@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="icon" href="/front/img/favicon.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="noindex, nofollow">
+	<title>Annuaire</title>
+	<link rel="preload" href="fonts/montserrat-extrabold.woff2" as="font" type="font/woff2">
+	<link rel="preload" href="fonts/montserrat-medium.woff2" as="font" type="font/woff2">
+	<link rel="preload" href="fonts/montserrat-regular.woff2" as="font" type="font/woff2">
+	<link rel="stylesheet" type="text/css" href="css/datatable.css">
+	<link rel="stylesheet" type="text/css" href="css/fancybox.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/tableau.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="css/responsive.css">
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/dist/bootstrap-modal.dev.js"></script>
+	<script src="js/dist/customize.dev.js"></script>
+	<script src="js/dist/modal.min.dev.js"></script>
+	<script src="js/tinymce.min.js"></script>
+	<script src="js/tinymce-webcomponent.js"></script>
+    <script src="js/jquery.fancybox.min.js"></script>
+    <script src="js/datatable.min.js"></script>
+    <script src="js/datatable-reponsive.min.js"></script>
+    <script src="js/nstslider.min.js"></script>
+    <script src="js/custom_ac.js"></script>
+    <script src="js/customize.js"></script>
+
+
+	<script type="text/javascript" src="js/datatable.min.js"></script>
+	<script type="text/javascript" src="js/datatable-reponsive.min.js"></script>
+
+</head>
+<body>
+<div id="wrapper">
+    <section class="logo-menu">
+		<div class="logo"><a href="/"><img src="../img/logo.svg" alt=""></a>
+		</div>
+		<nav class="menu-wrap">
+			<ul>
+				<li class="dash"><a href="dashboard.html">Dashboard</a></li>
+				<li class="has-child etablissement"><a href="etablissement.html">Liste établissement</a></li>
+				<li class="has-child users"><a href="utilisateur.html">Utilisateur</a></li>
+				<li class="has-child donnees">
+					<a href="#">Données</a>
+					<ul class="sub-menu">
+						<li class="category"><a href="#">Catégorie</a></li>
+						<li class="region"><a href="#">Région</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+	</section>
+    <main id="content" class="flex">
+        
+        <section id="contenu" class="candidat">
+            <div id="infoadmin">
+                <div class="infoad">
+                    <div class="bienvenu">
+                        <span>Bienvenue, Ravaka</span>
+                        <img src="../img/icon-admin.svg" alt="">
+                    </div>
+                    <div class="deco">
+                        <a href="/logout">Déconnexion</a>
+                    </div>
+                </div>
+            </div>
+            
+			<div class="form-wrap min">
+				<div class="form-control full">
+					<label for="">Poste</label>
+					<input type="text">
+				</div>
+				<div class="form-control full">
+					<label for="">Ville</label>
+					<input type="text">
+				</div>
+				<div class="half">
+					<div class="form-control">
+						<label for="">Secteur</label>
+						<select name="" id="">
+							<option value="">Informatique  - web</option>
+							<option value="">Informatique  - web</option>
+							<option value="">Informatique  - web</option>
+							<option value="">Informatique  - web</option>
+						</select>
+					</div>
+					<div class="form-control">
+						<label for="">Contrat</label>
+						<select name="" id="">
+							<option value="">CDI</option>
+							<option value="">CDD</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-control full">
+					<label for="">Sous secteurs</label>
+					<input type="text" id="tag">
+				</div>
+				<div class="form-control full">
+					<label for="">Description du poste <i class="indice"><img src="img/indice.svg" alt="Indice"></i></label>
+					<textarea name="" id=""></textarea>
+				</div>
+				<div class="form-control full addToUl">
+					<label for="">Missions <i class="indice"><img src="img/indice.svg" alt="Indice"></i></label>
+					<input type="text" id="mission">
+					<button id="addmission"></button>
+					<ul id="mission_added"></ul>
+				</div>
+				<div class="form-control full addToUl">
+					<label for="">Profil recherché <i class="indice"><img src="img/indice.svg" alt="Indice"></i></label>
+					<input type="text" id="profil_recherche">
+					<button id="addprofil"></button>
+					<ul id="profil_added"></ul>
+				</div>
+				<div class="form-control full salaire">
+					<label for="">Salaire proposé <i class="indice"><img src="img/indice.svg" alt="Indice"></i></label>
+					<div class="d-grid">
+						<div class="nstSlider" data-range_min="100" data-range_max="10000" data-cur_min="100" data-cur_max="800">
+							<div class="bar"></div>
+							<div class="leftGrip"></div>
+							<div class="rightGrip"></div>
+						</div>
+						<div class="slpropose">
+							<span class="leftLabel"></span> € à <span class="rightLabel"></span>€
+						</div>
+					</div>
+				</div>
+				<div class="form-control full">
+					<label for="">Email de réception des candidatures</label>
+					<input type="email">
+				</div>
+				<div class="form-control full">
+					<label for="">Date limite de candidature</label>
+					<input type="date">
+				</div>
+				<div class="form-control full">
+					<label for="">Information supplémentaire <i class="indice"><img src="img/indice.svg" alt="Indice"></i></label>
+					<textarea name="" id=""></textarea>
+				</div>
+				<div class="t-right margbtn"><a href="" class="btn red">Ajouter & Enregistrer</a></div>
+			</div>
+            <div class="copyright">© <strong>2023 Annuaire</strong>, tous droits réservés</div>
+        </section>
+    </main>
+    <!-- Modal -->
+    <div style="display: none;" class="pop-annonces" id="add">
+        <div class="offer-description">
+            <div class="prepend-icon">
+                <img src="img/agent-com.svg">
+                <h2>Agent commercial</h2>
+            </div>
+            <p><strong>Vous avez du talent et vous souhaitez vous investir sur la durée au sein d'une société qui saura vous offrir des perspectives d'évolution ? Rejoignez-nous !</strong></p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et ornare elit, maximus tempor urna. Sed vel felis vitae lectus volutpat semper ac ac leo. Proin congue eu massa non blandit. Nulla rutrum interdum cursus. Fusce non porttito.</p>
+        </div>
+        <div class="conditions">
+            <div class="offer-section">
+                <div class="section-head">
+                    <h3>Missions</h3>
+                </div>                            
+                <ul>
+                    <li>Rattaché(e) au Responsable d'agence et en collaboration avec un Technico-commercial itinérant, vous développez et assurez le suivi d'un portefeuille clients professionnels.</li>
+                    <li>Vous avez pour mission de renseigner le client, de répondre aux consultations, de rechercher les solutions techniques, de préconiser les solutions produits/services appropriées, de réaliser des offres de prix (devis) et d'en assurer le suivi, traiter les réclamations et participer aux opérations phoning. Vous êtes le garant du respect des délais et de la disponibilité des produits.</li>
+                    <li>Dans le respect de la politique commerciale définie, vous contribuez activement à l'augmentation du chiffre d'affaires, du nombre de comptes clients et de la marge. Vous participez, par vos relations privilégiées avec la clientèle, à l'évolution du plan de vente.</li>
+                </ul>
+            </div>
+            <div class="offer-section">
+                <div class="section-head">
+                    <h3>Profil</h3>
+                </div>
+                <ul>
+                    <li>De formation supérieure Technique (BAC +2 technique Sanitaire et/ou Thermique et/ou Génie Climatique), vous justifiez d'une première expérience commerciale réussie d'au moins 2 ans dans un poste similaire ou dans les secteurs du bâtiment ou de la distribution.</li>
+                    <li>L'orientation client, le sens de la communication, la capacité à hiérarchiser les priorités, l'autonomie et la rigueur sont les qualités incontournables pour la tenue de ce poste.</li>
+                </ul>
+            </div>
+            <div class="border-ds">
+                <div class="d-flex">
+                    <label for="">Salaire proposé :</label>
+                    <div class="value">20 000 €  à 40 000 € par an</div>
+                </div>
+                <div class="d-flex">
+                    <label for="">Date limite :</label>
+                    <div class="value">20 septembre 2021</div>
+                </div>
+            </div>
+        </div>
+        <div class="t-right">
+            <a href="" class="btn blue">Validé</a>
+            <a href="" class="btn">Refusé</a>
+        </div>
+    </div>
+</div>
+</body>
+
+<script>
+jQuery(document).ready(function($) {
+$('.nstSlider').nstSlider({
+    "rounding": {
+        "100": "100"
+    },
+    "left_grip_selector": ".leftGrip",
+    "right_grip_selector": ".rightGrip",
+    "value_bar_selector": ".bar",
+    "value_changed_callback": function(cause, leftValue, rightValue) {
+        $(this).parent().find('.leftLabel').text(leftValue);
+        $(this).parent().find('.rightLabel').text(rightValue);
+    }
+});
+});
+if (typeof autocomplete === "function") { 
+	/** Auto complete **/
+	var tag = ["Commercial", "Designer", "Développeur", "Integrateur html"];
+	autocomplete(document.getElementById("tag"), tag);
+}
+</script>
+</html>
