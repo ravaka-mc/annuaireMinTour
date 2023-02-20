@@ -116,8 +116,7 @@ p {
 
 .btn {
 	display: inline-block;
-	padding: 0 35px;
-	min-width: 200px;
+	padding: 0 40px;
 	text-align: center;
 	text-transform: uppercase;
 	font-size: 14px;
@@ -812,6 +811,9 @@ section#contenu {
 	gap: 20px;
 	margin-bottom: 20px;
 }
+.custom-radio.half, .custom_checkbox.half {
+	gap: 0 20px;
+}
 
 .form-wrap .half .form-control {
 	margin-bottom: 0 !important;
@@ -852,7 +854,6 @@ input, select, textarea {
 .form-wrap label i {
 	display: inline-block;
 }
-
 
 .form-wrap .addToUl input {
 	width: calc(100% - 45px);
@@ -906,6 +907,29 @@ input, select, textarea {
 	margin: 0;
 	font-size: 14px;
 	color: #41436a;
+}
+
+.inputright {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	margin-bottom: 0;
+}
+.inputright .custom-radio {
+	display: grid;
+	grid-template-columns: auto auto;
+	gap: 30px;
+}
+.inputright label,
+.inputright .custom-radio label {
+	margin-bottom: 0;
+}
+
+.custom_checkbox.slidergrpm {
+	display: none;
+	margin: 20px 0 0 30px;
+}
+.cat-options {
+	display: none;
 }
 
 .autocomplete-items {
@@ -1259,6 +1283,7 @@ input, select, textarea {
 	border: 0;
 	-webkit-appearance: none;
 	appearance: none;
+	width: 100%;
 }
 .categories .card-wrap {
 	display: grid;
