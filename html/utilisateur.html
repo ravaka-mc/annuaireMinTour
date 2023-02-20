@@ -151,24 +151,26 @@
         ];
         $('#table-list').DataTable({
             paging: true,
-            "searching": false,
+            "searching": true,
             "info": false,
             "bLengthChange" : false,
             "bInfo":false,
             responsive: true,
             "ordering": true,
             "language": {
-                "lengthMenu": "Afficher _MENU_",
-                "zeroRecords": "Rien n'a été trouvé, désolé",
-                "info": "Nombre de lignes <span class='current'>_PAGE_</span> sur <span>_PAGES_</span>",
-                "infoEmpty": "Non disponible",
-                "infoFiltered": "(filtré sur _MAX_ enregistrements)",
-                "sPaginationType": "3",
-                "paginate": {
-                    "previous": "<",
-                    "next": ">"
-                }
-            }
+				"lengthMenu": "Afficher _MENU_",
+				"zeroRecords": "Rien n'a été trouvé, désolé",
+				"info": "Nombre de lignes <span class='current'>_PAGE_</span> sur <span>_PAGES_</span>",
+				"infoEmpty": "Non disponible",
+				"infoFiltered": "(filtré sur _MAX_ enregistrements)",
+				"search": "",
+				"searchPlaceholder": "Recherche",
+				"sPaginationType": "3",
+				"paginate": {
+					"previous": "<",
+					"next": ">"
+				}
+			}
         });
         $(".close").click(function(){
             $(this).parent().parent().remove();
