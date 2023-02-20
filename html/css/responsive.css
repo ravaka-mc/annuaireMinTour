@@ -82,7 +82,7 @@ section.logo-menu { padding:0 0 40px; display: grid; grid-template-rows: 15vh 1f
 	#infoadmin .infoad .deco a { opacity: 1; visibility: visible; }
 }
 @media(max-height:775px){
-    section.logo-menu { padding-top: 40px; position: absolute; top: 0; bottom: 0; height: initial; }
+    section.logo-menu { padding-top: 40px; position: absolute; position: fixed; top: 0; bottom: 0; height: initial; }
     .logo-menu .logo { margin-bottom: 40px; }
     .deco { position: absolute; top: 500px; }
     .login { height: auto; min-height: 100vh; }

@@ -51,8 +51,8 @@
 					</div>
 				</div>
 				<div class="d-flex sb header">
-					<div class="title">Région</div>
-					<a data-fancybox data-src="#newregion" href="javascript:;" class="btn">Nouvelle région</a>
+					<div class="title">Catégories</div>
+					<a data-fancybox data-src="#newcat" href="javascript:;" class="btn">Nouvelle catégorie</a>
 				</div>
 				<table id="table-list" class="custom-table-ville">
 					<thead>
@@ -67,48 +67,48 @@
 					<tbody>
 						<tr>
 							<td></td>
-							<td>Analamanga</td>
+							<td>Hébergement</td>
 							<td>09-05-2022</td>
 							<td>
 								<div class="action">
-									<a data-fancybox data-src="#newregion" href="javascript:;" class="edit"></a>
-									<a data-fancybox data-src="#supprimer" class="delete"></a>
+									<a data-fancybox data-src="#newcat" href="javascript:;" class="edit"></a>
+									<a href="" class="delete"></a>
 								</div>
 							</td>
 							<td></td>
 						</tr>
 						<tr>
 							<td></td>
-							<td>Diana</td>
+							<td>Restauration</td>
 							<td>09-05-2022</td>
 							<td>
 								<div class="action">
-									<a data-fancybox data-src="#newregion" href="javascript:;" class="edit"></a>
-									<a data-fancybox data-src="#supprimer" class="delete"></a>
+									<a data-fancybox data-src="#newcat" href="javascript:;" class="edit"></a>
+									<a href="" class="delete"></a>
 								</div>
 							</td>
 							<td></td>
 						</tr>
 						<tr>
 							<td></td>
-							<td>Boeny</td>
+							<td>Voyages & Prestations touristiques</td>
 							<td>09-05-2022</td>
 							<td>
 								<div class="action">
-									<a data-fancybox data-src="#newregion" href="javascript:;" class="edit"></a>
-									<a data-fancybox data-src="#supprimer" class="delete"></a>
+									<a data-fancybox data-src="#newcat" href="javascript:;" class="edit"></a>
+									<a href="" class="delete"></a>
 								</div>
 							</td>
 							<td></td>
 						</tr>
 						<tr>
 							<td></td>
-							<td>Analanjorofo</td>
+							<td>Location</td>
 							<td>09-05-2022</td>
 							<td>
 								<div class="action">
-									<a data-fancybox data-src="#newregion" href="javascript:;" class="edit"></a>
-									<a data-fancybox data-src="#supprimer" class="delete"></a>
+									<a data-fancybox data-src="#newcat" href="javascript:;" class="edit"></a>
+									<a href="" class="delete"></a>
 								</div>
 							</td>
 							<td></td>
@@ -119,14 +119,14 @@
 			</section>
 		</main>
 		<!-- Modal -->
-		<div style="display: none; max-width: 500px;" id="newregion" class="popup-style">
-			<div class="sub-title">Ajout nouvelle <strong>région</strong></div>
+		<div style="display: none; max-width: 500px;" id="newcat" class="popup-style">
+			<div class="sub-title">Ajout nouvelle <strong>catégorie</strong></div>
 			<form class="form-wrap" method="post" action="">
 				<div class="form-control">
 					<label for="nom">Nom</label>
 					<input type="text" id="nom" name="titre">
 				</div>
-				<div class="pbtn full"><button type="submit" class="btn red">Ajouter région</button></div>
+				<div class="pbtn full"><button type="submit" class="btn red">Ajouter catégorie</button></div>
 			</form>
 		</div>
 		<div id="supprimer" class="pop_suppr" style="display:none; max-width:500px;">
@@ -139,12 +139,12 @@
 				<span data-fancybox-close class="btn-pop">Annuler</span>
 			</div>
 		</div>
+
 		<script src="js/jquery.fancybox.min.js"></script>
 		<script src="js/jquery.min.js"></script>
-		<script src="js/slick.min.js"></script>
-		<script src="js/customize.js"></script>
 		<script src="js/datatable.min.js"></script>
 		<script src="js/datatable-reponsive.min.js"></script>
+		<script src="js/customize.js"></script>
 		<script>
 			$(document).ready(function () {
 				$.fn.dataTable.Responsive.breakpoints = [

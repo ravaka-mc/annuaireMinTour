@@ -102,4 +102,19 @@ $(document).ready(function() {
 			}
 		});
 	});
+	$('input[type=radio][name=membre_grpm]').change(function() {
+		if (this.value == 'oui') {
+			$('.slidergrpm').slideDown();
+		} else {
+			$('.slidergrpm').slideUp();
+		}
+	});
+	let catvalfirst = $('.categories select').val();
+	$('.cat-options#'+catvalfirst).show();
+
+	$('.categories select').change(function() {
+		let cible = $(this).val();
+		$('.cat-options').hide();
+		$('.cat-options#'+cible).fadeIn();
+	});
 });
