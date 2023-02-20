@@ -15,23 +15,12 @@
 	<link rel="stylesheet" type="text/css" href="css/tableau.css">
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link rel="stylesheet" type="text/css" href="css/responsive.css">
-
-	<script src="js/jquery.min.js"></script>
-	<script src="js/dist/bootstrap-modal.dev.js"></script>
-	<script src="js/dist/customize.dev.js"></script>
-	<script src="js/dist/modal.min.dev.js"></script>
-	<script src="js/customize.js"></script>
-
-
-	<script type="text/javascript" src="js/datatable.min.js"></script>
-	<script type="text/javascript" src="js/datatable-reponsive.min.js"></script>
-
 </head>
 
 <body>
 	<div id="wrapper">
 		<section class="logo-menu">
-			<div class="logo"><a href="/"><img src="../img/logo.svg" alt=""></a>
+			<div class="logo"><a href="/"><img src="img/logo.svg" alt=""></a>
 			</div>
 			<nav class="menu-wrap">
 				<ul>
@@ -41,8 +30,8 @@
 					<li class="has-child donnees">
 						<a href="#">Données</a>
 						<ul class="sub-menu">
-							<li class="category"><a href="#">Catégorie</a></li>
-							<li class="region"><a href="#">Région</a></li>
+							<li class="category"><a href="categorie.html">Catégorie</a></li>
+							<li class="region"><a href="region.html">Région</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -54,7 +43,7 @@
 					<div class="infoad">
 						<div class="bienvenu">
 							<span>Bienvenue, Ravaka</span>
-							<img src="../img/icon-admin.svg" alt="">
+							<img src="img/icon-admin.svg" alt="">
 						</div>
 						<div class="deco">
 							<a href="/logout">Déconnexion</a>
@@ -65,8 +54,7 @@
 					<div class="title">Listes établissements</div>
 					<a href="new-etablissement.html" class="btn blue">Nouveau établissement</a>
 				</div>
-				<table id="table-list"
-					class="custom-table-secteur annonces">
+				<table id="table-list" class="custom-table-secteur">
 					<thead>
 						<tr>
 							<th><span>Nom</span></th>
@@ -90,7 +78,7 @@
 								<div class="action">
 									<a href="new-etablissement.html" class="edit"></a>
 									<a href="" class="view"></a>
-									<a data-fancybox="" class="delete"></a>
+									<a data-fancybox="" data-src="#popup-delete" class="delete"></a>
 								</div>
 							</td>
 						</tr>
@@ -105,7 +93,7 @@
 								<div class="action">
 									<a href="new-etablissement.html" class="edit"></a>
 									<a href="" class="view"></a>
-									<a data-fancybox="" data-src="#delete128" class="delete"></a>
+									<a data-fancybox="" data-src="#popup-delete" class="delete"></a>
 								</div>
 							</td>
 						</tr>
@@ -115,85 +103,74 @@
 			</section>
 		</main>
 		<!-- Modal -->
-		<div style="display: none;"
-			class="pop-annonces"
-			id="add"></div>
-		
-		<script src="js/jquery.fancybox.min.js"></script>
-		<script src="js/jquery.min.js"></script>
-		<script src="js/custom_ac.js"></script>
-		<script src="js/customize.js"></script>
-		<script type="text/javascript" src="js/datatable.min.js"></script>
-		<script type="text/javascript" src="js/datatable-reponsive.min.js"></script>
-		<script>
-			$(document).ready(function () {
-				$.fn.dataTable.Responsive.breakpoints = [{
-					name: 'desktop',
-					width: Infinity
-				}, {
-					name: 'tablet',
-					width: 1024
-				}, {
-					name: 'fablet',
-					width: 768
-				}, {
-					name: 'phone',
-					width: 480
-				}];
-				$('#table-list').DataTable({
-					paging: true,
-					"searching": true,
-					"info": false,
-					"bLengthChange": false,
-					"bInfo": false,
-					"order": [],
-					columnDefs: [{
-						targets: [0, 7],
-						orderable: false
-					}],
-					responsive: true,
-					"drawCallback": function (settings) {
-						$(".view").on('click', function () {
-							let id = $(this).data("annonce");
-							$.ajax({
-								type: 'POST',
-								url: '/admin/annonces',
-								data: {
-									annonce_id: id
-								},
-								dataType: 'html',
-								success: function (response) {
-									$('#add').html(response);
-								}
-							})
-						});
-
-						$(".btn-delete").on('click', function () {
-							let url = $(this).data("url");
-							window.location = url;
-						});
-					},
-					"language": {
-						"lengthMenu": "Afficher _MENU_",
-						"zeroRecords": "Rien n'a été trouvé, désolé",
-						"info": "Nombre de lignes <span class='current'>_PAGE_</span> sur <span>_PAGES_</span>",
-						"infoEmpty": "Non disponible",
-						"infoFiltered": "(filtré sur _MAX_ enregistrements)",
-						"search": "",
-						"searchPlaceholder": "Recherche",
-						"sPaginationType": "3",
-						"paginate": {
-							"previous": "<",
-							"next": ">"
-						}
-					}
-				});
-				$(".close").click(function () {
-					$.fancybox.close();
-				});
-			});
-		</script>
+		<div style="display: none;" class="pop-annonces" id="add"></div>
+		<!-- Modal supprimer -->
+		<div id="popup-delete" class="pop_suppr" style="display:none; max-width:500px;">
+			<div class="innerpad">
+				<div class="sub-title">Êtes vous sûr de supprimer ?</div>
+				<p>Êtes vous sûr de vouloir supprimer cette etablissement ?</p>
+				<div class="form-wrap">
+					<label>Raison</label>
+					<textarea name="" id=""></textarea>
+				</div>
+			</div>
+			<div class="pop_btns">
+				<a href="" class="btn-pop confirm">Supprimer</a>
+				<span data-fancybox-close class="btn-pop">Annuler</span>
+			</div>
+		</div>
 	</div>
+	<script src="js/jquery.fancybox.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/datatable.min.js"></script>
+	<script src="js/datatable-reponsive.min.js"></script>
+	<script src="js/customize.js"></script>
+	<script>
+		$(document).ready(function () {
+			$.fn.dataTable.Responsive.breakpoints = [{
+				name: 'desktop',
+				width: Infinity
+			}, {
+				name: 'tablet',
+				width: 1024
+			}, {
+				name: 'fablet',
+				width: 768
+			}, {
+				name: 'phone',
+				width: 480
+			}];
+			$('#table-list').DataTable({
+				paging: true,
+				"searching": true,
+				"info": false,
+				"bLengthChange": false,
+				"bInfo": false,
+				"order": [],
+				columnDefs: [{
+					targets: [6],
+					orderable: false
+				}],
+				responsive: true,
+				"language": {
+					"lengthMenu": "Afficher _MENU_",
+					"zeroRecords": "Rien n'a été trouvé, désolé",
+					"info": "Nombre de lignes <span class='current'>_PAGE_</span> sur <span>_PAGES_</span>",
+					"infoEmpty": "Non disponible",
+					"infoFiltered": "(filtré sur _MAX_ enregistrements)",
+					"search": "",
+					"searchPlaceholder": "Recherche",
+					"sPaginationType": "3",
+					"paginate": {
+						"previous": "<",
+						"next": ">"
+					}
+				}
+			});
+			$(".close").click(function () {
+				$.fancybox.close();
+			});
+		});
+	</script>
 </body>
-
 </html>

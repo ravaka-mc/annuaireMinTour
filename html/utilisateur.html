@@ -13,7 +13,7 @@
 <body>
 <div id="wrapper">
     <section class="logo-menu">
-		<div class="logo"><a href="/"><img src="../img/logo.svg" alt=""></a>
+		<div class="logo"><a href="/"><img src="img/logo.svg" alt=""></a>
 		</div>
 		<nav class="menu-wrap">
 			<ul>
@@ -23,8 +23,8 @@
 				<li class="has-child donnees">
 					<a href="#">Données</a>
 					<ul class="sub-menu">
-						<li class="category"><a href="#">Catégorie</a></li>
-						<li class="region"><a href="#">Région</a></li>
+						<li class="category"><a href="categorie.html">Catégorie</a></li>
+						<li class="region"><a href="region.html">Région</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -36,7 +36,7 @@
                 <div class="infoad">
                     <div class="bienvenu">
                         <span>Bienvenue, Ravaka</span>
-                        <img src="../img/icon-admin.svg" alt="">
+                        <img src="img/icon-admin.svg" alt="">
                     </div>
                     <div class="deco">
                         <a href="/logout">Déconnexion</a>
@@ -44,14 +44,8 @@
                 </div>
             </div>
             <div class="d-flex sb header">
-                <div class="title">Candidat</div>
-                <a data-fancybox data-src="#add" href="javascript:;" class="btn blue">Nouveau candidat</a>
-            </div>
-            <div id="filter_table">
-                <div class="search"><input type="search"></div>
-                <div class="date"><label for="">Date</label><input type="text" class="date"></div>
-                <div class="poste"><label for="">Poste</label><select name="" id=""><option value="">Agent comptable</option></select></div>
-                <button class="btn red">Filtrer</button>
+                <div class="title">Utilisateur</div>
+                <a data-fancybox data-src="#newuser" class="btn">Nouveau utilisateur</a>
             </div>
             <table id="table-list" class="custom-table-secteur">
                 <thead>
@@ -60,7 +54,6 @@
                         <th>Prénom</th>
                         <th>Email</th>
                         <th>Date d’inscription</th>
-                        <th>Poste</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -70,11 +63,10 @@
                         <td>Gregorio Meier</td>
                         <td>Gregorio@gmail.com</td>
                         <td>15 Oct.2020</td>
-                        <td>Agent comptable</td>
                         <td>
                             <div class="action">
                                 <a href="" class="edit"></a>
-                                <a href="" class="delete"></a>
+                                <a href="" data-fancybox data-src="#supprimer" class="delete"></a>
                             </div>
                         </td>
                     </tr>
@@ -83,11 +75,10 @@
                         <td>Gregorio Meier</td>
                         <td>Gregorio@gmail.com</td>
                         <td>15 Oct.2020</td>
-                        <td>Agent comptable</td>
                         <td>
                             <div class="action">
                                 <a href="" class="edit"></a>
-                                <a href="" class="delete"></a>
+                                <a href="" data-fancybox data-src="#supprimer" class="delete"></a>
                             </div>
                         </td>
                     </tr>
@@ -96,11 +87,10 @@
                         <td>Gregorio Meier</td>
                         <td>Gregorio@gmail.com</td>
                         <td>15 Oct.2020</td>
-                        <td>Agent comptable</td>
                         <td>
                             <div class="action">
                                 <a href="" class="edit"></a>
-                                <a href="" class="delete"></a>
+                                <a href="" data-fancybox data-src="#supprimer" class="delete"></a>
                             </div>
                         </td>
                     </tr>
@@ -109,39 +99,45 @@
             <div class="copyright">© <strong>2023 Annuaire</strong>, tous droits réservés</div>
         </section>
     </main>
-    <!-- Modal -->
-    <div style="display: none;" id="add">
-        <div class="title">Ajout nouveau <strong>Candidat</strong></div>
-        <div class="form-wrap">
-            <div class="half">
-                <div class="form-control">
-                    <label for="nom">Nom</label>
-                    <input type="text" id="nom">
-                </div>
-                <div class="form-control">
-                    <label for="prenom">Prénom</label>
-                    <input type="text" id="prenom">
-                </div>
-            </div>
-            <div class="form-control">
-                <label for="poste">Poste</label>
-                <input type="texte" id="poste">
-            </div>
-            <div class="form-control">
-                <label for="email">E-mail</label>
-                <input type="email" id="email">
-            </div>
-            <div class="form-control">
-                <label for="password">Mot de passe</label>
-                <input type="password" id="password">
-            </div>
-            <div class="pbtn full"><button class="btn red">Ajouter candidat</button></div>
-        </div>
-    </div>
+	<!-- Modal -->
+	<div id="newuser" style="display:none; max-width: 500px;">
+		<div class="title">Ajout nouveau <strong>Utilisateur</strong></div>
+		<div class="form-wrap">
+			<div class="half">
+				<div class="form-control">
+					<label for="nom">Nom</label>
+					<input type="text" id="nom">
+				</div>
+				<div class="form-control">
+					<label for="prenom">Prénom</label>
+					<input type="text" id="prenom">
+				</div>
+			</div>
+			<div class="form-control">
+				<label for="email">E-mail</label>
+				<input type="email" id="email">
+			</div>
+			<div class="form-control">
+				<label for="password">Mot de passe</label>
+				<input type="password" id="password">
+			</div>
+			<div class="pbtn full"><button class="btn">Ajouter utilisateur</button></div>
+		</div>
+	</div>
+	<div id="supprimer" class="pop_suppr" style="display:none; max-width:500px;">
+		<div class="innerpad">
+			<div class="sub-title">Vouler vraiment supprimer ?</div>
+			<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis tempora repellat soluta perferendis earum animi porro</p>
+		</div>
+		<div class="pop_btns">
+			<a href="" class="btn-pop confirm">Supprimer</a>
+			<span data-fancybox-close class="btn-pop">Annuler</span>
+		</div>
+	</div>
 </div>
 </body>
-<script src="js/jquery.min.js"></script>
 <script src="js/jquery.fancybox.min.js"></script>
+<script src="js/jquery.min.js"></script>
 <script src="js/datatable.min.js"></script>
 <script src="js/datatable-reponsive.min.js"></script>
 <script src="js/customize.js"></script>
