@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Template | Template</title>
+    <meta name="viewport" content="content-width=width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+
+<body>
+    <div id="wrapper">
+        <header class="header">
+            <div class="wrapper">
+                <div class="header__inner">
+                    <a href="index.php" class="custom-logo-link" title="">
+                        <img src="images/logo.svg" alt="">
+                    </a>
+                    <nav class="header_nav">
+                        <ul class="header_nav-menu" id="headermenu">
+                            <li class="current-menu-item"><a href="" title="Accueil">Accueil</a></li>
+                            <li>
+                                <a href="#" title="Categories">Categories</a>
+                                <i></i>
+                                <ul class="submenu">
+                                    <li><a href="#" title="Hébergement">Hébergement</a></li>
+                                    <li><a href="#" title="Restauration">Restauration</a></li>
+                                    <li><a href="#" title="Voyages &amp; Prestations touristiques">Voyages &amp; Prestations touristiques</a></li>
+                                    <li><a href="#" title="Location ">Location</a></li>
+                                    <li><a href="#" title="Hébergement et restaurations">restaurationsrestaurations</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#" title="Actualités">Actualités</a></li>
+                            <li><a href="#" title="Contact">Contact</a></li>
+                        </ul>
+                        <div class="header_right">
+                           <a href="#" class="btn btn-primary membrebtn"><span>Espace membre</span></a>
+                            <div class="hamburger">
+                                <div class="hamburger-box"></div>
+                            </div>
+                        </div>
+                        <span class="close-mobile-menu"></span>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <main>
+            
+            <div class="bgcontainerdefault">
+                <div class="wrapper">
+                    <form action="" class="blocform">
+                        <h1>Se connecter</h1>
+                        <div class="formgroup">
+                            <label for="">E-mail</label>
+                            <input type="email" placeholder="" >
+                        </div>
+                        <div class="formgroup">
+                            <label for="">Mot de passe</label>
+                            <input type="password" placeholder="" >
+                        </div>
+                        <div class="linkmdp">
+                            <a href="#"  >Mot de passe oublié ?</a>
+                        </div>
+                        <button type="submit" class="btn btn-secondary" ><span>Connexion</span></button>
+                        <div class="blocbottom">
+                            <p>Pas de compte ? <a href="#" title="Inscrivez-vous" ><strong>Inscrivez-vous</strong></a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+          
+        </main>
+        <footer>
+            <div class="wrapper">
+                <div class="footer">
+                    <ul class="mentions">
+                        <li>© 2023 Annuaire.mg , Tous droits réservé</li>
+                        <li><a href="#" title="Mentions légales">Mentions légales</a></li>
+                        <li><a href="#" title="Contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script type="text/javascript" src="./js/jquery.js"></script>
+    <script type="text/javascript" src="./js/magicline.js"></script>
+    <script type="text/javascript" src="./js/slick.min.js"></script>
+    <script type="text/javascript" src="./js/fancybox.min.js"></script>
+    <script type="text/javascript" src="./js/numscroller.js"></script>
+    <script type="text/javascript" src="./js/custom.js"></script>
+    <script>
+        jQuery(document).ready(function ($) {
+            $('.temoignages__slick').slick({
+                infinite: true,
+                dots: true,
+                pauseOnHover: true,
+                slidesToShow: 1,
+                arrows: false,
+                slidesToScroll:1,
+                fade: false,
+                responsive: [
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 1,
+                            dots: true,
+                            slidesToScroll:1,
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+</body>
+
+</html>
