@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>Template | Template</title>
     <meta name="viewport" content="content-width=width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="./css/fancybox.css">
     <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 
@@ -134,7 +135,37 @@
                             </div>
                         </div>
                     </div>
-                    <a href="" class="link-signal">Signaler cette établissement</a>
+                    <a data-fancybox href="#infopop" class="link-signal">Signaler cette établissement</a>
+                    <div class="popup" id="infopop">
+                        <div class="popup__top gtitre">
+                            Signaler
+                        </div>
+                        <div class="popup__content">
+                            <form action="">
+                                <div class="form-wrap">
+                                    <div class="form-control">
+                                        <label for="">établissment</label>
+                                        <input type="text" value="Hotel Colbert Spa & Casino" readonly>
+                                    </div>
+                                    <div class="form-control">
+                                        <label for="">Nom</label>
+                                        <input type="text" value="">
+                                    </div>
+                                    <div class="form-control">
+                                        <label for="">E-mail</label>
+                                        <input type="email" value="">
+                                    </div>
+                                    <div class="form-control">
+                                        <label for="">Motif</label>
+                                        <textarea name="" id="" placeholder="Veuillez expliquer ici la raison..."></textarea>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button class="btn"><span>Signaler</span></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="bg-purple-light">
