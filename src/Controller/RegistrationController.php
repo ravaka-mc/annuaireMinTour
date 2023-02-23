@@ -33,18 +33,19 @@ class RegistrationController extends AbstractController
             $user->setPassword(
             $userPasswordHasher->hashPassword(
                     $user,
-                    $form->get('plainPassword')->getData()
+                    $form->get('password')->getData()
                 )
             );
 
+            $user->setRoles(["ROLE_ETABLISSEMENT"]);
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('_profiler_home');
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
+            'form' => $form->createView(),
         ]);
     }
 
@@ -61,5 +62,13 @@ class RegistrationController extends AbstractController
             'last_username' => $lastUsername,
             'error'         => $error,
         ]);
+    }
+
+    /**
+     * @Route("/logout", name="app_logout")
+    */
+    public function logout(): void
+    {
+        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 }

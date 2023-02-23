@@ -22,11 +22,12 @@ $(document).ready(function() {
 		$('nav').toggleClass("active");
 		$('#headermenu').slideToggle();
 		$('body').toggleClass('menu-open');
+		$('.submenu').slideUp('fast');
 	});
 	$('.close-mobile-menu').click(function(){
 		$(".hamburger").removeClass("active");
 		$('nav').removeClass("active");
-		$('#headermenu').slideUp('fast');
+		$('#headermenu, .submenu').slideUp('fast');
 		$('body').removeClass('menu-open');
 	})
 
@@ -39,7 +40,7 @@ $(document).ready(function() {
 		  $(currentTab).show();
 		  return false;
 		});
-	  });	
+	});	
 
 
 	// menu mobile + custom mobile //

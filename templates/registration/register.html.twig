@@ -9,17 +9,49 @@
     <main>
         <div class="bgcontainerdefault">
             <div class="wrapper">
-                {{ form_start(registrationForm) }}
-                    <h1>Register</h1>
-                    {{ form_row(registrationForm.email) }}
-                    {{ form_row(registrationForm.plainPassword, {
-                        label: 'Password'
-                    }) }}
-                    {{ form_row(registrationForm.agreeTerms) }}
-
-                    <button type="submit" class="btn">Register</button>
-                {{ form_end(registrationForm) }}
+                <form action="{{ path("app_register") }}" name="{{ form.vars.full_name }}" class="blocform" method="post">
+                    <h1>Inscription</h1>
+                     {{ form_errors(form) }}
+                    <div class="grid-50">
+                        <div class="formgroup">
+                            <label for="">Nom</label>
+                            {{ form_widget(form.nom) }}
+                            {{ form_errors(form.nom) }}
+                        </div>
+                        <div class="formgroup">
+                            <label for="">Prénom</label>
+                            {{ form_widget(form.prenom) }}
+                            {{ form_errors(form.prenom) }}
+                        </div>
+                    </div>
+                    <div class="formgroup">
+                        <label for="">E-mail</label>
+                        {{ form_widget(form.email) }}
+                        {{ form_errors(form.email) }}
+                    </div>
+                    <div class="formgroup">
+                        <label for="">Mot de passe</label>
+                        {{ form_widget(form.password.first) }}
+                    </div>
+                    <div class="formgroup">
+                        <label for="">Confirmer mot de passe</label>
+                        {{ form_widget(form.password.second) }}
+                        {{ form_errors(form.password.first) }}
+                    </div>
+                    <div class="form_group checkboxgroup">
+                        <label class="checkbox">Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                            {{ form_widget(form.agreeTerms) }}
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    {{ form_widget(form._token) }}
+                    <button type="submit" class="btn btn-secondary" ><span>S’inscrire</span></button>
+                    <div class="blocbottom">
+                        <p>Vous avez déjà un compte ?<a href="#" title="Connectez-vous" ><strong> Connectez-vous</strong></a></p>
+                    </div>
+                </form>
             </div>
         </div>
+        
     </main>
 {% endblock %}
