@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="icon" href="/front/img/favicon.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="noindex, nofollow">
+	<title>Annuaire</title>
+	<link rel="preload" href="fonts/montserrat-extrabold.woff2" as="font" type="font/woff2">
+	<link rel="preload" href="fonts/montserrat-medium.woff2" as="font" type="font/woff2">
+	<link rel="preload" href="fonts/montserrat-regular.woff2" as="font" type="font/woff2">
+	<link rel="stylesheet" type="text/css" href="css/datatable.css">
+	<link rel="stylesheet" type="text/css" href="css/fancybox.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/tableau.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="css/responsive.css">
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/dist/bootstrap-modal.dev.js"></script>
+	<script src="js/dist/customize.dev.js"></script>
+	<script src="js/dist/modal.min.dev.js"></script>
+	<script src="js/customize.js"></script>
+	<script src="js/tinymce.min.js"></script>
+	<script src="js/tinymce-webcomponent.js"></script>
+	<script src="js/nstslider.min.js"></script>
+
+	<script type="text/javascript" src="js/datatable.min.js"></script>
+	<script type="text/javascript" src="js/datatable-reponsive.min.js"></script>
+
+</head>
+<body>
+<div id="wrapper">
+	<section class="logo-menu">
+		<div class="logo"><a href="/"><img src="img/logo.svg" alt=""></a>
+		</div>
+		<nav class="menu-wrap">
+			<ul>
+				<li class="dash"><a href="dashboard.html">Dashboard</a></li>
+				<li class="has-child etablissement"><a href="etablissement.html">Liste établissement</a></li>
+				<li class="has-child users"><a href="utilisateur.html">Utilisateur</a></li>
+				<li class="has-child donnees">
+					<a href="#">Données</a>
+					<ul class="sub-menu">
+						<li class="category"><a href="categorie.html">Catégorie</a></li>
+						<li class="region"><a href="region.html">Région</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+	</section>
+    <main id="content" class="flex">
+        <section id="contenu">
+            <div id="infoadmin">
+				<div class="infoad">
+					<div class="bienvenu">
+						<span>Bienvenue, Ravaka</span>
+						<img src="img/icon-admin.svg" alt="">
+					</div>
+					<div class="deco">
+						<a href="/logout">Déconnexion</a>
+					</div>
+				</div>
+			</div>
+            <div class="title bb">Ajout établissement</div>
+
+			<div class="categories">
+				<div class="card-wrap">
+					<label>Catégorie</label>
+					<select name="" id="">
+						<option value="voyage">Voyage et prestations touristiques</option>
+						<option value="hebergement">Etablissement d'Hébergement</option>
+						<option value="hebergement-et-restaurations">Etablissement d'Hébergement et de Restauration</option>
+						<option value="restauration">Etablissement de Restauration</option>
+						<option value="guide">Guide</option>
+					</select>
+				</div>
+			</div>
+
+			<div id="voyage" class="cat-options">
+				<div class="bloc_editense form-wrap">
+					<div class="card-wrap head">
+						<div class="logo-entreprise">
+							<img src="img/default-etablissement.svg">
+							<label for="pdp">
+								<span class="replace-img"></span>
+							</label>
+						</div>
+						<div class="form-in-head">
+							<div class="sub-title"><span>Coordonnées</span></div>
+							<div class="form-wrap half">
+								<div class="form-control">
+									<label>Dénomination social</label>
+									<input type="text" value="">
+								</div>
+								<div class="form-control">
+									<label>Auteur</label>
+									<input type="text" value="">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-wrap content-ense">
+						<div class="half">
+							<div class="form-control">
+								<label for="">Adresse</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">Téléphone</label>
+								<input type="number" value="">
+							</div>
+							<div class="form-control">
+								<label for="">E-mail</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">Site web</label>
+								<input type="email" value="">
+							</div>
+						</div>
+						<div class="form-control">
+							<label>Activités</label>
+							<div class="custom-radio">
+								<label>Agence de Voyages
+									<input type="radio" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Tour opérateur
+									<input type="radio" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Réceptif
+									<input type="radio" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Entreprise de prestations touristiques spécialisées
+									<input type="radio" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Entreprise de location de voitures
+									<input type="radio" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Entreprise de location de bateaux  de plaisance
+									<input type="radio" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Entreprise de location d’autres matériels de transports motorisés ou non
+									<input type="radio" name="activite">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+						</div>
+						<div class="half">
+							<div class="form-control">
+								<label>Propriétaire</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label>Gérant</label>
+								<input type="text" value="">
+							</div>
+						</div>
+						<div class="form-control">
+							<label for="">Region</label>
+							<input type="text" value="">
+						</div>
+						<div class="form-control inputright">
+							<label>Etes-vous membre d'un groupement ?</label>
+							<div class="custom-radio">
+								<label>OUI
+									<input type="radio" name="membre_grpm" value="oui">
+									<span class="checkmark"></span>
+								</label>
+								<label>NON
+									<input type="radio" name="membre_grpm" checked>
+									<span class="checkmark"></span>
+								</label>
+							</div>
+						</div>
+						<div class="custom_checkbox slidergrpm">
+							<label>Confédération du Tourisme de Madagascar (CTM),
+								<input type="checkbox" name="groupement">
+								<span class="checkmark"></span>
+							</label>
+							<label>Association des Tours Opérateurs Professionnels de Madagascar (TOP),
+								<input type="checkbox" name="groupement">
+								<span class="checkmark"></span>
+							</label>
+							<label>Office National du Tourisme de Madagascar (ONTM),
+								<input type="checkbox" name="groupement">
+								<span class="checkmark"></span>
+							</label>
+							<label>Office regional (ORT)
+								<input type="checkbox" name="groupement">
+								<span class="checkmark"></span>
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="bloc_editense form-wrap">
+					<div class="card-wrap">
+						<div class="form-in-head">
+							<div class="sub-title"><span>Coordonnées</span></div>
+						</div>
+						<div class="half">
+							<div class="form-control">
+								<label for="">Date d’ouverture</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">Référence</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">NIF</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">Stat</label>
+								<input type="text" value="">
+							</div>
+						</div>
+						<label>Licence</label>
+						<div class="custom_checkbox licence">
+							<div class="half">
+								<label>A <span style="color: #a2a2a2">(Agence de voyage)</span>
+									<input type="checkbox">
+									<div class="checkmark"></div>
+								</label>
+								<div class="obtention notselected">
+									<label>Obtention</label>
+									<input type="date" value="">
+								</div>
+							</div>
+							<div class="half">
+								<label>B <span style="color: #a2a2a2">(Tour-opérateur)</span>
+									<input type="checkbox">
+									<div class="checkmark"></div>
+								</label>
+								<div class="obtention notselected">
+									<label>Obtention</label>
+									<input type="date" value="">
+								</div>
+							</div>
+							<div class="half">
+								<label>C <span style="color: #a2a2a2">(loueur de voiture)</span>
+									<input type="checkbox">
+									<div class="checkmark"></div>
+								</label>
+								<div class="obtention notselected">
+									<label>Obtention</label>
+									<input type="date" value="">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="t-right mt-50">
+					<a href="" class="btn">Ajouter</a>
+				</div>
+			</div>
+			<div id="hebergement" class="cat-options">
+				<div class="bloc_editense form-wrap">
+					<div class="card-wrap head">
+						<div class="logo-entreprise">
+							<img src="img/default-etablissement.svg">
+							<label for="pdp">
+								<span class="replace-img"></span>
+							</label>
+						</div>
+						<div class="form-in-head">
+							<div class="sub-title"><span>Coordonnées</span></div>
+							<div class="form-wrap half">
+								<div class="form-control">
+									<label>Dénomination social</label>
+									<input type="text" value="">
+								</div>
+								<div class="form-control">
+									<label>Auteur</label>
+									<input type="text" value="">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-wrap content-ense">
+						<div class="half">
+							<div class="form-control">
+								<label for="">Adresse</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">Téléphone</label>
+								<input type="number" value="">
+							</div>
+							<div class="form-control">
+								<label for="">E-mail</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">Siteweb</label>
+								<input type="email" value="">
+							</div>
+						</div>
+						<div class="form-control">
+							<label>Activités</label>
+							<div class="custom-radio half">
+								<label>Hôtel
+									<input type="radio" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Pension de famille
+									<input type="radio" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Motel
+									<input type="radio" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Ecolodge
+									<input type="radio" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Relais
+									<input type="radio" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Gîte
+									<input type="radio" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Résidence de vacances
+									<input type="radio" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Chambre d’hôtes
+									<input type="radio" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Résidence de tourisme
+									<input type="radio" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Auberge
+									<input type="radio" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Village de vacances
+									<input type="radio" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Terrain de camping
+									<input type="radio" name="activite">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+						</div>
+						<div class="form-control">
+							<label>Classement</label>
+							<div class="custom-radio half">
+								<label>5 étoiles
+									<input type="radio" name="classement">
+									<span class="checkmark"></span>
+								</label>
+								<label>3 Ravinala
+									<input type="radio" name="classement">
+									<span class="checkmark"></span>
+								</label>
+								<label>4 étoiles
+									<input type="radio" name="classement">
+									<span class="checkmark"></span>
+								</label>
+								<label>2 Ravinala
+									<input type="radio" name="classement">
+									<span class="checkmark"></span>
+								</label>
+								<label>3 étoiles
+									<input type="radio" name="classement">
+									<span class="checkmark"></span>
+								</label>
+								<label>1 Ravinala
+									<input type="radio" name="classement">
+									<span class="checkmark"></span>
+								</label>
+								<label>2 étoiles
+									<input type="radio" name="classement">
+									<span class="checkmark"></span>
+								</label>
+								<label>Non classé
+									<input type="radio" name="classement">
+									<span class="checkmark"></span>
+								</label>
+								<label>1 étoiles
+									<input type="radio" name="classement">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+						</div>
+						<div class="half">
+							<div class="form-control">
+								<label for="">Propriétaire</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">Gérant</label>
+								<input type="number" value="">
+							</div>
+						</div>
+						<div class="form-control">
+							<label for="">Region</label>
+							<input type="text" value="">
+						</div>
+						<div class="form-control inputright">
+							<label>Etes-vous membre d'un groupement ?</label>
+							<div class="custom-radio">
+								<label>OUI
+									<input type="radio" name="membre_grpm" value="oui">
+									<span class="checkmark"></span>
+								</label>
+								<label>NON
+									<input type="radio" name="membre_grpm" checked>
+									<span class="checkmark"></span>
+								</label>
+							</div>
+						</div>
+						<div class="custom_checkbox slidergrpm">
+							<label>Confédération du Tourisme de Madagascar (CTM),
+								<input type="checkbox" name="groupement">
+								<span class="checkmark"></span>
+							</label>
+							<label>Fédération des Hôteliers et Restaurateur de Madagascar (FHORM),
+								<input type="checkbox" name="groupement">
+								<span class="checkmark"></span>
+							</label>
+							<label>Office National du Tourisme de Madagascar (ONTM),
+								<input type="checkbox" name="groupement">
+								<span class="checkmark"></span>
+							</label>
+							<label>Office regional (ORT)
+								<input type="checkbox" name="groupement">
+								<span class="checkmark"></span>
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="bloc_editense form-wrap">
+					<div class="card-wrap">
+						<div class="form-in-head">
+							<div class="sub-title"><span>Autorisation</span></div>
+						</div>
+						<div class="half">
+							<div class="form-control">
+								<label for="">Date d’ouverture</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">Référence</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">NIF</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">Stat</label>
+								<input type="text" value="">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="bloc_editense form-wrap">
+					<div class="card-wrap">
+						<div class="form-in-head">
+							<div class="sub-title"><span>Informations supplémentaires</span></div>
+						</div>
+						<div class="half">
+							<div class="form-control">
+								<label for="">Nombre de chambres</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">Capacité d'accueil</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">Nombre de couverts</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">Nombre de Salariés</label>
+								<input type="text" value="">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="t-right mt-50">
+					<a href="" class="btn">Ajouter</a>
+				</div>
+			</div>
+			<div id="hebergement-et-restaurations" class="cat-options">
+				<div class="bloc_editense form-wrap">
+					<div class="card-wrap head">
+						<div class="logo-entreprise">
+							<img src="img/default-etablissement.svg">
+							<label for="pdp">
+								<span class="replace-img"></span>
+							</label>
+						</div>
+						<div class="form-in-head">
+							<div class="sub-title"><span>Coordonnées</span></div>
+							<div class="form-wrap half">
+								<div class="form-control">
+									<label>Dénomination social</label>
+									<input type="text" value="">
+								</div>
+								<div class="form-control">
+									<label>Auteur</label>
+									<input type="text" value="">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-wrap content-ense">
+						<div class="half">
+							<div class="form-control">
+								<label for="">Adresse</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">Téléphone</label>
+								<input type="number" value="">
+							</div>
+							<div class="form-control">
+								<label for="">E-mail</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">Siteweb</label>
+								<input type="email" value="">
+							</div>
+						</div>
+						<div class="form-control">
+							<label>Activités</label>
+							<div class="custom_checkbox half">
+								<label>Hôtel
+									<input type="checkbox" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Auberge
+									<input type="checkbox" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Motel
+									<input type="checkbox" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Terrain de camping
+									<input type="checkbox" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Relais
+									<input type="checkbox" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Restaurant
+									<input type="checkbox" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Résidence de vacances
+									<input type="checkbox" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Buffet
+									<input type="checkbox" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Résidence de tourisme
+									<input type="checkbox" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Snack ou café
+									<input type="checkbox" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Village de vacances
+									<input type="checkbox" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Table d’hôte
+									<input type="checkbox" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Pension de famille
+									<input type="checkbox" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Traiteur
+									<input type="checkbox" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Ecolodge
+									<input type="checkbox" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Fast-food
+									<input type="checkbox" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Gîte
+									<input type="checkbox" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Salon de thé
+									<input type="checkbox" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Chambre d’hôtes
+									<input type="checkbox" name="activite">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+						</div>
+						<div class="form-control">
+							<label>Classement</label>
+							<div class="custom-radio half">
+								<label>5 étoiles
+									<input type="radio" name="classement">
+									<span class="checkmark"></span>
+								</label>
+								<label>3 Ravinala
+									<input type="radio" name="classement">
+									<span class="checkmark"></span>
+								</label>
+								<label>4 étoiles
+									<input type="radio" name="classement">
+									<span class="checkmark"></span>
+								</label>
+								<label>2 Ravinala
+									<input type="radio" name="classement">
+									<span class="checkmark"></span>
+								</label>
+								<label>3 étoiles
+									<input type="radio" name="classement">
+									<span class="checkmark"></span>
+								</label>
+								<label>1 Ravinala
+									<input type="radio" name="classement">
+									<span class="checkmark"></span>
+								</label>
+								<label>2 étoiles
+									<input type="radio" name="classement">
+									<span class="checkmark"></span>
+								</label>
+								<label>Non classé
+									<input type="radio" name="classement">
+									<span class="checkmark"></span>
+								</label>
+								<label>1 étoiles
+									<input type="radio" name="classement">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+						</div>
+						<div class="half">
+							<div class="form-control">
+								<label>Propriétaire</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label>Gérant</label>
+								<input type="text" value="">
+							</div>
+						</div>
+						<div class="form-control">
+							<label for="">Region</label>
+							<input type="text" value="">
+						</div>
+						<div class="form-control inputright">
+							<label>Etes-vous membre d'un groupement ?</label>
+							<div class="custom-radio">
+								<label>OUI
+									<input type="radio" name="membre_grpm" value="oui">
+									<span class="checkmark"></span>
+								</label>
+								<label>NON
+									<input type="radio" name="membre_grpm" checked>
+									<span class="checkmark"></span>
+								</label>
+							</div>
+						</div>
+						<div class="custom_checkbox slidergrpm">
+							<label>Confédération du Tourisme de Madagascar (CTM),
+								<input type="checkbox" name="groupement">
+								<span class="checkmark"></span>
+							</label>
+							<label>Fédération des Hôteliers et Restaurateur de Madagascar (FHORM),
+								<input type="checkbox" name="groupement">
+								<span class="checkmark"></span>
+							</label>
+							<label>Office National du Tourisme de Madagascar (ONTM),
+								<input type="checkbox" name="groupement">
+								<span class="checkmark"></span>
+							</label>
+							<label>Office regional (ORT)
+								<input type="checkbox" name="groupement">
+								<span class="checkmark"></span>
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="bloc_editense form-wrap">
+					<div class="card-wrap">
+						<div class="form-in-head">
+							<div class="sub-title"><span>Autorisation</span></div>
+						</div>
+						<div class="half">
+							<div class="form-control">
+								<label for="">Date d’ouverture</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">Référence</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">NIF</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">Stat</label>
+								<input type="text" value="">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="bloc_editense form-wrap">
+					<div class="card-wrap">
+						<div class="form-in-head">
+							<div class="sub-title"><span>Informations supplémentaires</span></div>
+						</div>
+						<div class="half">
+							<div class="form-control">
+								<label for="">Nombre de chambres</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">Capacité d'accueil</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">Nombre de couverts</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">Nombre de Salariés</label>
+								<input type="text" value="">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="t-right mt-50">
+					<a href="" class="btn">Ajouter</a>
+				</div>
+			</div>
+			<div id="restauration" class="cat-options">
+				<div class="bloc_editense form-wrap">
+					<div class="card-wrap head">
+						<div class="logo-entreprise">
+							<img src="img/default-etablissement.svg">
+							<label for="pdp">
+								<span class="replace-img"></span>
+							</label>
+						</div>
+						<div class="form-in-head">
+							<div class="sub-title"><span>Coordonnées</span></div>
+							<div class="form-wrap half">
+								<div class="form-control">
+									<label>Dénomination social</label>
+									<input type="text" value="">
+								</div>
+								<div class="form-control">
+									<label>Auteur</label>
+									<input type="text" value="">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-wrap content-ense">
+						<div class="half">
+							<div class="form-control">
+								<label for="">Adresse</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">Téléphone</label>
+								<input type="number" value="">
+							</div>
+							<div class="form-control">
+								<label for="">E-mail</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">Site web</label>
+								<input type="email" value="">
+							</div>
+						</div>
+						<div class="form-control">
+							<label>Activités</label>
+							<div class="custom-radio half">
+								<label>Restaurant
+									<input type="radio" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Traiteur
+									<input type="radio" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Buffet
+									<input type="radio" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Fast-food
+									<input type="radio" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Snack ou café
+									<input type="radio" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Salon de thé
+									<input type="radio" name="activite">
+									<span class="checkmark"></span>
+								</label>
+								<label>Table d’hôte
+									<input type="radio" name="activite">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+						</div>
+						<div class="form-control">
+							<label>Classement</label>
+							<div class="custom-radio half">
+								<label>5 étoiles
+									<input type="radio" name="classement">
+									<span class="checkmark"></span>
+								</label>
+								<label>3 Ravinala
+									<input type="radio" name="classement">
+									<span class="checkmark"></span>
+								</label>
+								<label>4 étoiles
+									<input type="radio" name="classement">
+									<span class="checkmark"></span>
+								</label>
+								<label>2 Ravinala
+									<input type="radio" name="classement">
+									<span class="checkmark"></span>
+								</label>
+								<label>3 étoiles
+									<input type="radio" name="classement">
+									<span class="checkmark"></span>
+								</label>
+								<label>1 Ravinala
+									<input type="radio" name="classement">
+									<span class="checkmark"></span>
+								</label>
+								<label>2 étoiles
+									<input type="radio" name="classement">
+									<span class="checkmark"></span>
+								</label>
+								<label>Non classé
+									<input type="radio" name="classement">
+									<span class="checkmark"></span>
+								</label>
+								<label>1 étoiles
+									<input type="radio" name="classement">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+						</div>
+						<div class="half">
+							<div class="form-control">
+								<label for="">Propriétaire</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">Gérant</label>
+								<input type="number" value="">
+							</div>
+						</div>
+						<div class="form-control">
+							<label for="">Region</label>
+							<input type="text" value="">
+						</div>
+						<div class="form-control inputright">
+							<label>Etes-vous membre d'un groupement ?</label>
+							<div class="custom-radio">
+								<label>OUI
+									<input type="radio" name="membre_grpm" value="oui">
+									<span class="checkmark"></span>
+								</label>
+								<label>NON
+									<input type="radio" name="membre_grpm" checked>
+									<span class="checkmark"></span>
+								</label>
+							</div>
+						</div>
+						<div class="custom_checkbox slidergrpm">
+							<label>Confédération du Tourisme de Madagascar (CTM),
+								<input type="checkbox" name="groupement">
+								<span class="checkmark"></span>
+							</label>
+							<label>Fédération des Hôteliers et Restaurateur de Madagascar (FHORM),
+								<input type="checkbox" name="groupement">
+								<span class="checkmark"></span>
+							</label>
+							<label>Office National du Tourisme de Madagascar (ONTM),
+								<input type="checkbox" name="groupement">
+								<span class="checkmark"></span>
+							</label>
+							<label>Office regional (ORT)
+								<input type="checkbox" name="groupement">
+								<span class="checkmark"></span>
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="bloc_editense form-wrap">
+					<div class="card-wrap">
+						<div class="form-in-head">
+							<div class="sub-title"><span>Autorisation</span></div>
+						</div>
+						<div class="half">
+							<div class="form-control">
+								<label for="">Date d’ouverture</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">Référence</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">NIF</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">Stat</label>
+								<input type="text" value="">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="bloc_editense form-wrap">
+					<div class="card-wrap">
+						<div class="form-in-head">
+							<div class="sub-title"><span>Informations supplémentaires</span></div>
+						</div>
+						<div class="half">
+							<div class="form-control">
+								<label for="">Nombre de couverts</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">Nombre de Salariés</label>
+								<input type="text" value="">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="t-right mt-50">
+					<a href="" class="btn">Ajouter</a>
+				</div>
+			</div>
+			<div id="guide" class="cat-options">
+				<div class="bloc_editense form-wrap">
+					<div class="card-wrap head">
+						<div class="logo-entreprise">
+							<img src="img/default-etablissement.svg">
+							<label for="pdp">
+								<span class="replace-img"></span>
+							</label>
+						</div>
+						<div class="form-in-head">
+							<div class="sub-title"><span>Coordonnées</span></div>
+							<div class="form-wrap half">
+								<div class="form-control">
+									<label>Nom et prénom</label>
+									<input type="text" value="">
+								</div>
+								<div class="form-control">
+									<label>Auteur</label>
+									<input type="text" value="">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-wrap content-ense">
+						<div class="half">
+							<div class="form-control">
+								<label for="">Adresse</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">Téléphone</label>
+								<input type="number" value="">
+							</div>
+							<div class="form-control">
+								<label for="">E-mail</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">Site web</label>
+								<input type="email" value="">
+							</div>
+						</div>
+						<div class="form-control">
+							<label for="">Zone d'intervention</label>
+							<input type="text" value="">
+						</div>
+						<div class="form-control inputright">
+							<label>Êtes vous membre d'un association des guides</label>
+							<div class="custom-radio">
+								<label>OUI
+									<input type="radio" name="membre_grpm" value="oui">
+									<span class="checkmark"></span>
+								</label>
+								<label>NON
+									<input type="radio" name="membre_grpm" checked>
+									<span class="checkmark"></span>
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="bloc_editense form-wrap">
+					<div class="card-wrap">
+						<div class="form-in-head">
+							<div class="sub-title"><span>Autorisation</span></div>
+						</div>
+						<div class="half">
+							<div class="form-control">
+								<label for="">Catégorie</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">N° carte et badge professionnel</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">NIF</label>
+								<input type="text" value="">
+							</div>
+							<div class="form-control">
+								<label for="">Stat</label>
+								<input type="text" value="">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="t-right mt-50">
+					<a href="" class="btn">Ajouter</a>
+				</div>
+			</div>
+			
+            <div class="copyright">© <strong>2023 Annuaire</strong>, tous droits réservés</div>
+        </section>
+    </main>
+</div>
+</body>
+<script>
+jQuery(document).ready(function($) {
+$('.nstSlider').nstSlider({
+    "rounding": {
+        "100": "100"
+    },
+    "left_grip_selector": ".leftGrip",
+    "right_grip_selector": ".rightGrip",
+    "value_bar_selector": ".bar",
+    "value_changed_callback": function(cause, leftValue, rightValue) {
+        $(this).parent().find('.leftLabel').text(leftValue);
+        $(this).parent().find('.rightLabel').text(rightValue);
+    }
+});
+});
+</script>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noindex, nofollow">
+        <link rel="preload" href="{{ asset('admin/fonts/montserrat-extrabold.woff2') }}" as="font" type="font/woff2">
+        <link rel="preload" href="{{ asset('admin/fonts/montserrat-medium.woff2') }}" as="font" type="font/woff2">
+        <link rel="preload" href="{{ asset('admin/fonts/montserrat-regular.woff2') }}" as="font" type="font/woff2">
+        <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/datatable.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/fancybox.min.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/tableau.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('admin/style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/responsive.css') }}">
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+        <script src="{{ asset('admin/js/jquery.min.js') }}"></script>
+    </head>
+    <body>
+        <div id="wrapper">
+            <section class="logo-menu">
+                <div class="logo"><a href="/"><img src="img/logo.svg" alt=""></a>
+                </div>
+                <nav class="menu-wrap">
+                    <ul>
+                        <li class="dash"><a href="dashboard.html">Dashboard</a></li>
+                        <li class="has-child etablissement"><a href="etablissement.html">Liste établissement</a></li>
+                        <li class="has-child users"><a href="utilisateur.html">Utilisateur</a></li>
+                        <li class="has-child donnees">
+                            <a href="#">Données</a>
+                            <ul class="sub-menu">
+                                <li class="category"><a href="categorie.html">Catégorie</a></li>
+                                <li class="region"><a href="region.html">Région</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </section>
+            {% block body %}{% endblock %}
+        </div>
+        {% block javascripts %}
+            <script src="{{ asset('admin/js/dist/bootstrap-modal.dev.js') }}"></script>
+            <script src="{{ asset('admin/js/dist/customize.dev.js') }}"></script>
+            <script src="{{ asset('admin/js/dist/modal.min.dev.js') }}"></script>
+            <script src="{{ asset('admin/js/customize.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('admin/js/datatable.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('admin/js/datatable-reponsive.min.js') }}"></script>
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </body>
+</html>

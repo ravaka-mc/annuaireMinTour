@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="icon" href="/front/img/favicon.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="noindex, nofollow">
+	<title>Annuaire</title>
+	<link rel="preload" href="fonts/montserrat-extrabold.woff2" as="font" type="font/woff2">
+	<link rel="preload" href="fonts/montserrat-medium.woff2" as="font" type="font/woff2">
+	<link rel="preload" href="fonts/montserrat-regular.woff2" as="font" type="font/woff2">
+	<link rel="stylesheet" type="text/css" href="css/datatable.css">
+	<link rel="stylesheet" type="text/css" href="css/fancybox.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/tableau.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="css/responsive.css">
+</head>
+
+<body>
+	<div id="wrapper">
+		<section class="logo-menu">
+			<div class="logo"><a href="/"><img src="img/logo.svg" alt=""></a>
+			</div>
+			<nav class="menu-wrap">
+				<ul>
+					<li class="dash"><a href="dashboard.html">Dashboard</a></li>
+					<li class="has-child etablissement"><a href="etablissement.html">Liste établissement</a></li>
+					<li class="has-child users"><a href="utilisateur.html">Utilisateur</a></li>
+					<li class="has-child donnees">
+						<a href="#">Données</a>
+						<ul class="sub-menu">
+							<li class="category"><a href="categorie.html">Catégorie</a></li>
+							<li class="region"><a href="region.html">Région</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</section>
+		<main id="content" class="flex custom-table-mobile">
+			<section id="contenu" class="candidat">
+				<div id="infoadmin">
+					<div class="infoad">
+						<div class="bienvenu">
+							<span>Bienvenue, Ravaka</span>
+							<img src="http://localhost:8000/back/img/icon-admin.svg" alt="">
+						</div>
+						<div class="deco">
+							<a href="/logout">Déconnexion</a>
+						</div>
+					</div>
+				</div>
+				<div class="d-flex sb header">
+					<div class="title">Catégories</div>
+					<a data-fancybox data-src="#newcat" href="javascript:;" class="btn">Nouvelle catégorie</a>
+				</div>
+				<table id="table-list" class="custom-table-ville">
+					<thead>
+						<tr>
+							<th></th>
+							<th><span>Nom</span></th>
+							<th><span>Date d’ajout</span></th>
+							<th><span>Action</span></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td></td>
+							<td>Hébergement</td>
+							<td>09-05-2022</td>
+							<td>
+								<div class="action">
+									<a data-fancybox data-src="#newcat" href="javascript:;" class="edit"></a>
+									<a href="" class="delete"></a>
+								</div>
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>Restauration</td>
+							<td>09-05-2022</td>
+							<td>
+								<div class="action">
+									<a data-fancybox data-src="#newcat" href="javascript:;" class="edit"></a>
+									<a href="" class="delete"></a>
+								</div>
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>Voyages & Prestations touristiques</td>
+							<td>09-05-2022</td>
+							<td>
+								<div class="action">
+									<a data-fancybox data-src="#newcat" href="javascript:;" class="edit"></a>
+									<a href="" class="delete"></a>
+								</div>
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>Location</td>
+							<td>09-05-2022</td>
+							<td>
+								<div class="action">
+									<a data-fancybox data-src="#newcat" href="javascript:;" class="edit"></a>
+									<a href="" class="delete"></a>
+								</div>
+							</td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="copyright">© <strong>2023 Annuaire</strong>, tous droits réservés</div>
+			</section>
+		</main>
+		<!-- Modal -->
+		<div style="display: none; max-width: 500px;" id="newcat" class="popup-style">
+			<div class="sub-title">Ajout nouvelle <strong>catégorie</strong></div>
+			<form class="form-wrap" method="post" action="">
+				<div class="form-control">
+					<label for="nom">Nom</label>
+					<input type="text" id="nom" name="titre">
+				</div>
+				<div class="pbtn full"><button type="submit" class="btn red">Ajouter catégorie</button></div>
+			</form>
+		</div>
+		<div id="supprimer" class="pop_suppr" style="display:none; max-width:500px;">
+			<div class="innerpad">
+				<div class="sub-title">Vouler vraiment supprimer ?</div>
+				<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis tempora repellat soluta perferendis earum animi porro</p>
+			</div>
+			<div class="pop_btns">
+				<a href="" class="btn-pop confirm">Supprimer</a>
+				<span data-fancybox-close class="btn-pop">Annuler</span>
+			</div>
+		</div>
+
+		<script src="js/jquery.fancybox.min.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/datatable.min.js"></script>
+		<script src="js/datatable-reponsive.min.js"></script>
+		<script src="js/customize.js"></script>
+		<script>
+			$(document).ready(function () {
+				$.fn.dataTable.Responsive.breakpoints = [
+					{ name: 'desktop', width: Infinity },
+					{ name: 'tablet', width: 1024 },
+					{ name: 'fablet', width: 768 },
+					{ name: 'phone', width: 480 }
+				];
+				$('#table-list').DataTable({
+					paging: true,
+					"searching": true,
+					"info": false,
+					"bLengthChange": false,
+					"bInfo": false,
+					responsive: true,
+					"ordering": false,
+					"language": {
+						"lengthMenu": "Afficher _MENU_",
+						"zeroRecords": "Rien n'a été trouvé, désolé",
+						"info": "Nombre de lignes <span class='current'>_PAGE_</span> sur <span>_PAGES_</span>",
+						"infoEmpty": "Non disponible",
+						"infoFiltered": "(filtré sur _MAX_ enregistrements)",
+						"search": "",
+						"searchPlaceholder": "Recherche",
+						"sPaginationType": "3",
+						"paginate": {
+							"previous": "<",
+							"next": ">"
+						}
+					}
+				});
+				$(".close").click(function () {
+					$(this).parent().parent().remove();
+				});
+			});
+		</script>
+	</div>
+</body>
+
+</html>
