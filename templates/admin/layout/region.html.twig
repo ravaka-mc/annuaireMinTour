@@ -5,20 +5,10 @@
 {% block body %}
     <main id="content" class="flex custom-table-mobile">
         <section id="contenu" class="candidat">
-            <div id="infoadmin">
-                <div class="infoad">
-                    <div class="bienvenu">
-                        <span>Bienvenue, Ravaka</span>
-                        <img src="http://localhost:8000/back/img/icon-admin.svg" alt="">
-                    </div>
-                    <div class="deco">
-                        <a href="/logout">Déconnexion</a>
-                    </div>
-                </div>
-            </div>
+            {% include "admin/block/logout.html.twig" %}
             <div class="d-flex sb header">
-                <div class="title">Catégories</div>
-                <a data-fancybox data-src="#newcat" href="javascript:;" class="btn">Nouvelle catégorie</a>
+                <div class="title">Région</div>
+                <a data-fancybox data-src="#newregion" href="javascript:;" class="btn">Nouvelle région</a>
             </div>
             <table id="table-list" class="custom-table-ville">
                 <thead>
@@ -33,48 +23,48 @@
                 <tbody>
                     <tr>
                         <td></td>
-                        <td>Hébergement</td>
+                        <td>Analamanga</td>
                         <td>09-05-2022</td>
                         <td>
                             <div class="action">
-                                <a data-fancybox data-src="#newcat" href="javascript:;" class="edit"></a>
-                                <a href="" class="delete"></a>
+                                <a data-fancybox data-src="#newregion" href="javascript:;" class="edit"></a>
+                                <a data-fancybox data-src="#supprimer" class="delete"></a>
                             </div>
                         </td>
                         <td></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>Restauration</td>
+                        <td>Diana</td>
                         <td>09-05-2022</td>
                         <td>
                             <div class="action">
-                                <a data-fancybox data-src="#newcat" href="javascript:;" class="edit"></a>
-                                <a href="" class="delete"></a>
+                                <a data-fancybox data-src="#newregion" href="javascript:;" class="edit"></a>
+                                <a data-fancybox data-src="#supprimer" class="delete"></a>
                             </div>
                         </td>
                         <td></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>Voyages & Prestations touristiques</td>
+                        <td>Boeny</td>
                         <td>09-05-2022</td>
                         <td>
                             <div class="action">
-                                <a data-fancybox data-src="#newcat" href="javascript:;" class="edit"></a>
-                                <a href="" class="delete"></a>
+                                <a data-fancybox data-src="#newregion" href="javascript:;" class="edit"></a>
+                                <a data-fancybox data-src="#supprimer" class="delete"></a>
                             </div>
                         </td>
                         <td></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>Location</td>
+                        <td>Analanjorofo</td>
                         <td>09-05-2022</td>
                         <td>
                             <div class="action">
-                                <a data-fancybox data-src="#newcat" href="javascript:;" class="edit"></a>
-                                <a href="" class="delete"></a>
+                                <a data-fancybox data-src="#newregion" href="javascript:;" class="edit"></a>
+                                <a data-fancybox data-src="#supprimer" class="delete"></a>
                             </div>
                         </td>
                         <td></td>
@@ -85,14 +75,14 @@
         </section>
     </main>
     <!-- Modal -->
-    <div style="display: none; max-width: 500px;" id="newcat" class="popup-style">
-        <div class="sub-title">Ajout nouvelle <strong>catégorie</strong></div>
+    <div style="display: none; max-width: 500px;" id="newregion" class="popup-style">
+        <div class="sub-title">Ajout nouvelle <strong>région</strong></div>
         <form class="form-wrap" method="post" action="">
             <div class="form-control">
                 <label for="nom">Nom</label>
                 <input type="text" id="nom" name="titre">
             </div>
-            <div class="pbtn full"><button type="submit" class="btn red">Ajouter catégorie</button></div>
+            <div class="pbtn full"><button type="submit" class="btn red">Ajouter région</button></div>
         </form>
     </div>
     <div id="supprimer" class="pop_suppr" style="display:none; max-width:500px;">
@@ -108,10 +98,10 @@
 {% endblock %}
 {% block javascripts %}
     <script src="{{ asset('admin/js/jquery.fancybox.min.js') }}"></script>
-    <script src="{{ asset('admin/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('front/js/slick.min.js') }}"></script>
+    <script src="{{ asset('admin/js/customize.js') }}"></script>
     <script src="{{ asset('admin/js/datatable.min.js') }}"></script>
     <script src="{{ asset('admin/js/datatable-reponsive.min.js') }}"></script>
-    <script src="{{ asset('admin/js/customize.js') }}"></script>
     <script>
         $(document).ready(function () {
             $.fn.dataTable.Responsive.breakpoints = [

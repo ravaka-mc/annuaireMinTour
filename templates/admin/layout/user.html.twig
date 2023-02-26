@@ -5,17 +5,7 @@
 {% block body %}
 <main id="content" class="flex">
     <section id="contenu" class="candidat">
-        <div id="infoadmin">
-            <div class="infoad">
-                <div class="bienvenu">
-                    <span>Bienvenue, Ravaka</span>
-                    <img src="img/icon-admin.svg" alt="">
-                </div>
-                <div class="deco">
-                    <a href="/logout">Déconnexion</a>
-                </div>
-            </div>
-        </div>
+        {% include "admin/block/logout.html.twig" %}
         <div class="d-flex sb header">
             <div class="title">Utilisateur</div>
             <a data-fancybox data-src="#newuser" class="btn">Nouveau utilisateur</a>
@@ -75,27 +65,31 @@
 <!-- Modal -->
 <div id="newuser" style="display:none; max-width: 500px;">
     <div class="title">Ajout nouveau <strong>Utilisateur</strong></div>
-    <div class="form-wrap">
+    <form action="{{ path("app_admin_user") }}" name="{{ form.vars.full_name }}" class="form-wrap" method="post">
+        {{ form_errors(form) }}
         <div class="half">
             <div class="form-control">
                 <label for="nom">Nom</label>
-                <input type="text" id="nom">
+                {{ form_widget(form.nom) }}
             </div>
             <div class="form-control">
                 <label for="prenom">Prénom</label>
-                <input type="text" id="prenom">
+                {{ form_widget(form.prenom) }}
             </div>
         </div>
         <div class="form-control">
             <label for="email">E-mail</label>
-            <input type="email" id="email">
+            {{ form_widget(form.email) }}
+            {{ form_errors(form.email) }}
         </div>
         <div class="form-control">
             <label for="password">Mot de passe</label>
-            <input type="password" id="password">
+            {{ form_widget(form.password) }}
+            {{ form_errors(form.password) }}
         </div>
-        <div class="pbtn full"><button class="btn">Ajouter utilisateur</button></div>
-    </div>
+         {{ form_widget(form._token) }}
+        <div class="pbtn full"><button type="submit" class="btn">Ajouter utilisateur</button></div>
+    </form>
 </div>
 <div id="supprimer" class="pop_suppr" style="display:none; max-width:500px;">
     <div class="innerpad">

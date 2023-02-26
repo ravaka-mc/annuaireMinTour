@@ -5,17 +5,7 @@
 {% block body %}
 <main id="dashboard" class="flex">
     <section id="contenu">
-        <div id="infoadmin">
-            <div class="infoad">
-                <div class="bienvenu">
-                    <span>Bienvenue, Ravaka</span>
-                    <img src="img/icon-admin.svg" alt="">
-                </div>
-                <div class="deco">
-                    <a href="/logout">Déconnexion</a>
-                </div>
-            </div>
-        </div>
+        {% include "admin/block/logout.html.twig" %}
         <div class="title">Dashboard</div>
         <div class="bloc-33 chiffre">
             <div class="item">

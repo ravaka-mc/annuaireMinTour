@@ -1,0 +1,131 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Annuaire{% endblock %}
+
+{% block body %}
+    <main id="content" class="flex">
+        <section id="contenu" class="sect-annonce">
+            {% include "admin/block/logout.html.twig" %}
+            <div class="d-flex sb header">
+                <div class="title">Listes établissements</div>
+                <a href="{{ path('app_admin_etablissement_add') }}" class="btn blue">Nouveau établissement</a>
+            </div>
+            <table id="table-list" class="custom-table-secteur">
+                <thead>
+                    <tr>
+                        <th><span>Nom</span></th>
+                        <th><span>Catégorie</span></th>
+                        <th><span>Licence</span></th>
+                        <th><span>Region</span></th>
+                        <th><span>Date</span></th>
+                        <th><span>Etat</span></th>
+                        <th><span>Action</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Le rafia</td>
+                        <td>Hebergement</td>
+                        <td>A, B</td>
+                        <td>Analamanga</td>
+                        <td>17/02/23</td>
+                        <td><div class="valide">Validé</div></td>
+                        <td>
+                            <div class="action">
+                                <a href="new-etablissement.html" class="edit"></a>
+                                <a href="" class="view"></a>
+                                <a data-fancybox="" data-src="#popup-delete" class="delete"></a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Le rafia</td>
+                        <td>Hebergement</td>
+                        <td>A, B</td>
+                        <td>Analamanga</td>
+                        <td>17/02/23</td>
+                        <td><div class="en-attente">En attente</div></td>
+                        <td>
+                            <div class="action">
+                                <a href="new-etablissement.html" class="edit"></a>
+                                <a href="" class="view"></a>
+                                <a data-fancybox="" data-src="#popup-delete" class="delete"></a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="copyright">© <strong>2023 Annuaire</strong>, tous droits réservés</div>
+        </section>
+    </main>
+    <!-- Modal -->
+    <div style="display: none;" class="pop-annonces" id="add"></div>
+    <!-- Modal supprimer -->
+    <div id="popup-delete" class="pop_suppr" style="display:none; max-width:500px;">
+        <div class="innerpad">
+            <div class="sub-title">Êtes vous sûr de supprimer ?</div>
+            <p>Êtes vous sûr de vouloir supprimer cette etablissement ?</p>
+            <div class="form-wrap">
+                <label>Raison</label>
+                <textarea name="" id=""></textarea>
+            </div>
+        </div>
+        <div class="pop_btns">
+            <a href="" class="btn-pop confirm">Supprimer</a>
+            <span data-fancybox-close class="btn-pop">Annuler</span>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('admin/js/jquery.fancybox.min.js') }}"></script>
+	<script src="{{ asset('admin/js/datatable.min.js') }}"></script>
+	<script src="{{ asset('admin/js/datatable-reponsive.min.js') }}"></script>
+	<script src="{{ asset('admin/js/customize.js') }}"></script>
+	<script>
+		$(document).ready(function () {
+			$.fn.dataTable.Responsive.breakpoints = [{
+				name: 'desktop',
+				width: Infinity
+			}, {
+				name: 'tablet',
+				width: 1024
+			}, {
+				name: 'fablet',
+				width: 768
+			}, {
+				name: 'phone',
+				width: 480
+			}];
+			$('#table-list').DataTable({
+				paging: true,
+				"searching": true,
+				"info": false,
+				"bLengthChange": false,
+				"bInfo": false,
+				"order": [],
+				columnDefs: [{
+					targets: [6],
+					orderable: false
+				}],
+				responsive: true,
+				"language": {
+					"lengthMenu": "Afficher _MENU_",
+					"zeroRecords": "Rien n'a été trouvé, désolé",
+					"info": "Nombre de lignes <span class='current'>_PAGE_</span> sur <span>_PAGES_</span>",
+					"infoEmpty": "Non disponible",
+					"infoFiltered": "(filtré sur _MAX_ enregistrements)",
+					"search": "",
+					"searchPlaceholder": "Recherche",
+					"sPaginationType": "3",
+					"paginate": {
+						"previous": "<",
+						"next": ">"
+					}
+				}
+			});
+			$(".close").click(function () {
+				$.fancybox.close();
+			});
+		});
+	</script>
+{% endblock %}
