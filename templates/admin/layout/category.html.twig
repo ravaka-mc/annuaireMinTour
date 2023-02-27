@@ -21,54 +21,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td>Hébergement</td>
-                        <td>09-05-2022</td>
-                        <td>
-                            <div class="action">
-                                <a data-fancybox data-src="#newcat" href="javascript:;" class="edit"></a>
-                                <a href="" class="delete"></a>
-                            </div>
-                        </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Restauration</td>
-                        <td>09-05-2022</td>
-                        <td>
-                            <div class="action">
-                                <a data-fancybox data-src="#newcat" href="javascript:;" class="edit"></a>
-                                <a href="" class="delete"></a>
-                            </div>
-                        </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Voyages & Prestations touristiques</td>
-                        <td>09-05-2022</td>
-                        <td>
-                            <div class="action">
-                                <a data-fancybox data-src="#newcat" href="javascript:;" class="edit"></a>
-                                <a href="" class="delete"></a>
-                            </div>
-                        </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Location</td>
-                        <td>09-05-2022</td>
-                        <td>
-                            <div class="action">
-                                <a data-fancybox data-src="#newcat" href="javascript:;" class="edit"></a>
-                                <a href="" class="delete"></a>
-                            </div>
-                        </td>
-                        <td></td>
-                    </tr>
+                    {% for category in categories %}
+                        <tr>
+                            <td></td>
+                            <td>{{ category.nom }}</td>
+                            <td>{{ category.getCreatedAt()|date('d-m-Y') }}</td>
+                            <td>
+                                <div class="action">
+                                    <a data-fancybox data-src="#newcat" href="javascript:;" class="edit"></a>
+                                    <a href="" class="delete"></a>
+                                </div>
+                            </td>
+                            <td></td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
             <div class="copyright">© <strong>2023 Annuaire</strong>, tous droits réservés</div>
@@ -77,11 +43,13 @@
     <!-- Modal -->
     <div style="display: none; max-width: 500px;" id="newcat" class="popup-style">
         <div class="sub-title">Ajout nouvelle <strong>catégorie</strong></div>
-        <form class="form-wrap" method="post" action="">
+        <form id="form-category" class="form-wrap" method="post" name="{{ form.vars.full_name }}" action="{{ path("app_admin_category_add") }}">
+             <ul class="form-error"></ul>
             <div class="form-control">
                 <label for="nom">Nom</label>
-                <input type="text" id="nom" name="titre">
+                {{ form_widget(form.nom) }}
             </div>
+            {{ form_widget(form._token) }}
             <div class="pbtn full"><button type="submit" class="btn red">Ajouter catégorie</button></div>
         </form>
     </div>
@@ -95,10 +63,14 @@
             <span data-fancybox-close class="btn-pop">Annuler</span>
         </div>
     </div>
+    <div style="display:none" id="dialog-message" title="Information">
+        <p>
+            La catégorie a été bien enregistrée avec succès
+        </p>
+    </div>
 {% endblock %}
 {% block javascripts %}
     <script src="{{ asset('admin/js/jquery.fancybox.min.js') }}"></script>
-    <script src="{{ asset('admin/js/jquery.min.js') }}"></script>
     <script src="{{ asset('admin/js/datatable.min.js') }}"></script>
     <script src="{{ asset('admin/js/datatable-reponsive.min.js') }}"></script>
     <script src="{{ asset('admin/js/customize.js') }}"></script>
@@ -133,9 +105,44 @@
                     }
                 }
             });
+
             $(".close").click(function () {
                 $(this).parent().parent().remove();
             });
+
+            $("#form-category").submit(function(e){
+                e.preventDefault();
+
+                var $form = $(e.currentTarget);
+                $.ajax({
+                    url: $form.attr('action'),
+                    method: 'POST',
+                    data: $form.serialize(),
+                    success: function(resp){
+                        if(resp.code_status == 503){
+                            error = resp.msg_error;
+                            html = "";
+                           for (let i = 0; i < error.length; i++){
+                                html += "<li>" + error[i] + "</li>";
+                            }
+                            $(".form-error").html(html);
+                        } else {
+                            document.getElementById("form-category").reset();
+                            $('.carousel__button').trigger('click');
+                            $( "#dialog-message" ).dialog({
+                                modal: true,
+                                width: 500,
+                                close: function(){
+                                    window.location = '{{ path("app_admin_category") }}';
+                                }
+                            });
+                        }
+                    },
+                    error: function(e){
+                        console.log(e);
+                    }
+                });
+            })
         });
     </script>
 {% endblock %}

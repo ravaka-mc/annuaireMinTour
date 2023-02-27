@@ -21,54 +21,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td>Analamanga</td>
-                        <td>09-05-2022</td>
-                        <td>
-                            <div class="action">
-                                <a data-fancybox data-src="#newregion" href="javascript:;" class="edit"></a>
-                                <a data-fancybox data-src="#supprimer" class="delete"></a>
-                            </div>
-                        </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Diana</td>
-                        <td>09-05-2022</td>
-                        <td>
-                            <div class="action">
-                                <a data-fancybox data-src="#newregion" href="javascript:;" class="edit"></a>
-                                <a data-fancybox data-src="#supprimer" class="delete"></a>
-                            </div>
-                        </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Boeny</td>
-                        <td>09-05-2022</td>
-                        <td>
-                            <div class="action">
-                                <a data-fancybox data-src="#newregion" href="javascript:;" class="edit"></a>
-                                <a data-fancybox data-src="#supprimer" class="delete"></a>
-                            </div>
-                        </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Analanjorofo</td>
-                        <td>09-05-2022</td>
-                        <td>
-                            <div class="action">
-                                <a data-fancybox data-src="#newregion" href="javascript:;" class="edit"></a>
-                                <a data-fancybox data-src="#supprimer" class="delete"></a>
-                            </div>
-                        </td>
-                        <td></td>
-                    </tr>
+                    {% for region in regions %}
+                        <tr>
+                            <td></td>
+                            <td>{{ region.nom }}</td>
+                            <td>{{ region.getCreatedAt()|date('d-m-Y') }}</td>
+                            <td>
+                                <div class="action">
+                                    <a data-fancybox data-src="#newregion" href="javascript:;" class="edit"></a>
+                                    <a data-fancybox data-src="#supprimer" class="delete"></a>
+                                </div>
+                            </td>
+                            <td></td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
             <div class="copyright">© <strong>2023 Annuaire</strong>, tous droits réservés</div>
@@ -77,11 +43,13 @@
     <!-- Modal -->
     <div style="display: none; max-width: 500px;" id="newregion" class="popup-style">
         <div class="sub-title">Ajout nouvelle <strong>région</strong></div>
-        <form class="form-wrap" method="post" action="">
+        <form id="form-region" class="form-wrap" method="post" name="{{ form.vars.full_name }}" action="{{ path("app_admin_region_add") }}">
+             <ul class="form-error"></ul>
             <div class="form-control">
                 <label for="nom">Nom</label>
-                <input type="text" id="nom" name="titre">
+                {{ form_widget(form.nom) }}
             </div>
+            {{ form_widget(form._token) }}
             <div class="pbtn full"><button type="submit" class="btn red">Ajouter région</button></div>
         </form>
     </div>
@@ -94,6 +62,11 @@
             <a href="" class="btn-pop confirm">Supprimer</a>
             <span data-fancybox-close class="btn-pop">Annuler</span>
         </div>
+    </div>
+    <div style="display:none" id="dialog-message" title="Information">
+        <p>
+            La region a été bien enregistrée avec succès
+        </p>
     </div>
 {% endblock %}
 {% block javascripts %}
@@ -136,6 +109,39 @@
             $(".close").click(function () {
                 $(this).parent().parent().remove();
             });
+            $("#form-region").submit(function(e){
+                e.preventDefault();
+
+                var $form = $(e.currentTarget);
+                $.ajax({
+                    url: $form.attr('action'),
+                    method: 'POST',
+                    data: $form.serialize(),
+                    success: function(resp){
+                        if(resp.code_status == 503){
+                            error = resp.msg_error;
+                            html = "";
+                           for (let i = 0; i < error.length; i++){
+                                html += "<li>" + error[i] + "</li>";
+                            }
+                            $(".form-error").html(html);
+                        } else {
+                            document.getElementById("form-region").reset();
+                            $('.carousel__button').trigger('click');
+                            $( "#dialog-message" ).dialog({
+                                modal: true,
+                                width: 500,
+                                close: function(){
+                                    window.location = '{{ path("app_admin_region") }}';
+                                }
+                            });
+                        }
+                    },
+                    error: function(e){
+                        console.log(e);
+                    }
+                });
+            })
         });
     </script>
 {% endblock %}

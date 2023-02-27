@@ -8,8 +8,9 @@
         {% include "admin/block/logout.html.twig" %}
         <div class="d-flex sb header">
             <div class="title">Utilisateur</div>
-            <a data-fancybox data-src="#newuser" class="btn">Nouveau utilisateur</a>
+            <a id="btn-newuser" data-fancybox data-src="#newuser" class="btn">Nouveau utilisateur</a>
         </div>
+
         <table id="table-list" class="custom-table-secteur">
             <thead>
                 <tr>
@@ -21,42 +22,20 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Rabetokotany</td>
-                    <td>Gregorio Meier</td>
-                    <td>Gregorio@gmail.com</td>
-                    <td>15 Oct.2020</td>
-                    <td>
-                        <div class="action">
-                            <a href="" class="edit"></a>
-                            <a href="" data-fancybox data-src="#supprimer" class="delete"></a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Rabetokotany</td>
-                    <td>Gregorio Meier</td>
-                    <td>Gregorio@gmail.com</td>
-                    <td>15 Oct.2020</td>
-                    <td>
-                        <div class="action">
-                            <a href="" class="edit"></a>
-                            <a href="" data-fancybox data-src="#supprimer" class="delete"></a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Rabetokotany</td>
-                    <td>Gregorio Meier</td>
-                    <td>Gregorio@gmail.com</td>
-                    <td>15 Oct.2020</td>
-                    <td>
-                        <div class="action">
-                            <a href="" class="edit"></a>
-                            <a href="" data-fancybox data-src="#supprimer" class="delete"></a>
-                        </div>
-                    </td>
-                </tr>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.nom }}</td>
+                        <td>{{ user.prenom }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.getCreatedAt()|date("d M.Y") }}</td>
+                        <td>
+                            <div class="action">
+                                <a href="" class="edit"></a>
+                                <a href="" data-fancybox data-src="#supprimer" class="delete"></a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
         <div class="copyright">© <strong>2023 Annuaire</strong>, tous droits réservés</div>
@@ -65,8 +44,8 @@
 <!-- Modal -->
 <div id="newuser" style="display:none; max-width: 500px;">
     <div class="title">Ajout nouveau <strong>Utilisateur</strong></div>
-    <form action="{{ path("app_admin_user") }}" name="{{ form.vars.full_name }}" class="form-wrap" method="post">
-        {{ form_errors(form) }}
+    <form id="form-user" action="{{ path("app_admin_user_add") }}" name="{{ form.vars.full_name }}" class="form-wrap" method="post">
+        <ul class="form-error"></ul>
         <div class="half">
             <div class="form-control">
                 <label for="nom">Nom</label>
@@ -101,6 +80,11 @@
         <span data-fancybox-close class="btn-pop">Annuler</span>
     </div>
 </div>
+<div style="display:none" id="dialog-message" title="Information">
+  <p>
+     L'utilisateur a été bien enregistré avec succès
+  </p>
+</div>
 {% endblock %}
 {% block javascripts %}
     <script src="{{ asset('admin/js/jquery.fancybox.min.js') }}"></script>
@@ -109,6 +93,7 @@
     <script src="{{ asset('admin/js/customize.js') }}"></script>
     <script>
         $(document).ready( function () {
+   
             $.fn.dataTable.Responsive.breakpoints = [
                 { name: 'desktop', width: Infinity },
                 { name: 'tablet',  width: 1024 },
@@ -138,9 +123,44 @@
                     }
                 }
             });
+
             $(".close").click(function(){
                 $(this).parent().parent().remove();
             });
-        } );
+
+            $("#form-user").submit(function(e){
+                e.preventDefault();
+
+                var $form = $(e.currentTarget);
+                $.ajax({
+                    url: $form.attr('action'),
+                    method: 'POST',
+                    data: $form.serialize(),
+                    success: function(resp){
+                        if(resp.code_status == 503){
+                            error = resp.msg_error;
+                            html = "";
+                           for (let i = 0; i < error.length; i++){
+                                html += "<li>" + error[i] + "</li>";
+                            }
+                            $(".form-error").html(html);
+                        } else {
+                            document.getElementById("form-user").reset();
+                            $('.carousel__button').trigger('click');
+                            $( "#dialog-message" ).dialog({
+                                modal: true,
+                                width: 500,
+                                close: function(){
+                                    window.location = '{{ path("app_admin_user") }}';
+                                }
+                            });
+                        }
+                    },
+                    error: function(e){
+                        console.log(e);
+                    }
+                });
+            })
+        });
     </script>
 {% endblock %}
