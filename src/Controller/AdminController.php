@@ -37,7 +37,6 @@ class AdminController extends AbstractController
         $this->userRepository = $userRepository;
     }
 
-
     /**
      * @Route("/admin/", name="app_admin")
      */
@@ -50,54 +49,6 @@ class AdminController extends AbstractController
 
 
     /**
-     * @Route("/admin/user", name="app_admin_user")
-     */
-    public function user(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-
-        $users = $this->userRepository->findAll();
-
-        return $this->render('admin/layout/user.html.twig', [
-            'form' => $form->createView(),
-            'users' => $users
-        ]);
-    }
-
-    /**
-     * @Route("/admin/category", name="app_admin_category")
-     */
-    public function category(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $category = new Category();
-        $form = $this->createForm(CategoryType::class, $category);
-
-        $categories = $this->categoryRepository->findAll();
-
-        return $this->render('admin/layout/category.html.twig', [
-            'form' => $form->createView(),
-            'categories' => $categories
-        ]);
-    }
-
-    /**
-     * @Route("/admin/region", name="app_admin_region")
-     */
-    public function region(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $region = new Region();
-        $form = $this->createForm(RegionType::class, $region);
-
-        $regions = $this->categoryRepository->findAll();
-
-        return $this->render('admin/layout/region.html.twig', [
-            'form' => $form->createView(),
-            'regions' => $regions
-        ]);
-    }
-
-    /**
      * @Route("/admin/etablissement", name="app_admin_etablissement")
      */
     public function etablissement(Request $request, EntityManagerInterface $entityManager): Response
@@ -107,60 +58,10 @@ class AdminController extends AbstractController
         ]);
     }
 
-
-   /**
-     * @Route("/admin/category/add", name="app_admin_category_add")
-     */
-    public function categoryAdd(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $category = new Category();
-        $form = $this->createForm(CategoryType::class, $category);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-           $this->categoryRepository->add($category, true);
-
-            return new JsonResponse([
-                "msg_error" => '',
-                "code_status" => 200
-            ]);
-        }
-
-        return new JsonResponse([
-            "msg_error" => $this->getErrorMessages($form),
-            "code_status" => 503
-        ]);
-    }
-
-    /**
-     * @Route("/admin/region/add", name="app_admin_region_add")
-     */
-    public function regionAdd(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $region = new Region();
-        $form = $this->createForm(RegionType::class, $region);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->regionRepository->add($region, true);
-
-            return new JsonResponse([
-                "msg_error" => '',
-                "code_status" => 200
-            ]);
-        }
-
-        return new JsonResponse([
-            "msg_error" => $this->getErrorMessages($form),
-            "code_status" => 503
-        ]);
-    }
-
-
     /**
      * @Route("/admin/etablissement/add", name="app_admin_etablissement_add")
      */
-    public function etablissementAdd(Request $request, EntityManagerInterface $entityManager): Response
+    public function etablissementAdd(Request $request): Response
     {
         $etablissement = new Etablissement();
         $form = $this->createForm(EtablissementType::class, $etablissement);
@@ -170,41 +71,6 @@ class AdminController extends AbstractController
             $entityManager->persist($etablissement);
             $entityManager->flush();
             
-            $this->userRepository->add($user, true);
-
-            return new JsonResponse([
-                "msg_error" => '',
-                "code_status" => 200
-            ]);
-        }
-
-        return new JsonResponse([
-            "msg_error" => $this->getErrorMessages($form),
-            "code_status" => 503
-        ]);
-    }
-
-
-    /**
-     * @Route("/admin/user/add", name="app_admin_user_add")
-     */
-    public function userAdd(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
-    {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
-            $user->setPassword(
-            $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('password')->getData()
-                )
-            );
-
-            $user->setRoles(["ROLE_ETABLISSEMENT"]);
-
             $this->userRepository->add($user, true);
 
             return new JsonResponse([

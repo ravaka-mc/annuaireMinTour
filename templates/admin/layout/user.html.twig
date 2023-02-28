@@ -31,7 +31,7 @@
                         <td>
                             <div class="action">
                                 <a href="" class="edit"></a>
-                                <a href="" data-fancybox data-src="#supprimer" class="delete"></a>
+                                <a href="" data-fancybox data-src="#supprimer_{{ user.id }}" class="delete"></a>
                             </div>
                         </td>
                     </tr>
@@ -70,16 +70,18 @@
         <div class="pbtn full"><button type="submit" class="btn">Ajouter utilisateur</button></div>
     </form>
 </div>
-<div id="supprimer" class="pop_suppr" style="display:none; max-width:500px;">
+{% for user in users %}
+<div id="supprimer_{{ user.id }}" class="pop_suppr" style="display:none; max-width:500px;">
     <div class="innerpad">
         <div class="sub-title">Vouler vraiment supprimer ?</div>
         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis tempora repellat soluta perferendis earum animi porro</p>
     </div>
     <div class="pop_btns">
-        <a href="" class="btn-pop confirm">Supprimer</a>
+        <a href="{{ path('app_admin_user_delete',{id:user.id}) }}" class="btn-pop confirm">Supprimer</a>
         <span data-fancybox-close class="btn-pop">Annuler</span>
     </div>
 </div>
+{% endfor %}
 <div style="display:none" id="dialog-message" title="Information">
   <p>
      L'utilisateur a été bien enregistré avec succès
@@ -121,6 +123,12 @@
                         "previous": "<",
                         "next": ">"
                     }
+                },
+                "drawCallback": function(settings) {
+                    $(".confirm").on('click', function () {
+					let url = $(this).data("url");
+					window.location = url;
+				});
                 }
             });
 

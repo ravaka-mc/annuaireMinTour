@@ -28,8 +28,8 @@
                             <td>{{ category.getCreatedAt()|date('d-m-Y') }}</td>
                             <td>
                                 <div class="action">
-                                    <a data-fancybox data-src="#newcat" href="javascript:;" class="edit"></a>
-                                    <a href="" class="delete"></a>
+                                    <a data-fancybox data-src="#editcategry_{{ category.id }}" href="javascript:;" class="edit"></a>
+                                    <a data-fancybox data-src="#supprimer_{{ category.id }}" class="delete"></a>
                                 </div>
                             </td>
                             <td></td>
@@ -53,16 +53,28 @@
             <div class="pbtn full"><button type="submit" class="btn red">Ajouter catégorie</button></div>
         </form>
     </div>
-    <div id="supprimer" class="pop_suppr" style="display:none; max-width:500px;">
-        <div class="innerpad">
-            <div class="sub-title">Vouler vraiment supprimer ?</div>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis tempora repellat soluta perferendis earum animi porro</p>
+    {% for category in categories %}
+        <div style="display: none; max-width: 500px;" id="editcategry_{{ category.id }}" class="popup-style">
+            <div class="sub-title">Ajout nouvelle <strong>région</strong></div>
+            <form class="form-wrap" method="post" action="{{ path("app_admin_category_edit", {id:category.id}) }}">
+                <div class="form-control">
+                    <label for="nom">Nom</label>
+                    <input type="text" name="nom" value="{{ category.nom }}">
+                </div>
+                <div class="pbtn full"><button type="submit" class="btn red">Enregistré</button></div>
+            </form>
         </div>
-        <div class="pop_btns">
-            <a href="" class="btn-pop confirm">Supprimer</a>
-            <span data-fancybox-close class="btn-pop">Annuler</span>
+        <div id="supprimer_{{ category.id }}" class="pop_suppr" style="display:none; max-width:500px;">
+            <div class="innerpad">
+                <div class="sub-title">Vouler vraiment supprimer ?</div>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis tempora repellat soluta perferendis earum animi porro</p>
+            </div>
+            <div class="pop_btns">
+                <a href="{{ path('app_admin_category_delete',{id:category.id}) }}" class="btn-pop confirm">Supprimer</a>
+                <span data-fancybox-close class="btn-pop">Annuler</span>
+            </div>
         </div>
-    </div>
+    {% endfor %}
     <div style="display:none" id="dialog-message" title="Information">
         <p>
             La catégorie a été bien enregistrée avec succès
