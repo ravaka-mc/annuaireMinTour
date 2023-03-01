@@ -28,7 +28,7 @@
                             <td>{{ region.getCreatedAt()|date('d-m-Y') }}</td>
                             <td>
                                 <div class="action">
-                                    <a data-fancybox data-src="#editregion_{{ region.id }}" href="javascript:;" class="edit"></a>
+                                    <a data-fancybox data-src="#edit_{{ region.id }}" href="javascript:;" class="edit"></a>
                                     <a data-fancybox data-src="#supprimer_{{ region.id }}" class="delete"></a>
                                 </div>
                             </td>
@@ -54,7 +54,7 @@
         </form>
     </div>
     {% for region in regions %}
-    <div style="display: none; max-width: 500px;" id="editregion_{{ region.id }}" class="popup-style">
+    <div style="display: none; max-width: 500px;" id="edit_{{ region.id }}" class="popup-style">
         <div class="sub-title">Ajout nouvelle <strong>région</strong></div>
         <form class="form-wrap" method="post" action="{{ path("app_admin_region_edit", {id:region.id}) }}">
             <div class="form-control">

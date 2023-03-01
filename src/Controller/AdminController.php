@@ -47,44 +47,6 @@ class AdminController extends AbstractController
         ]);
     }
 
-
-    /**
-     * @Route("/admin/etablissement", name="app_admin_etablissement")
-     */
-    public function etablissement(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        return $this->render('admin/layout/etablissement.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
-    }
-
-    /**
-     * @Route("/admin/etablissement/add", name="app_admin_etablissement_add")
-     */
-    public function etablissementAdd(Request $request): Response
-    {
-        $etablissement = new Etablissement();
-        $form = $this->createForm(EtablissementType::class, $etablissement);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($etablissement);
-            $entityManager->flush();
-            
-            $this->userRepository->add($user, true);
-
-            return new JsonResponse([
-                "msg_error" => '',
-                "code_status" => 200
-            ]);
-        }
-
-        return new JsonResponse([
-            "msg_error" => $this->getErrorMessages($form),
-            "code_status" => 503
-        ]);
-    }
-
     // Generate an array contains a key -> value with the errors where the key is the name of the form field
     protected function getErrorMessages(Form $form) 
     {

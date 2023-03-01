@@ -28,7 +28,7 @@
                             <td>{{ category.getCreatedAt()|date('d-m-Y') }}</td>
                             <td>
                                 <div class="action">
-                                    <a data-fancybox data-src="#editcategry_{{ category.id }}" href="javascript:;" class="edit"></a>
+                                    <a data-fancybox data-src="#edit_{{ category.id }}" href="javascript:;" class="edit"></a>
                                     <a data-fancybox data-src="#supprimer_{{ category.id }}" class="delete"></a>
                                 </div>
                             </td>
@@ -54,7 +54,7 @@
         </form>
     </div>
     {% for category in categories %}
-        <div style="display: none; max-width: 500px;" id="editcategry_{{ category.id }}" class="popup-style">
+        <div style="display: none; max-width: 500px;" id="edit_{{ category.id }}" class="popup-style">
             <div class="sub-title">Ajout nouvelle <strong>région</strong></div>
             <form class="form-wrap" method="post" action="{{ path("app_admin_category_edit", {id:category.id}) }}">
                 <div class="form-control">
