@@ -140,6 +140,11 @@ class Etablissement
      */
     private $created_at;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="etablissements")
+     */
+    private $category;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -420,5 +425,17 @@ class Etablissement
          $this->avatarFile = $avatarFile ;
 
          return $this ;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
     }
 }

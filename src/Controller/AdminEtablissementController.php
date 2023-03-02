@@ -51,6 +51,8 @@ class AdminEtablissementController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->etablissementRepository->add($etablissement, true);
+
+            return $this->redirectToRoute('app_admin_etablissement');
         }
 
         return $this->render('admin/form/etablissement.html.twig', [

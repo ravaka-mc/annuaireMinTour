@@ -929,7 +929,7 @@ input, select, textarea {
 	margin: 20px 0 0 30px;
 }
 .cat-options {
-	display: none;
+	/*display: none;*/
 }
 
 .autocomplete-items {
