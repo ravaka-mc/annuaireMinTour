@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class AdminCategorieController extends AbstractController
+class AdminCategorieController extends AdminController
 {
     private $categoryRepository;
 
@@ -73,7 +73,7 @@ class AdminCategorieController extends AbstractController
      /**
      * @Route("/admin/category/{id}/delete", name="app_admin_category_delete")
      */
-    public function delete(Request $request, category $category): Response
+    public function delete(Category $category): Response
     {
         
         $this->categoryRepository->remove($category, true);
@@ -84,7 +84,7 @@ class AdminCategorieController extends AbstractController
     /**
      * @Route("/admin/category/{id}/edit", name="app_admin_category_edit")
      */
-    public function edit(Request $request, category $category): Response
+    public function edit(Request $request, Category $category): Response
     {
         $nom = $request->request->get('nom');
         

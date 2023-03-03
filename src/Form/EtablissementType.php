@@ -2,16 +2,21 @@
 
 namespace App\Form;
 
+use App\Entity\Region;
 use App\Entity\Category;
+use App\Entity\Groupement;
 use App\Entity\Etablissement;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class EtablissementType extends AbstractType
 {
@@ -22,7 +27,11 @@ class EtablissementType extends AbstractType
             ->add('auteur')
             ->add('adresse')
             ->add('telephone')
-            ->add('email')
+            ->add('email', EmailType::class, [
+                'constraints' => [
+                    new Email(),
+                ],
+            ])
             ->add('siteWeb')
             ->add('proprietaire')
             ->add('gerant')
@@ -35,7 +44,8 @@ class EtablissementType extends AbstractType
                 'multiple' => false,
             ])
             ->add('dateOuverture', DateType::class, [
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'required' => false,
             ])
             ->add('reference')
             ->add('nif')
@@ -53,6 +63,44 @@ class EtablissementType extends AbstractType
                 'choice_label' => 'nom',
                 'expanded' => false,
                 'multiple' => false,
+                'placeholder' => '--------------------',
+            ])
+            ->add('groupement', EntityType::class, [
+                'class' => Groupement::class,
+                'choice_label' => 'nom',
+                'expanded' => true,
+                'multiple' => true,
+            ])
+            ->add('region', EntityType::class, [
+                'class' => Region::class,
+                'choice_label' => 'nom',
+                'expanded' => false,
+                'multiple' => false,
+                'placeholder' => '--------------------',
+            ])
+            ->add('licenceA', CheckboxType::class, [
+                'label'    => 'A',
+                'required' => false,
+            ])
+            ->add('dateLicenceA', DateType::class, [
+                'widget' => 'single_text',
+                'required' => false,
+            ])
+            ->add('licenceB', CheckboxType::class, [
+                'label'    => 'B',
+                'required' => false,
+            ])
+            ->add('dateLicenceB', DateType::class, [
+                'widget' => 'single_text',
+                'required' => false,
+            ])
+            ->add('licenceC', CheckboxType::class, [
+                'label'    => 'C',
+                'required' => false,
+            ])
+            ->add('dateLicenceC', DateType::class, [
+                'widget' => 'single_text',
+                'required' => false,
             ])
             ->add('save', SubmitType::class)
         ;

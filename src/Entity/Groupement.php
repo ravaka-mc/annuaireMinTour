@@ -2,16 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\RegionRepository;
+use App\Repository\GroupementRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Entity(repositoryClass=RegionRepository::class)
+ * @ORM\Entity(repositoryClass=GroupementRepository::class)
  */
-class Region
+class Groupement
 {
     /**
      * @ORM\Id
@@ -26,19 +25,7 @@ class Region
     private $nom;
 
     /**
-     * @Gedmo\Slug(fields={"nom"})
-     * @ORM\Column(type="string", length=255)
-     */
-    private $slug;
-
-    /**
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(type="datetime_immutable")
-     */
-    private $created_at;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Etablissement::class, mappedBy="region")
+     * @ORM\ManyToMany(targetEntity=Etablissement::class, mappedBy="groupement")
      */
     private $etablissements;
 
@@ -64,23 +51,6 @@ class Region
         return $this;
     }
 
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt(\DateTimeImmutable $created_at): self
-    {
-        $this->created_at = $created_at;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Etablissement>
      */
@@ -93,7 +63,7 @@ class Region
     {
         if (!$this->etablissements->contains($etablissement)) {
             $this->etablissements[] = $etablissement;
-            $etablissement->setRegion($this);
+            $etablissement->addGroupement($this);
         }
 
         return $this;
@@ -102,10 +72,7 @@ class Region
     public function removeEtablissement(Etablissement $etablissement): self
     {
         if ($this->etablissements->removeElement($etablissement)) {
-            // set the owning side to null (unless already changed)
-            if ($etablissement->getRegion() === $this) {
-                $etablissement->setRegion(null);
-            }
+            $etablissement->removeGroupement($this);
         }
 
         return $this;

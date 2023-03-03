@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class AdminEtablissementController extends AbstractController
+class AdminEtablissementController extends AdminController
 {
     private $etablissementRepository;
 
@@ -54,9 +54,10 @@ class AdminEtablissementController extends AbstractController
 
             return $this->redirectToRoute('app_admin_etablissement');
         }
-
+        
         return $this->render('admin/form/etablissement.html.twig', [
             'form' => $form->createView(),
+            "errors" => $this->getErrorMessages($form),
         ]);
     }
 }

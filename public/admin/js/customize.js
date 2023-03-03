@@ -102,8 +102,8 @@ $(document).ready(function() {
 			}
 		});
 	});
-	$('input[type=radio][name=membre_grpm]').change(function() {
-		if (this.value == 'oui') {
+	$('#wrapper-member input').change(function() {
+		if (this.value == 1) {
 			$('.slidergrpm').slideDown();
 		} else {
 			$('.slidergrpm').slideUp();

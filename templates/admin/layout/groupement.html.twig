@@ -7,29 +7,27 @@
         <section id="contenu" class="candidat">
             {% include "admin/block/logout.html.twig" %}
             <div class="d-flex sb header">
-                <div class="title">Région</div>
-                <a data-fancybox data-src="#newregion" href="javascript:;" class="btn">Nouvelle région</a>
+                <div class="title">Groupement</div>
+                <a data-fancybox data-src="#newcat" href="javascript:;" class="btn">Nouvelle Groupement</a>
             </div>
             <table id="table-list" class="custom-table-ville">
                 <thead>
                     <tr>
                         <th></th>
                         <th><span>Nom</span></th>
-                        <th><span>Date d’ajout</span></th>
                         <th><span>Action</span></th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for region in regions %}
+                    {% for groupement in groupements %}
                         <tr>
                             <td></td>
-                            <td>{{ region.nom }}</td>
-                            <td>{{ region.getCreatedAt()|date('d-m-Y') }}</td>
+                            <td>{{ groupement.nom }}</td>
                             <td>
                                 <div class="action">
-                                    <a data-fancybox data-src="#edit_{{ region.id }}" href="javascript:;" class="edit"></a>
-                                    <a data-fancybox data-src="#supprimer_{{ region.id }}" class="delete"></a>
+                                    <a data-fancybox data-src="#edit_{{ groupement.id }}" href="javascript:;" class="edit"></a>
+                                    <a data-fancybox data-src="#supprimer_{{ groupement.id }}" class="delete"></a>
                                 </div>
                             </td>
                             <td></td>
@@ -41,52 +39,51 @@
         </section>
     </main>
     <!-- Modal -->
-    <div style="display: none; max-width: 500px;" id="newregion" class="popup-style">
-        <div class="sub-title">Ajout nouvelle <strong>région</strong></div>
-        <form id="form-region" class="form-wrap" method="post" name="{{ form.vars.full_name }}" action="{{ path("app_admin_region_add") }}">
+    <div style="display: none; max-width: 500px;" id="newcat" class="popup-style">
+        <div class="sub-title">Ajout groupement <strong>groupement</strong></div>
+        <form id="form-groupement" class="form-wrap" method="post" name="{{ form.vars.full_name }}" action="{{ path("app_admin_groupement_add") }}">
              <ul class="form-error"></ul>
             <div class="form-control">
                 <label for="nom">Nom</label>
                 {{ form_widget(form.nom) }}
             </div>
             {{ form_widget(form._token) }}
-            <div class="pbtn full"><button type="submit" class="btn red">Ajouter région</button></div>
+            <div class="pbtn full"><button type="submit" class="btn red">Ajouter groupement</button></div>
         </form>
     </div>
-    {% for region in regions %}
-    <div style="display: none; max-width: 500px;" id="edit_{{ region.id }}" class="popup-style">
-        <div class="sub-title">Ajout nouvelle <strong>région</strong></div>
-        <form class="form-wrap" method="post" action="{{ path("app_admin_region_edit", {id:region.id}) }}">
-            <div class="form-control">
-                <label for="nom">Nom</label>
-                <input type="text" name="nom" value="{{ region.nom }}">
+    {% for groupement in groupements %}
+        <div style="display: none; max-width: 500px;" id="edit_{{ groupement.id }}" class="popup-style">
+            <div class="sub-title">Ajout nouvelle <strong>région</strong></div>
+            <form class="form-wrap" method="post" action="{{ path("app_admin_groupement_edit", {id:groupement.id}) }}">
+                <div class="form-control">
+                    <label for="nom">Nom</label>
+                    <input type="text" name="nom" value="{{ groupement.nom }}">
+                </div>
+                <div class="pbtn full"><button type="submit" class="btn red">Enregistré</button></div>
+            </form>
+        </div>
+        <div id="supprimer_{{ groupement.id }}" class="pop_suppr" style="display:none; max-width:500px;">
+            <div class="innerpad">
+                <div class="sub-title">Vouler vraiment supprimer ?</div>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis tempora repellat soluta perferendis earum animi porro</p>
             </div>
-            <div class="pbtn full"><button type="submit" class="btn red">Enregistré</button></div>
-        </form>
-    </div>
-    <div id="supprimer_{{ region.id }}" class="pop_suppr" style="display:none; max-width:500px;">
-        <div class="innerpad">
-            <div class="sub-title">Vouler vraiment supprimer ?</div>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis tempora repellat soluta perferendis earum animi porro</p>
+            <div class="pop_btns">
+                <a href="{{ path('app_admin_groupement_delete',{id:groupement.id}) }}" class="btn-pop confirm">Supprimer</a>
+                <span data-fancybox-close class="btn-pop">Annuler</span>
+            </div>
         </div>
-        <div class="pop_btns">
-            <a href="{{ path('app_admin_region_delete',{id:region.id}) }}" class="btn-pop confirm">Supprimer</a>
-            <span data-fancybox-close class="btn-pop">Annuler</span>
-        </div>
-    </div>
     {% endfor %}
     <div style="display:none" id="dialog-message" title="Information">
         <p>
-            La region a été bien enregistrée avec succès
+            Le groupement a été bien enregistré avec succès
         </p>
     </div>
 {% endblock %}
 {% block javascripts %}
     <script src="{{ asset('admin/js/jquery.fancybox.min.js') }}"></script>
-    <script src="{{ asset('front/js/slick.min.js') }}"></script>
-    <script src="{{ asset('admin/js/customize.js') }}"></script>
     <script src="{{ asset('admin/js/datatable.min.js') }}"></script>
     <script src="{{ asset('admin/js/datatable-reponsive.min.js') }}"></script>
+    <script src="{{ asset('admin/js/customize.js') }}"></script>
     <script>
         $(document).ready(function () {
             $.fn.dataTable.Responsive.breakpoints = [
@@ -118,10 +115,12 @@
                     }
                 }
             });
+
             $(".close").click(function () {
                 $(this).parent().parent().remove();
             });
-            $("#form-region").submit(function(e){
+
+            $("#form-groupement").submit(function(e){
                 e.preventDefault();
 
                 var $form = $(e.currentTarget);
@@ -138,13 +137,13 @@
                             }
                             $(".form-error").html(html);
                         } else {
-                            document.getElementById("form-region").reset();
+                            document.getElementById("form-groupement").reset();
                             $('.carousel__button').trigger('click');
                             $( "#dialog-message" ).dialog({
                                 modal: true,
                                 width: 500,
                                 close: function(){
-                                    window.location = '{{ path("app_admin_region") }}';
+                                    window.location = '{{ path("app_admin_groupement") }}';
                                 }
                             });
                         }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EtablissementRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -64,7 +66,7 @@ class Etablissement
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $membre;
+    private $membre= false;
 
     /**
      * @ORM\Column(type="date", nullable=true)
@@ -144,6 +146,56 @@ class Etablissement
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="etablissements")
      */
     private $category;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $valide = false;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Groupement::class, inversedBy="etablissements")
+     */
+    private $groupement;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Region::class, inversedBy="etablissements")
+     */
+    private $region;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $licenceA;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $licenceB;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $licenceC;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dateLicenceA;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dateLicenceB;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dateLicenceC;
+
+    public function __construct()
+    {
+        $this->groupement = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -435,6 +487,126 @@ class Etablissement
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function isValide(): ?bool
+    {
+        return $this->valide;
+    }
+
+    public function setValide(?bool $valide): self
+    {
+        $this->valide = $valide;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Groupement>
+     */
+    public function getGroupement(): Collection
+    {
+        return $this->groupement;
+    }
+
+    public function addGroupement(Groupement $groupement): self
+    {
+        if (!$this->groupement->contains($groupement)) {
+            $this->groupement[] = $groupement;
+        }
+
+        return $this;
+    }
+
+    public function removeGroupement(Groupement $groupement): self
+    {
+        $this->groupement->removeElement($groupement);
+
+        return $this;
+    }
+
+    public function getRegion(): ?Region
+    {
+        return $this->region;
+    }
+
+    public function setRegion(?Region $region): self
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    public function isLicenceA(): ?bool
+    {
+        return $this->licenceA;
+    }
+
+    public function setLicenceA(?bool $licenceA): self
+    {
+        $this->licenceA = $licenceA;
+
+        return $this;
+    }
+
+    public function isLicenceB(): ?bool
+    {
+        return $this->licenceB;
+    }
+
+    public function setLicenceB(?bool $licenceB): self
+    {
+        $this->licenceB = $licenceB;
+
+        return $this;
+    }
+
+    public function isLicenceC(): ?bool
+    {
+        return $this->licenceC;
+    }
+
+    public function setLicenceC(?bool $licenceC): self
+    {
+        $this->licenceC = $licenceC;
+
+        return $this;
+    }
+
+    public function getDateLicenceA(): ?\DateTimeInterface
+    {
+        return $this->dateLicenceA;
+    }
+
+    public function setDateLicenceA(?\DateTimeInterface $dateLicenceA): self
+    {
+        $this->dateLicenceA = $dateLicenceA;
+
+        return $this;
+    }
+
+    public function getDateLicenceB(): ?\DateTimeInterface
+    {
+        return $this->dateLicenceB;
+    }
+
+    public function setDateLicenceB(?\DateTimeInterface $dateLicenceB): self
+    {
+        $this->dateLicenceB = $dateLicenceB;
+
+        return $this;
+    }
+
+    public function getDateLicenceC(): ?\DateTimeInterface
+    {
+        return $this->dateLicenceC;
+    }
+
+    public function setDateLicenceC(?\DateTimeInterface $dateLicenceC): self
+    {
+        $this->dateLicenceC = $dateLicenceC;
 
         return $this;
     }
