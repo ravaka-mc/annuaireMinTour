@@ -70,35 +70,26 @@
 							</div>
 							<div class="form-control">
 								<label>Activités</label>
-								<div class="custom-radio">
-									<label>Agence de Voyages
-										<input type="radio" name="activite">
+								<div class="custom_checkbox half">
+									{% for child in form.activites|filter(child => not child.rendered) %}
+										<label>
+											{{ child.vars.label }}
+											{{ form_widget(child) }}
+											<span class="checkmark"></span>
+										</label>
+									{% endfor %}
+								</div>
+							</div>
+							<div class="form-control">
+								<label>Classement</label>
+								<div class="custom-radio half">
+									{% for child in form.classement|filter(child => not child.rendered) %}
+									<label>
+										{{ child.vars.label }}
+										{{ form_widget(child) }}
 										<span class="checkmark"></span>
 									</label>
-									<label>Tour opérateur
-										<input type="radio" name="activite">
-										<span class="checkmark"></span>
-									</label>
-									<label>Réceptif
-										<input type="radio" name="activite">
-										<span class="checkmark"></span>
-									</label>
-									<label>Entreprise de prestations touristiques spécialisées
-										<input type="radio" name="activite">
-										<span class="checkmark"></span>
-									</label>
-									<label>Entreprise de location de voitures
-										<input type="radio" name="activite">
-										<span class="checkmark"></span>
-									</label>
-									<label>Entreprise de location de bateaux  de plaisance
-										<input type="radio" name="activite">
-										<span class="checkmark"></span>
-									</label>
-									<label>Entreprise de location d’autres matériels de transports motorisés ou non
-										<input type="radio" name="activite">
-										<span class="checkmark"></span>
-									</label>
+									{% endfor %}
 								</div>
 							</div>
 							<div class="half">
@@ -128,7 +119,7 @@
 								</div>
 							</div>
 							<div class="custom_checkbox slidergrpm">
-								{% for child in form.groupement|filter(child => not child.rendered) %}
+								{% for child in form.groupements|filter(child => not child.rendered) %}
 									<label>
 										{{ child.vars.label }}
 										{{ form_widget(child) }}

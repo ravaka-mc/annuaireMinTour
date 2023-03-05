@@ -2,8 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Activite;
 use App\Entity\Region;
 use App\Entity\Category;
+use App\Entity\Classement;
 use App\Entity\Groupement;
 use App\Entity\Etablissement;
 use Symfony\Component\Form\AbstractType;
@@ -65,8 +67,20 @@ class EtablissementType extends AbstractType
                 'multiple' => false,
                 'placeholder' => '--------------------',
             ])
-            ->add('groupement', EntityType::class, [
+            ->add('groupements', EntityType::class, [
                 'class' => Groupement::class,
+                'choice_label' => 'nom',
+                'expanded' => true,
+                'multiple' => true,
+            ])
+            ->add('classement', EntityType::class, [
+                'class' => Classement::class,
+                'choice_label' => 'nom',
+                'expanded' => true,
+                'multiple' => false,
+            ])
+            ->add('activites', EntityType::class, [
+                'class' => Activite::class,
                 'choice_label' => 'nom',
                 'expanded' => true,
                 'multiple' => true,

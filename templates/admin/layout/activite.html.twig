@@ -1,0 +1,158 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Annuaire{% endblock %}
+
+{% block body %}
+    <main id="content" class="flex custom-table-mobile">
+        <section id="contenu" class="candidat">
+            {% include "admin/block/logout.html.twig" %}
+            <div class="d-flex sb header">
+                <div class="title">Activité</div>
+                <a data-fancybox data-src="#newcat" href="javascript:;" class="btn">Nouvelle Activité</a>
+            </div>
+            <table id="table-list" class="custom-table-ville">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th><span>Nom</span></th>
+                        <th><span>Action</span></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for activite in activites %}
+                        <tr>
+                            <td></td>
+                            <td>{{ activite.nom }}</td>
+                            <td>
+                                <div class="action">
+                                    <a data-fancybox data-src="#edit_{{ activite.id }}" href="javascript:;" class="edit"></a>
+                                    <a data-fancybox data-src="#supprimer_{{ activite.id }}" class="delete"></a>
+                                </div>
+                            </td>
+                            <td></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% include "admin/block/copyright.html.twig" %}
+        </section>
+    </main>
+    <!-- Modal -->
+    <div style="display: none; max-width: 500px;" id="newcat" class="popup-style">
+        <div class="sub-title">Ajout activite <strong>activite</strong></div>
+        <form id="form-activite" class="form-wrap" method="post" name="{{ form.vars.full_name }}" action="{{ path("app_admin_activite_add") }}">
+             <ul class="form-error"></ul>
+            <div class="form-control">
+                <label for="nom">Nom</label>
+                {{ form_widget(form.nom) }}
+            </div>
+            {{ form_widget(form._token) }}
+            <div class="pbtn full"><button type="submit" class="btn red">Ajouter activite</button></div>
+        </form>
+    </div>
+    {% for activite in activites %}
+        <div style="display: none; max-width: 500px;" id="edit_{{ activite.id }}" class="popup-style">
+            <div class="sub-title">Ajout nouvelle <strong>région</strong></div>
+            <form class="form-wrap" method="post" action="{{ path("app_admin_activite_edit", {id:activite.id}) }}">
+                <div class="form-control">
+                    <label for="nom">Nom</label>
+                    <input type="text" name="nom" value="{{ activite.nom }}">
+                </div>
+                <div class="pbtn full"><button type="submit" class="btn red">Enregistré</button></div>
+            </form>
+        </div>
+        <div id="supprimer_{{ activite.id }}" class="pop_suppr" style="display:none; max-width:500px;">
+            <div class="innerpad">
+                <div class="sub-title">Vouler vraiment supprimer ?</div>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis tempora repellat soluta perferendis earum animi porro</p>
+            </div>
+            <div class="pop_btns">
+                <a href="{{ path('app_admin_activite_delete',{id:activite.id}) }}" class="btn-pop confirm">Supprimer</a>
+                <span data-fancybox-close class="btn-pop">Annuler</span>
+            </div>
+        </div>
+    {% endfor %}
+    <div style="display:none" id="dialog-message" title="Information">
+        <p>
+            Le activite a été bien enregistré avec succès
+        </p>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('admin/js/jquery.fancybox.min.js') }}"></script>
+    <script src="{{ asset('admin/js/datatable.min.js') }}"></script>
+    <script src="{{ asset('admin/js/datatable-reponsive.min.js') }}"></script>
+    <script src="{{ asset('admin/js/customize.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $.fn.dataTable.Responsive.breakpoints = [
+                { name: 'desktop', width: Infinity },
+                { name: 'tablet', width: 1024 },
+                { name: 'fablet', width: 768 },
+                { name: 'phone', width: 480 }
+            ];
+            $('#table-list').DataTable({
+                paging: true,
+                "searching": true,
+                "info": false,
+                "bLengthChange": false,
+                "bInfo": false,
+                responsive: true,
+                "ordering": false,
+                "language": {
+                    "lengthMenu": "Afficher _MENU_",
+                    "zeroRecords": "Rien n'a été trouvé, désolé",
+                    "info": "Nombre de lignes <span class='current'>_PAGE_</span> sur <span>_PAGES_</span>",
+                    "infoEmpty": "Non disponible",
+                    "infoFiltered": "(filtré sur _MAX_ enregistrements)",
+                    "search": "",
+                    "searchPlaceholder": "Recherche",
+                    "sPaginationType": "3",
+                    "paginate": {
+                        "previous": "<",
+                        "next": ">"
+                    }
+                }
+            });
+
+            $(".close").click(function () {
+                $(this).parent().parent().remove();
+            });
+
+            $("#form-activite").submit(function(e){
+                e.preventDefault();
+
+                var $form = $(e.currentTarget);
+                $.ajax({
+                    url: $form.attr('action'),
+                    method: 'POST',
+                    data: $form.serialize(),
+                    success: function(resp){
+                        if(resp.code_status == 503){
+                            error = resp.msg_error;
+                            html = "";
+                           for (let i = 0; i < error.length; i++){
+                                html += "<li>" + error[i] + "</li>";
+                            }
+                            $(".form-error").html(html);
+                        } else {
+                            document.getElementById("form-activite").reset();
+                            $('.carousel__button').trigger('click');
+                            $( "#dialog-message" ).dialog({
+                                modal: true,
+                                width: 500,
+                                close: function(){
+                                    window.location = '{{ path("app_admin_activite") }}';
+                                }
+                            });
+                        }
+                    },
+                    error: function(e){
+                        console.log(e);
+                    }
+                });
+            })
+        });
+    </script>
+{% endblock %}

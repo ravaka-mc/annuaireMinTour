@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\GroupementRepository;
+use App\Repository\ClassementRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=GroupementRepository::class)
+ * @ORM\Entity(repositoryClass=ClassementRepository::class)
  */
-class Groupement
+class Classement
 {
     /**
      * @ORM\Id
@@ -25,7 +25,7 @@ class Groupement
     private $nom;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Etablissement::class, mappedBy="groupements")
+     * @ORM\OneToMany(targetEntity=Etablissement::class, mappedBy="classement")
      */
     private $etablissements;
 
@@ -63,7 +63,7 @@ class Groupement
     {
         if (!$this->etablissements->contains($etablissement)) {
             $this->etablissements[] = $etablissement;
-            $etablissement->addGroupement($this);
+            $etablissement->setClassement($this);
         }
 
         return $this;
@@ -72,7 +72,10 @@ class Groupement
     public function removeEtablissement(Etablissement $etablissement): self
     {
         if ($this->etablissements->removeElement($etablissement)) {
-            $etablissement->removeGroupement($this);
+            // set the owning side to null (unless already changed)
+            if ($etablissement->getClassement() === $this) {
+                $etablissement->setClassement(null);
+            }
         }
 
         return $this;

@@ -155,7 +155,7 @@ class Etablissement
     /**
      * @ORM\ManyToMany(targetEntity=Groupement::class, inversedBy="etablissements")
      */
-    private $groupement;
+    private $groupements;
 
     /**
      * @ORM\ManyToOne(targetEntity=Region::class, inversedBy="etablissements")
@@ -192,9 +192,20 @@ class Etablissement
      */
     private $dateLicenceC;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Classement::class, inversedBy="etablissements")
+     */
+    private $classement;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Activite::class, inversedBy="etablissements")
+     */
+    private $activites;
+
     public function __construct()
     {
-        $this->groupement = new ArrayCollection();
+        $this->groupements = new ArrayCollection();
+        $this->activites = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -506,23 +517,23 @@ class Etablissement
     /**
      * @return Collection<int, Groupement>
      */
-    public function getGroupement(): Collection
+    public function getGroupements(): Collection
     {
-        return $this->groupement;
+        return $this->groupements;
     }
 
-    public function addGroupement(Groupement $groupement): self
+    public function addGroupement(Groupement $groupements): self
     {
-        if (!$this->groupement->contains($groupement)) {
-            $this->groupement[] = $groupement;
+        if (!$this->groupements->contains($groupements)) {
+            $this->groupements[] = $groupements;
         }
 
         return $this;
     }
 
-    public function removeGroupement(Groupement $groupement): self
+    public function removeGroupement(Groupement $groupements): self
     {
-        $this->groupement->removeElement($groupement);
+        $this->groupements->removeElement($groupements);
 
         return $this;
     }
@@ -607,6 +618,42 @@ class Etablissement
     public function setDateLicenceC(?\DateTimeInterface $dateLicenceC): self
     {
         $this->dateLicenceC = $dateLicenceC;
+
+        return $this;
+    }
+
+    public function getClassement(): ?Classement
+    {
+        return $this->classement;
+    }
+
+    public function setClassement(?Classement $classement): self
+    {
+        $this->classement = $classement;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Activite>
+     */
+    public function getActivites(): Collection
+    {
+        return $this->activites;
+    }
+
+    public function addActivite(Activite $activite): self
+    {
+        if (!$this->activites->contains($activite)) {
+            $this->activites[] = $activite;
+        }
+
+        return $this;
+    }
+
+    public function removeActivite(Activite $activite): self
+    {
+        $this->activites->removeElement($activite);
 
         return $this;
     }
