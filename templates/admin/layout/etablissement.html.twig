@@ -23,36 +23,27 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for etablissement in etablissements %}
                     <tr>
-                        <td>Le rafia</td>
-                        <td>Hebergement</td>
-                        <td>A, B</td>
-                        <td>Analamanga</td>
-                        <td>17/02/23</td>
-                        <td><div class="valide">Validé</div></td>
+                        <td>{{ etablissement.nom }}</td>
+                        <td>{{ etablissement.getCategory() }}</td>
+                        <td>{{ etablissement.getLicences() }}</td>
+                        <td>{{ etablissement.getRegion() }}</td>
+                        <td>{{ etablissement.getCreatedAt()|date('d/m/y') }}</td>
+                        {% if etablissement.isValide() %}
+                            <td><div class="valide">Validé</div></td>
+                        {% else %}
+                            <td><div class="en-attente">En attente</div></td>
+                        {% endif %}
                         <td>
                             <div class="action">
-                                <a href="new-etablissement.html" class="edit"></a>
+                                <a href="{{ path('app_admin_etablissement_edit', {id:etablissement.id}) }}" class="edit"></a>
                                 <a href="" class="view"></a>
                                 <a data-fancybox="" data-src="#popup-delete" class="delete"></a>
                             </div>
                         </td>
                     </tr>
-                    <tr>
-                        <td>Le rafia</td>
-                        <td>Hebergement</td>
-                        <td>A, B</td>
-                        <td>Analamanga</td>
-                        <td>17/02/23</td>
-                        <td><div class="en-attente">En attente</div></td>
-                        <td>
-                            <div class="action">
-                                <a href="new-etablissement.html" class="edit"></a>
-                                <a href="" class="view"></a>
-                                <a data-fancybox="" data-src="#popup-delete" class="delete"></a>
-                            </div>
-                        </td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
            {% include "admin/block/copyright.html.twig" %}

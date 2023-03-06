@@ -2,12 +2,14 @@
 
 namespace App\Form;
 
-use App\Entity\Activite;
 use App\Entity\Region;
+use App\Entity\Activite;
 use App\Entity\Category;
 use App\Entity\Classement;
 use App\Entity\Groupement;
 use App\Entity\Etablissement;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -72,18 +74,23 @@ class EtablissementType extends AbstractType
                 'choice_label' => 'nom',
                 'expanded' => true,
                 'multiple' => true,
+                'required' => false,
             ])
             ->add('classement', EntityType::class, [
                 'class' => Classement::class,
                 'choice_label' => 'nom',
                 'expanded' => true,
                 'multiple' => false,
+                'empty_data' => '',
+                'placeholder' => false,
+                'required' => false,
             ])
             ->add('activites', EntityType::class, [
                 'class' => Activite::class,
                 'choice_label' => 'nom',
                 'expanded' => true,
                 'multiple' => true,
+                'required' => false,
             ])
             ->add('region', EntityType::class, [
                 'class' => Region::class,
@@ -91,6 +98,7 @@ class EtablissementType extends AbstractType
                 'expanded' => false,
                 'multiple' => false,
                 'placeholder' => '--------------------',
+                'required' => false,
             ])
             ->add('licenceA', CheckboxType::class, [
                 'label'    => 'A',
@@ -116,8 +124,16 @@ class EtablissementType extends AbstractType
                 'widget' => 'single_text',
                 'required' => false,
             ])
-            ->add('save', SubmitType::class)
-        ;
+            ->add('save', SubmitType::class);
+
+            $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {
+                $data = $event->getData();
+                $form = $event->getForm();
+                if(isset($_POST['category']) && !empty($_POST['category'])){
+                    
+                }
+                
+            });
     }
 
     public function configureOptions(OptionsResolver $resolver): void

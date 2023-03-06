@@ -6,7 +6,7 @@
     <main id="content" class="flex">
         <section id="contenu">
             {% include "admin/block/logout.html.twig" %}
-            <div class="title bb">Ajout établissement</div>
+            <div class="title bb">{{ titre }} établissement</div>
 			<form name="{{ form.vars.full_name }}" method="post" enctype="multipart/form-data">
 				<ul class="error">
 					{% for error in errors %}
@@ -30,7 +30,11 @@
 					<div class="bloc_editense form-wrap">
 						<div class="card-wrap head">
 							<div class="logo-entreprise">
-								<img src="{{ asset('admin/img/default-etablissement.svg') }}">
+								{% if etablissement is defined and etablissement.avatar is not null %}
+									<img src="{{ asset('uploads/etablissements/' ~ etablissement.getAvatar()) }}">
+								{% else %}
+									<img src="{{ asset('admin/img/default-etablissement.svg') }}">
+								{% endif %}
 								<label for="pdp">
 									<span class="replace-img"></span>
 								</label>
@@ -80,6 +84,7 @@
 									{% endfor %}
 								</div>
 							</div>
+							{% if form.classement is defined %}
 							<div class="form-control">
 								<label>Classement</label>
 								<div class="custom-radio half">
@@ -92,6 +97,7 @@
 									{% endfor %}
 								</div>
 							</div>
+							{% endif %}
 							<div class="half">
 								<div class="form-control">
 									<label>Propriétaire</label>
@@ -189,7 +195,7 @@
 					</div>
 					<div class="t-right mt-50">
 						{{ form_widget(form._token) }}
-						<button type="submit" class="btn">Ajouter</button>
+						<button type="submit" class="btn">{{ label_btn }}</button>
 					</div>
 				</div>
 			</form>
@@ -224,6 +230,20 @@
 					$(this).parent().find('.leftLabel').text(leftValue);
 					$(this).parent().find('.rightLabel').text(rightValue);
 				}
+			});
+
+			$('.categories select').change(function() {
+				$.ajax({
+					type: 'POST',
+					url: '{{ path('app_admin_etablissement_add') }}',
+					data: {
+						category: $(this).val()
+					},
+					dataType: 'html',
+					success: function (response) {
+						$('#add').html(response);
+					}
+				})
 			});
 		});
 	</script>

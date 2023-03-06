@@ -35,8 +35,10 @@ class AdminEtablissementController extends AdminController
      */
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $etablissements = $this->etablissementRepository->findAll();
+
         return $this->render('admin/layout/etablissement.html.twig', [
-            'controller_name' => 'AdminController',
+            'etablissements' => $etablissements,
         ]);
     }
 
@@ -57,6 +59,32 @@ class AdminEtablissementController extends AdminController
         
         return $this->render('admin/form/etablissement.html.twig', [
             'form' => $form->createView(),
+            'titre' => 'Ajout',
+            'label_btn' => 'Ajouter',
+            "errors" => $this->getErrorMessages($form),
+        ]);
+    }
+
+
+    /**
+     * @Route("/admin/etablissement/{id}/edit", name="app_admin_etablissement_edit")
+     */
+    public function edit(Request $request, Etablissement $etablissement): Response
+    {
+        $form = $this->createForm(EtablissementType::class, $etablissement);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->etablissementRepository->add($etablissement, true);
+
+            return $this->redirectToRoute('app_admin_etablissement');
+        }
+        
+        return $this->render('admin/form/etablissement.html.twig', [
+            'form' => $form->createView(),
+            'etablissement' => $etablissement,
+            'titre' => 'Modifier',
+            'label_btn' => 'Enregistrer',
             "errors" => $this->getErrorMessages($form),
         ]);
     }

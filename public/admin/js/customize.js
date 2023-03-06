@@ -109,12 +109,8 @@ $(document).ready(function() {
 			$('.slidergrpm').slideUp();
 		}
 	});
-	let catvalfirst = $('.categories select').val();
-	$('.cat-options#'+catvalfirst).show();
+	/*let catvalfirst = $('.categories select').val();
+	$('.cat-options#'+catvalfirst).show();*/
 
-	$('.categories select').change(function() {
-		let cible = $(this).val();
-		$('.cat-options').hide();
-		$('.cat-options#'+cible).fadeIn();
-	});
+	
 });

@@ -657,4 +657,15 @@ class Etablissement
 
         return $this;
     }
+
+    public function getLicences(): ?string
+    {
+        $licences = [];
+        
+        if($this->licenceA) $licences[] = 'A';
+        if($this->licenceB) $licences[] = 'B';
+        if($this->licenceC) $licences[] = 'C';
+
+        return  \implode(', ', $licences);
+    }
 }
