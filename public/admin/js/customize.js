@@ -102,6 +102,8 @@ $(document).ready(function() {
 			}
 		});
 	});
+
+	setTimeout(() => $('#wrapper-member input:checked').trigger('change'), 500);
 	$('#wrapper-member input').change(function() {
 		if (this.value == 1) {
 			$('.slidergrpm').slideDown();
