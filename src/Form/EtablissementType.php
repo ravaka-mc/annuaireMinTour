@@ -126,7 +126,7 @@ class EtablissementType extends AbstractType
             ])
             ->add('save', SubmitType::class);
 
-            $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {
+            $builder->get('category')->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
                 $data = $event->getData();
                 $form = $event->getForm();
                 if(isset($_POST['category']) && !empty($_POST['category'])){

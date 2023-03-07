@@ -233,12 +233,13 @@
 			});
 
 			$('.categories select').change(function() {
+				
+				data = {};
+				data[$(this).attr('name')] = $(this).val();
 				$.ajax({
 					type: 'POST',
 					url: '{{ path('app_admin_etablissement_add') }}',
-					data: {
-						category: $(this).val()
-					},
+					data: data,
 					dataType: 'html',
 					success: function (response) {
 						$('#add').html(response);
