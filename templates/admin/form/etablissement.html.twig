@@ -193,18 +193,37 @@
 							</div>
 						</div>
 					</div>
-					<div class="t-right mt-50">
+					<div class="t-right mt-50 huhu">
 						{{ form_widget(form._token) }}
 						<button type="submit" class="btn">{{ label_btn }}</button>
+						
+						<!-- Modifier en attente -->
+						<button class="btn green">Validé</button>
+						<button data-fancybox="" data-src="#refuser" class="btn red">Refuser</button>
 					</div>
 				</div>
 			</form>
            {% include "admin/block/copyright.html.twig" %}
         </section>
     </main>
+	<div style="display: none; min-width: 400px; max-width: 500px;" id="refuser" class="popup-style">
+        <form id="" class="form-wrap" method="post" name="" action="">
+             <ul class="form-error"></ul>
+            <div class="form-control">
+                <label for="nom">Nom</label>
+                <input type="text" value="Carlton Madagascar">
+            </div>
+            <div class="form-control">
+                <label for="nom">Raison</label>
+                <textarea name="" id=""></textarea>
+            </div>
+            <div class="pbtn full"><button type="submit" class="btn">Envoyer</button></div>
+        </form>
+    </div>
 {% endblock %}
 {% block javascripts %}
 	<script src="{{ asset('admin/js/dist/bootstrap-modal.dev.js') }}"></script>
+	<script src="{{ asset('admin/js/jquery.fancybox.min.js') }}"></script>
 	<script src="{{ asset('admin/js/dist/customize.dev.js') }}"></script>
 	<script src="{{ asset('admin/js/dist/modal.min.dev.js') }}"></script>
 	<script src="{{ asset('admin/js/customize.js') }}"></script>
@@ -245,6 +264,9 @@
 						$('#add').html(response);
 					}
 				})
+			});
+			$(".close").click(function () {
+				$.fancybox.close();
 			});
 		});
 	</script>

@@ -15,7 +15,7 @@
                     <tr>
                         <th></th>
                         <th><span>Nom</span></th>
-                        <th><span>Date d’ajout</span></th>
+                        <th><span>Date d'ajout</span></th>
                         <th><span>Action</span></th>
                         <th></th>
                     </tr>
@@ -41,8 +41,8 @@
         </section>
     </main>
     <!-- Modal -->
-    <div style="display: none; max-width: 500px;" id="newregion" class="popup-style">
-        <div class="sub-title">Ajout nouvelle <strong>région</strong></div>
+    <div style="display: none; min-width: 400px; max-width: 500px;" id="newregion" class="popup-style">
+        <div class="sub-title">Ajout nouvelle <strong>région fafa</strong></div>
         <form id="form-region" class="form-wrap" method="post" name="{{ form.vars.full_name }}" action="{{ path("app_admin_region_add") }}">
              <ul class="form-error"></ul>
             <div class="form-control">
@@ -54,7 +54,7 @@
         </form>
     </div>
     {% for region in regions %}
-    <div style="display: none; max-width: 500px;" id="edit_{{ region.id }}" class="popup-style">
+    <div style="display: none; min-width: 400px; max-width: 500px;" id="edit_{{ region.id }}" class="popup-style">
         <div class="sub-title">Ajout nouvelle <strong>région</strong></div>
         <form class="form-wrap" method="post" action="{{ path("app_admin_region_edit", {id:region.id}) }}">
             <div class="form-control">

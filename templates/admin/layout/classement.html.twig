@@ -39,7 +39,7 @@
         </section>
     </main>
     <!-- Modal -->
-    <div style="display: none; max-width: 500px;" id="newcat" class="popup-style">
+    <div style="display: none; min-width: 400px; max-width: 500px;" id="newcat" class="popup-style">
         <div class="sub-title">Ajout classement <strong>classement</strong></div>
         <form id="form-classement" class="form-wrap" method="post" name="{{ form.vars.full_name }}" action="{{ path("app_admin_classement_add") }}">
              <ul class="form-error"></ul>
@@ -52,7 +52,7 @@
         </form>
     </div>
     {% for classement in classements %}
-        <div style="display: none; max-width: 500px;" id="edit_{{ classement.id }}" class="popup-style">
+        <div style="display: none; min-width: 400px; max-width: 500px;" id="edit_{{ classement.id }}" class="popup-style">
             <div class="sub-title">Ajout nouvelle <strong>région</strong></div>
             <form class="form-wrap" method="post" action="{{ path("app_admin_classement_edit", {id:classement.id}) }}">
                 <div class="form-control">

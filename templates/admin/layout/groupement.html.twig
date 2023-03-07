@@ -39,7 +39,7 @@
         </section>
     </main>
     <!-- Modal -->
-    <div style="display: none; max-width: 500px;" id="newcat" class="popup-style">
+    <div style="display: none; min-width: 400px; max-width: 500px;" id="newcat" class="popup-style">
         <div class="sub-title">Ajout groupement <strong>groupement</strong></div>
         <form id="form-groupement" class="form-wrap" method="post" name="{{ form.vars.full_name }}" action="{{ path("app_admin_groupement_add") }}">
              <ul class="form-error"></ul>
@@ -52,7 +52,7 @@
         </form>
     </div>
     {% for groupement in groupements %}
-        <div style="display: none; max-width: 500px;" id="edit_{{ groupement.id }}" class="popup-style">
+        <div style="display: none; min-width: 400px; max-width: 500px;" id="edit_{{ groupement.id }}" class="popup-style">
             <div class="sub-title">Ajout nouvelle <strong>région</strong></div>
             <form class="form-wrap" method="post" action="{{ path("app_admin_groupement_edit", {id:groupement.id}) }}">
                 <div class="form-control">

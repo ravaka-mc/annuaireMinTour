@@ -15,7 +15,7 @@
                     <tr>
                         <th></th>
                         <th><span>Nom</span></th>
-                        <th><span>Date d’ajout</span></th>
+                        <th><span>Date d'ajout</span></th>
                         <th><span>Action</span></th>
                         <th></th>
                     </tr>
@@ -41,7 +41,7 @@
         </section>
     </main>
     <!-- Modal -->
-    <div style="display: none; max-width: 500px;" id="newcat" class="popup-style">
+    <div style="display: none; min-width: 400px; max-width: 500px;" id="newcat" class="popup-style">
         <div class="sub-title">Ajout nouvelle <strong>catégorie</strong></div>
         <form id="form-category" class="form-wrap" method="post" name="{{ form.vars.full_name }}" action="{{ path("app_admin_category_add") }}">
              <ul class="form-error"></ul>
@@ -54,7 +54,7 @@
         </form>
     </div>
     {% for category in categories %}
-        <div style="display: none; max-width: 500px;" id="edit_{{ category.id }}" class="popup-style">
+        <div style="display: none; min-width: 400px; max-width: 500px;" id="edit_{{ category.id }}" class="popup-style">
             <div class="sub-title">Ajout nouvelle <strong>région</strong></div>
             <form class="form-wrap" method="post" action="{{ path("app_admin_category_edit", {id:category.id}) }}">
                 <div class="form-control">
