@@ -128,9 +128,12 @@ p {
 	background-position: 100% 0;
 }
 
-.btn.blue {
+.btn.green {
+	background-image: linear-gradient(to left, #59a63b 0%, #59a63b 50%, #417a2b 50%, #417a2b 100%);
+}
+.btn.red {
 	height: 50px;
-	background-image: linear-gradient(to left, #41436a 0%, #41436a 50%, #231942 50%, #231942 100%);
+	background-image: linear-gradient(to left, #cc224e 0%, #cc224e 50%, #e16e38 50%, #e16e38 100%);
 }
 
 .mt-50 {

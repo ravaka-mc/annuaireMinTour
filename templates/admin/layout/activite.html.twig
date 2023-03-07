@@ -39,7 +39,7 @@
         </section>
     </main>
     <!-- Modal -->
-    <div style="display: none; max-width: 500px;" id="newcat" class="popup-style">
+    <div style="display: none; min-width: 400px; max-width: 500px;" id="newcat" class="popup-style">
         <div class="sub-title">Ajout activite <strong>activite</strong></div>
         <form id="form-activite" class="form-wrap" method="post" name="{{ form.vars.full_name }}" action="{{ path("app_admin_activite_add") }}">
              <ul class="form-error"></ul>
@@ -52,7 +52,7 @@
         </form>
     </div>
     {% for activite in activites %}
-        <div style="display: none; max-width: 500px;" id="edit_{{ activite.id }}" class="popup-style">
+        <div style="display: none; min-width: 400px; max-width: 500px;" id="edit_{{ activite.id }}" class="popup-style">
             <div class="sub-title">Ajout nouvelle <strong>région</strong></div>
             <form class="form-wrap" method="post" action="{{ path("app_admin_activite_edit", {id:activite.id}) }}">
                 <div class="form-control">
