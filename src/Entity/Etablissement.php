@@ -144,6 +144,7 @@ class Etablissement
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="etablissements")
+     * @ORM\JoinColumn(onDelete="SET NULL")
      */
     private $category;
 

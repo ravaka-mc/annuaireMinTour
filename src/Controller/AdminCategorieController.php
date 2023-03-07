@@ -18,15 +18,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AdminCategorieController extends AdminController
 {
     private $categoryRepository;
+    private $slugger;
 
-    public function __construct(CategoryRepository $categoryRepository){
+    public function __construct(CategoryRepository $categoryRepository, SluggerInterface $slugger){
         $this->categoryRepository = $categoryRepository;
+        $this->slugger = $slugger;
     }
 
 
@@ -87,10 +91,26 @@ class AdminCategorieController extends AdminController
     public function edit(Request $request, Category $category): Response
     {
         $nom = $request->request->get('nom');
+        $icon = $request->files->get('icon');
         
         $category->setNom($nom);
+        if($icon){
+            $fileName = $this->upload($icon);
+            $category->setIcon($fileName);
+        }
+        
         $this->categoryRepository->add($category, true);
-
+        
         return $this->redirectToRoute('app_admin_category');
+    }
+
+
+    private function upload(UploadedFile $file)
+    {
+        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $fileName = $this->slugger->slug($originalFilename) . '-'.uniqid() . '.'.$file->guessExtension();
+        $file->move($this->getParameter('upload_category'), $fileName);
+
+        return $fileName;
     }
 }
