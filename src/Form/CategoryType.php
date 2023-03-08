@@ -2,16 +2,17 @@
 
 namespace App\Form;
 
-use App\Enum\ViewType;
 use App\Entity\Activite;
 use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Validator\Constraints\Choice;
 
 class CategoryType extends AbstractType
 {
@@ -27,15 +28,14 @@ class CategoryType extends AbstractType
                 'multiple' => true,
                 'required' => false,
             ])
-            ->add('viewType', EnumType::class, [
-                'class' => ViewType::class,
-                'choice_label' => fn ($choice) => match ($choice) {
-                    ViewType::Type1 => 'Type d\'affichage 1',
-                    ViewType::Type2 => 'Type d\'affichage 2',
-                    ViewType::Type3 => 'Type d\'affichage 3',
-                    ViewType::Type4 => 'Type d\'affichage 4',
-                    ViewType::Type5 => 'Type d\'affichage 5',
-                },
+            ->add('viewType', ChoiceType::class, [
+                'choices' => [
+                    'TYPE_1' => 'Type d\'affichage 1',
+                    'TYPE_2' => 'Type d\'affichage 2',
+                    'TYPE_3' => 'Type d\'affichage 3',
+                    'TYPE_4' => 'Type d\'affichage 4',
+                    'TYPE_5' => 'Type d\'affichage 5',
+                ],
             ])
             ->add('save', SubmitType::class)
         ;

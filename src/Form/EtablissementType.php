@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Region;
-use App\Enum\ViewType;
 use App\Entity\Activite;
 use App\Entity\Category;
 use App\Entity\Classement;
@@ -74,7 +73,7 @@ class EtablissementType extends AbstractType
     private function dynamiqueForm(FormInterface $form, Category $category = null) : void {
         $type = $category->getViewType();
         switch($category->getViewType()){
-            case ViewType::Type1->value:
+            case 'TYPE_1':
                 $form->add('activites', EntityType::class, [
                     'class' => Activite::class,
                     'choice_label' => 'nom',
@@ -125,8 +124,8 @@ class EtablissementType extends AbstractType
                     'required' => false,
                 ]);
                 break;
-            case ViewType::Type2->value:
-            case ViewType::Type3->value:
+            case 'TYPE_2':
+            case 'TYPE_3':
                 $form->add('classement', EntityType::class, [
                     'class' => Classement::class,
                     'choice_label' => 'nom',
@@ -166,7 +165,7 @@ class EtablissementType extends AbstractType
                 ->add('nombreCouverts')
                 ->add('nombreSalaries');
                 break;
-            case ViewType::Type4->value:
+            case 'TYPE_4':
                 $form->add('classement', EntityType::class, [
                     'class' => Classement::class,
                     'choice_label' => 'nom',
@@ -204,7 +203,7 @@ class EtablissementType extends AbstractType
                 ->add('nombreCouverts')
                 ->add('nombreSalaries');
                 break;
-            case ViewType::Type5->value:
+            case 'TYPE_5':
                 $form->add('zoneIntervention')
                 ->add('categorieAutorisation')
                 ->add('carteProfessionnelle')
