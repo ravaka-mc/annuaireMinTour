@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Region;
+use App\Enum\ViewType;
 use App\Form\UserType;
 use App\Entity\Category;
 use App\Form\RegionType;
@@ -11,6 +12,7 @@ use App\Form\CategoryType;
 use App\Entity\Etablissement;
 use App\Form\EtablissementType;
 use Symfony\Component\Form\Form;
+use App\Repository\ActiviteRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\EtablissementRepository;
@@ -26,10 +28,12 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class AdminCategorieController extends AdminController
 {
     private $categoryRepository;
+    private $activiteRepository;
     private $slugger;
 
-    public function __construct(CategoryRepository $categoryRepository, SluggerInterface $slugger){
+    public function __construct(CategoryRepository $categoryRepository, ActiviteRepository $activiteRepository, SluggerInterface $slugger){
         $this->categoryRepository = $categoryRepository;
+        $this->activiteRepository = $activiteRepository;
         $this->slugger = $slugger;
     }
 
@@ -42,11 +46,17 @@ class AdminCategorieController extends AdminController
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
 
-        $categories = $this->categoryRepository->findAll();
-
         return $this->render('admin/layout/category.html.twig', [
             'form' => $form->createView(),
-            'categories' => $categories
+            'categories' => $this->categoryRepository->findAll(),
+            'activites' => $this->activiteRepository->findAll(),
+            'viewTypes' => [
+                'TYPE_1' => 'Type d\'affichage 1',
+                'TYPE_2' => 'Type d\'affichage 2',
+                'TYPE_3' => 'Type d\'affichage 3',
+                'TYPE_4' => 'Type d\'affichage 4',
+                'TYPE_5' => 'Type d\'affichage 5',
+            ]
         ]);
     }
 
@@ -92,8 +102,18 @@ class AdminCategorieController extends AdminController
     {
         $nom = $request->request->get('nom');
         $icon = $request->files->get('icon');
+        $activites = (array) $request->request->get('activites');
+        $viewType = $request->request->get('viewType');
         
         $category->setNom($nom);
+        $category->setViewType($viewType);
+        
+        foreach($activites as $row){
+            $category->addActivite($this->activiteRepository->findOneBy([
+                'id' => (int) $row
+            ]));
+        }
+            
         if($icon){
             $fileName = $this->upload($icon);
             $category->setIcon($fileName);

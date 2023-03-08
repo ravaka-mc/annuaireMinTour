@@ -29,9 +29,15 @@ class Activite
      */
     private $etablissements;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="activites")
+     */
+    private $categories;
+
     public function __construct()
     {
         $this->etablissements = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -73,6 +79,33 @@ class Activite
     {
         if ($this->etablissements->removeElement($etablissement)) {
             $etablissement->removeActivite($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Category>
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+            $category->addActivite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        if ($this->categories->removeElement($category)) {
+            $category->removeActivite($this);
         }
 
         return $this;

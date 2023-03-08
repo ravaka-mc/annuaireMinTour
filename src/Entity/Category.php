@@ -57,9 +57,20 @@ class Category
      */
     private $etablissements;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Activite::class, inversedBy="categories")
+     */
+    private $activites;
+
+    /**
+     * @ORM\Column(type="string", length=10, nullable=true)
+     */
+    private $viewType;
+
     public function __construct()
     {
         $this->etablissements = new ArrayCollection();
+        $this->activites = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -160,5 +171,41 @@ class Category
 
     public function __toString(){
         return $this->nom;
+    }
+
+    /**
+     * @return Collection<int, Activite>
+     */
+    public function getActivites(): Collection
+    {
+        return $this->activites;
+    }
+
+    public function addActivite(Activite $activite): self
+    {
+        if (!$this->activites->contains($activite)) {
+            $this->activites[] = $activite;
+        }
+
+        return $this;
+    }
+
+    public function removeActivite(Activite $activite): self
+    {
+        $this->activites->removeElement($activite);
+
+        return $this;
+    }
+
+    public function getViewType(): ?string
+    {
+        return $this->viewType;
+    }
+
+    public function setViewType(?string $viewType): self
+    {
+        $this->viewType = $viewType;
+
+        return $this;
     }
 }
