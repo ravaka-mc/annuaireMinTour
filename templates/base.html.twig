@@ -29,11 +29,9 @@
                                     <a href="#" title="Categories">Categories</a>
                                     <i></i>
                                     <ul class="submenu">
-                                        <li><a href="#" title="Hébergement">Hébergement</a></li>
-                                        <li><a href="#" title="Restauration">Restauration</a></li>
-                                        <li><a href="#" title="Voyages &amp; Prestations touristiques">Voyages &amp; Prestations touristiques</a></li>
-                                        <li><a href="#" title="Location ">Location</a></li>
-                                        <li><a href="#" title="Restaurations">Restaurations</a></li>
+                                        {% for category in categories %}
+                                            <li><a href="#" title="Hébergement">{{ category.nom }}</a></li>
+                                        {% endfor %}
                                     </ul>
                                 </li>
                                 <li><a href="#" title="Hébergement et restaurations">Hébergement et restaurations</a></li>

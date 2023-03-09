@@ -45,12 +45,12 @@
     <div class="wrapper">
         <div class="atouts">
             {% for category in categories %}
-            <a href="#" class="atouts__item">
-                <div class="icone">
-                    <img src="{{ asset('uploads/categories/' ~ category.icon) }}" alt="">
-                </div>
-                <span>{{ category.nom }}</span>
-            </a>
+                <a href="#" class="atouts__item">
+                    <div class="icone">
+                        <img src="{{ asset('uploads/categories/' ~ category.icon) }}" alt="">
+                    </div>
+                    <span>{{ category.nom }}</span>
+                </a>
             {% endfor %}
         </div>
     </div>
