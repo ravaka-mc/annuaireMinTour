@@ -18,15 +18,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AdminEtablissementController extends AdminController
 {
     private $etablissementRepository;
+    private $slugger;
 
-    public function __construct(EtablissementRepository $etablissementRepository){
+    public function __construct(EtablissementRepository $etablissementRepository, SluggerInterface $slugger){
         $this->etablissementRepository = $etablissementRepository;
+        $this->slugger = $slugger;
     }
 
 
@@ -48,21 +52,7 @@ class AdminEtablissementController extends AdminController
     public function add(Request $request): Response
     {
         $etablissement = new Etablissement();
-        $form = $this->createForm(EtablissementType::class, $etablissement);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->etablissementRepository->add($etablissement, true);
-
-            return $this->redirectToRoute('app_admin_etablissement');
-        }
-        
-        return $this->render('admin/form/etablissement.html.twig', [
-            'form' => $form->createView(),
-            'titre' => 'Ajout',
-            'label_btn' => 'Ajouter',
-            "errors" => $this->getErrorMessages($form),
-        ]);
+        return $this->save($request, $etablissement, 'Ajout', 'Ajouter');
     }
 
 
@@ -71,10 +61,20 @@ class AdminEtablissementController extends AdminController
      */
     public function edit(Request $request, Etablissement $etablissement): Response
     {
+        return $this->save($request, $etablissement, 'Modifie', 'Modifier');
+    }
+
+    private function save(Request $request, Etablissement $etablissement, $titre, $label_btn){
         $form = $this->createForm(EtablissementType::class, $etablissement);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $avatarFile = $form->get('avatarFile')->getData();
+            if ($avatarFile) {
+                $fileName = $this->upload($avatarFile);
+                $etablissement->setAvatar($fileName);
+            }
+
             $this->etablissementRepository->add($etablissement, true);
 
             return $this->redirectToRoute('app_admin_etablissement');
@@ -83,9 +83,18 @@ class AdminEtablissementController extends AdminController
         return $this->render('admin/form/etablissement.html.twig', [
             'form' => $form->createView(),
             'etablissement' => $etablissement,
-            'titre' => 'Modifier',
-            'label_btn' => 'Enregistrer',
+            'titre' => $titre,
+            'label_btn' => $label_btn,
             "errors" => $this->getErrorMessages($form),
         ]);
+    }
+
+    private function upload(UploadedFile $file)
+    {
+        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $fileName = $this->slugger->slug($originalFilename) . '-'.uniqid() . '.'.$file->guessExtension();
+        $file->move($this->getParameter('upload_etablissement'), $fileName);
+
+        return $fileName;
     }
 }

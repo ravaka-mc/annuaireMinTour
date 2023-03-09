@@ -39,7 +39,10 @@ class EtablissementType extends AbstractType
                 ],
             ])
             ->add('siteWeb')
-            ->add('avatarFile', FileType::class)
+            ->add('avatarFile', FileType::class,[
+                'required' => false,
+                'mapped' => false,
+            ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'nom',

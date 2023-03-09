@@ -68,7 +68,7 @@ class AdminCategorieController extends AdminController
     {
         $category = new Category();
 
-        return $this->categorySave($request, $category, 'Ajout', 'Ajouter');
+        return $this->save($request, $category, 'Ajout', 'Ajouter');
     }
 
      /**
@@ -87,17 +87,17 @@ class AdminCategorieController extends AdminController
      */
     public function edit(Request $request, Category $category): Response
     {
-        return $this->categorySave($request, $category, 'Modifie', 'Modifier');
+        return $this->save($request, $category, 'Modifie', 'Modifier');
     }
 
-    private function categorySave(Request $request, Category $category, $titre, $label_btn){
+    private function save(Request $request, Category $category, $titre, $label_btn){
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $iconFile = $form->get('iconFile')->getData();
             if ($iconFile) {
-                $fileName = $this->upload($iconFile);
+                $fileName = $this->upload($iconFile, 'upload_category');
                 $category->setIcon($fileName);
             }
             $this->categoryRepository->add($category, true);
@@ -117,7 +117,6 @@ class AdminCategorieController extends AdminController
 
     private function upload(UploadedFile $file)
     {
-        $path = $this->getParameter('upload_category');
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $fileName = $this->slugger->slug($originalFilename) . '-'.uniqid() . '.'.$file->guessExtension();
         $file->move($this->getParameter('upload_category'), $fileName);
