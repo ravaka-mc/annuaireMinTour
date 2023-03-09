@@ -63,14 +63,26 @@ class EtablissementType extends AbstractType
                 'required' => false,
             ]);
 
-            $builder->get('category')->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
-                $data = $event->getForm()->getData();
-                $form = $event->getForm()->getParent();
-                $this->dynamiqueForm($form, $data);
-            });
+            $builder->addEventListener(
+                FormEvents::PRE_SET_DATA,
+                function (FormEvent $event) {
+                    $data = $event->getData();
+                    $this->dynamiqueForm($event->getForm(), $data->getCategory());
+                }
+            );
+
+            $builder->get('category')->addEventListener(
+                FormEvents::POST_SUBMIT, 
+                function (FormEvent $event) {
+                    $data = $event->getForm()->getData();
+                    $form = $event->getForm()->getParent();
+                    $this->dynamiqueForm($form, $data);
+                }
+            );
     }
 
     private function dynamiqueForm(FormInterface $form, Category $category = null) : void {
+        if($category == null) return;
         $type = $category->getViewType();
         switch($category->getViewType()){
             case 'TYPE_1':

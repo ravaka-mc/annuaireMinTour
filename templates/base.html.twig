@@ -5,17 +5,20 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <meta name="viewport" content="content-width=width, initial-scale=1, maximum-scale=1, user-scalable=no">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        <link rel="stylesheet" type="text/css" href="{{ asset('front/css/datatable.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('front/css/fancybox.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('front/css/tableau.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('front/style.css') }}">
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
     </head>
-    <body>
-        <div id="wrapper" class="categorie-detail">
+    <body class="bg__purplelight">
+        <div id="wrapper" class="{{ class }}">
             <header class="header">
                 <div class="wrapper">
                     <div class="header__inner">
-                        <a href="index.php" class="custom-logo-link" title="">
+                        <a href="{{ path('app_home') }}" class="custom-logo-link" title="">
                             <img src="{{ asset('front/images/logo.svg') }}" alt="">
                         </a>
                         <nav class="header_nav">
@@ -64,6 +67,9 @@
         <script type="text/javascript" src="{{ asset('front/js/slick.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('front/js/fancybox.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('front/js/numscroller.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('front/js/jquery.nice-select.min.js') }}"></script>
+        <script src="{{ asset('front/js/datatable.min.js') }}"></script>
+	    <script src="{{ asset('front/js/datatable-reponsive.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('front/js/custom.js') }}"></script>
         <script>
             jQuery(document).ready(function ($) {

@@ -44,41 +44,14 @@
 
     <div class="wrapper">
         <div class="atouts">
+            {% for category in categories %}
             <a href="#" class="atouts__item">
                 <div class="icone">
-                    <img src="images/voyages.svg" alt="">
+                    <img src="{{ asset('uploads/categories/' ~ category.icon) }}" alt="">
                 </div>
-                <span>Voyages & 
-                    Prestations 
-                    touristiques</span>
+                <span>{{ category.nom }}</span>
             </a>
-            <a href="#" class="atouts__item">
-                <div class="icone">
-                    <img src="images/restauration.svg" alt="">
-                </div>
-                <span>Restauration</span>
-            </a>
-            <a href="#" class="atouts__item">
-                <div class="icone">
-                    <img src="images/hebergement.svg" alt="">
-                </div>
-                <span>Hébergement</span>
-            </a>
-            
-            
-            <a href="#" class="atouts__item">
-                <div class="icone">
-                    <img src="images/guide.svg" alt="">
-                </div>
-                <span>Guide</span>
-            </a>
-            <a href="#" class="atouts__item">
-                <div class="icone">
-                    <img src="images/hebergement-restauration.svg" alt="">
-                </div>
-                <span>Hébergement et 
-                    restaurations</span>
-            </a>
+            {% endfor %}
         </div>
     </div>
 
@@ -94,7 +67,7 @@
                         <h2>Professionnels? inscrivez-vous 
                             pour plus d’avantage</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-                        <a href="#" class="btn linkplus"><span>S’inscrire</span></a>
+                        <a href="{{ path('app_register') }}" class="btn linkplus"><span>S’inscrire</span></a>
                     </div>
                 </div>
             </div>
@@ -198,92 +171,11 @@
             <h2>Trouver les établissements 
                 de toute la région</h2>
             <div class="regions__content">
-
-                <a href="" class="regions__content--item">
-                    Analamanga
-                </a>
-                <a href="" class="regions__content--item">
-                    Vakinankaratra
-                </a>
-                <a href="" class="regions__content--item">
-                    Bongolava
-                </a>
-                <a href="" class="regions__content--item">
-                    Alaotra Mangoro
-                </a>
-
-
-                <a href="" class="regions__content--item">
-                    Diana
-                </a>
-                <a href="" class="regions__content--item">
-                    Sava
-                </a>
-                <a href="" class="regions__content--item">
-                    Itasy
-                </a>
-                <a href="" class="regions__content--item">
-                    Sofia
-                </a>
-
-
-                <a href="" class="regions__content--item">
-                    Boeny
-                </a>
-                <a href="" class="regions__content--item">
-                    Betsiboka
-                </a>
-                <a href="" class="regions__content--item">
-                    Melaky
-                </a>
-                <a href="" class="regions__content--item">
-                    Atsinanana
-                </a>
-
-
-                <a href="" class="regions__content--item">
-                    Analanjorofo
-                </a>
-                <a href="" class="regions__content--item">
-                    Amoron’i Mania
-                </a>
-                <a href="" class="regions__content--item">
-                    Haute Matsiatra
-                </a>
-                <a href="" class="regions__content--item">
-                    Vatovavy 
-                </a>
-                
-
-                <a href="" class="regions__content--item">
-                    Atsimo Atsinanana
-                </a>
-                <a href="" class="regions__content--item">
-                    Ihorombe
-                </a>
-                <a href="" class="regions__content--item">
-                    Menabe
-                </a>
-                <a href="" class="regions__content--item">
-                    Atsimo Andrefana
-                </a>
-                <a href="" class="regions__content--item">
-                    Fitovinany 
-                </a>
-
-                <a href="" class="regions__content--item">
-                    Androy
-                </a>
-                <a href="" class="regions__content--item">
-                    Anosy
-                </a>
-                <a href="" class="regions__content--item">
-                    nosy be
-                </a>
-                <a href="" class="regions__content--item">
-                    Sainte marie
-                </a>
-
+                {% for region in regions %}
+                    <a href="" class="regions__content--item">
+                        {{ region.nom }}
+                    </a>
+                {% endfor %}
             </div>
         </div>
     </div>

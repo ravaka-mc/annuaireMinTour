@@ -160,6 +160,7 @@ class Etablissement
 
     /**
      * @ORM\ManyToOne(targetEntity=Region::class, inversedBy="etablissements")
+     * @ORM\JoinColumn(onDelete="SET NULL")
      */
     private $region;
 

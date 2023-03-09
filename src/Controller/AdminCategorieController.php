@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Region;
-use App\Enum\ViewType;
 use App\Form\UserType;
 use App\Entity\Category;
 use App\Form\RegionType;
