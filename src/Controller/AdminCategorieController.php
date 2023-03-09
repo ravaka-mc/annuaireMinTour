@@ -48,7 +48,9 @@ class AdminCategorieController extends AdminController
         return $this->render('admin/layout/category.html.twig', [
             'form' => $form->createView(),
             'categories' => $this->categoryRepository->findAll(),
-            'activites' => $this->activiteRepository->findAll(),
+            'activites' => $this->activiteRepository->findBy([], [
+                'nom' => 'asc'
+            ]),
             'viewTypes' => [
                 'TYPE_1' => 'Type d\'affichage 1',
                 'TYPE_2' => 'Type d\'affichage 2',
@@ -65,22 +67,8 @@ class AdminCategorieController extends AdminController
     public function add(Request $request): Response
     {
         $category = new Category();
-        $form = $this->createForm(CategoryType::class, $category);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-           $this->categoryRepository->add($category, true);
-
-            return new JsonResponse([
-                "msg_error" => '',
-                "code_status" => 200
-            ]);
-        }
-
-        return new JsonResponse([
-            "msg_error" => $this->getErrorMessages($form),
-            "code_status" => 503
-        ]);
+        return $this->categorySave($request, $category, 'Ajout', 'Ajouter');
     }
 
      /**
@@ -99,33 +87,37 @@ class AdminCategorieController extends AdminController
      */
     public function edit(Request $request, Category $category): Response
     {
-        $nom = $request->request->get('nom');
-        $icon = $request->files->get('icon');
-        $activites = (array) $request->request->get('activites');
-        $viewType = $request->request->get('viewType');
-        
-        $category->setNom($nom);
-        $category->setViewType($viewType);
-        
-        foreach($activites as $row){
-            $category->addActivite($this->activiteRepository->findOneBy([
-                'id' => (int) $row
-            ]));
+        return $this->categorySave($request, $category, 'Modifie', 'Modifier');
+    }
+
+    private function categorySave(Request $request, Category $category, $titre, $label_btn){
+        $form = $this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $iconFile = $form->get('iconFile')->getData();
+            if ($iconFile) {
+                $fileName = $this->upload($iconFile);
+                $category->setIcon($fileName);
+            }
+            $this->categoryRepository->add($category, true);
+
+           return $this->redirectToRoute('app_admin_category');
         }
-            
-        if($icon){
-            $fileName = $this->upload($icon);
-            $category->setIcon($fileName);
-        }
-        
-        $this->categoryRepository->add($category, true);
-        
-        return $this->redirectToRoute('app_admin_category');
+
+        return $this->render('admin/form/category.html.twig', [
+            'form' => $form->createView(),
+            'titre' =>  $titre,
+            'label_btn' => $label_btn,
+            'errors' => $this->getErrorMessages($form),
+            'category' => $category
+        ]);
     }
 
 
     private function upload(UploadedFile $file)
     {
+        $path = $this->getParameter('upload_category');
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $fileName = $this->slugger->slug($originalFilename) . '-'.uniqid() . '.'.$file->guessExtension();
         $file->move($this->getParameter('upload_category'), $fileName);

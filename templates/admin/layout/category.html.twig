@@ -8,7 +8,7 @@
             {% include "admin/block/logout.html.twig" %}
             <div class="d-flex sb header">
                 <div class="title">Catégories</div>
-                <a data-fancybox data-src="#newcat" href="javascript:;" class="btn">Nouvelle catégorie</a>
+                <a href="{{ path('app_admin_category_add') }}" class="btn">Nouvelle catégorie</a>
             </div>
             <table id="table-list" class="custom-table-ville">
                 <thead>
@@ -28,7 +28,7 @@
                             <td>{{ category.getCreatedAt()|date('d-m-Y') }}</td>
                             <td>
                                 <div class="action">
-                                    <a data-fancybox data-src="#edit_{{ category.id }}" href="javascript:;" class="edit"></a>
+                                    <a href="{{ path('app_admin_category_edit', {id: category.id}) }}" class="edit"></a>
                                     <a data-fancybox data-src="#supprimer_{{ category.id }}" class="delete"></a>
                                 </div>
                             </td>
@@ -40,66 +40,12 @@
             {% include "admin/block/copyright.html.twig" %}
         </section>
     </main>
-    <!-- Modal -->
-    <div style="display: none; min-width: 400px; max-width: 500px;" id="newcat" class="popup-style">
-        <div class="sub-title">Ajout nouvelle <strong>catégorie</strong></div>
-        <form enctype="multipart/form-data" id="form-category" class="form-wrap" method="post" name="{{ form.vars.full_name }}" action="{{ path("app_admin_category_add") }}">
-             <ul class="form-error"></ul>
-            <div class="form-control">
-                <label for="nom">Nom</label>
-                {{ form_widget(form.nom) }}
-            </div>
-            <div class="form-control">
-                <label for="nom">Icom</label>
-                {{ form_widget(form.iconFile) }}
-            </div>
-            <div class="form-control">
-                <label for="nom">Activités</label>
-                {{ form_widget(form.activites) }}
-            </div>
-            <div class="form-control">
-                <label for="nom">Type d'affichage</label>
-                {{ form_widget(form.viewType) }}
-            </div>
-            {{ form_widget(form._token) }}
-            <div class="pbtn full"><button id="btn-add" type="button" class="btn red">Ajouter catégorie</button></div>
-        </form>
-    </div>
     {% for category in categories %}
         {% set activite_ids = [] %}
         {% for activite in category.activites %}
             {% set activite_ids = activite_ids|merge([activite.id]) %}
         {% endfor %}
-        <div style="display: none; min-width: 400px; max-width: 500px;" id="edit_{{ category.id }}" class="popup-style">
-            <div class="sub-title">Ajout nouvelle <strong>catégorie</strong></div>
-            <form enctype="multipart/form-data" class="form-wrap" method="post" action="{{ path("app_admin_category_edit", {id:category.id}) }}">
-                <div class="form-control">
-                    <label for="nom">Nom</label>
-                    <input type="text" name="nom" value="{{ category.nom }}">
-                </div>
-                <div class="form-control">
-                    <label for="nom"> <img src="{{ asset('uploads/categories/' ~ category.icon) }}"></label>
-                    <input type="file" name="icon" value="{{ category.icon }}">
-                </div>
-                <div class="form-control">
-                    <label for="nom">Activités</label>
-                    <select name="activites[]" multiple="multiple" tabindex="0">
-                        {% for activite in activites %}
-                            <option value="{{ activite.id }}" {% if activite.id in activite_ids %}selected{% endif %}>{{ activite.nom }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="form-control">
-                    <label for="nom">Type d'affichage</label>
-                    <select name="viewType" tabindex="0">
-                        {% for key, viewType in viewTypes %}
-                            <option value="{{ key }}" {% if key == category.viewType %}selected{% endif %}>{{ viewType }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="pbtn full"><button type="submit" class="btn red">Enregistrer</button></div>
-            </form>
-        </div>
+        
         <div id="supprimer_{{ category.id }}" class="pop_suppr" style="display:none; max-width:500px;">
             <div class="innerpad">
                 <div class="sub-title">Vouler vraiment supprimer ?</div>
@@ -111,11 +57,7 @@
             </div>
         </div>
     {% endfor %}
-    <div style="display:none" id="dialog-message" title="Information">
-        <p>
-            La catégorie a été bien enregistrée avec succès
-        </p>
-    </div>
+
 {% endblock %}
 {% block javascripts %}
     <script src="{{ asset('admin/js/jquery.fancybox.min.js') }}"></script>

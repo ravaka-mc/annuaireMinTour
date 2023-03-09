@@ -1,0 +1,67 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Annuaire{% endblock %}
+
+{% block body %}
+    <main id="content" class="flex">
+        <section id="contenu">
+            {% include "admin/block/logout.html.twig" %}
+            <div class="title bb">{{ titre }} catégorie</div>
+			<ul class="error">
+				{% for error in errors %}
+					{% if error is iterable %}
+						{% for msg in error %}
+							<li>{{ msg }}</li>
+						{% endfor %}
+					{% else %}
+						<li>{{ error }}</li>
+					{% endif %}
+				{% endfor %}
+			</ul>
+			<form enctype="multipart/form-data" id="form-category" class="form-wrap" method="post" name="{{ form.vars.full_name }}">
+				<ul class="form-error"></ul>
+				<div class="form-control">
+					<label for="category_nom">Nom</label>
+					{{ form_widget(form.nom) }}
+				</div>
+				<div class="form-control">
+					{% if category.icon is not null %}
+						<label for="category_iconFile"><img src="{{ asset('uploads/categories/' ~ category.icon) }}"></label>
+					{% else %}
+						<label for="category_iconFile">Icon</label>
+					{% endif %}
+					{{ form_widget(form.iconFile) }}
+				</div>
+				<div class="form-control">
+					<label for="category_activites">Activités</label>
+					{{ form_widget(form.activites) }}
+				</div>
+				<div class="form-control">
+					<label for="category_viewType">Type d'affichage</label>
+					{{ form_widget(form.viewType) }}
+				</div>
+				{{ form_widget(form._token) }}
+				<div class="pbtn full"><button id="btn-add" type="submit" class="btn red">{{ label_btn }} catégorie</button></div>
+			</form>
+           {% include "admin/block/copyright.html.twig" %}
+        </section>
+    </main>
+{% endblock %}
+{% block javascripts %}
+	<script src="{{ asset('admin/js/selectize.min.js') }}"></script>
+	<script src="{{ asset('admin/js/dist/bootstrap-modal.dev.js') }}"></script>
+	<script src="{{ asset('admin/js/jquery.fancybox.min.js') }}"></script>
+	<script src="{{ asset('admin/js/dist/customize.dev.js') }}"></script>
+	<script src="{{ asset('admin/js/dist/modal.min.dev.js') }}"></script>
+	<script src="{{ asset('admin/js/customize.js') }}"></script>
+	<script src="{{ asset('admin/js/tinymce.min.js') }}"></script>
+	<script src="{{ asset('admin/js/tinymce-webcomponent.js') }}"></script>
+	<script src="{{ asset('admin/js/nstslider.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('admin/js/datatable.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('admin/js/datatable-reponsive.min.js') }}"></script>
+	<script>
+		jQuery(document).ready(function($) {
+			$("#category_activites").selectize();
+		});
+	</script>
+{% endblock %}
