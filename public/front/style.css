@@ -4038,7 +4038,7 @@ footer .footer .mentions li span {
     grid-gap: 5px 15px;
   }
   .regions__content--item {
-    text-transform: lowercase;
+    text-transform: inherit;
     padding: 8px 0 4px 30px;
   }
   .regions__content--item::after {
