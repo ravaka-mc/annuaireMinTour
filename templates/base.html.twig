@@ -24,13 +24,13 @@
                         </a>
                         <nav class="header_nav">
                             <ul class="header_nav-menu" id="headermenu">
-                                <li class="current-menu-item"><a href="" title="Accueil">Accueil</a></li>
+                                <li class="current-menu-item"><a href="{{ path('app_home') }}" title="Accueil">Accueil</a></li>
                                 <li>
                                     <a href="#" title="Categories">Categories</a>
                                     <i></i>
                                     <ul class="submenu">
                                         {% for category in categories %}
-                                            <li><a href="#" title="Hébergement">{{ category.nom }}</a></li>
+                                            <li><a href="{{ path('app_category', {slug:category.slug}) }}" title="Hébergement">{{ category.nom }}</a></li>
                                         {% endfor %}
                                     </ul>
                                 </li>
@@ -38,7 +38,7 @@
                                 <li><a href="#" title="Contact">Contact</a></li>
                             </ul>
                             <div class="header_right">
-                            <a href="#" class="btn btn-primary membrebtn"><span>Espace membre</span></a>
+                            <a href="{{ path('app_dashboard')}}" class="btn btn-primary membrebtn"><span>Espace membre</span></a>
                                 <div class="hamburger">
                                     <div class="hamburger-box"></div>
                                 </div>
