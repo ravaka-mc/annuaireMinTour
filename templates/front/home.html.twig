@@ -9,7 +9,7 @@
         <div class="banner__content">
             <!-- <span class="bgtext">annuaire</span> -->
             <div class="wrapper">
-                <h1>Trouvez les établissements formels dans tout Madagascar </h1>
+                <h1>Les établissements touristiques formels à Madagascar </h1>
                 <form action="" class="recherche">
                     <div class="formgroup">
                         <input type="text" placeholder="Faire votre recherche" >
@@ -49,7 +49,10 @@
                     <div class="icone">
                         <img src="{{ asset('uploads/categories/' ~ category.icon) }}" alt="">
                     </div>
-                    <span>{{ category.nom }}</span>
+                    <div class="texte">
+						<span>{{ category.nom }}</span>
+						<span><strong class="nbre">(1000)</strong></span>
+					</div>
                 </a>
             {% endfor %}
         </div>
@@ -58,10 +61,6 @@
     <div class="bandeau">
         <div class="wrapper">
             <div class="bandeau__content">
-                <div class="bandeau__content--chiffre">
-                    <div class="titre">Inscrits</div>
-                    <div class="chiffres">5 673</div>
-                </div>
                 <div class="bandeau__content--item">
                     <div>
                         <h2>Professionnels? inscrivez-vous 
