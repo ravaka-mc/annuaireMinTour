@@ -4034,7 +4034,7 @@ footer .footer .mentions li span {
   .regions {
     padding: 50px 0 40px;
   }
-  .regions__content {
+  .regions__content { 
     grid-gap: 5px 15px;
   }
   .regions__content--item {
