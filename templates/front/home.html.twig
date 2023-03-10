@@ -78,90 +78,9 @@
         <div class="wrapper">
             <h2>Les dernières membres inscrites.</h2>
             <div class="membre__content">
-                <div class="membre__content--item">
-                        
-                    <div class="logoitem">
-                        <img src="{{ asset('front/images/colbert.png') }}" alt="">
-                    </div>
-                    <div class="texteitem">
-                        <div class="titreitem">Hôtel Colbert Madagascar</div>
-                        <ul>
-                            <li><span class="domaine"> Hébergement & Restauration</span></li>
-                            <li> <span  class="localisation"> Analamanga</span></li>
-                        </ul>
-                    </div>
-                    <a href="" class="voir">Voir plus</a>
-                </div>
-                <div class="membre__content--item">
-                        
-                    <div class="logoitem">
-                        <img src="{{ asset('front/images/mct.png') }}" alt="">
-                    </div>
-                    <div class="texteitem">
-                        <div class="titreitem">Grand Hotel Urban</div>
-                        <ul>
-                            <li><span class="domaine"> Hébergement & Restauration</span></li>
-                            <li> <span  class="localisation"> Analamanga</span></li>
-                        </ul>
-                    </div>
-                    <a href="" class="voir">Voir plus</a>
-                </div>
-                <div class="membre__content--item">
-                        
-                    <div class="logoitem">
-                        <img src="{{ asset('front/images/colbert.png') }}" alt="">
-                    </div>
-                    <div class="texteitem">
-                        <div class="titreitem">Hôtel Colbert Madagascar</div>
-                        <ul>
-                            <li><span class="domaine"> Hébergement & Restauration</span></li>
-                            <li> <span  class="localisation"> Analamanga</span></li>
-                        </ul>
-                    </div>
-                    <a href="" class="voir">Voir plus</a>
-                </div>
-                <div class="membre__content--item">
-                        
-                    <div class="logoitem">
-                        <img src="{{ asset('front/images/mct.png') }}" alt="">
-                    </div>
-                    <div class="texteitem">
-                        <div class="titreitem">Grand Hotel Urban</div>
-                        <ul>
-                            <li><span class="domaine"> Hébergement & Restauration</span></li>
-                            <li> <span  class="localisation"> Analamanga</span></li>
-                        </ul>
-                    </div>
-                    <a href="" class="voir">Voir plus</a>
-                </div>
-                <div class="membre__content--item">
-                        
-                    <div class="logoitem">
-                        <img src="{{ asset('front/images/colbert.png') }}" alt="">
-                    </div>
-                    <div class="texteitem">
-                        <div class="titreitem">Hôtel Colbert Madagascar</div>
-                        <ul>
-                            <li><span class="domaine"> Hébergement & Restauration</span></li>
-                            <li> <span  class="localisation"> Analamanga</span></li>
-                        </ul>
-                    </div>
-                    <a href="" class="voir">Voir plus</a>
-                </div>
-                <div class="membre__content--item">
-                        
-                    <div class="logoitem">
-                        <img src="{{ asset('front/images/mct.png') }}" alt="">
-                    </div>
-                    <div class="texteitem">
-                        <div class="titreitem">Grand Hotel Urban</div>
-                        <ul>
-                            <li><span class="domaine"> Hébergement & Restauration</span></li>
-                            <li> <span  class="localisation"> Analamanga</span></li>
-                        </ul>
-                    </div>
-                    <a href="" class="voir">Voir plus</a>
-                </div>
+                {% for etablissement in etablissements %}
+                    {% include "front/block/etablissement.html.twig" %}
+                {% endfor %}
             </div>
         </div>
     </div>

@@ -39,7 +39,7 @@ class AdminEtablissementController extends AdminController
      */
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $etablissements = $this->etablissementRepository->findAll();
+        $etablissements = $this->etablissementRepository->findBy([], ['created_at' => 'desc']);
 
         return $this->render('admin/layout/etablissement.html.twig', [
             'etablissements' => $etablissements,
@@ -62,6 +62,20 @@ class AdminEtablissementController extends AdminController
     public function edit(Request $request, Etablissement $etablissement): Response
     {
         return $this->save($request, $etablissement, 'Modifie', 'Modifier');
+    }
+
+    /**
+     * @Route("/admin/etablissement/generate/slug", name="app_admin_etablissement_generate_slug")
+     */
+    public function generateslug(Request $request): Response
+    {
+        $etablissements = $this->etablissementRepository->findBy([], ['created_at' => 'desc']);
+        foreach($etablissements as $etablissement){
+            $etablissement->setSlug($etablissement->getNom());
+            $this->etablissementRepository->add($etablissement, true);
+        }
+
+        return $this->redirectToRoute('app_admin_etablissement');
     }
 
     private function save(Request $request, Etablissement $etablissement, $titre, $label_btn){

@@ -204,6 +204,17 @@ class Etablissement
      */
     private $activites;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Gedmo\Slug(fields={"nom"})
+     */
+    private $slug;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateValidation;
+
     public function __construct()
     {
         $this->groupements = new ArrayCollection();
@@ -669,5 +680,29 @@ class Etablissement
         if($this->licenceC) $licences[] = 'C';
 
         return  \implode(', ', $licences);
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getDateValidation(): ?\DateTimeInterface
+    {
+        return $this->dateValidation;
+    }
+
+    public function setDateValidation(?\DateTimeInterface $dateValidation): self
+    {
+        $this->dateValidation = $dateValidation;
+
+        return $this;
     }
 }

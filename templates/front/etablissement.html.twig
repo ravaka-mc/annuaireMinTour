@@ -1,0 +1,213 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FrontController!{% endblock %}
+
+{% block body %}
+<main>
+    <div class="top-detail">
+        <div class="wrapper">
+            <div class="breadcrumbs">
+                    <a href="{{ path('app_home') }}" title="Accueil" class="home">Accueil</a>
+                    {% if etablissement.category is not null %}
+                        <a href="{{ path('app_category', {slug:etablissement.category.getSlug()}) }}" title="Hébergement ">{{ etablissement.category }}</a>
+                    {% endif %}
+                    <span class="breadcrumb_last" aria-current="page" >{{ etablissement.nom }}</span>
+            </div>
+            <div class="wrap-detail">
+                <div class="images">
+                    <img src="./images/colbert.png" alt="">
+                </div>
+                <div class="texteitem">
+                    <h1>{{ etablissement.nom }}</h1>
+                    <div class="stitre">
+                        Entreprise de prestations touristiques spécialisées
+                    </div>
+                    <div class="texteitem">
+                        <ul>
+                            {% if etablissement.region is not null %}
+                            <li> <span class="localisation">{{ etablissement.region }}</span></li>
+                            {% endif %}
+                            {% if etablissement.category is not null %}
+                                <li><span class="domaine"> {{ etablissement.category }}</span></li>
+                            {% endif %}
+                            {% if etablissement.classement is not null %}
+                                <li><span class="etoile">{{ etablissement.classement }}</span></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="information">
+            <div class="information-detail">
+                <div class="gtitre">
+                    Contacts
+                </div>
+                <div class="details">
+                    <div class="item">
+                        <div class="stitre">
+                            Adresse
+                        </div>
+                        <span>Jardin Antaninarenina, 29 rue Prince </span> <br>
+                        <span>Ratsimamanga, Antananarivo 101</span>
+                    </div>
+                    {% if etablissement.telephone is not null %}
+                    <div class="item">
+                        <div class="stitre">
+                            Téléphone
+                        </div>
+                        <span>{{ etablissement.telephone }}</span>
+                    </div>
+                    {% endif %}
+                    {% if etablissement.email is not null %}
+                    <div class="item">
+                        <div class="stitre">
+                            E-mail
+                        </div>
+                        <span>{{ etablissement.email }}</span>
+                    </div>
+                    {% endif %}
+                    {% if etablissement.siteWeb is not null %}
+                    <div class="item">
+                        <div class="stitre">
+                            Site web
+                        </div>
+                        <span>{{ etablissement.siteWeb }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="gtitre">
+                    Autorisation
+                </div>
+                <div class="details">
+                    {% if etablissement.dateOuverture is not null %}
+                    <div class="item">
+                        <div class="stitre">
+                            Date d’ouverture
+                        </div>
+                        <span>{{ etablissement.dateOuverture|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}</span>
+                    </div>
+                    {% endif %}
+                    {% if etablissement.reference is not null %}
+                    <div class="item">
+                        <div class="stitre">
+                            Numero de référence
+                        </div>
+                        <span>{{ etablissement.reference }}</span>
+                    </div>
+                    {% endif %}
+                    {% if etablissement.licenceA or etablissement.licenceB or etablissement.licenceC%}
+                    <div class="item licence">
+                        <div class="stitre">
+                            Licence
+                        </div>
+                        <div class="licence-detail">
+                            {% if etablissement.licenceA %}
+                            <p><span class="licence-class">A</span>(Agence de voyage)</p> <span
+                                class="licence-date">Le <strong>{{ etablissement.dateLicenceA|date('d / m / Y') }}</strong></span>
+                            {% endif %}
+                            {% if etablissement.licenceB %}
+                            <p><span class="licence-class">B</span>(Agence de voyage)</p> <span
+                                class="licence-date">Le <strong>{{ etablissement.dateLicenceA|date('d / m / Y') }}</strong></span>
+                            {% endif %}
+                            {% if etablissement.licenceC %}
+                            <p><span class="licence-class">C</span>(Agence de voyage)</p> <span
+                                class="licence-date">Le <strong>{{ etablissement.dateLicenceA|date('d / m / Y') }}</strong></span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            <a data-fancybox href="#infopop" class="link-signal">Signaler cette établissement</a>
+            <div class="popup" id="infopop">
+                <div class="popup__top gtitre">
+                    Signaler
+                </div>
+                <div class="popup__content">
+                    <form action="">
+                        <div class="form-wrap">
+                            <div class="form-control">
+                                <label for="">établissment</label>
+                                <input type="text" value="Hotel Colbert Spa & Casino" readonly>
+                            </div>
+                            <div class="form-control">
+                                <label for="">Nom</label>
+                                <input type="text" value="">
+                            </div>
+                            <div class="form-control">
+                                <label for="">E-mail</label>
+                                <input type="email" value="">
+                            </div>
+                            <div class="form-control">
+                                <label for="">Motif</label>
+                                <textarea name="" id="" placeholder="Veuillez expliquer ici la raison..."></textarea>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn"><span>Signaler</span></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-purple-light">
+        <div class="wrapper">
+            <div class="stat">
+                <div class="gtitre textcenter">
+                    L’établissement en quelques chiffres
+                </div>
+                <div class="stat-detail">
+                    {% if etablissement.capaciteAccueil is not null %}
+                    <div class="item">
+                        <div class="icon">
+                            <img src="./images/accueil.svg" alt="">
+                        </div>
+                        <div class="texte">
+                        <p><span class="numscroller" data-min="1" data-max="{{ etablissement.capaciteAccueil}}" data-delay="5" data-increment="10">{{ etablissement.capaciteAccueil}}</span></p>
+                        <div class="n-titre">Capacité d'accueil</div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if etablissement.nombreSalaries is not null %}
+                    <div class="item">
+                        <div class="icon">
+                            <img src="./images/salarie.svg" alt="">
+                        </div>
+                        <div class="texte">
+                            <p><span class="numscroller" data-min="1" data-max="{{ etablissement.nombreSalaries}}" data-delay="5" data-increment="10">{{ etablissement.nombreSalaries}}</span></p>
+                        <div class="n-titre">Salariés</div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if etablissement.nombreChambres is not null %}
+                    <div class="item">
+                        <div class="icon">
+                            <img src="./images/chambres.svg" alt="">
+                        </div>
+                        <div class="texte">
+                        <p><span class="numscroller" data-min="1" data-max="{{ etablissement.nombreChambres}}" data-delay="5" data-increment="10">>{{ etablissement.nombreChambres}}</span></p>
+                        <div class="n-titre">Chambres</div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if etablissement.nombreCouverts is not null %}
+                    <div class="item">
+                        <div class="icon">
+                            <img src="./images/salle.svg" alt="">
+                        </div>
+                        <div class="texte">
+                        <p><span class="numscroller" data-min="1" data-max="{{ etablissement.nombreCouverts}}   " data-delay="5" data-increment="10">{{ etablissement.nombreCouverts}}</span>m <sup>2</sup> </p>
+                        <div class="n-titre">Salle de conférence</div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>  
+</main>
+{% endblock %}

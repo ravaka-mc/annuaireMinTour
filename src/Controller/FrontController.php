@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Region;
 use App\Entity\Category;
+use App\Entity\Etablissement;
 use App\Repository\UserRepository;
 use App\Repository\RegionRepository;
 use App\Repository\CategoryRepository;
@@ -12,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class FrontController extends AbstractController
 {
@@ -34,9 +36,14 @@ class FrontController extends AbstractController
     {
         $categories = $this->categoryRepository->findAll();
         $regions = $this->regionRepository->findAll();
+        $etablissements = $this->etablissementRepository->findBy([], [
+            'created_at' => 'desc'
+        ],6);
+
         return $this->render('front/home.html.twig', [
             'categories' => $categories,
             'regions' => $regions,
+            'etablissements' => $etablissements,
             'class' => ''
         ]);
     }
@@ -62,9 +69,12 @@ class FrontController extends AbstractController
     {
         $categories = $this->categoryRepository->findAll();
 
+        $etablissements = $category->getEtablissements();
+
         return $this->render('front/etablissements.html.twig', [
             'class' => 'categorie',
             'categories' => $categories,
+            'etablissements' => $etablissements
         ]);
     }
 
@@ -75,9 +85,28 @@ class FrontController extends AbstractController
     {
         $categories = $this->categoryRepository->findAll();
 
+        $etablissements = $region->getEtablissements();
+
         return $this->render('front/etablissements.html.twig', [
             'class' => 'categorie',
             'categories' => $categories,
+            'etablissements' => $etablissements
+        ]);
+    }
+
+    /**
+     * @Route("/{category_slug}/{etablissement_slug}", name="app_etablissement")
+     * @ParamConverter("category", options={"mapping": {"category_slug": "slug"}})
+     * @ParamConverter("etablissement", options={"mapping": {"etablissement_slug": "slug"}})
+     */
+    public function etablissement(Request $request, Category $category, Etablissement $etablissement): Response
+    {
+        $categories = $this->categoryRepository->findAll();
+
+        return $this->render('front/etablissement.html.twig', [
+            'class' => 'categorie',
+            'categories' => $categories,
+            'etablissement' => $etablissement
         ]);
     }
 }
