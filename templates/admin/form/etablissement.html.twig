@@ -7,18 +7,18 @@
         <section id="contenu">
             {% include "admin/block/logout.html.twig" %}
             <div class="title bb">{{ titre }} établissement</div>
-			<form name="{{ form.vars.full_name }}" method="post" enctype="multipart/form-data">
-				<ul class="error">
-					{% for error in errors %}
-						{% if error is iterable %}
-							{% for msg in error %}
-								<li>{{ msg }}</li>
-							{% endfor %}
-						{% else %}
-							<li>{{ error }}</li>
-						{% endif %}
-					{% endfor %}
-				</ul>
+			<ul class="error">
+				{% for error in errors %}
+					{% if error is iterable %}
+						{% for msg in error %}
+							<li>{{ msg }}</li>
+						{% endfor %}
+					{% else %}
+						<li>{{ error }}</li>
+					{% endif %}
+				{% endfor %}
+			</ul>
+			<form id="frm-etablissement" name="{{ form.vars.full_name }}" method="post" enctype="multipart/form-data">
 				<div class="categories">
 					<div class="card-wrap">
 						<label>Catégorie</label>
@@ -72,7 +72,16 @@
 									{{ form_widget(form.siteWeb) }}
 								</div>
 							</div>
-							<div class="form-control">
+							{% if form.zoneIntervention is defined %}
+							<div id="wrapper-zone" class="form-control">
+								<label for="">Zone d'intervention</label>
+								{{ form_widget(form.zoneIntervention) }}
+							</div>
+							{% else %}
+								<div id="wrapper-zone"></div>
+							{% endif %}
+							{% if form.activites is defined %}
+							<div id="wrapper-activites" class="form-control">
 								<label>Activités</label>
 								<div class="custom_checkbox half">
 									{% for child in form.activites|filter(child => not child.rendered) %}
@@ -84,9 +93,12 @@
 									{% endfor %}
 								</div>
 							</div>
+							{% else %}
+								<div id="wrapper-activites"></div>
+							{% endif %}
 							{% if form.classement is defined %}
-							<div class="form-control">
-								<label>Classement</label>
+							<div id="wrapper-classements" class="form-control">
+								<label>Classements</label>
 								<div class="custom-radio half">
 									{% for child in form.classement|filter(child => not child.rendered) %}
 									<label>
@@ -97,21 +109,28 @@
 									{% endfor %}
 								</div>
 							</div>
+							{% else %}
+								<div id="wrapper-classements"></div>
 							{% endif %}
-							<div class="half">
-								<div class="form-control">
-									<label>Propriétaire</label>
-									{{ form_widget(form.proprietaire) }}
+							{% if form.proprietaire is defined %}
+								<div id="wrapper-proprietaire" class="half">
+									<div class="form-control">
+										<label>Propriétaire</label>
+										{{ form_widget(form.proprietaire) }}
+									</div>
+									<div class="form-control">
+										<label>Gérant</label>
+										{{ form_widget(form.gerant) }}
+									</div>
 								</div>
-								<div class="form-control">
-									<label>Gérant</label>
-									{{ form_widget(form.gerant) }}
+								<div id="wrapper-region" class="form-control">
+									<label for="">Region</label>
+									{{ form_widget(form.region) }}
 								</div>
-							</div>
-							<div class="form-control">
-								<label for="">Region</label>
-								{{ form_widget(form.region) }}
-							</div>
+							{% else %}
+								<div id="wrapper-proprietaire"></div>
+								<div id="wrapper-region"></div>
+							{% endif %}
 							<div class="form-control inputright">
 								<label>Etes-vous membre d'un groupement ?</label>
 								<div id="wrapper-member" class="custom-radio">
@@ -121,7 +140,7 @@
 										{{ form_widget(child) }}
 										<span class="checkmark"></span>
 									</label>
-    							{% endfor %}
+								{% endfor %}
 								</div>
 							</div>
 							<div class="custom_checkbox slidergrpm">
@@ -135,7 +154,8 @@
 							</div>
 						</div>
 					</div>
-					<div class="bloc_editense form-wrap">
+					{% if form.licenceA is defined %}
+					<div id="wrapper-coordonnees" class="bloc_editense form-wrap">
 						<div class="card-wrap">
 							<div class="form-in-head">
 								<div class="sub-title"><span>Coordonnées</span></div>
@@ -193,6 +213,95 @@
 							</div>
 						</div>
 					</div>
+					{% else %}
+						<div id="wrapper-coordonnees"></div>
+					{% endif %}
+					{% if form.classement is defined %}
+						<div id="wrapper-autorisation" class="bloc_editense form-wrap">
+							<div class="card-wrap">
+								<div class="form-in-head">
+									<div class="sub-title"><span>Autorisation</span></div>
+								</div>
+								<div class="half">
+									<div class="form-control">
+										<label for="">Date d’ouverture</label>
+										{{ form_widget(form.dateOuverture) }}
+									</div>
+									<div class="form-control">
+										<label for="">Référence</label>
+										{{ form_widget(form.reference) }}
+									</div>
+									<div class="form-control">
+										<label for="">NIF</label>
+										{{ form_widget(form.nif) }}
+									</div>
+									<div class="form-control">
+										<label for="">Stat</label>
+										{{ form_widget(form.stat) }}
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="wrapper-infos_supplementaire" class="bloc_editense form-wrap">
+							<div class="card-wrap">
+								<div class="form-in-head">
+									<div class="sub-title"><span>Informations supplémentaires</span></div>
+								</div>
+								<div class="half">
+									{% if form.nombreChambres is defined %}
+									<div class="form-control">
+										<label for="">Nombre de chambres</label>
+										{{ form_widget(form.nombreChambres) }}
+									</div>
+									<div class="form-control">
+										<label for="">Capacité d'accueil</label>
+										{{ form_widget(form.capaciteAccueil) }}
+									</div>
+									{% endif %}
+									<div class="form-control">
+										<label for="">Nombre de couverts</label>
+										{{ form_widget(form.nombreCouverts) }}
+									</div>
+									<div class="form-control">
+										<label for="">Nombre de Salariés</label>
+										{{ form_widget(form.nombreSalaries) }}
+									</div>
+								</div>
+							</div>
+						</div>
+					{% else %}
+						<div id="wrapper-autorisation"></div>
+						<div id="wrapper-infos_supplementaire"></div>
+					{% endif %}
+					{% if form.categorieAutorisation is defined %}
+						<div id="wrapper-autorisation2" class="bloc_editense form-wrap">
+							<div class="card-wrap">
+								<div class="form-in-head">
+									<div class="sub-title"><span>Autorisation</span></div>
+								</div>
+								<div class="half">
+									<div class="form-control">
+										<label for="">Catégorie</label>
+										{{ form_widget(form.categorieAutorisation) }}
+									</div>
+									<div class="form-control">
+										<label for="">N° carte et badge professionnel</label>
+										{{ form_widget(form.carteProfessionnelle) }}
+									</div>
+									<div class="form-control">
+										<label for="">NIF</label>
+										{{ form_widget(form.nif) }}
+									</div>
+									<div class="form-control">
+										<label for="">Stat</label>
+										{{ form_widget(form.stat) }}
+									</div>
+								</div>
+							</div>
+						</div>
+					{% else %}
+						<div id="wrapper-autorisation2"></div>
+					{% endif %}
 					<div class="t-right mt-50 huhu">
 						{{ form_widget(form._token) }}
 						<button type="submit" class="btn">{{ label_btn }}</button>
@@ -251,16 +360,43 @@
 				}
 			});
 
-			$('.categories select').change(function() {
+			$('.categories select').on('change', function() {
+				data = {};
+				data[$(this).attr('name')] = $(this).val();
 				$.ajax({
 					type: 'POST',
 					url: '{{ path('app_admin_etablissement_add') }}',
-					data: {
-						category: $(this).val()
-					},
+					data: data,
 					dataType: 'html',
 					success: function (response) {
-						$('#add').html(response);
+						$('#wrapper-activites').replaceWith(
+							$(response).find('#wrapper-activites')
+						);
+						$('#wrapper-classements').replaceWith(
+							$(response).find('#wrapper-classements')
+						);
+						$('#wrapper-coordonnees').replaceWith(
+							$(response).find('#wrapper-coordonnees')
+						);
+						$('#wrapper-autorisation').replaceWith(
+							$(response).find('#wrapper-autorisation')
+						);
+						$('#wrapper-autorisation2').replaceWith(
+							$(response).find('#wrapper-autorisation2')
+						);
+						$('#wrapper-infos_supplementaire').replaceWith(
+							$(response).find('#wrapper-infos_supplementaire')
+						);
+						$('#wrapper-zone').replaceWith(
+							$(response).find('#wrapper-zone')
+						);
+						$('#wrapper-proprietaire').replaceWith(
+							$(response).find('#wrapper-proprietaire')
+						);
+						$('#wrapper-region').replaceWith(
+							$(response).find('#wrapper-region')
+						);
+						changeLicences();
 					}
 				})
 			});

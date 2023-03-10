@@ -1,3 +1,17 @@
+var changeLicences = () => {
+	$('.licence .half').each(function(){
+		let $inp = $(this).find("input[type=checkbox]");
+		let self = $(this);
+		$inp.change(function() {
+			if(this.checked) {
+				self.find('.obtention').removeClass('notselected')
+			} else {
+				self.find('.obtention').addClass('notselected')
+			}
+		});
+	});
+}
+
 $(document).ready(function() {
 	$('<i></i>').insertBefore('.sub-menu');
 	$('.has-child i').click(function(){
@@ -90,18 +104,8 @@ $(document).ready(function() {
 			}
 		});
 	});
-
-	$('.licence .half').each(function(){
-		let $inp = $(this).find("input[type=checkbox]");
-		let self = $(this);
-		$inp.change(function() {
-			if(this.checked) {
-				self.find('.obtention').removeClass('notselected')
-			} else {
-				self.find('.obtention').addClass('notselected')
-			}
-		});
-	});
+	
+	
 
 	setTimeout(() => $('#wrapper-member input:checked').trigger('change'), 500);
 	$('#wrapper-member input').change(function() {
@@ -111,6 +115,8 @@ $(document).ready(function() {
 			$('.slidergrpm').slideUp();
 		}
 	});
+
+	changeLicences();
 	/*let catvalfirst = $('.categories select').val();
 	$('.cat-options#'+catvalfirst).show();*/
 

@@ -11,6 +11,7 @@ use App\Form\CategoryType;
 use App\Entity\Etablissement;
 use App\Form\EtablissementType;
 use Symfony\Component\Form\Form;
+use App\Repository\ActiviteRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\EtablissementRepository;
@@ -18,15 +19,21 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AdminCategorieController extends AdminController
 {
     private $categoryRepository;
+    private $activiteRepository;
+    private $slugger;
 
-    public function __construct(CategoryRepository $categoryRepository){
+    public function __construct(CategoryRepository $categoryRepository, ActiviteRepository $activiteRepository, SluggerInterface $slugger){
         $this->categoryRepository = $categoryRepository;
+        $this->activiteRepository = $activiteRepository;
+        $this->slugger = $slugger;
     }
 
 
@@ -38,11 +45,19 @@ class AdminCategorieController extends AdminController
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
 
-        $categories = $this->categoryRepository->findAll();
-
         return $this->render('admin/layout/category.html.twig', [
             'form' => $form->createView(),
-            'categories' => $categories
+            'categories' => $this->categoryRepository->findAll(),
+            'activites' => $this->activiteRepository->findBy([], [
+                'nom' => 'asc'
+            ]),
+            'viewTypes' => [
+                'TYPE_1' => 'Type d\'affichage 1',
+                'TYPE_2' => 'Type d\'affichage 2',
+                'TYPE_3' => 'Type d\'affichage 3',
+                'TYPE_4' => 'Type d\'affichage 4',
+                'TYPE_5' => 'Type d\'affichage 5',
+            ]
         ]);
     }
 
@@ -52,22 +67,8 @@ class AdminCategorieController extends AdminController
     public function add(Request $request): Response
     {
         $category = new Category();
-        $form = $this->createForm(CategoryType::class, $category);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-           $this->categoryRepository->add($category, true);
-
-            return new JsonResponse([
-                "msg_error" => '',
-                "code_status" => 200
-            ]);
-        }
-
-        return new JsonResponse([
-            "msg_error" => $this->getErrorMessages($form),
-            "code_status" => 503
-        ]);
+        return $this->save($request, $category, 'Ajout', 'Ajouter');
     }
 
      /**
@@ -86,11 +87,40 @@ class AdminCategorieController extends AdminController
      */
     public function edit(Request $request, Category $category): Response
     {
-        $nom = $request->request->get('nom');
-        
-        $category->setNom($nom);
-        $this->categoryRepository->add($category, true);
+        return $this->save($request, $category, 'Modifie', 'Modifier');
+    }
 
-        return $this->redirectToRoute('app_admin_category');
+    private function save(Request $request, Category $category, $titre, $label_btn){
+        $form = $this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $iconFile = $form->get('iconFile')->getData();
+            if ($iconFile) {
+                $fileName = $this->upload($iconFile, 'upload_category');
+                $category->setIcon($fileName);
+            }
+            $this->categoryRepository->add($category, true);
+
+           return $this->redirectToRoute('app_admin_category');
+        }
+
+        return $this->render('admin/form/category.html.twig', [
+            'form' => $form->createView(),
+            'titre' =>  $titre,
+            'label_btn' => $label_btn,
+            'errors' => $this->getErrorMessages($form),
+            'category' => $category
+        ]);
+    }
+
+
+    private function upload(UploadedFile $file)
+    {
+        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $fileName = $this->slugger->slug($originalFilename) . '-'.uniqid() . '.'.$file->guessExtension();
+        $file->move($this->getParameter('upload_category'), $fileName);
+
+        return $fileName;
     }
 }

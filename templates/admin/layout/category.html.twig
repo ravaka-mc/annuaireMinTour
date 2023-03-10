@@ -8,7 +8,7 @@
             {% include "admin/block/logout.html.twig" %}
             <div class="d-flex sb header">
                 <div class="title">Catégories</div>
-                <a data-fancybox data-src="#newcat" href="javascript:;" class="btn">Nouvelle catégorie</a>
+                <a href="{{ path('app_admin_category_add') }}" class="btn">Nouvelle catégorie</a>
             </div>
             <table id="table-list" class="custom-table-ville">
                 <thead>
@@ -28,7 +28,7 @@
                             <td>{{ category.getCreatedAt()|date('d-m-Y') }}</td>
                             <td>
                                 <div class="action">
-                                    <a data-fancybox data-src="#edit_{{ category.id }}" href="javascript:;" class="edit"></a>
+                                    <a href="{{ path('app_admin_category_edit', {id: category.id}) }}" class="edit"></a>
                                     <a data-fancybox data-src="#supprimer_{{ category.id }}" class="delete"></a>
                                 </div>
                             </td>
@@ -40,30 +40,12 @@
             {% include "admin/block/copyright.html.twig" %}
         </section>
     </main>
-    <!-- Modal -->
-    <div style="display: none; min-width: 400px; max-width: 500px;" id="newcat" class="popup-style">
-        <div class="sub-title">Ajout nouvelle <strong>catégorie</strong></div>
-        <form id="form-category" class="form-wrap" method="post" name="{{ form.vars.full_name }}" action="{{ path("app_admin_category_add") }}">
-             <ul class="form-error"></ul>
-            <div class="form-control">
-                <label for="nom">Nom</label>
-                {{ form_widget(form.nom) }}
-            </div>
-            {{ form_widget(form._token) }}
-            <div class="pbtn full"><button type="submit" class="btn red">Ajouter catégorie</button></div>
-        </form>
-    </div>
     {% for category in categories %}
-        <div style="display: none; min-width: 400px; max-width: 500px;" id="edit_{{ category.id }}" class="popup-style">
-            <div class="sub-title">Ajout nouvelle <strong>région</strong></div>
-            <form class="form-wrap" method="post" action="{{ path("app_admin_category_edit", {id:category.id}) }}">
-                <div class="form-control">
-                    <label for="nom">Nom</label>
-                    <input type="text" name="nom" value="{{ category.nom }}">
-                </div>
-                <div class="pbtn full"><button type="submit" class="btn red">Enregistrer</button></div>
-            </form>
-        </div>
+        {% set activite_ids = [] %}
+        {% for activite in category.activites %}
+            {% set activite_ids = activite_ids|merge([activite.id]) %}
+        {% endfor %}
+        
         <div id="supprimer_{{ category.id }}" class="pop_suppr" style="display:none; max-width:500px;">
             <div class="innerpad">
                 <div class="sub-title">Vouler vraiment supprimer ?</div>
@@ -75,11 +57,7 @@
             </div>
         </div>
     {% endfor %}
-    <div style="display:none" id="dialog-message" title="Information">
-        <p>
-            La catégorie a été bien enregistrée avec succès
-        </p>
-    </div>
+
 {% endblock %}
 {% block javascripts %}
     <script src="{{ asset('admin/js/jquery.fancybox.min.js') }}"></script>
@@ -122,14 +100,14 @@
                 $(this).parent().parent().remove();
             });
 
-            $("#form-category").submit(function(e){
+            $("#btn-add").click(function(e){
                 e.preventDefault();
-
-                var $form = $(e.currentTarget);
                 $.ajax({
-                    url: $form.attr('action'),
+                    url: $('#form-category').attr('action'),
+                    processData: false,
+                    contentType: false,
                     method: 'POST',
-                    data: $form.serialize(),
+                    data: new FormData(document.getElementById('form-category')),
                     success: function(resp){
                         if(resp.code_status == 503){
                             error = resp.msg_error;

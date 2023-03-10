@@ -1,0 +1,158 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FrontController!{% endblock %}
+
+{% block body %}
+<main>
+    <div class="top-page">
+        <div class="wrapper">
+            <h1>Tous les établissement formels d’hébergement 
+                à Madagascar</h1>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="grid-custom list-etablissement">
+            <div>
+                <div class="card">
+                    <ul>
+                        <li class="activeitem"><a href="#"><img src="{{ asset('front/images/etablissement.svg') }}" alt=""> Mes etablissements</a></li>
+                        <li><a href="#"><img src="{{ asset('front/images/profil.svg') }}" alt="">Profil</a></li>
+                    </ul>
+                </div>
+                <div class="text-center">
+                    <a class="deconnexion" href="#"><img src="{{ asset('front/images/deconnecte.svg') }}" alt="">Se déconnecter</a>
+                </div>
+            </div>
+            <div class="content-etablissement">
+                <div class="headtitle">
+                    <div class="title">Mes établissements</div>
+                    <a href="#" class="btn btn-primary"><span>Ajouter un établissement</span></a>
+                </div>
+                <table id="table-list" class="custom-table-secteur">
+                    <thead>
+                        <tr>
+                            <th><span>Nom</span></th>
+                            <th><span>Catégorie</span></th>
+                            <th><span>Licence</span></th>
+                            <th><span>Region</span></th>
+                            <th><span>Date</span></th>
+                            <th><span>Etat</span></th>
+                            <th><span></span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Le rafia</td>
+                            <td>Hebergement</td>
+                            <td>A, B</td>
+                            <td>Analamanga</td>
+                            <td>17/02/23</td>
+                            <td><div class="valide">Validé</div></td>
+                            <td>
+                                <div class="action">
+                                    <a href="new-etablissement.html" class="edit"></a>
+                                    <a href="" class="view"></a>
+                                    <a data-fancybox="" data-src="#popup-delete" class="delete"></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Hotel & spa Colbert</td>
+                            <td>Hebergement</td>
+                            <td>A, B</td>
+                            <td>Analamanga</td>
+                            <td>17/02/23</td>
+                            <td><div class="en-attente">En attente</div></td>
+                            <td>
+                                <div class="action">
+                                    <a href="new-etablissement.html" class="edit"></a>
+                                    <a data-fancybox="" data-src="#popup-delete" class="delete"></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Carlton Madagascar</td>
+                            <td>Hebergement</td>
+                            <td>A, B</td>
+                            <td>Analamanga</td>
+                            <td>17/02/23</td>
+                            <td><div class="refuse">Refusé</div></td>
+                            <td>
+                                <div class="action">
+                                    <div class="infobull"><div class="content"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</span></div></div>
+                                    <a href="" class="view"></a>
+                                    <a data-fancybox="" data-src="#popup-delete" class="delete"></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Grand Mellis</td>
+                            <td>Hebergement</td>
+                            <td>A, B</td>
+                            <td>Analamanga</td>
+                            <td>17/02/23</td>
+                            <td><div class="en-attente">En attente</div></td>
+                            <td>
+                                <div class="action">
+                                    <a href="new-etablissement.html" class="edit"></a>
+                                    <a href="" class="view"></a>
+                                    <a data-fancybox="" data-src="#popup-delete" class="delete"></a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+{% block javascripts %}
+   <script>
+		$(document).ready(function () {
+			$.fn.dataTable.Responsive.breakpoints = [{
+				name: 'desktop',
+				width: Infinity
+			}, {
+				name: 'tablet',
+				width: 1024
+			}, {
+				name: 'fablet',
+				width: 768
+			}, {
+				name: 'phone',
+				width: 480
+			}];
+			$('#table-list').DataTable({
+				paging: false,
+				"searching": false,
+				"info": false,
+				"bLengthChange": false,
+				"bInfo": false,
+				"order": [],
+				columnDefs: [{
+					targets: [6],
+					orderable: false
+				}],
+				responsive: true,
+				"language": {
+					"lengthMenu": "Afficher _MENU_",
+					"zeroRecords": "Rien n'a été trouvé, désolé",
+					"info": "Nombre de lignes <span class='current'>_PAGE_</span> sur <span>_PAGES_</span>",
+					"infoEmpty": "Non disponible",
+					"infoFiltered": "(filtré sur _MAX_ enregistrements)",
+					"search": "",
+					"searchPlaceholder": "Recherche",
+					"sPaginationType": "3",
+					"paginate": {
+						"previous": "<",
+						"next": ">"
+					}
+				}
+			});
+			$(".close").click(function () {
+				$.fancybox.close();
+			});
+		});
+	</script>
+{% endblock %}
