@@ -74,7 +74,8 @@ class FrontController extends AbstractController
         return $this->render('front/etablissements.html.twig', [
             'class' => 'categorie',
             'categories' => $categories,
-            'etablissements' => $etablissements
+            'etablissements' => $etablissements,
+            'title' => $category->getNom()
         ]);
     }
 
@@ -90,7 +91,8 @@ class FrontController extends AbstractController
         return $this->render('front/etablissements.html.twig', [
             'class' => 'categorie',
             'categories' => $categories,
-            'etablissements' => $etablissements
+            'etablissements' => $etablissements,
+            'title' => $region->getNom()
         ]);
     }
 
