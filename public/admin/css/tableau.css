@@ -26,6 +26,10 @@
 #table-list #imgrc { width: 100px !important; }
 #table-list td img { display: inline-block; max-height:70px; max-width: 140px; object-fit:cover; height: auto; }
 .annonces .action { min-width: 122px; }
+/* ajout */
+.custom-table-secteur th:nth-child(7), .custom-table-secteur td:nth-child(7) {
+	min-width: 130px;
+}
 /* RESPONSIVE */
 @media(max-width:1080px) {
     .split-bloc { display:block;}
