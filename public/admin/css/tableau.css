@@ -1,8 +1,8 @@
 [class^="custom-table"] { width:100% !important; margin:0 auto; overflow: hidden; border: 1px solid #ebebeb !important; text-align: center;}
 /*.custom-table-alert { max-width:990px;}*/
 [class^="custom-table"] thead [class^="sorting"]{ color:#fff; background-color:#41436a; font:normal 16px/22px "Montserrat"; font-weight: normal; padding:0; border:none;}
-[class^="custom-table"].dataTable tbody td { position:relative; padding:10px; border-bottom: 1px solid #ebebeb; }
-[class^="custom-table"].dataTable thead th { padding:0 30px; height:52px; text-transform: uppercase; background: none; background-color: #41436a; font-size: 14px; color:#fff; }
+[class^="custom-table"].dataTable tbody td { position:relative; padding:5px; border-bottom: 1px solid #ebebeb; }
+[class^="custom-table"].dataTable thead th { padding:0 30px; height:52px; text-transform: uppercase; background: none; background-color: #41436a; color:#fff; }
 
 [class^="custom-table"].dataTable thead .sorting_asc span {background: url(../img/sort_asc.png) no-repeat right center; padding-right: 20px; }
 [class^="custom-table"].dataTable thead .sorting_desc span{background: url(../img/sort_desc.png) no-repeat right center;  padding-right: 20px;}
@@ -59,7 +59,6 @@
 @media(max-width: 480px) {
    [class^="custom-table"] tbody .child { padding:0; font-size: 16px;}
    [class^="custom-table"].dataTable tbody td { padding: 20px;}
-   [class^="custom-table"].dataTable tbody td:first-child { font-family: 'atcbo'; font-size: 16px; }
    [class^="custom-table"] tbody td { padding:20px;}
    .custom-table-alert .dtr-details li{ margin-top: 10px;}
    #table-list_filter { float: none; padding-left: 20px; text-align: left; }
