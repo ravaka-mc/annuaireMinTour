@@ -61,13 +61,13 @@ class AdminEtablissementController extends AdminController
      */
     public function edit(Request $request, Etablissement $etablissement): Response
     {
-        return $this->save($request, $etablissement, 'Modifie', 'Modifier');
+        return $this->save($request, $etablissement, 'Modifie', 'Modifier', true);
     }
 
     /**
      * @Route("/admin/etablissement/generate/slug", name="app_admin_etablissement_generate_slug")
      */
-    public function generateslug(Request $request): Response
+    public function generateSlug(Request $request): Response
     {
         $etablissements = $this->etablissementRepository->findBy([], ['created_at' => 'desc']);
         foreach($etablissements as $etablissement){
@@ -78,7 +78,33 @@ class AdminEtablissementController extends AdminController
         return $this->redirectToRoute('app_admin_etablissement');
     }
 
-    private function save(Request $request, Etablissement $etablissement, $titre, $label_btn){
+    /**
+     * @Route("/admin/etablissement/generate/date-validation", name="app_admin_etablissement_generate_date_validation")
+     */
+    public function dateValidation(Request $request): Response
+    {
+        $etablissements = $this->etablissementRepository->findBy([], ['created_at' => 'desc']);
+        foreach($etablissements as $etablissement){
+            $etablissement->setDateValidation($etablissement->getCreatedAt());
+            $this->etablissementRepository->add($etablissement, true);
+        }
+
+        return $this->redirectToRoute('app_admin_etablissement');
+    }
+
+    /**
+     * @Route("/admin/etablissement/{id}/valide", name="app_admin_etablissement_valide")
+     */
+    public function valide(Request $request, Etablissement $etablissement): Response
+    {
+        $date_validation =  new \DateTime();
+        $etablissement->setValide(1);
+        $etablissement->setDateValidation($date_validation);
+        $this->etablissementRepository->add($etablissement, true);
+        return $this->redirectToRoute('app_admin_etablissement');
+    }
+
+    private function save(Request $request, Etablissement $etablissement, $titre, $label_btn, $is_edit = false){
         $form = $this->createForm(EtablissementType::class, $etablissement);
         $form->handleRequest($request);
 
@@ -100,6 +126,7 @@ class AdminEtablissementController extends AdminController
             'titre' => $titre,
             'label_btn' => $label_btn,
             "errors" => $this->getErrorMessages($form),
+            'is_edit' => $is_edit,
         ]);
     }
 
@@ -111,4 +138,5 @@ class AdminEtablissementController extends AdminController
 
         return $fileName;
     }
+    
 }

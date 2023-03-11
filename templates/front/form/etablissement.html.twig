@@ -1,0 +1,383 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Espace membre{% endblock %}
+
+{% block body %}
+<main>
+	<div class="top-page">
+		<div class="wrapper">
+			<h1>Espace membre</h1>
+		</div>
+	</div>
+	<div class="wrapper">
+		<div class="grid-custom list-etablissement">
+			{% include "front/block/dashboard-nav.html.twig" %}
+			<div class="content-etablissement">
+				<div class="headtitle">
+					<div class="title">Ajout établissement</div>
+				</div>
+				<ul class="error">
+					{% for error in errors %}
+						{% if error is iterable %}
+							{% for msg in error %}
+								<li>{{ msg }}</li>
+							{% endfor %}
+						{% else %}
+							<li>{{ error }}</li>
+						{% endif %}
+					{% endfor %}
+				</ul>
+				<form id="frm-etablissement" name="{{ form.vars.full_name }}" method="post" enctype="multipart/form-data">
+					<div class="categories">
+						<div class="card-wrap">
+							<label>Catégorie</label>
+							{{ form_widget(form.category) }}
+						</div>
+					</div>
+					<input type="file" name="{{ form.avatarFile.vars.full_name }}" id="avatar" class="form-control-file" style="display: none;"/>
+					<div id="voyage" class="cat-options">
+						<div class="bloc_editense form-wrap">
+							<div class="card-wrap head">
+								<div class="logo-entreprise">
+									{% if etablissement is defined and etablissement.avatar is not null %}
+										<img src="{{ asset('uploads/etablissements/' ~ etablissement.getAvatar()) }}">
+									{% else %}
+										<img src="{{ asset('admin/img/default-etablissement.svg') }}">
+									{% endif %}
+									<label for="pdp">
+										<span class="replace-img"></span>
+									</label>
+								</div>
+								<div class="form-in-head">
+									<div class="sub-title"><span>Coordonnées</span></div>
+									<div class="form-wrap half">
+										<div class="form-control">
+											<label>Dénomination social</label>
+											{{ form_widget(form.nom) }}
+										</div>
+										<div class="form-control">
+											<label>Auteur</label>
+											{{ form_widget(form.auteur) }}
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="card-wrap content-ense">
+								<div class="half">
+									<div class="form-control">
+										<label for="">Adresse</label>
+										{{ form_widget(form.adresse) }}
+									</div>
+									<div class="form-control">
+										<label for="">Téléphone</label>
+										{{ form_widget(form.telephone) }}
+									</div>
+									<div class="form-control">
+										<label for="">E-mail</label>
+										{{ form_widget(form.email) }}
+									</div>
+									<div class="form-control">
+										<label for="">Site web</label>
+										{{ form_widget(form.siteWeb) }}
+									</div>
+								</div>
+								{% if form.zoneIntervention is defined %}
+								<div id="wrapper-zone" class="form-control">
+									<label for="">Zone d'intervention</label>
+									{{ form_widget(form.zoneIntervention) }}
+								</div>
+								{% else %}
+									<div id="wrapper-zone"></div>
+								{% endif %}
+								{% if form.activites is defined %}
+								<div id="wrapper-activites" class="form-control">
+									<label>Activités</label>
+									<div class="custom_checkbox half">
+										{% for child in form.activites|filter(child => not child.rendered) %}
+											<label>
+												{{ child.vars.label }}
+												{{ form_widget(child) }}
+												<span class="checkmark"></span>
+											</label>
+										{% endfor %}
+									</div>
+								</div>
+								{% else %}
+									<div id="wrapper-activites"></div>
+								{% endif %}
+								{% if form.classement is defined %}
+								<div id="wrapper-classements" class="form-control">
+									<label>Classements</label>
+									<div class="custom-radio half">
+										{% for child in form.classement|filter(child => not child.rendered) %}
+										<label>
+											{{ child.vars.label }}
+											{{ form_widget(child) }}
+											<span class="checkmark"></span>
+										</label>
+										{% endfor %}
+									</div>
+								</div>
+								{% else %}
+									<div id="wrapper-classements"></div>
+								{% endif %}
+								{% if form.proprietaire is defined %}
+									<div id="wrapper-proprietaire" class="half">
+										<div class="form-control">
+											<label>Propriétaire</label>
+											{{ form_widget(form.proprietaire) }}
+										</div>
+										<div class="form-control">
+											<label>Gérant</label>
+											{{ form_widget(form.gerant) }}
+										</div>
+									</div>
+									<div id="wrapper-region" class="form-control">
+										<label for="">Region</label>
+										{{ form_widget(form.region) }}
+									</div>
+								{% else %}
+									<div id="wrapper-proprietaire"></div>
+									<div id="wrapper-region"></div>
+								{% endif %}
+								<div class="form-control inputright">
+									<label>Etes-vous membre d'un groupement ?</label>
+									<div id="wrapper-member" class="custom-radio">
+										{% for child in form.membre|filter(child => not child.rendered) %}
+										<label>
+											{{ child.vars.label }}
+											{{ form_widget(child) }}
+											<span class="checkmark"></span>
+										</label>
+									{% endfor %}
+									</div>
+								</div>
+								<div class="custom_checkbox slidergrpm">
+									{% for child in form.groupements|filter(child => not child.rendered) %}
+										<label>
+											{{ child.vars.label }}
+											{{ form_widget(child) }}
+											<span class="checkmark"></span>
+										</label>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+						{% if form.licenceA is defined %}
+						<div id="wrapper-coordonnees" class="bloc_editense form-wrap">
+							<div class="card-wrap">
+								<div class="form-in-head">
+									<div class="sub-title"><span>Coordonnées</span></div>
+								</div>
+								<div class="half">
+									<div class="form-control">
+										<label for="">Date d’ouverture</label>
+										{{ form_widget(form.dateOuverture) }}
+									</div>
+									<div class="form-control">
+										<label for="">Référence</label>
+										{{ form_widget(form.reference) }}
+									</div>
+									<div class="form-control">
+										<label for="">NIF</label>
+										{{ form_widget(form.nif) }}
+									</div>
+									<div class="form-control">
+										<label for="">Stat</label>
+										{{ form_widget(form.stat) }}
+									</div>
+								</div>
+								<label>Licence</label>
+								<div class="custom_checkbox licence">
+									<div class="half">
+										<label>A <span style="color: #a2a2a2">(Agence de voyage)</span>
+											{{ form_widget(form.licenceA) }}
+											<div class="checkmark"></div>
+										</label>
+										<div class="obtention notselected">
+											<label>Obtention</label>
+											{{ form_widget(form.dateLicenceA) }}
+										</div>
+									</div>
+									<div class="half">
+										<label>B <span style="color: #a2a2a2">(Tour-opérateur)</span>
+											{{ form_widget(form.licenceB) }}
+											<div class="checkmark"></div>
+										</label>
+										<div class="obtention notselected">
+											<label>Obtention</label>
+											{{ form_widget(form.dateLicenceB) }}
+										</div>
+									</div>
+									<div class="half">
+										<label>C <span style="color: #a2a2a2">(loueur de voiture)</span>
+											{{ form_widget(form.licenceC) }}
+											<div class="checkmark"></div>
+										</label>
+										<div class="obtention notselected">
+											<label>Obtention</label>
+											{{ form_widget(form.dateLicenceC) }}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						{% else %}
+							<div id="wrapper-coordonnees"></div>
+						{% endif %}
+						{% if form.classement is defined %}
+							<div id="wrapper-autorisation" class="bloc_editense form-wrap">
+								<div class="card-wrap">
+									<div class="form-in-head">
+										<div class="sub-title"><span>Autorisation</span></div>
+									</div>
+									<div class="half">
+										<div class="form-control">
+											<label for="">Date d’ouverture</label>
+											{{ form_widget(form.dateOuverture) }}
+										</div>
+										<div class="form-control">
+											<label for="">Référence</label>
+											{{ form_widget(form.reference) }}
+										</div>
+										<div class="form-control">
+											<label for="">NIF</label>
+											{{ form_widget(form.nif) }}
+										</div>
+										<div class="form-control">
+											<label for="">Stat</label>
+											{{ form_widget(form.stat) }}
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="wrapper-infos_supplementaire" class="bloc_editense form-wrap">
+								<div class="card-wrap">
+									<div class="form-in-head">
+										<div class="sub-title"><span>Informations supplémentaires</span></div>
+									</div>
+									<div class="half">
+										{% if form.nombreChambres is defined %}
+										<div class="form-control">
+											<label for="">Nombre de chambres</label>
+											{{ form_widget(form.nombreChambres) }}
+										</div>
+										<div class="form-control">
+											<label for="">Capacité d'accueil</label>
+											{{ form_widget(form.capaciteAccueil) }}
+										</div>
+										{% endif %}
+										<div class="form-control">
+											<label for="">Nombre de couverts</label>
+											{{ form_widget(form.nombreCouverts) }}
+										</div>
+										<div class="form-control">
+											<label for="">Nombre de Salariés</label>
+											{{ form_widget(form.nombreSalaries) }}
+										</div>
+									</div>
+								</div>
+							</div>
+						{% else %}
+							<div id="wrapper-autorisation"></div>
+							<div id="wrapper-infos_supplementaire"></div>
+						{% endif %}
+						{% if form.categorieAutorisation is defined %}
+							<div id="wrapper-autorisation2" class="bloc_editense form-wrap">
+								<div class="card-wrap">
+									<div class="form-in-head">
+										<div class="sub-title"><span>Autorisation</span></div>
+									</div>
+									<div class="half">
+										<div class="form-control">
+											<label for="">Catégorie</label>
+											{{ form_widget(form.categorieAutorisation) }}
+										</div>
+										<div class="form-control">
+											<label for="">N° carte et badge professionnel</label>
+											{{ form_widget(form.carteProfessionnelle) }}
+										</div>
+										<div class="form-control">
+											<label for="">NIF</label>
+											{{ form_widget(form.nif) }}
+										</div>
+										<div class="form-control">
+											<label for="">Stat</label>
+											{{ form_widget(form.stat) }}
+										</div>
+									</div>
+								</div>
+							</div>
+						{% else %}
+							<div id="wrapper-autorisation2"></div>
+						{% endif %}
+						<div class="t-right mt-50 huhu">
+							{{ form_widget(form._token) }}
+							<button type="submit" class="btn">{{ label_btn }}</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</main>
+{% endblock %}
+{% block javascripts %}
+    <script>
+		$(document).ready(function () {
+			$('.replace-img').click(function(){
+				$('#avatar').trigger('click')
+			})
+            $('.categories select').on('change', function() {
+				data = {};
+				data[$(this).attr('name')] = $(this).val();
+				$.ajax({
+					type: 'POST',
+					url: '{{ path('app_front_etablissement_add') }}',
+					data: data,
+					dataType: 'html',
+					success: function (response) {
+						$('#wrapper-activites').replaceWith(
+							$(response).find('#wrapper-activites')
+						);
+						$('#wrapper-classements').replaceWith(
+							$(response).find('#wrapper-classements')
+						);
+						$('#wrapper-coordonnees').replaceWith(
+							$(response).find('#wrapper-coordonnees')
+						);
+						$('#wrapper-autorisation').replaceWith(
+							$(response).find('#wrapper-autorisation')
+						);
+						$('#wrapper-autorisation2').replaceWith(
+							$(response).find('#wrapper-autorisation2')
+						);
+						$('#wrapper-infos_supplementaire').replaceWith(
+							$(response).find('#wrapper-infos_supplementaire')
+						);
+						$('#wrapper-zone').replaceWith(
+							$(response).find('#wrapper-zone')
+						);
+						$('#wrapper-proprietaire').replaceWith(
+							$(response).find('#wrapper-proprietaire')
+						);
+						$('#wrapper-region').replaceWith(
+							$(response).find('#wrapper-region')
+						);
+						changeLicences();
+					}
+				})
+			});
+			setTimeout(() => $('#wrapper-member input:checked').trigger('change'), 500);
+			$('#wrapper-member input').change(function() {
+				if (this.value == 1) {
+					$('.slidergrpm').slideDown();
+				} else {
+					$('.slidergrpm').slideUp();
+				}
+			});
+
+			changeLicences();
+		});
+	</script>
+{% endblock %}

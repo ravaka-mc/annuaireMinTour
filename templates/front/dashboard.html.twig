@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello FrontController!{% endblock %}
+{% block title %}Dashoard{% endblock %}
 
 {% block body %}
 <main>
@@ -12,21 +12,11 @@
     </div>
     <div class="wrapper">
         <div class="grid-custom list-etablissement">
-            <div>
-                <div class="card">
-                    <ul>
-                        <li class="activeitem"><a href="#"><img src="{{ asset('front/images/etablissement.svg') }}" alt=""> Mes etablissements</a></li>
-                        <li><a href="#"><img src="{{ asset('front/images/profil.svg') }}" alt="">Profil</a></li>
-                    </ul>
-                </div>
-                <div class="text-center">
-                    <a class="deconnexion" href="#"><img src="{{ asset('front/images/deconnecte.svg') }}" alt="">Se déconnecter</a>
-                </div>
-            </div>
+            {% include "front/block/dashboard-nav.html.twig" %}
             <div class="content-etablissement">
                 <div class="headtitle">
                     <div class="title">Mes établissements</div>
-                    <a href="#" class="btn btn-primary"><span>Ajouter un établissement</span></a>
+                    <a href="{{ path('app_front_etablissement_add') }}" class="btn btn-primary"><span>Ajouter un établissement</span></a>
                 </div>
                 <table id="table-list" class="custom-table-secteur">
                     <thead>

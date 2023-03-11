@@ -3226,10 +3226,6 @@ textarea::placeholder {
 	margin: 20px 0 0 30px;
 }
 
-.cat-options {
-	display: none;
-}
-
 .autocomplete-items {
 	position: absolute;
 	z-index: 99;
@@ -3247,10 +3243,6 @@ textarea::placeholder {
 	color: #303259;
 	text-align: left;
 	border-top: 1px solid #e2e2e2;
-}
-
-.cat-options {
-	display: none;
 }
 
 .bloc_editense {

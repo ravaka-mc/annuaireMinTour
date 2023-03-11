@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Region;
 use App\Entity\Category;
 use App\Entity\Etablissement;
+use App\Form\EtablissementType;
+use Symfony\Component\Form\Form;
 use App\Repository\UserRepository;
 use App\Repository\RegionRepository;
 use App\Repository\CategoryRepository;
@@ -12,6 +14,8 @@ use App\Repository\EtablissementRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
@@ -21,12 +25,14 @@ class FrontController extends AbstractController
     private $regionRepository;
     private $etablissementRepository;
     private $userRepository;
+    private $slugger;
 
-    public function __construct(CategoryRepository $categoryRepository, RegionRepository $regionRepository, EtablissementRepository $etablissementRepository, UserRepository $userRepository){
+    public function __construct(CategoryRepository $categoryRepository, RegionRepository $regionRepository, EtablissementRepository $etablissementRepository, UserRepository $userRepository, SluggerInterface $slugger){
         $this->categoryRepository = $categoryRepository;
         $this->regionRepository = $regionRepository;
         $this->etablissementRepository = $etablissementRepository;
         $this->userRepository = $userRepository;
+        $this->slugger = $slugger;
     }
     
     /**
@@ -44,7 +50,8 @@ class FrontController extends AbstractController
             'categories' => $categories,
             'regions' => $regions,
             'etablissements' => $etablissements,
-            'class' => ''
+            'class' => '',
+            'class_wrapper' => ''
         ]);
     }
 
@@ -58,6 +65,8 @@ class FrontController extends AbstractController
         return $this->render('front/dashboard.html.twig', [
             'class' => 'categorie',
             'categories' => $categories,
+            'class' => 'bg__purplelight',
+            'class_wrapper' => 'categorie'
         ]);
     }
 
@@ -73,6 +82,7 @@ class FrontController extends AbstractController
 
         return $this->render('front/etablissements.html.twig', [
             'class' => 'categorie',
+            'class_wrapper' => '',
             'categories' => $categories,
             'etablissements' => $etablissements,
             'title' => $category->getNom()
@@ -90,9 +100,45 @@ class FrontController extends AbstractController
 
         return $this->render('front/etablissements.html.twig', [
             'class' => 'categorie',
+            'class_wrapper' => '',
             'categories' => $categories,
             'etablissements' => $etablissements,
             'title' => $region->getNom()
+        ]);
+    }
+
+    /**
+     * @Route("/etablissement/add", name="app_front_etablissement_add")
+     */
+    public function etablissementAdd(Request $request): Response
+    {
+        $categories = $this->categoryRepository->findAll();
+
+        $etablissement = new Etablissement();
+        $form = $this->createForm(EtablissementType::class, $etablissement);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $avatarFile = $form->get('avatarFile')->getData();
+            if ($avatarFile) {
+                $fileName = $this->upload($avatarFile);
+                $etablissement->setAvatar($fileName);
+            }
+
+            $this->etablissementRepository->add($etablissement, true);
+
+            return $this->redirectToRoute('app_dashboard');
+        }
+
+        return $this->render('front/form/etablissement.html.twig', [
+            'form' => $form->createView(),
+            'etablissement' => $etablissement,
+            'titre' => 'Ajout',
+            'label_btn' => 'Ajouter',
+            'categories' => $categories,
+            "errors" => $this->getErrorMessages($form),
+            'class' => 'bg__purplelight',
+            'class_wrapper' => 'categorie'
         ]);
     }
 
@@ -107,8 +153,38 @@ class FrontController extends AbstractController
 
         return $this->render('front/etablissement.html.twig', [
             'class' => 'categorie',
+            'class_wrapper' => 'categorie',
             'categories' => $categories,
             'etablissement' => $etablissement
         ]);
+    }
+    
+    private function upload(UploadedFile $file)
+    {
+        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $fileName = $this->slugger->slug($originalFilename) . '-'.uniqid() . '.'.$file->guessExtension();
+        $file->move($this->getParameter('upload_etablissement'), $fileName);
+
+        return $fileName;
+    }
+
+    // Generate an array contains a key -> value with the errors where the key is the name of the form field
+    protected function getErrorMessages(Form $form) 
+    {
+        if(!$form->isSubmitted()) return;
+
+        $errors = array();
+
+        foreach ($form->getErrors() as $key => $error) {
+            $errors[] = $error->getMessage();
+        }
+
+        foreach ($form->all() as $child) {
+            if (!$child->isValid()) {
+                $errors[] = $this->getErrorMessages($child);
+            }
+        }
+
+        return $errors;
     }
 }

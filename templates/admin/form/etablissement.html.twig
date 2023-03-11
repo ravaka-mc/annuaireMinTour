@@ -305,10 +305,11 @@
 					<div class="t-right mt-50 huhu">
 						{{ form_widget(form._token) }}
 						<button type="submit" class="btn">{{ label_btn }}</button>
-						
+						{% if is_edit == 1 and etablissement.valide != 1 %}
 						<!-- Modifier en attente -->
-						<button class="btn green">Valider</button>
+						<a href="{{ path('app_admin_etablissement_valide', {id:etablissement.id}) }}"class="btn green">Valider</a>
 						<button data-fancybox="" data-src="#refuser" class="btn red">Refuser</button>
+						{% endif %}
 					</div>
 				</div>
 			</form>
@@ -343,6 +344,19 @@
 	<script type="text/javascript" src="{{ asset('admin/js/datatable.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('admin/js/datatable-reponsive.min.js') }}"></script>
 	<script>
+		var changeLicences = () => {
+			$('.licence .half').each(function(){
+				let $inp = $(this).find("input[type=checkbox]");
+				let self = $(this);
+				$inp.change(function() {
+					if(this.checked) {
+						self.find('.obtention').removeClass('notselected')
+					} else {
+						self.find('.obtention').addClass('notselected')
+					}
+				});
+			});
+		}
 		jQuery(document).ready(function($) {
 			$('.replace-img').click(function(){
 				$('#avatar').trigger('click')
