@@ -79,25 +79,6 @@ class FrontController extends AbstractController
         ]);
     }
 
-
-    /**
-     * @Route("/{slug}", name="app_category")
-     */
-    public function category(Request $request, Category $category): Response
-    {
-        $categories = $this->categoryRepository->findAll();
-
-        $etablissements = $category->getEtablissements();
-
-        return $this->render('front/etablissements.html.twig', [
-            'class' => 'categorie',
-            'class_wrapper' => '',
-            'categories' => $categories,
-            'etablissements' => $etablissements,
-            'title' => $category->getNom()
-        ]);
-    }
-
     /**
      * @Route("/region/{slug}", name="app_region")
      */
@@ -153,7 +134,7 @@ class FrontController extends AbstractController
     }
 
     /**
-     * @Route("/{category_slug}/{etablissement_slug}", name="app_etablissement")
+     * @Route("/{category_slug}/{etablissement_slug}", name="app_etablissement", requirements={"category_slug"="^((?!_wdt).)*$"})
      * @ParamConverter("category", options={"mapping": {"category_slug": "slug"}})
      * @ParamConverter("etablissement", options={"mapping": {"etablissement_slug": "slug"}})
      */
@@ -196,5 +177,23 @@ class FrontController extends AbstractController
         }
 
         return $errors;
+    }
+
+    /**
+     * @Route("/{slug}", name="app_category", requirements={"slug"="^((?!_wdt).)*$"})
+     */
+    public function category(Request $request, Category $category): Response
+    {
+        $categories = $this->categoryRepository->findAll();
+
+        $etablissements = $category->getEtablissements();
+
+        return $this->render('front/etablissements.html.twig', [
+            'class' => 'categorie',
+            'class_wrapper' => '',
+            'categories' => $categories,
+            'etablissements' => $etablissements,
+            'title' => $category->getNom()
+        ]);
     }
 }
