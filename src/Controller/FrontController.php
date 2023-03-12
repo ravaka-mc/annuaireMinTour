@@ -12,6 +12,7 @@ use App\Repository\RegionRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\EtablissementRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -26,13 +27,15 @@ class FrontController extends AbstractController
     private $etablissementRepository;
     private $userRepository;
     private $slugger;
+    private $security;
 
-    public function __construct(CategoryRepository $categoryRepository, RegionRepository $regionRepository, EtablissementRepository $etablissementRepository, UserRepository $userRepository, SluggerInterface $slugger){
+    public function __construct(CategoryRepository $categoryRepository, RegionRepository $regionRepository, EtablissementRepository $etablissementRepository, UserRepository $userRepository, SluggerInterface $slugger, Security $security){
         $this->categoryRepository = $categoryRepository;
         $this->regionRepository = $regionRepository;
         $this->etablissementRepository = $etablissementRepository;
         $this->userRepository = $userRepository;
         $this->slugger = $slugger;
+        $this->security = $security;
     }
     
     /**
@@ -61,10 +64,16 @@ class FrontController extends AbstractController
     public function dashboard(): Response
     {
         $categories = $this->categoryRepository->findAll();
-
+        $user = $this->security->getUser();
+        $etablissements = $this->etablissementRepository->findBy([
+            'createdBy' => $user
+        ], [
+            'created_at' => 'desc'
+        ]);
         return $this->render('front/dashboard.html.twig', [
             'class' => 'categorie',
             'categories' => $categories,
+            'etablissements' => $etablissements,
             'class' => 'bg__purplelight',
             'class_wrapper' => 'categorie'
         ]);
@@ -119,6 +128,7 @@ class FrontController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $etablissement->setCreatedBy($this->security->getUser());
             $avatarFile = $form->get('avatarFile')->getData();
             if ($avatarFile) {
                 $fileName = $this->upload($avatarFile);

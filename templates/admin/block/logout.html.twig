@@ -1,11 +1,11 @@
 <div id="infoadmin">
     <div class="infoad">
         <div class="bienvenu">
-            <span>Bienvenue, Ravaka</span>
+            <span>Bienvenue, {{app.user.nom}}</span>
             <img src="{{ asset('admin/img/icon-admin.svg') }}" alt="">
         </div>
         <div class="deco">
-            <a href="/logout">Déconnexion</a>
+            <a href="{{ path('app_logout') }}">Déconnexion</a>
         </div>
     </div>
 </div>

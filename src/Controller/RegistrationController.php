@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use Symfony\Component\Mime\Address;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +18,11 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class RegistrationController extends AbstractController
 {
-    public function __construct(){ }
+    private $categoryRepository;
+
+    public function __construct(CategoryRepository $categoryRepository){ 
+        $this->categoryRepository = $categoryRepository;
+    }
 
     /**
      * @Route("/register", name="app_register")
@@ -50,22 +55,27 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/login", name="app_login")
+     * @Route("/login", priority=1, name="app_login")
      */
     public function login(Request $request, AuthenticationUtils $authenticationUtils): Response
-    {
+    {   
+        $categories = $this->categoryRepository->findAll();
+
         $error = $authenticationUtils->getLastAuthenticationError();
 
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('registration/login.html.twig', [
             'last_username' => $lastUsername,
+            'categories' => $categories,
             'error'         => $error,
+            'class'         => '',
+            'class_wrapper'         => '',
         ]);
     }
 
     /**
-     * @Route("/logout", name="app_logout")
+     * @Route("/logout", priority=2, name="app_logout")
     */
     public function logout(): void
     {

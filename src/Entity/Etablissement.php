@@ -215,6 +215,11 @@ class Etablissement
      */
     private $dateValidation;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="etablissements")
+     */
+    private $createdBy;
+
     public function __construct()
     {
         $this->groupements = new ArrayCollection();
@@ -702,6 +707,18 @@ class Etablissement
     public function setDateValidation(?\DateTimeInterface $dateValidation): self
     {
         $this->dateValidation = $dateValidation;
+
+        return $this;
+    }
+
+    public function getCreatedBy(): ?User
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy(?User $createdBy): self
+    {
+        $this->createdBy = $createdBy;
 
         return $this;
     }

@@ -15,6 +15,7 @@ use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\EtablissementRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -27,10 +28,12 @@ class AdminEtablissementController extends AdminController
 {
     private $etablissementRepository;
     private $slugger;
+    private $security;
 
-    public function __construct(EtablissementRepository $etablissementRepository, SluggerInterface $slugger){
+    public function __construct(EtablissementRepository $etablissementRepository, SluggerInterface $slugger, Security $security){
         $this->etablissementRepository = $etablissementRepository;
         $this->slugger = $slugger;
+        $this->security = $security;
     }
 
 
@@ -41,7 +44,7 @@ class AdminEtablissementController extends AdminController
     {
         $etablissements = $this->etablissementRepository->findBy([], ['created_at' => 'desc']);
 
-        return $this->render('admin/layout/etablissement.html.twig', [
+        return $this->render('admin/layout/etablissements.html.twig', [
             'etablissements' => $etablissements,
         ]);
     }
@@ -107,9 +110,10 @@ class AdminEtablissementController extends AdminController
     private function save(Request $request, Etablissement $etablissement, $titre, $label_btn, $is_edit = false){
         $form = $this->createForm(EtablissementType::class, $etablissement);
         $form->handleRequest($request);
-
+ 
         if ($form->isSubmitted() && $form->isValid()) {
             $avatarFile = $form->get('avatarFile')->getData();
+            $etablissement->setCreatedBy($this->security->getUser());
             if ($avatarFile) {
                 $fileName = $this->upload($avatarFile);
                 $etablissement->setAvatar($fileName);

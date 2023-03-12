@@ -31,65 +31,27 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Le rafia</td>
-                            <td>Hebergement</td>
-                            <td>A, B</td>
-                            <td>Analamanga</td>
-                            <td>17/02/23</td>
-                            <td><div class="valide">Validé</div></td>
-                            <td>
-                                <div class="action">
-                                    <a href="new-etablissement.html" class="edit"></a>
-                                    <a href="" class="view"></a>
-                                    <a data-fancybox="" data-src="#popup-delete" class="delete"></a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Hotel & spa Colbert</td>
-                            <td>Hebergement</td>
-                            <td>A, B</td>
-                            <td>Analamanga</td>
-                            <td>17/02/23</td>
-                            <td><div class="en-attente">En attente</div></td>
-                            <td>
-                                <div class="action">
-                                    <a href="new-etablissement.html" class="edit"></a>
-                                    <a data-fancybox="" data-src="#popup-delete" class="delete"></a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Carlton Madagascar</td>
-                            <td>Hebergement</td>
-                            <td>A, B</td>
-                            <td>Analamanga</td>
-                            <td>17/02/23</td>
-                            <td><div class="refuse">Refusé</div></td>
-                            <td>
-                                <div class="action">
-                                    <div class="infobull"><div class="content"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</span></div></div>
-                                    <a href="" class="view"></a>
-                                    <a data-fancybox="" data-src="#popup-delete" class="delete"></a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Grand Mellis</td>
-                            <td>Hebergement</td>
-                            <td>A, B</td>
-                            <td>Analamanga</td>
-                            <td>17/02/23</td>
-                            <td><div class="en-attente">En attente</div></td>
-                            <td>
-                                <div class="action">
-                                    <a href="new-etablissement.html" class="edit"></a>
-                                    <a href="" class="view"></a>
-                                    <a data-fancybox="" data-src="#popup-delete" class="delete"></a>
-                                </div>
-                            </td>
-                        </tr>
+                        {% for etablissement in etablissements %}
+                            <tr>
+                                <td>{{ etablissement.nom }}</td>
+                                <td>{{ etablissement.getCategory() }}</td>
+                                <td>{{ etablissement.getLicences() }}</td>
+                                <td>{{ etablissement.getRegion() }}</td>
+                                <td>{{ etablissement.getCreatedAt()|date('d/m/y') }}</td>
+                                {% if etablissement.isValide() %}
+                                    <td><div class="valide">Validé</div></td>
+                                {% else %}
+                                    <td><div class="en-attente">En attente</div></td>
+                                {% endif %}
+                                <td>
+                                    <div class="action">
+                                        <a href="{{ path('app_admin_etablissement_edit', {id:etablissement.id}) }}" class="edit"></a>
+                                        <a href="" class="view"></a>
+                                        <a data-fancybox="" data-src="#popup-delete" class="delete"></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
