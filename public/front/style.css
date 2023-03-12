@@ -4739,3 +4739,28 @@ footer .footer .mentions li span {
 		grid-template-columns: auto;
 	}
 }
+
+.pop_suppr .sub-title {
+	margin-bottom: 5px;
+}
+.pop_suppr p {
+	margin-bottom: 10px;
+}
+.pop_btns {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	border-top: 1px solid #f8f8f8;
+	margin-top: 30px;
+}
+.pop_btns .btn-pop {
+	display: block;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 14px;
+	line-height: 50px;
+	cursor: pointer;
+}
+.pop_suppr .confirm {
+	color: #cc224e;
+	border-right: 1px solid #f8f8f8;
+}

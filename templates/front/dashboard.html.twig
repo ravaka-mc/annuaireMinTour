@@ -45,7 +45,7 @@
                                 {% endif %}
                                 <td>
                                     <div class="action">
-                                        <a href="{{ path('app_admin_etablissement_edit', {id:etablissement.id}) }}" class="edit"></a>
+                                        <a href="{{ path('app_front_etablissement_edit', {slug:etablissement.slug}) }}" class="edit"></a>
                                         <a href="" class="view"></a>
                                         <a data-fancybox="" data-src="#popup-delete" class="delete"></a>
                                     </div>
@@ -58,6 +58,15 @@
         </div>
     </div>
 </main>
+<div id="popup-delete" class="pop_suppr" style="display:none; max-width:500px;">
+    <div class="innerpad">
+        <p>Êtes vous sûr de vouloir supprimer cette etablissement ?</p>
+    </div>
+    <div class="pop_btns">
+        <a href="" class="btn-pop confirm">Supprimer</a>
+        <span data-fancybox-close class="btn-pop">Annuler</span>
+    </div>
+</div>
 {% endblock %}
 {% block javascripts %}
    <script>

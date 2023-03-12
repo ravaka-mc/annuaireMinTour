@@ -98,18 +98,37 @@ class FrontController extends AbstractController
     }
 
     /**
-     * @Route("/etablissement/add", name="app_front_etablissement_add")
+     * @Route("/dashboard/etablissement/add", name="app_front_etablissement_add")
      */
     public function etablissementAdd(Request $request): Response
     {
+        $etablissement = new Etablissement();
+        return $this->save($request, $etablissement, 'Ajout', 'Ajouter');
+    }
+
+    /**
+     * @Route("/dashboard/etablissement/{slug}/edit", name="app_front_etablissement_edit")
+     */
+    public function etablissementEdit(Request $request, Etablissement $etablissement): Response
+    {
+        return $this->save($request, $etablissement, 'Modifie', 'Modifier', true);
+    }
+
+    private function save(Request $request, Etablissement $etablissement, $titre, $label_btn, $is_edit = false){
+        $user = $this->security->getUser();
+
+        if($is_edit && $user != $etablissement->getCreatedBy())
+            return $this->redirectToRoute('app_dashboard');
+        
+        
+
         $categories = $this->categoryRepository->findAll();
 
-        $etablissement = new Etablissement();
         $form = $this->createForm(EtablissementType::class, $etablissement);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $etablissement->setCreatedBy($this->security->getUser());
+            $etablissement->setCreatedBy($user);
             $avatarFile = $form->get('avatarFile')->getData();
             if ($avatarFile) {
                 $fileName = $this->upload($avatarFile);
@@ -120,12 +139,12 @@ class FrontController extends AbstractController
 
             return $this->redirectToRoute('app_dashboard');
         }
-
+        
         return $this->render('front/form/etablissement.html.twig', [
             'form' => $form->createView(),
             'etablissement' => $etablissement,
-            'titre' => 'Ajout',
-            'label_btn' => 'Ajouter',
+            'titre' => $titre,
+            'label_btn' => $label_btn,
             'categories' => $categories,
             "errors" => $this->getErrorMessages($form),
             'class' => 'bg__purplelight',
