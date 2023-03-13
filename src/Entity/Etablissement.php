@@ -220,6 +220,11 @@ class Etablissement
      */
     private $createdBy;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $refuse;
+
     public function __construct()
     {
         $this->groupements = new ArrayCollection();
@@ -719,6 +724,18 @@ class Etablissement
     public function setCreatedBy(?User $createdBy): self
     {
         $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    public function isRefuse(): ?bool
+    {
+        return $this->refuse;
+    }
+
+    public function setRefuse(?bool $refuse): self
+    {
+        $this->refuse = $refuse;
 
         return $this;
     }

@@ -39,18 +39,25 @@
 									<span class="replace-img"></span>
 								</label>
 							</div>
+							
 							<div class="form-in-head">
 								<div class="sub-title"><span>Coordonnées</span></div>
-								<div class="form-wrap half">
+								<div class="form-wrap">
 									<div class="form-control">
 										<label>Dénomination social</label>
 										{{ form_widget(form.nom) }}
 									</div>
 									<div class="form-control">
-										<label>Auteur</label>
+										<label>Courte description</label>
 										{{ form_widget(form.auteur) }}
 									</div>
 								</div>
+							</div>
+						</div>
+						<div class="card-wrap content-ense">
+							<div class="form-wrap">
+								<label>Auteur</label>
+								{{ form_widget(form.createdBy) }}
 							</div>
 						</div>
 						<div class="card-wrap content-ense">
@@ -332,6 +339,7 @@
     </div>
 {% endblock %}
 {% block javascripts %}
+	<script src="{{ asset('admin/js/selectize.min.js') }}"></script>
 	<script src="{{ asset('admin/js/dist/bootstrap-modal.dev.js') }}"></script>
 	<script src="{{ asset('admin/js/jquery.fancybox.min.js') }}"></script>
 	<script src="{{ asset('admin/js/dist/customize.dev.js') }}"></script>
@@ -358,6 +366,8 @@
 			});
 		}
 		jQuery(document).ready(function($) {
+			$("#etablissement_createdBy").selectize();
+			
 			$('.replace-img').click(function(){
 				$('#avatar').trigger('click')
 			})

@@ -38,7 +38,7 @@
                         <td>
                             <div class="action">
                                 <a href="{{ path('app_admin_etablissement_edit', {id:etablissement.id}) }}" class="edit"></a>
-                                <a href="" class="view"></a>
+                                <a href="{{ path('app_etablissement', {category_slug:etablissement.category.slug, etablissement_slug:etablissement.slug}) }}" class="view"></a>
                                 <a data-fancybox="" data-src="#popup-delete" class="delete"></a>
                             </div>
                         </td>

@@ -2,16 +2,19 @@
 
 namespace App\Form;
 
+use App\Entity\User;
 use App\Entity\Region;
 use App\Entity\Activite;
 use App\Entity\Category;
 use App\Entity\Classement;
 use App\Entity\Groupement;
 use App\Entity\Etablissement;
+use App\Repository\UserRepository;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Email;
@@ -26,8 +29,20 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class EtablissementType extends AbstractType
 {
+    private $userRepository;
+    private $security;
+
+    public function __construct(UserRepository $userRepository, Security $security)
+    {
+        $this->userRepository = $userRepository;
+        $this->security = $security;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $user = $this->security->getUser();
+        $defaultUser = $this->userRepository->find($user->getId());
+
         $builder
             ->add('nom')
             ->add('auteur')
@@ -49,6 +64,13 @@ class EtablissementType extends AbstractType
                 'expanded' => false,
                 'multiple' => false,
                 'placeholder' => '--------------------',
+            ])
+            ->add('createdBy', EntityType::class, [
+                'class' => User::class,
+                'choice_label' => 'nom',
+                'expanded' => false,
+                'multiple' => false,
+                'required' => false,
             ])
             ->add('membre', ChoiceType::class, [
                 'choices'  => [
