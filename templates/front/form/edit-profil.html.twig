@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashoard{% endblock %}
+
+{% block body %}
+<main>
+    <div class="top-page">
+        <div class="wrapper">
+            <h1>Espace membre</h1>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="grid-custom">
+            {% include "front/block/dashboard-nav.html.twig" %}
+            <div class="content-bo_user">
+                <div class="headtitle">
+                    <div class="title">Editer le profil</div>
+                </div>
+                <form action="" class="form-sans-bg">
+					<div class="grid-50">
+						<div class="formgroup">
+							<label for="">Nom</label>
+							<input type="text" placeholder="" >
+						</div>
+						<div class="formgroup">
+							<label for="">Prénom</label>
+							<input type="text" placeholder="" >
+						</div>
+						<div class="formgroup">
+							<label for="">E-mail</label>
+							<input type="email" placeholder="" >
+						</div>
+						<div class="formgroup">
+							<label for="">Mot de passe</label>
+							<input type="password" placeholder="" >
+						</div>
+					</div>
+					<button type="submit" class="btn btn-secondary" ><span>Modifier</span></button>
+				</form>
+            </div>
+        </div>
+    </div>
+</main>
+<div id="popup-delete" class="pop_suppr" style="display:none; max-width:500px;">
+    <div class="innerpad">
+        <p>Êtes vous sûr de vouloir supprimer cette etablissement ?</p>
+    </div>
+    <div class="pop_btns">
+        <a href="" class="btn-pop confirm">Supprimer</a>
+        <span data-fancybox-close class="btn-pop">Annuler</span>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+   <script>
+		$(document).ready(function () {
+			$.fn.dataTable.Responsive.breakpoints = [{
+				name: 'desktop',
+				width: Infinity
+			}, {
+				name: 'tablet',
+				width: 1024
+			}, {
+				name: 'fablet',
+				width: 768
+			}, {
+				name: 'phone',
+				width: 480
+			}];
+			$('#table-list').DataTable({
+				paging: false,
+				"searching": false,
+				"info": false,
+				"bLengthChange": false,
+				"bInfo": false,
+				"order": [],
+				columnDefs: [{
+					targets: [6],
+					orderable: false
+				}],
+				responsive: true,
+				"language": {
+					"lengthMenu": "Afficher _MENU_",
+					"zeroRecords": "Rien n'a été trouvé, désolé",
+					"info": "Nombre de lignes <span class='current'>_PAGE_</span> sur <span>_PAGES_</span>",
+					"infoEmpty": "Non disponible",
+					"infoFiltered": "(filtré sur _MAX_ enregistrements)",
+					"search": "",
+					"searchPlaceholder": "Recherche",
+					"sPaginationType": "3",
+					"paginate": {
+						"previous": "<",
+						"next": ">"
+					}
+				}
+			});
+			$(".close").click(function () {
+				$.fancybox.close();
+			});
+		});
+	</script>
+{% endblock %}

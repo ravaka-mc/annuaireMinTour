@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+<main>
+	<div class="bgcontainerdefault pageContact">
+		<div class="wrapper">
+			<form action="" class="blocform">
+				<h1>Contact</h1>
+				<div class="grid-50">
+					<div class="formgroup">
+						<label for="">Nom</label>
+						<input type="text" placeholder="" >
+					</div>
+					<div class="formgroup">
+						<label for="">Prénom</label>
+						<input type="text" placeholder="" >
+					</div>
+				</div>
+				<div class="formgroup">
+					<label for="">E-mail</label>
+					<input type="text" placeholder="" >
+				</div>
+				<div class="formgroup">
+					<label for="">Message</label>
+					<textarea name=""></textarea>
+				</div>
+				<button type="submit" class="btn btn-secondary" ><span>Envoyer</span></button>
+			</form>
+		</div>
+	</div>
+</main>
+
+{% endblock %}

@@ -860,13 +860,15 @@ form input[readonly] {
 }
 
 form textarea {
-	border: none;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
 	resize: none;
+	border: 1px solid #e9e5ef;
+	padding: 10px;
+	font: 16px/29px "mr";
 	width: 100%;
-	height: 130px;
+	height: 200px;
 	color: #1a141d;
 }
 
@@ -884,6 +886,10 @@ form .btn {
 
 form .checkboxgroup {
 	margin: 10px 0 20px;
+}
+
+.pageContact .blocform {
+	padding-bottom: 50px;
 }
 
 .contact main form {
@@ -2736,7 +2742,7 @@ form .checkboxgroup {
 	transition: all 0.4s ease;
 }
 
-.content-etablissement .headtitle {
+.content-bo_user .headtitle {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -2746,11 +2752,11 @@ form .checkboxgroup {
 	gap: 30px;
 }
 
-.content-etablissement .headtitle .title {
+.content-bo_user .headtitle .title {
 	margin-bottom: 0;
 }
 
-.content-etablissement .headtitle .btn {
+.content-bo_user .headtitle .btn {
 	display: inline-flex;
 	align-items: center;
 	padding: 0 20px;
@@ -2758,14 +2764,31 @@ form .checkboxgroup {
 	height: 52px;
 }
 
-.content-etablissement .card-wrap {
-	max-width: 545px;
+.content-bo_user .card-wrap {
+	max-width: 650px;
 	margin: 0 auto;
 }
 
-.content-etablissement .cat-options .btn {
+.content-bo_user .cat-options .btn {
 	padding: 0 40px;
 	line-height: 51px;
+}
+.form-sans-bg input,
+.form-sans-bg textarea {
+	background-color: #ebe7f1;
+}
+.form-sans-bg .grid-50 {
+	margin-bottom: 20px;
+	gap: 20px 40px;
+}
+.form-sans-bg .grid-50 .formgroup {
+	margin-bottom: 0;
+}
+.form-sans-bg .formgroup {
+	margin-bottom: 20px;
+}
+.form-sans-bg .btn {
+	margin-top: 10px;
 }
 
 .header {
@@ -4424,6 +4447,7 @@ footer .footer .mentions li span {
 	.atouts .atouts__item .icone {
 		margin-bottom: 0;
 	}
+
 	.atouts .atouts__item .texte {
 		padding: 15px 20px 15px 0;
 	}
@@ -4444,7 +4468,7 @@ footer .footer .mentions li span {
 		min-height: 55px;
 	}
 
-	.content-etablissement .headtitle {
+	.content-bo_user .headtitle {
 		display: grid;
 		grid-template-columns: auto;
 	}
@@ -4743,15 +4767,18 @@ footer .footer .mentions li span {
 .pop_suppr .sub-title {
 	margin-bottom: 5px;
 }
+
 .pop_suppr p {
 	margin-bottom: 10px;
 }
+
 .pop_btns {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	border-top: 1px solid #f8f8f8;
 	margin-top: 30px;
 }
+
 .pop_btns .btn-pop {
 	display: block;
 	text-align: center;
@@ -4760,6 +4787,7 @@ footer .footer .mentions li span {
 	line-height: 50px;
 	cursor: pointer;
 }
+
 .pop_suppr .confirm {
 	color: #cc224e;
 	border-right: 1px solid #f8f8f8;

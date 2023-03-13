@@ -403,6 +403,25 @@ section.logo-menu::-webkit-scrollbar {
 .menu-wrap ul .category>a:hover {
 	background-image: url("img/category-light.svg");
 }
+.menu-wrap ul .groupement>a {
+	background-image: url("img/groupement.svg");
+}
+.menu-wrap ul .groupement>a:hover {
+	background-image: url("img/groupement-light.svg");
+}
+.menu-wrap ul .classement>a {
+	background-image: url("img/classement.svg");
+}
+.menu-wrap ul .classement>a:hover {
+	background-image: url("img/classement-light.svg");
+}
+.menu-wrap ul .activite>a {
+	background-image: url("img/activite.svg");
+}
+.menu-wrap ul .activite>a:hover {
+	background-image: url("img/activite-light.svg");
+}
+
 .menu-wrap ul .region>a {
 	background-image: url("img/region.svg");
 }
@@ -1261,7 +1280,7 @@ input, select, textarea {
 }
 
 .card-wrap {
-	max-width: 545px;
+	max-width: 650px;
 	margin: 0 auto;
 }
 
