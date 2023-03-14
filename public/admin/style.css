@@ -1555,3 +1555,10 @@ input, select, textarea {
 #newuser {
 	gap: 20px;
 }
+
+/** Step **/
+.step.active { display: block; }
+.prev, .btnadd, .step { display: none; }
+.btn.next, .btn.btnadd {
+	background-image: linear-gradient(to left, #614371 0%, #614371 50%, #231942 50%, #231942 100%);
+}
