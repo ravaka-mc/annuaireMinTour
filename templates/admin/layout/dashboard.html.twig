@@ -11,6 +11,7 @@
             {% for category in categories %}
                 <div class="item">
                     <a href="{{ path('app_category', {slug:category.slug}) }}" class="card etablissement">
+						<div class="image"><img src="img/etablissement.svg" alt=""></div>
                         <div class="nombre">{{ category.etablissements|length }}</div>
                         <div class="subtitle">{{ category.nom }}</div>
                     </a>

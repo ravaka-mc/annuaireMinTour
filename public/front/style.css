@@ -332,7 +332,7 @@ h3>a {
 }
 
 .bgcontainerdefault {
-	padding: 165px 0 85px;
+	padding: 160px 0 80px;
 	background: linear-gradient(to bottom, #231942 0%, #231942 315px, #f1eef6 315px, #f1eef6 100%);
 }
 
@@ -344,14 +344,14 @@ h3>a {
 .blocform {
 	max-width: 550px;
 	margin: 0 auto;
-	padding: 40px 85px 30px;
+	padding: 30px 85px 20px;
 	background: #fff;
 	border-radius: 8px;
 	text-align: center;
 }
 
 .blocform h1 {
-	margin-bottom: 35px;
+	margin-bottom: 25px;
 	color: #231942;
 }
 
@@ -379,8 +379,8 @@ h3>a {
 }
 
 .blocform .blocbottom {
-	margin-top: 35px;
-	padding-top: 25px;
+	margin-top: 25px;
+	padding-top: 18px;
 	border-top: 1px solid #e9e5ef;
 }
 
@@ -834,15 +834,13 @@ form label {
 	color: #1a141d;
 	text-transform: none;
 	display: inline-block;
-	padding-bottom: 5px;
+	padding-bottom: 2px;
 }
 
 form input {
-	font: 16px/29px "mr";
+	font: 14px/20px "mr";
 	color: #1a141d;
-	padding-bottom: 10px;
 	width: 100%;
-	height: 50px;
 	border: 1px solid #e9e5ef;
 	padding: 10px;
 }
@@ -881,8 +879,10 @@ form .btn {
 	background: #231942;
 	padding: 10px 30px;
 	min-width: 180px;
-	font-size: 18px;
-	line-height: 28px;
+	font-size: 16px;
+	line-height: 26px;
+	margin-top: 15px;
+	height: auto;
 }
 
 form .checkboxgroup {
