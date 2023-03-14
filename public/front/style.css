@@ -600,6 +600,7 @@ h3>a {
 	line-height: 30px;
 	min-width: 180px;
 	transition: all 0.5s ease-in-out;
+	text-transform: inherit;
 }
 
 .btn.membrebtn span {
@@ -2101,7 +2102,7 @@ form .checkboxgroup {
 }
 
 .banner__content {
-	padding: 160px 0 220px;
+	padding: 130px 0 180px;
 	position: relative;
 	width: 100%;
 	color: #fff;
@@ -2248,8 +2249,7 @@ form .checkboxgroup {
 }
 
 .bandeau {
-	min-height: 450px;
-	padding: 85px 0 95px;
+	padding: 60px 0 70px;
 	background: linear-gradient(to bottom, #fff 0%, #fff 50%, #f1eef6 50%, #f1eef6 100%);
 }
 
@@ -2286,7 +2286,7 @@ form .checkboxgroup {
 
 .membre {
 	background: #f1eef6;
-	padding: 0 0 100px;
+	padding: 0 0 80px;
 }
 
 .membre h2 {
@@ -2296,8 +2296,8 @@ form .checkboxgroup {
 .membre__content {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	grid-gap: 40px 80px;
-	padding-top: 40px;
+	grid-gap: 20px 60px;
+	padding-top: 30px;
 }
 
 .membre__content--item {
@@ -2317,11 +2317,11 @@ form .checkboxgroup {
 }
 
 .texteitem {
-	padding: 25px 35px 50px;
+	padding: 15px 30px 40px;
 }
 
 .texteitem .titreitem {
-	font: 20px/32px "meb";
+	font: 20px/26px "meb";
 	color: #1a141d;
 	margin-bottom: 10px;
 }
@@ -2348,7 +2348,7 @@ form .checkboxgroup {
 
 .regions {
 	background: #231942;
-	padding: 75px 0 95px;
+	padding: 60px 0 80px;
 }
 
 .regions h2 {
@@ -2361,11 +2361,11 @@ form .checkboxgroup {
 }
 
 .regions__content {
-	padding-top: 80px;
+	padding-top: 60px;
 	text-align: center;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
-	grid-gap: 10px 45px;
+	grid-gap: 5px 30px;
 }
 
 .regions__content--item {
@@ -2397,7 +2397,7 @@ form .checkboxgroup {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	align-items: center;
-	padding: 100px 0 75px;
+	padding: 80px 0 75px;
 }
 
 .phototexte__texte {
@@ -2429,7 +2429,7 @@ form .checkboxgroup {
 }
 
 .categorie .membre__content {
-	padding-top: 70px;
+	padding-top: 50px;
 }
 
 .top-page {
@@ -2448,12 +2448,11 @@ form .checkboxgroup {
 
 .voir {
 	position: absolute;
-	background: url(./images/voir.svg) no-repeat right 1px center;
+	background: url(./images/voir.svg) no-repeat right 1px center / 18px;
 	font: 600 13px/27px "mm";
 	color: #856298;
 	padding-right: 30px;
-	text-transform: uppercase;
-	bottom: 15px;
+	bottom: 10px;
 	right: 30px;
 }
 
