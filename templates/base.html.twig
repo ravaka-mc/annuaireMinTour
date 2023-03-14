@@ -38,7 +38,19 @@
                                 <li><a href="#" title="Contact">Contact</a></li>
                             </ul>
                             <div class="header_right">
-                            <a href="{{ path('app_dashboard')}}" class="btn btn-primary membrebtn"><span>Espace membre</span></a>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="{{ path('app_admin')}}" class="btn btn-primary membrebtn">
+                                        <span>Bonjour, {{ app.user.nom }}</span>
+                                    </a>
+                                {% elseif is_granted('ROLE_ETABLISSEMENT') %}
+                                    <a href="{{ path('app_dashboard')}}" class="btn btn-primary membrebtn">
+                                        <span>Bonjour, {{ app.user.nom }}</span>
+                                    </a>
+                                {% else  %}
+                                    <a href="{{ path('app_dashboard')}}" class="btn btn-primary membrebtn">
+                                        <span>Espace member</span>
+                                    </a>
+                                {% endif %}
                                 <div class="hamburger">
                                     <div class="hamburger-box"></div>
                                 </div>

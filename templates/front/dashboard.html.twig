@@ -40,16 +40,23 @@
                                 <td>{{ etablissement.getCreatedAt()|date('d/m/y') }}</td>
                                 {% if etablissement.isValide() %}
                                     <td><div class="valide">Validé</div></td>
+                                    <td>
+                                        <div class="action">
+                                            <a href="{{ path('app_front_etablissement_edit', {slug:etablissement.slug}) }}" class="edit"></a>
+                                            <a href="{{ path('app_etablissement', {category_slug:etablissement.category.slug, etablissement_slug:etablissement.slug}) }}" class="view"></a>
+                                            <a data-fancybox="" data-src="#popup-delete" class="delete"></a>
+                                        </div>
+                                    </td>
                                 {% else %}
                                     <td><div class="en-attente">En attente</div></td>
+                                    <td>
+                                        <div class="action">
+                                            <div class="infobull"><div class="content"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</span></div></div>
+                                            <a href="{{ path('app_etablissement', {category_slug:etablissement.category.slug, etablissement_slug:etablissement.slug}) }}" class="view"></a>
+                                            <a data-fancybox="" data-src="#popup-delete" class="delete"></a>
+                                        </div>
+                                    </td>
                                 {% endif %}
-                                <td>
-                                    <div class="action">
-                                        <a href="{{ path('app_front_etablissement_edit', {slug:etablissement.slug}) }}" class="edit"></a>
-                                        <a href="" class="view"></a>
-                                        <a data-fancybox="" data-src="#popup-delete" class="delete"></a>
-                                    </div>
-                                </td>
                             </tr>
                         {% endfor %}
                     </tbody>

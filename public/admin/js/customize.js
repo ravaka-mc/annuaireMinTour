@@ -117,8 +117,11 @@ $(document).ready(function() {
 	});
 
 	changeLicences();
-	/*let catvalfirst = $('.categories select').val();
-	$('.cat-options#'+catvalfirst).show();*/
+
+	$('.deco a').click(function(){
+		url = $(this).attr('href');
+		window.location.href = url;
+	})
 
 	
 });

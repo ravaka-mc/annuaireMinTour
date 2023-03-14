@@ -113,7 +113,7 @@ class AdminEtablissementController extends AdminController
  
         if ($form->isSubmitted() && $form->isValid()) {
             $avatarFile = $form->get('avatarFile')->getData();
-            $etablissement->setCreatedBy($this->security->getUser());
+            //$etablissement->setCreatedBy($this->security->getUser());
             if ($avatarFile) {
                 $fileName = $this->upload($avatarFile);
                 $etablissement->setAvatar($fileName);

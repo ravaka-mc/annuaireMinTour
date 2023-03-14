@@ -63,13 +63,22 @@ class FrontController extends AbstractController
      */
     public function dashboard(): Response
     {
-        $categories = $this->categoryRepository->findAll();
         $user = $this->security->getUser();
-        $etablissements = $this->etablissementRepository->findBy([
-            'createdBy' => $user
-        ], [
-            'created_at' => 'desc'
-        ]);
+
+        if(in_array('ROLE_ADMIN', $user->getRoles()))
+            return $this->redirectToRoute('app_admin');
+
+        $categories = $this->categoryRepository->findAll();
+        
+        $etablissements = $this->etablissementRepository->findBy(
+            [
+                'createdBy' => $user
+            ], 
+            [
+                'created_at' => 'desc'
+            ]
+        );
+
         return $this->render('front/dashboard.html.twig', [
             'class' => 'categorie',
             'categories' => $categories,
@@ -119,7 +128,7 @@ class FrontController extends AbstractController
 
         if($is_edit && $user != $etablissement->getCreatedBy())
             return $this->redirectToRoute('app_dashboard');
-        
+            //return $this->denyAccessUnlessGranted('view', null, 'accès non autorisé');
         
 
         $categories = $this->categoryRepository->findAll();
