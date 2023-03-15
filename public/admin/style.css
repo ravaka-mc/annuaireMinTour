@@ -403,6 +403,25 @@ section.logo-menu::-webkit-scrollbar {
 .menu-wrap ul .category>a:hover {
 	background-image: url("img/category-light.svg");
 }
+.menu-wrap ul .groupement>a {
+	background-image: url("img/groupement.svg");
+}
+.menu-wrap ul .groupement>a:hover {
+	background-image: url("img/groupement-light.svg");
+}
+.menu-wrap ul .classement>a {
+	background-image: url("img/classement.svg");
+}
+.menu-wrap ul .classement>a:hover {
+	background-image: url("img/classement-light.svg");
+}
+.menu-wrap ul .activite>a {
+	background-image: url("img/activite.svg");
+}
+.menu-wrap ul .activite>a:hover {
+	background-image: url("img/activite-light.svg");
+}
+
 .menu-wrap ul .region>a {
 	background-image: url("img/region.svg");
 }
@@ -545,18 +564,21 @@ section#contenu {
 }
 
 .chiffre .card {
+	position: relative;
+	display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+	color: #88869f;
+	background-color: #fff;
+	height: 100%;
 	padding: 30px;
 	padding-left: 110px;
-	background-color: #fff;
 	box-shadow: 23px 0 35px rgba(45, 45, 45, 0.08);
-	color: #88869f;
-	display: block;
-	position: relative;
 }
 
 .chiffre .card .subtitle {
-	font-size: 21px;
-	line-height: 25px;
+	font-size: 18px;
+	line-height: 24px;
 	color: #41436a;
 }
 
@@ -569,10 +591,11 @@ section#contenu {
 	position: relative;
 }
 
-.chiffre .card::before {
+.chiffre .card .image {
 	content: '';
 	position: absolute;
-	display: block;
+	display: flex;
+	place-items: center;
 	width: 58px;
 	height: 58px;
 	top: 50%;
@@ -581,24 +604,12 @@ section#contenu {
 	border-radius: 50%;
 	background: no-repeat center #efefef;
 }
-
-.chiffre .card.etablissement::before {
-	background-image: url('img/etablissement.svg');
-}
-.chiffre .card.hebergement::before {
-	background-image: url('img/hebergement.svg');
-}
-.chiffre .card.restauration::before {
-	background-image: url('img/restauration.svg');
-}
-.chiffre .card.evpt::before {
-	background-image: url('img/vpt.svg');
-}
-.chiffre .card.guide::before {
-	background-image: url('img/guide.svg');
-}
-.chiffre .card.users::before {
-	background-image: url('img/candidat-blue.svg');
+.chiffre .card .image img {
+	max-width: 80%;
+	max-height: 80%;
+	width: auto;
+	height: auto;
+	margin: auto;
 }
 
 .graph {
@@ -825,7 +836,7 @@ section#contenu {
 .form-wrap label,
 .form-wrap .label {
 	display: block;
-	margin-bottom: 5px;
+	margin-bottom: 2px;
 	font-size: 12px;
 	color: #4e4e4e;
 	text-transform: uppercase;
@@ -1261,13 +1272,13 @@ input, select, textarea {
 }
 
 .card-wrap {
-	max-width: 545px;
+	max-width: 650px;
 	margin: 0 auto;
 }
 
 .categories {
 	background-color: #d9cbe1;
-	padding: 20px 40px;
+	padding: 15px 40px;
 	border-radius: 5px;
 	margin-bottom: 40px;
 }
@@ -1364,6 +1375,12 @@ input, select, textarea {
 	padding-right: 50px;
 	background-color: #fff;
 }
+.form-in-head .form-control {
+	margin-bottom: 10px;
+}
+.form-in-head .form-control:last-child {
+	margin-bottom: 0;
+}
 .form-in-head input {
 	width: 100%;
 	border: 1px solid #ebebeb;
@@ -1450,6 +1467,7 @@ input, select, textarea {
 	display: block;
 	position: relative;
 	padding-left: 30px;
+	margin-left: 20px;
 	margin-bottom: 5px;
 	cursor: pointer;
 	text-transform: inherit;
@@ -1533,4 +1551,14 @@ input, select, textarea {
 }
 .licence.custom_checkbox label {
 	margin-bottom: 0;
+}
+#newuser {
+	gap: 20px;
+}
+
+/** Step **/
+.step.active { display: block; }
+.prev, .btnadd, .step { display: none; }
+.btn.next, .btn.btnadd {
+	background-image: linear-gradient(to left, #614371 0%, #614371 50%, #231942 50%, #231942 100%);
 }
