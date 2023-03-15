@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Region;
+use App\Entity\User;
+use App\Form\UserType;
 use App\Entity\Category;
 use App\Entity\Etablissement;
 use App\Form\EtablissementType;
@@ -19,6 +21,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class FrontController extends AbstractController
 {
@@ -85,6 +88,61 @@ class FrontController extends AbstractController
             'etablissements' => $etablissements,
             'class' => 'bg__purplelight',
             'class_wrapper' => 'categorie'
+        ]);
+    }
+
+
+    /**
+     * @Route("/contact", name="app_contact")
+     */
+    public function contact(): Response
+    {
+        $categories = $this->categoryRepository->findAll();
+    
+        return $this->render('front/form/contact.html.twig', [
+            'categories' => $categories,
+            'class' => '',
+            'class_wrapper' => ''
+        ]);
+    }
+
+
+    /**
+     * @Route("/profil", name="app_profil")
+     */
+    public function profil(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
+    {
+        /**
+         * @var User $user
+         */
+        $user = $this->security->getUser();
+        if($request->getMethod() === 'POST') {
+            $nom = $request->request->get('nom');
+            $prenom = $request->request->get('prenom');
+            $email = $request->request->get('email');
+    
+            $user->setNom($nom);
+            $user->setPrenom($prenom);
+            $user->setEmail($email);
+
+            if($pwd = $request->request->get('password'))
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $pwd
+                )
+            );
+
+            $this->userRepository->add($user, true);
+        }
+        
+        $categories = $this->categoryRepository->findAll();
+        
+        return $this->render('front/form/profil.html.twig', [
+            'categories' => $categories,
+            'user' => $user,
+            'class' => '',
+            'class_wrapper' => ''
         ]);
     }
 

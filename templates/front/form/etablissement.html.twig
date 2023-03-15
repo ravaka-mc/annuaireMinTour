@@ -6,16 +6,13 @@
 <main>
 	<div class="top-page">
 		<div class="wrapper">
-			<h1>Espace membre</h1>
+			<h1>{{ titre }} établissement</h1>
 		</div>
 	</div>
 	<div class="wrapper">
 		<div class="grid-custom list-etablissement">
 			{% include "front/block/dashboard-nav.html.twig" %}
 			<div class="content-bo_user">
-				<div class="headtitle">
-					<div class="title">{{ titre }} établissement</div>
-				</div>
 				<ul class="error">
 					{% for error in errors %}
 						{% if error is iterable %}

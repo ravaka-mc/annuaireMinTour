@@ -34,8 +34,7 @@
                                         {% endfor %}
                                     </ul>
                                 </li>
-                                <li><a href="#" title="Hébergement et restaurations">Hébergement et restaurations</a></li>
-                                <li><a href="#" title="Contact">Contact</a></li>
+                                <li><a href="{{ path('app_contact') }}" title="Contact">Contact</a></li>
                             </ul>
                             <div class="header_right">
                                 {% if is_granted('ROLE_ADMIN') %}
@@ -48,7 +47,7 @@
                                     </a>
                                 {% else  %}
                                     <a href="{{ path('app_dashboard')}}" class="btn btn-primary membrebtn">
-                                        <span>Espace member</span>
+                                        <span>Espace membre</span>
                                     </a>
                                 {% endif %}
                                 <div class="hamburger">

@@ -52,6 +52,7 @@
                                     <td>
                                         <div class="action">
                                             <div class="infobull"><div class="content"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</span></div></div>
+                                            <a href="{{ path('app_front_etablissement_edit', {slug:etablissement.slug}) }}" class="edit"></a>
                                             <a href="{{ path('app_etablissement', {category_slug:etablissement.category.slug, etablissement_slug:etablissement.slug}) }}" class="view"></a>
                                             <a data-fancybox="" data-src="#popup-delete" class="delete"></a>
                                         </div>

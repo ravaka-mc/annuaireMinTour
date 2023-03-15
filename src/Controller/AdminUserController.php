@@ -82,7 +82,39 @@ class AdminUserController extends AdminController
         ]);
     }
 
-     /**
+    /**
+     * @Route("/admin/user/{id}/edit", name="app_admin_user_edit")
+     */
+    public function edit(Request $request, User $user,  UserPasswordHasherInterface $userPasswordHasher): Response
+    {
+        /**
+         * @var User $user
+         */
+        if($request->getMethod() === 'POST') {
+            $nom = $request->request->get('nom');
+            $prenom = $request->request->get('prenom');
+            $email = $request->request->get('email');
+    
+            $user->setNom($nom);
+            $user->setPrenom($prenom);
+            $user->setEmail($email);
+
+            if($pwd = $request->request->get('password'))
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $pwd
+                )
+            );
+
+            $this->userRepository->add($user, true);
+        }
+
+        return $this->redirectToRoute('app_admin_user');
+    }
+
+
+    /**
      * @Route("/admin/user/{id}/delete", name="app_admin_user_delete")
      */
     public function delete(Request $request, User $user): Response
