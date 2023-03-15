@@ -2517,6 +2517,9 @@ form .checkboxgroup {
 	margin: 0 auto;
 	justify-content: center;
 }
+.wrap-detail h1 {
+	text-align: left;
+}
 
 .top-detail .wrap-detail .images {
 	display: grid;
@@ -2529,44 +2532,57 @@ form .checkboxgroup {
 .information {
 	position: relative;
 	margin-top: -170px;
-	padding-bottom: 150px;
+	font-size: 14px;
+	line-height: 24px;
 }
 
 .information-detail {
-	display: grid;
-	grid-template-columns: 355px auto;
-	background: #e9e5ef;
-	gap: 1px;
-	border-bottom: 1px solid #e9e5ef;
-	box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.02);
-}
-
-.information-detail>div {
 	background: #fff;
-	padding: 60px 80px 50px;
+	box-shadow: 0px 10px 30px 3px rgba(0, 0, 0, 0.08);
+	padding: 20px 60px 40px;
 }
 
+.information .item {
+	padding-left: 30px;
+	background: no-repeat left top 5px;
+}
+.information .adresse { background-image: url(images/adresse.svg); }
+.information .email { background-image: url(images/email.svg);}
+.information .telephone { background-image: url(images/telephone.svg); }
+.information .siteweb { background-image: url(images/siteweb.svg); }
+.information .date { background-image: url(images/date.svg); }
+.information .reference { background-image: url(images/reference.svg); }
+.information .licence { background-image: url(images/licence.svg); }
+
+
+.information .gtitre {
+	font-size: 25px;
+	line-height: 30px;
+	font-family: "meb";
+	padding-bottom: 20px;
+	border-bottom: 1px solid #e9e5ef;
+}
 .information .stitre {
-	font: 22px/30px "meb";
+	font: 18px/30px "meb";
 	color: #231942;
 }
-
 .information .details {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 290px 1fr 1fr 1fr;
 	gap: 30px;
+	margin: 30px 0;
 }
-
-.information .licence {
-	grid-area: 2/1/3/3;
+.auto-details {
+	display: grid;
+	grid-template-columns: 290px 1fr 2fr;
+	gap: 30px;
+	margin-top: 30px;
 }
 
 .information .licence-detail {
 	display: grid;
-	grid-template-columns: 295px 1fr;
+	grid-template-columns: 180px 1fr;
 	align-items: center;
-	gap: 15px 0;
-	margin-top: 25px;
 }
 
 .information .licence-detail p {
@@ -2574,19 +2590,13 @@ form .checkboxgroup {
 }
 
 .information .licence-class {
-	display: inline-grid;
-	place-content: center;
-	background: #856298;
-	width: 38px;
-	height: 38px;
-	border-radius: 50%;
-	color: #fff;
-	margin-right: 20px;
+	color: #614371;
+	font-family: meb;
 }
 
 .information .licence-date {
 	position: relative;
-	padding-left: 60px;
+	padding-left: 20px;
 }
 
 .information .licence-date::after {
@@ -2604,15 +2614,7 @@ form .checkboxgroup {
 	color: #614371;
 }
 
-.gtitre {
-	font: 800 30px/42px "meb";
-	color: #231942;
-}
-
 .link-signal {
-	position: absolute;
-	right: 0;
-	bottom: 100px;
 	color: #231942;
 	font: 400 16px/30px "gr";
 	border-bottom: 1px solid #e3deea;
@@ -2624,7 +2626,7 @@ form .checkboxgroup {
 
 .stat {
 	position: relative;
-	padding: 80px 0 100px;
+	padding: 45px 0 50px;
 }
 
 .stat-detail {
@@ -4031,12 +4033,8 @@ footer .footer .mentions li span {
 		min-height: inherit;
 	}
 
-	.information-detail>div {
-		padding: 50px;
-	}
-
-	.information .details {
-		grid-template-columns: 1fr 1fr;
+	.information-detail {
+		padding: 20px 30px 40px;
 	}
 }
 
@@ -4235,28 +4233,13 @@ footer .footer .mentions li span {
 		margin-top: 50px;
 	}
 
-	.information-detail>div {
-		padding: 30px 40px;
-	}
-
 	.information .details {
-		grid-template-columns: auto;
-		gap: 10px;
+		grid-template-columns: 1fr 1fr;
+		gap: 30px 10px;
 	}
 
-	.information .licence {
-		grid-area: auto;
-	}
-
-	.information .licence-detail {
-		grid-template-columns: auto;
-		gap: 0;
-		margin-top: 0;
-	}
-
-	.information .licence-class {
-		position: relative;
-		top: 10px;
+	.auto-details {
+		grid-template-columns: 1fr 1fr;
 	}
 
 	.information-detail {
@@ -4277,12 +4260,12 @@ footer .footer .mentions li span {
 		padding-bottom: 220px;
 	}
 
-	.information .licence-date {
-		margin-left: 58px;
-		padding: 0;
-		margin-bottom: 15px;
+	.information .licence {
+		grid-column: 1 / -1;
 	}
-
+	.information .licence-date {
+		padding: 0;
+	}
 	.information .licence-date::after {
 		display: none;
 	}
@@ -4371,9 +4354,7 @@ footer .footer .mentions li span {
 	.header .custom-logo-link {
 		left: 10px;
 	}
-}
 
-@media (max-width: 600px) {
 	#headermenu {
 		top: 80px;
 	}
@@ -4614,7 +4595,6 @@ footer .footer .mentions li span {
 
 	.information {
 		margin: 30px 0 0;
-		padding-bottom: 100px;
 	}
 
 	.link-signal {
@@ -4623,15 +4603,9 @@ footer .footer .mentions li span {
 
 	.information-detail {
 		grid-template-columns: auto;
-		box-shadow: none;
 	}
-
-	.information-detail>div {
-		padding: 10px 0;
-	}
-
-	.information-detail .details {
-		padding: 20px 0;
+	.information .licence-detail {
+		grid-template-columns: 1fr;
 	}
 
 	.top-page {
@@ -4760,6 +4734,10 @@ footer .footer .mentions li span {
 
 	.bloc_editense .head {
 		grid-template-columns: auto;
+	}
+	.information .details, .auto-details {
+		grid-template-columns: 1fr;
+		gap: 20px;
 	}
 }
 
