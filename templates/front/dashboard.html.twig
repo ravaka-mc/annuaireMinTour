@@ -23,7 +23,6 @@
                         <tr>
                             <th><span>Nom</span></th>
                             <th><span>Catégorie</span></th>
-                            <th><span>Licence</span></th>
                             <th><span>Region</span></th>
                             <th><span>Date</span></th>
                             <th><span>Etat</span></th>
@@ -35,7 +34,6 @@
                             <tr>
                                 <td>{{ etablissement.nom }}</td>
                                 <td>{{ etablissement.getCategory() }}</td>
-                                <td>{{ etablissement.getLicences() }}</td>
                                 <td>{{ etablissement.getRegion() }}</td>
                                 <td>{{ etablissement.getCreatedAt()|date('d/m/y') }}</td>
                                 {% if etablissement.isValide() %}
