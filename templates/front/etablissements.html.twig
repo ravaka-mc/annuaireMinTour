@@ -40,15 +40,15 @@
                 </form>
         </div>
     </div>
-        <div class="membre">
-            <div class="wrapper">
-                <div class="membre__content">
-                    {% for etablissement in etablissements %}
-                        {% include "front/block/etablissement.html.twig" %}
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
+	<div class="membre">
+		<div class="wrapper">
+			<div class="membre__content">
+				{% for etablissement in etablissements %}
+					{% include "front/block/etablissement.html.twig" %}
+				{% endfor %}
+			</div>
+		</div>
+	</div>
 </main>
 {% endblock %}
 {% block javascripts %}
