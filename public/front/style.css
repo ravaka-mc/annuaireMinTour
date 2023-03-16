@@ -2426,6 +2426,7 @@ form .checkboxgroup {
 .categorie .membre {
 	background: #fff;
 	padding-bottom: 50px;
+	min-height: 40vh;
 }
 
 .categorie .membre__content {
