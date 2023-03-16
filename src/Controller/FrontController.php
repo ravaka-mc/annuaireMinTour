@@ -220,7 +220,7 @@ class FrontController extends AbstractController
     }
 
     /**
-     * @Route("/{category_slug}/{etablissement_slug}", name="app_etablissement", requirements={"category_slug"="^((?!_wdt).)*$"})
+     * @Route("/{category_slug}/{etablissement_slug}", name="app_etablissement", requirements={"category_slug"="^((?!_).)*$"})
      * @ParamConverter("category", options={"mapping": {"category_slug": "slug"}})
      * @ParamConverter("etablissement", options={"mapping": {"etablissement_slug": "slug"}})
      */
@@ -266,7 +266,7 @@ class FrontController extends AbstractController
     }
 
     /**
-     * @Route("/{slug}", name="app_category", requirements={"slug"="^((?!_wdt).)*$"})
+     * @Route("/{slug}", name="app_category", requirements={"slug"="^((?!_).)*$"})
      */
     public function category(Request $request, Category $category): Response
     {
