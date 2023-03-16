@@ -2,18 +2,21 @@
 
 namespace App\Controller;
 
-use App\Entity\Region;
 use App\Entity\User;
+use App\Entity\Region;
 use App\Form\UserType;
 use App\Entity\Category;
+use App\Form\ContactType;
 use App\Entity\Etablissement;
 use App\Form\EtablissementType;
 use Symfony\Component\Form\Form;
+use Symfony\Component\Mime\Email;
 use App\Repository\UserRepository;
 use App\Repository\RegionRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\EtablissementRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -48,7 +51,10 @@ class FrontController extends AbstractController
     {
         $categories = $this->categoryRepository->findAll();
         $regions = $this->regionRepository->findAll();
-        $etablissements = $this->etablissementRepository->findBy([], [
+        $etablissements = $this->etablissementRepository->findBy([
+            'valide' => 1
+        ], 
+        [
             'created_at' => 'desc'
         ],6);
 
@@ -95,14 +101,34 @@ class FrontController extends AbstractController
     /**
      * @Route("/contact", name="app_contact")
      */
-    public function contact(): Response
+    public function contact(Request $request, MailerInterface $mailer): Response
     {
         $categories = $this->categoryRepository->findAll();
-    
+        $form = $this->createForm(ContactType::class);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+            $contactFormData = $form->getData();
+            
+            $message = (new Email())
+            ->from($contactFormData['email'])
+            ->to('testannuaire@yopmail.com')
+            ->subject('Formulaire de contact')
+            ->html('<p>' . $contactFormData['message'] . '</p>');
+
+            $mailer->send($message);
+
+            $this->addFlash('success', 'Your message has been sent');
+
+            return $this->redirectToRoute('app_contact');
+        }
+
         return $this->render('front/form/contact.html.twig', [
             'categories' => $categories,
             'class' => '',
-            'class_wrapper' => ''
+            'class_wrapper' => '',
+            'form' => $form->createView(),
         ]);
     }
 

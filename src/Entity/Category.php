@@ -144,7 +144,9 @@ class Category
      */
     public function getEtablissements(): Collection
     {
-        return $this->etablissements;
+        return $this->etablissements->filter(function(Etablissement $etablissement) {
+            return $etablissement->isValide();
+        });;
     }
 
     public function addEtablissement(Etablissement $etablissement): self

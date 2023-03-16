@@ -6,26 +6,27 @@
 <main>
 	<div class="bgcontainerdefault pageContact">
 		<div class="wrapper">
-			<form action="" class="blocform">
+			<form action="" name="{{ form.vars.full_name }}" method="post" class="blocform">
 				<h1>Contact</h1>
 				<div class="grid-50">
 					<div class="formgroup">
 						<label for="">Nom</label>
-						<input type="text" placeholder="" >
+						{{ form_widget(form.nom) }}
 					</div>
 					<div class="formgroup">
 						<label for="">Prénom</label>
-						<input type="text" placeholder="" >
+						{{ form_widget(form.prenom) }}
 					</div>
 				</div>
 				<div class="formgroup">
 					<label for="">E-mail</label>
-					<input type="text" placeholder="" >
+					{{ form_widget(form.email) }}
 				</div>
 				<div class="formgroup">
 					<label for="">Message</label>
-					<textarea name=""></textarea>
+					{{ form_widget(form.message) }}
 				</div>
+				{{ form_widget(form._token) }}
 				<button type="submit" class="btn btn-secondary" ><span>Envoyer</span></button>
 			</form>
 		</div>
