@@ -2309,11 +2309,16 @@ form .checkboxgroup {
 }
 
 .membre__content--item .logoitem {
-	display: grid;
+	display: flex;
 	align-items: center;
 	justify-content: center;
 	background: #ded9e6;
 	transition: all 400ms ease-in-out;
+}
+.logoitem img {
+	max-width: 80%;
+	max-height: 80%;
+	width: auto;
 }
 
 .texteitem {
@@ -2523,11 +2528,18 @@ form .checkboxgroup {
 }
 
 .top-detail .wrap-detail .images {
-	display: grid;
+	display: flex;
 	background: #ded9e6;
 	width: 200px;
 	height: 140px;
-	place-content: center;
+	align-items: center;
+	justify-content: center;
+}
+.top-detail .wrap-detail .images img {
+	max-width: 80%;
+	max-height: 80%;
+	width: auto;
+	height: auto;
 }
 
 .information {
@@ -2557,9 +2569,6 @@ form .checkboxgroup {
 
 
 .information .gtitre {
-	font-size: 25px;
-	line-height: 30px;
-	font-family: "meb";
 	padding-bottom: 20px;
 	border-bottom: 1px solid #e9e5ef;
 }
@@ -2615,10 +2624,16 @@ form .checkboxgroup {
 	color: #614371;
 }
 
+.gtitre {
+	font: 25px/30px "meb";
+}
+
 .link-signal {
+	display: inline-block;
 	color: #231942;
 	font: 400 16px/30px "gr";
 	border-bottom: 1px solid #e3deea;
+	margin-top: 50px;
 }
 
 .bg-purple-light {
@@ -4040,6 +4055,9 @@ footer .footer .mentions li span {
 }
 
 @media (max-width: 1050px) {
+	.categorie .top-page {
+		padding-bottom: 150px;
+	}
 	.bg-white {
 		max-width: 450px;
 		margin: 0 auto;
@@ -4292,6 +4310,9 @@ footer .footer .mentions li span {
 
 	.stat-detail .item .texte {
 		padding: 15px 20px 0;
+	}
+	.categorie .top-page {
+		padding-bottom: 130px;
 	}
 }
 
@@ -4599,7 +4620,7 @@ footer .footer .mentions li span {
 	}
 
 	.link-signal {
-		bottom: 50px;
+		margin-top: 30px;
 	}
 
 	.information-detail {
@@ -4713,6 +4734,9 @@ footer .footer .mentions li span {
 
 	.popup .fancybox-close-small {
 		right: 20px;
+	}
+	.categorie .top-page {
+		padding-bottom: 50px;
 	}
 }
 

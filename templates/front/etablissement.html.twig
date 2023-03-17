@@ -130,7 +130,7 @@
 				{% if etablissement.capaciteAccueil is not null %}
 				<div class="item">
 					<div class="icon">
-						<img src="./images/accueil.svg" alt="">
+						<img src="{{ asset('front/images/accueil.svg') }}" alt="">
 					</div>
 					<div class="texte">
 					<p><span class="numscroller" data-min="1" data-max="{{ etablissement.capaciteAccueil}}" data-delay="5" data-increment="10">{{ etablissement.capaciteAccueil}}</span></p>
@@ -141,7 +141,7 @@
 				{% if etablissement.nombreSalaries is not null %}
 				<div class="item">
 					<div class="icon">
-						<img src="./images/salarie.svg" alt="">
+						<img src="{{ asset('front/images/salarie.svg') }}" alt="">
 					</div>
 					<div class="texte">
 						<p><span class="numscroller" data-min="1" data-max="{{ etablissement.nombreSalaries}}" data-delay="5" data-increment="10">{{ etablissement.nombreSalaries}}</span></p>
@@ -152,7 +152,7 @@
 				{% if etablissement.nombreChambres is not null %}
 				<div class="item">
 					<div class="icon">
-						<img src="./images/chambres.svg" alt="">
+						<img src="{{ asset('front/images/chambres.svg') }}" alt="">
 					</div>
 					<div class="texte">
 					<p><span class="numscroller" data-min="1" data-max="{{ etablissement.nombreChambres}}" data-delay="5" data-increment="10">>{{ etablissement.nombreChambres}}</span></p>
@@ -163,7 +163,7 @@
 				{% if etablissement.nombreCouverts is not null %}
 				<div class="item">
 					<div class="icon">
-						<img src="./images/salle.svg" alt="">
+						<img src="{{ asset('front/images/salle.svg') }}" alt="">
 					</div>
 					<div class="texte">
 					<p><span class="numscroller" data-min="1" data-max="{{ etablissement.nombreCouverts}}   " data-delay="5" data-increment="10">{{ etablissement.nombreCouverts}}</span>m <sup>2</sup> </p>
