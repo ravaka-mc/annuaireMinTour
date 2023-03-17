@@ -12,7 +12,7 @@
 [class^="custom-table"].dataTable thead .sorting span { background: url(../images/sort_both.png) no-repeat right center;  padding-right: 12px; font-size: 12px;}
 [class^="custom-table"].dataTable thead span { display: inline-block; }
 .custom-table-secteur [class^="custom-table"].dataTable thead th { padding: 0 20px; }
-.dtr-data { padding-bottom: 20px; }
+.dtr-data { display: block; padding-bottom: 20px; }
 .dataTables_wrapper .dataTables_paginate { float: none; padding: 20px 18px; background-color: #ffffff;}
 #table-list_paginate a { width: 29px; height: 29px; border-radius: 50%; border: 1px solid #dddddd; vertical-align: middle; transition: 300ms all ease-in-out; }
 .dataTables_wrapper .dataTables_paginate .paginate_button.previous { font-size: 0; background: url('../images/prev-table.svg') no-repeat center; margin-right: 2px; }
@@ -40,10 +40,13 @@
 }
 @media(max-width:768px) {
     .custom-table-alert { text-align:left;}
+	.action {
+		justify-content: center !important
+	}
 }
 @media(max-width:600px) {
     [class^="custom-table"] .dtr-details li { display: block; }
-    [class^="custom-table"] .dtr-details li .dtr-title { display: block; color: #fff; background: #41436a; margin-bottom: 10px; }
+    [class^="custom-table"] .dtr-details li .dtr-title { display: block; color: #fff; background: #41436a; margin-bottom: 10px; padding: 10px; }
     [class^="custom-table"] .close { margin-left: 0; }
     [class^="custom-table"].dataTable tbody tr:nth-child(odd) { background-color: var(--light-grey);}
     [class^="custom-table"] .dtr-data { font-family:"Montserrat"; }
@@ -57,8 +60,9 @@
 }
 @media(max-width: 480px) {
    [class^="custom-table"] tbody .child { padding:0; font-size: 16px;}
-   [class^="custom-table"].dataTable tbody td { padding: 20px;}
-   [class^="custom-table"].dataTable tbody td:first-child { font-family: 'atcbo'; font-size: 16px; }
+   [class^="custom-table"].dataTable tbody td { padding: 10px 20px; }
+   [class^="custom-table"].dataTable tbody td.child { padding-bottom: 0; }
+   [class^="custom-table"].dataTable tbody td:first-child { font-size: 14px; }
    [class^="custom-table"] tbody td { padding:20px;}
    .custom-table-alert .dtr-details li{ margin-top: 10px;}
    #table-list_filter { float: none; padding-left: 20px; text-align: left; }
