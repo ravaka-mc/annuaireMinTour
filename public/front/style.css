@@ -4055,6 +4055,9 @@ footer .footer .mentions li span {
 }
 
 @media (max-width: 1050px) {
+	.categorie .top-page {
+		padding-bottom: 150px;
+	}
 	.bg-white {
 		max-width: 450px;
 		margin: 0 auto;
@@ -4307,6 +4310,9 @@ footer .footer .mentions li span {
 
 	.stat-detail .item .texte {
 		padding: 15px 20px 0;
+	}
+	.categorie .top-page {
+		padding-bottom: 130px;
 	}
 }
 
@@ -4728,6 +4734,9 @@ footer .footer .mentions li span {
 
 	.popup .fancybox-close-small {
 		right: 20px;
+	}
+	.categorie .top-page {
+		padding-bottom: 50px;
 	}
 }
 
