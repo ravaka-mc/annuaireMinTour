@@ -2490,7 +2490,7 @@ form .checkboxgroup {
 }
 
 .top-detail {
-	padding: 110px 0 250px;
+	padding: 110px 0 220px;
 	background: #e9e5ef;
 }
 
@@ -4608,7 +4608,7 @@ footer .footer .mentions li span {
 	}
 
 	.top-detail {
-		padding: 110px 0 50px;
+		padding: 100px 0 30px;
 	}
 
 	.breadcrumbs {
