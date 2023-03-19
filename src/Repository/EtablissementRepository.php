@@ -63,4 +63,29 @@ class EtablissementRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    /**
+     * @return Etablissement[] Returns an array of Etablissement objects
+     */
+    public function search($keyword = "", $region = "", $activite =""): array
+    {
+        $query = $this->createQueryBuilder('e')
+        ->andWhere('e.nom LIKE :keyword')
+        ->setParameter('keyword', '%' . $keyword . '%')
+        ->orderBy('e.created_at', 'DESC');
+        //->setMaxResults(10)
+
+        if($region != ""){
+            $query = $query->andWhere('e.region = :region')
+            ->setParameter('region', $region);
+        } 
+
+        if($activite != ""){
+            $query = $query->join('e.activites', 'activite')
+            ->andWhere('activite.id = :activite')
+            ->setParameter('activite', $activite);
+        }
+
+        return $query->getQuery()->getResult();
+    }
 }

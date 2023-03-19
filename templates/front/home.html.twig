@@ -10,9 +10,9 @@
             <!-- <span class="bgtext">annuaire</span> -->
             <div class="wrapper">
                 <h1>Les établissements touristiques formels à Madagascar </h1>
-                <form action="" class="recherche">
+                <form action="{{ path('app_search') }}" class="recherche">
                     <div class="formgroup">
-                        <input type="text" placeholder="Recherchez un établissement" >
+                        <input type="text" name="s" placeholder="Recherchez un établissement" >
                         <button type="submit"class="send" ></button>
                     </div>
                 </form>

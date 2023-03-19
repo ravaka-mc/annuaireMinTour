@@ -13,6 +13,7 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\Mime\Email;
 use App\Repository\UserRepository;
 use App\Repository\RegionRepository;
+use App\Repository\ActiviteRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\EtablissementRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,14 +35,16 @@ class FrontController extends AbstractController
     private $userRepository;
     private $slugger;
     private $security;
+    private $activiteRepository;
 
-    public function __construct(CategoryRepository $categoryRepository, RegionRepository $regionRepository, EtablissementRepository $etablissementRepository, UserRepository $userRepository, SluggerInterface $slugger, Security $security){
+    public function __construct(CategoryRepository $categoryRepository, RegionRepository $regionRepository, EtablissementRepository $etablissementRepository, UserRepository $userRepository, SluggerInterface $slugger, Security $security, ActiviteRepository $activiteRepository){
         $this->categoryRepository = $categoryRepository;
         $this->regionRepository = $regionRepository;
         $this->etablissementRepository = $etablissementRepository;
         $this->userRepository = $userRepository;
         $this->slugger = $slugger;
         $this->security = $security;
+        $this->activiteRepository = $activiteRepository;
     }
     
     /**
@@ -112,7 +115,7 @@ class FrontController extends AbstractController
             $contactFormData = $form->getData();
             
             $message = (new Email())
-            ->from($contactFormData['email'])
+            ->from('ramanantsoafitiavana@gmail.com')
             ->to('testannuaire@yopmail.com')
             ->subject('Formulaire de contact')
             ->html('<p>' . $contactFormData['message'] . '</p>');
@@ -129,6 +132,36 @@ class FrontController extends AbstractController
             'class' => '',
             'class_wrapper' => '',
             'form' => $form->createView(),
+        ]);
+    }
+
+
+    /**
+     * @Route("/search", name="app_search")
+     */
+    public function search(Request $request): Response
+    {
+        $categories = $this->categoryRepository->findAll();
+        $regions = $this->regionRepository->findAll();
+        $activites = $this->activiteRepository->findAll();
+
+        $search = $request->query->get('s','');
+        $region_id = $request->query->get('region','');
+        $activite_id = $request->query->get('activite','');
+
+        $etablissements = $this->etablissementRepository->search($search, $region_id, $activite_id);
+
+        return $this->render('front/etablissements.html.twig', [
+            'categories' => $categories,
+            'class' => '',
+            'etablissements' => $etablissements,
+            'class_wrapper' => '',
+            'regions' => $regions,
+            'activites' => $activites,
+            'search' => $search,
+            'region_id' => $region_id,
+            'activite_id' => $activite_id,
+            'title' => 'Recherche'
         ]);
     }
 
@@ -179,6 +212,13 @@ class FrontController extends AbstractController
     {
         $categories = $this->categoryRepository->findAll();
 
+        $regions = $this->regionRepository->findAll();
+        $activites = $this->activiteRepository->findAll();
+
+        $search = $request->query->get('s','');
+        $region_id = $request->query->get('region','');
+        $activite_id = $request->query->get('activite','');
+
         $etablissements = $region->getEtablissements();
 
         return $this->render('front/etablissements.html.twig', [
@@ -186,6 +226,11 @@ class FrontController extends AbstractController
             'class_wrapper' => '',
             'categories' => $categories,
             'etablissements' => $etablissements,
+            'regions' => $regions,
+            'activites' => $activites,
+            'search' => $search,
+            'region_id' => $region_id,
+            'activite_id' => $activite_id,
             'title' => $region->getNom()
         ]);
     }
