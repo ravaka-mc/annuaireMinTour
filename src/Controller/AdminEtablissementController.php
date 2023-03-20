@@ -61,7 +61,7 @@ class AdminEtablissementController extends AdminController
     }
 
     /**
-     * @Route("/admin/region/{id}/delete", name="app_admin_region_delete")
+     * @Route("/admin/region/{id}/delete", name="app_admin_etablissement_delete")
      */
     public function delete(Etablissement $etablissement): Response
     {

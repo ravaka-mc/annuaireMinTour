@@ -230,10 +230,16 @@ class Etablissement
      */
     private $refused;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Signaler::class, mappedBy="etablissement", orphanRemoval=true)
+     */
+    private $signalers;
+
     public function __construct()
     {
         $this->groupements = new ArrayCollection();
         $this->activites = new ArrayCollection();
+        $this->signalers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -758,6 +764,36 @@ class Etablissement
         }
 
         $this->refused = $refused;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Signaler>
+     */
+    public function getSignalers(): Collection
+    {
+        return $this->signalers;
+    }
+
+    public function addSignaler(Signaler $signaler): self
+    {
+        if (!$this->signalers->contains($signaler)) {
+            $this->signalers[] = $signaler;
+            $signaler->setEtablissement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSignaler(Signaler $signaler): self
+    {
+        if ($this->signalers->removeElement($signaler)) {
+            // set the owning side to null (unless already changed)
+            if ($signaler->getEtablissement() === $this) {
+                $signaler->setEtablissement(null);
+            }
+        }
 
         return $this;
     }

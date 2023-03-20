@@ -7,7 +7,9 @@ use App\Entity\Region;
 use App\Form\UserType;
 use App\Entity\Category;
 use App\Form\ContactType;
+use App\Form\SignalerType;
 use App\Entity\Etablissement;
+use App\Entity\Signaler;
 use App\Form\EtablissementType;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Mime\Email;
@@ -15,6 +17,7 @@ use App\Repository\UserRepository;
 use App\Repository\RegionRepository;
 use App\Repository\ActiviteRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\SignalerRepository;
 use App\Repository\EtablissementRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
@@ -36,8 +39,9 @@ class FrontController extends AbstractController
     private $slugger;
     private $security;
     private $activiteRepository;
+    private $signalerRepository;
 
-    public function __construct(CategoryRepository $categoryRepository, RegionRepository $regionRepository, EtablissementRepository $etablissementRepository, UserRepository $userRepository, SluggerInterface $slugger, Security $security, ActiviteRepository $activiteRepository){
+    public function __construct(SignalerRepository $signalerRepository, CategoryRepository $categoryRepository, RegionRepository $regionRepository, EtablissementRepository $etablissementRepository, UserRepository $userRepository, SluggerInterface $slugger, Security $security, ActiviteRepository $activiteRepository){
         $this->categoryRepository = $categoryRepository;
         $this->regionRepository = $regionRepository;
         $this->etablissementRepository = $etablissementRepository;
@@ -45,6 +49,7 @@ class FrontController extends AbstractController
         $this->slugger = $slugger;
         $this->security = $security;
         $this->activiteRepository = $activiteRepository;
+        $this->signalerRepository = $signalerRepository;
     }
     
     /**
@@ -305,6 +310,35 @@ class FrontController extends AbstractController
     }
 
     /**
+     * @Route("/signaler/{slug}", name="app_etablissement_signaler")
+     */
+    public function signaler(Request $request, Etablissement $etablissement): Response
+    {
+        $form = $this->createForm(SignalerType::class);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $signaler = new Signaler();
+            
+            $signalerFormData = $form->getData();
+
+            $signaler->setNom($signalerFormData['nom']);
+            $signaler->setEmail($signalerFormData['email']);
+            $signaler->setMotif($signalerFormData['motif']);
+            $signaler->setEtablissement($etablissement);
+
+            $this->signalerRepository->add($signaler, true);
+        }
+
+        $error = $this->getErrorMessages($form);
+
+        return $this->redirectToRoute('app_etablissement', [
+            'category_slug' => $etablissement->getCategory()->getSlug(),
+            'etablissement_slug' => $etablissement->getSlug()
+        ]);
+    }
+
+    /**
      * @Route("/{category_slug}/{etablissement_slug}", name="app_etablissement", requirements={"category_slug"="^((?!_).)*$"})
      * @ParamConverter("category", options={"mapping": {"category_slug": "slug"}})
      * @ParamConverter("etablissement", options={"mapping": {"etablissement_slug": "slug"}})
@@ -312,10 +346,13 @@ class FrontController extends AbstractController
     public function etablissement(Category $category, Etablissement $etablissement): Response
     {
         $categories = $this->categoryRepository->findAll();
+        
+        $form = $this->createForm(SignalerType::class);
 
         return $this->render('front/etablissement.html.twig', [
             'class' => 'categorie',
             'class_wrapper' => 'categorie',
+            'form' => $form->createView(),
             'categories' => $categories,
             'etablissement' => $etablissement
         ]);
@@ -359,11 +396,23 @@ class FrontController extends AbstractController
 
         $etablissements = $category->getEtablissements();
 
+        $regions = $this->regionRepository->findAll();
+        $activites = $this->activiteRepository->findAll();
+
+        $search = $request->query->get('s','');
+        $region_id = $request->query->get('region','');
+        $activite_id = $request->query->get('activite','');
+
         return $this->render('front/etablissements.html.twig', [
             'class' => 'categorie',
             'class_wrapper' => '',
             'categories' => $categories,
             'etablissements' => $etablissements,
+            'regions' => $regions,
+            'activites' => $activites,
+            'search' => $search,
+            'region_id' => $region_id,
+            'activite_id' => $activite_id,
             'title' => $category->getNom()
         ]);
     }

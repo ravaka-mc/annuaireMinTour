@@ -39,7 +39,7 @@
                             <div class="action">
                                 <a href="{{ path('app_admin_etablissement_edit', {id:etablissement.id}) }}" class="edit"></a>
                                 <a href="{{ path('app_etablissement', {category_slug:etablissement.category.slug, etablissement_slug:etablissement.slug}) }}" class="view"></a>
-                                <a data-fancybox="" data-src="#popup-delete" class="delete"></a>
+                                <a data-fancybox="" data-src="#popup-delete_{{etablissement.id}}" class="delete"></a>
                             </div>
                         </td>
                     </tr>
@@ -52,20 +52,17 @@
     <!-- Modal -->
     <div style="display: none;" class="pop-annonces" id="add"></div>
     <!-- Modal supprimer -->
-    <div id="popup-delete" class="pop_suppr" style="display:none; max-width:500px;">
+    {% for etablissement in etablissements %}
+    <div id="popup-delete_{{etablissement.id}}" class="pop_suppr" style="display:none; max-width:500px;">
         <div class="innerpad">
-            <div class="sub-title">Êtes vous sûr de supprimer ?</div>
             <p>Êtes vous sûr de vouloir supprimer cette etablissement ?</p>
-            <div class="form-wrap">
-                <label>Raison</label>
-                <textarea name="" id=""></textarea>
-            </div>
         </div>
         <div class="pop_btns">
-            <a href="" class="btn-pop confirm">Supprimer</a>
+            <a href="{{ path('app_admin_etablissement_delete', {id:etablissement.id}) }}" class="btn-pop confirm">Supprimer</a>
             <span data-fancybox-close class="btn-pop">Annuler</span>
         </div>
     </div>
+    {% endfor %}
 {% endblock %}
 {% block javascripts %}
     <script src="{{ asset('admin/js/jquery.fancybox.min.js') }}"></script>

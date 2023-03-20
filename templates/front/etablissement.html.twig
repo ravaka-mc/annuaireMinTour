@@ -181,27 +181,28 @@
 		Signaler
 	</div>
 	<div class="popup__content">
-		<form action="">
+		<form name="{{ form.vars.full_name }}" action="{{ path('app_etablissement_signaler', {slug:etablissement.slug}) }}" method="post">
 			<div class="form-wrap">
 				<div class="form-control">
 					<label for="">établissment</label>
-					<input type="text" value="Hotel Colbert Spa & Casino" readonly>
+					<input type="text" value="{{etablissement.nom}}" readonly>
 				</div>
 				<div class="form-control">
 					<label for="">Nom</label>
-					<input type="text" value="">
+					{{ form_widget(form.nom) }}
 				</div>
 				<div class="form-control">
 					<label for="">E-mail</label>
-					<input type="email" value="">
+					{{ form_widget(form.email) }}
 				</div>
 				<div class="form-control">
 					<label for="">Motif</label>
-					<textarea name="" id="" placeholder="Veuillez expliquer ici la raison..."></textarea>
+					{{ form_widget(form.motif) }}
 				</div>
 			</div>
 			<div class="text-center">
-				<button class="btn"><span>Signaler</span></button>
+                {{ form_widget(form._token) }}
+				<button type="submit" class="btn"><span>Signaler</span></button>
 			</div>
 		</form>
 	</div>
