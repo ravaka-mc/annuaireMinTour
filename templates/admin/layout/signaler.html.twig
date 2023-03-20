@@ -1,0 +1,76 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Annuaire{% endblock %}
+
+{% block body %}
+    <main id="content" class="flex custom-table-mobile">
+        <section id="contenu" class="candidat">
+            {% include "admin/block/logout.html.twig" %}
+            <div class="d-flex sb header">
+                <div class="title">Etablissements signaler</div>
+            </div>
+            <table id="table-list" class="custom-table-ville">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th><span>Nom</span></th>
+                        <th><span>Email</span></th>
+                        <th><span>Etablissements</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for signaler in signalers %}
+                        <tr>
+                            <td></td>
+                            <td>{{ signaler.nom }}</td>
+                            <td>{{ signaler.email }}</td>
+                            <td>{{ signaler.etablissement }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% include "admin/block/copyright.html.twig" %}
+        </section>
+    </main>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('admin/js/jquery.fancybox.min.js') }}"></script>
+    <script src="{{ asset('front/js/slick.min.js') }}"></script>
+    <script src="{{ asset('admin/js/customize.js') }}"></script>
+    <script src="{{ asset('admin/js/datatable.min.js') }}"></script>
+    <script src="{{ asset('admin/js/datatable-reponsive.min.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $.fn.dataTable.Responsive.breakpoints = [
+                { name: 'desktop', width: Infinity },
+                { name: 'tablet', width: 1024 },
+                { name: 'fablet', width: 768 },
+                { name: 'phone', width: 480 }
+            ];
+            $('#table-list').DataTable({
+                paging: true,
+				"pageLength": 20,
+                "searching": true,
+                "info": false,
+                "bLengthChange": false,
+                "bInfo": false,
+                responsive: true,
+                "ordering": false,
+                "language": {
+                    "lengthMenu": "Afficher _MENU_",
+                    "zeroRecords": "Rien n'a été trouvé, désolé",
+                    "info": "Nombre de lignes <span class='current'>_PAGE_</span> sur <span>_PAGES_</span>",
+                    "infoEmpty": "Non disponible",
+                    "infoFiltered": "(filtré sur _MAX_ enregistrements)",
+                    "search": "",
+                    "searchPlaceholder": "Recherche",
+                    "sPaginationType": "3",
+                    "paginate": {
+                        "previous": "<",
+                        "next": ">"
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
