@@ -252,6 +252,20 @@ class FrontController extends AbstractController
         return $this->save($request, $etablissement, 'Modifie', 'Modifier', true);
     }
 
+    /**
+     * @Route("/dashboard/etablissement/{slug}/delete", name="app_front_etablissement_delete")
+     */
+    public function etablissementDelete(Etablissement $etablissement): Response
+    {
+        $user = $this->security->getUser();
+        if($user != $etablissement->getCreatedBy())
+            return $this->redirectToRoute('app_dashboard');
+
+        $this->etablissementRepository->remove($etablissement, true);
+
+        return $this->redirectToRoute('app_dashboard');
+    }
+
     private function save(Request $request, Etablissement $etablissement, $titre, $label_btn, $is_edit = false){
         $user = $this->security->getUser();
 
@@ -295,7 +309,7 @@ class FrontController extends AbstractController
      * @ParamConverter("category", options={"mapping": {"category_slug": "slug"}})
      * @ParamConverter("etablissement", options={"mapping": {"etablissement_slug": "slug"}})
      */
-    public function etablissement(Request $request, Category $category, Etablissement $etablissement): Response
+    public function etablissement(Category $category, Etablissement $etablissement): Response
     {
         $categories = $this->categoryRepository->findAll();
 

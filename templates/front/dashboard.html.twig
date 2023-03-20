@@ -42,17 +42,26 @@
                                         <div class="action">
                                             <a href="{{ path('app_front_etablissement_edit', {slug:etablissement.slug}) }}" class="edit"></a>
                                             <a href="{{ path('app_etablissement', {category_slug:etablissement.category.slug, etablissement_slug:etablissement.slug}) }}" class="view"></a>
-                                            <a data-fancybox="" data-src="#popup-delete" class="delete"></a>
+                                            <a data-fancybox="" data-src="#popup-delete_{{etablissement.id}}" class="delete"></a>
+                                        </div>
+                                    </td>
+                                {% elseif etablissement.isRefuse() %}
+                                    <td><div class="refuse">Refusé</div></td>
+                                    <td>
+                                        <div class="action">
+                                            <div class="infobull"><div class="content"><span>{{ etablissement.refused.raison }}</span></div></div>
+                                            <a href="{{ path('app_front_etablissement_edit', {slug:etablissement.slug}) }}" class="edit"></a>
+                                            <a href="{{ path('app_etablissement', {category_slug:etablissement.category.slug, etablissement_slug:etablissement.slug}) }}" class="view"></a>
+                                            <a data-fancybox="" data-src="#popup-delete_{{etablissement.id}}" class="delete"></a>
                                         </div>
                                     </td>
                                 {% else %}
                                     <td><div class="en-attente">En attente</div></td>
                                     <td>
                                         <div class="action">
-                                            <div class="infobull"><div class="content"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</span></div></div>
                                             <a href="{{ path('app_front_etablissement_edit', {slug:etablissement.slug}) }}" class="edit"></a>
                                             <a href="{{ path('app_etablissement', {category_slug:etablissement.category.slug, etablissement_slug:etablissement.slug}) }}" class="view"></a>
-                                            <a data-fancybox="" data-src="#popup-delete" class="delete"></a>
+                                            <a data-fancybox="" data-src="#popup-delete_{{etablissement.id}}" class="delete"></a>
                                         </div>
                                     </td>
                                 {% endif %}
@@ -64,15 +73,17 @@
         </div>
     </div>
 </main>
-<div id="popup-delete" class="pop_suppr" style="display:none; max-width:500px;">
+{% for etablissement in etablissements %}
+<div id="popup-delete_{{etablissement.id}}" class="pop_suppr" style="display:none; max-width:500px;">
     <div class="innerpad">
         <p>Êtes vous sûr de vouloir supprimer cette etablissement ?</p>
     </div>
     <div class="pop_btns">
-        <a href="" class="btn-pop confirm">Supprimer</a>
+        <a href="{{ path('app_front_etablissement_delete', {slug:etablissement.slug}) }}" class="btn-pop confirm">Supprimer</a>
         <span data-fancybox-close class="btn-pop">Annuler</span>
     </div>
 </div>
+{% endfor %}
 {% endblock %}
 {% block javascripts %}
    <script>

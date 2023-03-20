@@ -225,6 +225,11 @@ class Etablissement
      */
     private $refuse;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Refuse::class, mappedBy="etablissement", cascade={"persist", "remove"})
+     */
+    private $refused;
+
     public function __construct()
     {
         $this->groupements = new ArrayCollection();
@@ -736,6 +741,23 @@ class Etablissement
     public function setRefuse(?bool $refuse): self
     {
         $this->refuse = $refuse;
+
+        return $this;
+    }
+
+    public function getRefused(): ?Refuse
+    {
+        return $this->refused;
+    }
+
+    public function setRefused(Refuse $refused): self
+    {
+        // set the owning side of the relation if necessary
+        if ($refused->getEtablissement() !== $this) {
+            $refused->setEtablissement($this);
+        }
+
+        $this->refused = $refused;
 
         return $this;
     }

@@ -3,35 +3,28 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Entity\Region;
-use App\Form\UserType;
-use App\Entity\Category;
-use App\Form\RegionType;
-use App\Form\CategoryType;
+use App\Entity\Refuse;
 use App\Entity\Etablissement;
 use App\Form\EtablissementType;
-use Symfony\Component\Form\Form;
-use App\Repository\CategoryRepository;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\RefuseRepository;
 use App\Repository\EtablissementRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AdminEtablissementController extends AdminController
 {
     private $etablissementRepository;
+    private $refuseRepository;
     private $slugger;
     private $security;
 
-    public function __construct(EtablissementRepository $etablissementRepository, SluggerInterface $slugger, Security $security){
+    public function __construct(EtablissementRepository $etablissementRepository, SluggerInterface $slugger, Security $security, RefuseRepository $refuseRepository){
         $this->etablissementRepository = $etablissementRepository;
+        $this->refuseRepository = $refuseRepository;
         $this->slugger = $slugger;
         $this->security = $security;
     }
@@ -40,7 +33,7 @@ class AdminEtablissementController extends AdminController
    /**
      * @Route("/admin/etablissement", name="app_admin_etablissement")
      */
-    public function index(Request $request, EntityManagerInterface $entityManager): Response
+    public function index(): Response
     {
         $etablissements = $this->etablissementRepository->findBy([], ['created_at' => 'desc']);
 
@@ -68,9 +61,19 @@ class AdminEtablissementController extends AdminController
     }
 
     /**
+     * @Route("/admin/region/{id}/delete", name="app_admin_region_delete")
+     */
+    public function delete(Etablissement $etablissement): Response
+    {
+        $this->etablissementRepository->remove($etablissement, true);
+
+        return $this->redirectToRoute('app_admin_etablissement');
+    }
+
+    /**
      * @Route("/admin/etablissement/generate/slug", name="app_admin_etablissement_generate_slug")
      */
-    public function generateSlug(Request $request): Response
+    public function generateSlug(): Response
     {
         $etablissements = $this->etablissementRepository->findBy([], ['created_at' => 'desc']);
         foreach($etablissements as $etablissement){
@@ -84,7 +87,7 @@ class AdminEtablissementController extends AdminController
     /**
      * @Route("/admin/etablissement/generate/date-validation", name="app_admin_etablissement_generate_date_validation")
      */
-    public function dateValidation(Request $request): Response
+    public function dateValidation(): Response
     {
         $etablissements = $this->etablissementRepository->findBy([], ['created_at' => 'desc']);
         foreach($etablissements as $etablissement){
@@ -98,12 +101,30 @@ class AdminEtablissementController extends AdminController
     /**
      * @Route("/admin/etablissement/{id}/valide", name="app_admin_etablissement_valide")
      */
-    public function valide(Request $request, Etablissement $etablissement): Response
+    public function valide(Etablissement $etablissement): Response
     {
         $date_validation =  new \DateTime();
         $etablissement->setValide(1);
         $etablissement->setDateValidation($date_validation);
         $this->etablissementRepository->add($etablissement, true);
+        return $this->redirectToRoute('app_admin_etablissement');
+    }
+
+
+    /**
+     * @Route("/admin/etablissement/{id}/refuse", name="app_admin_etablissement_refuse")
+     */
+    public function refuse(Request $request, Etablissement $etablissement): Response
+    {
+        $raison = $request->request->get('raison');
+        $refuse = new Refuse();
+        $refuse->setRaison($raison);
+        $refuse->setEtablissement($etablissement);
+        $this->refuseRepository->add($refuse, true);
+
+        $etablissement->setRefuse(1);
+        $this->etablissementRepository->add($etablissement, true);
+
         return $this->redirectToRoute('app_admin_etablissement');
     }
 

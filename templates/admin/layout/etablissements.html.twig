@@ -30,6 +30,8 @@
                         <td>{{ etablissement.getCreatedAt()|date('d/m/y') }}</td>
                         {% if etablissement.isValide() %}
                             <td><div class="valide">Validé</div></td>
+                        {% elseif etablissement.isRefuse() %}
+                            <td><div class="refuse">Refusé</div></td>
                         {% else %}
                             <td><div class="en-attente">En attente</div></td>
                         {% endif %}
@@ -94,7 +96,7 @@
 				"bInfo": false,
 				"order": [],
 				columnDefs: [{
-					targets: [6],
+					targets: [5],
 					orderable: false
 				}],
 				responsive: true,

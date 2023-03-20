@@ -323,20 +323,22 @@
            {% include "admin/block/copyright.html.twig" %}
         </section>
     </main>
+	{% if is_edit == 1 and etablissement.valide != 1 %}
 	<div style="display: none; min-width: 400px; max-width: 500px;" id="refuser" class="popup-style">
-        <form id="" class="form-wrap" method="post" name="" action="">
+        <form class="form-wrap" method="post" action="{{ path('app_admin_etablissement_refuse', {id:etablissement.id}) }}">
              <ul class="form-error"></ul>
             <div class="form-control">
                 <label for="nom">Nom</label>
-                <input type="text" value="Carlton Madagascar">
+                <input type="text" value="{{ etablissement.nom}}">
             </div>
             <div class="form-control">
                 <label for="nom">Raison</label>
-                <textarea name="" id=""></textarea>
+                <textarea name="raison" id=""></textarea>
             </div>
             <div class="pbtn full"><button type="submit" class="btn">Envoyer</button></div>
         </form>
     </div>
+	{% endif %}
 {% endblock %}
 {% block javascripts %}
 	<script src="{{ asset('admin/js/selectize.min.js') }}"></script>
