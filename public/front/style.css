@@ -397,8 +397,8 @@ h3>a {
 	text-align: center;
 	max-width: 960px;
 	margin: 0 auto;
-	font-size: 37px;
-	line-height: 51px;
+	font-size: 32px;
+	line-height: 38px;
 }
 
 .filtre {
@@ -2503,7 +2503,7 @@ form .checkboxgroup {
 }
 
 .top-detail .texteitem .stitre {
-	font-size: 16px;
+	font-size: 14px;
 	text-transform: uppercase;
 	font-family: "mm";
 	margin-bottom: 10px;
@@ -2545,8 +2545,8 @@ form .checkboxgroup {
 .information {
 	position: relative;
 	margin-top: -170px;
-	font-size: 14px;
-	line-height: 24px;
+	font-size: 13px;
+	line-height: 22px;
 }
 
 .information-detail {
@@ -2558,13 +2558,14 @@ form .checkboxgroup {
 .information .item {
 	padding-left: 30px;
 	background: no-repeat left top 5px;
+	background-size: 18px;
 }
-.information .adresse { background-image: url(images/adresse.svg); }
-.information .email { background-image: url(images/email.svg);}
-.information .telephone { background-image: url(images/telephone.svg); }
-.information .siteweb { background-image: url(images/siteweb.svg); }
+.information .adresse { background-image: url(images/adresse.svg); background-size: 14px; background-position: top 2px left; }
+.information .email { background-image: url(images/email.svg); }
+.information .telephone { background-image: url(images/telephone.svg); background-position: top 3px left; }
+.information .siteweb { background-image: url(images/siteweb.svg); background: no-repeat left top 3px; }
 .information .date { background-image: url(images/date.svg); }
-.information .reference { background-image: url(images/reference.svg); }
+.information .reference { background-image: url(images/reference.svg); background-size: 20px; }
 .information .licence { background-image: url(images/licence.svg); }
 
 
@@ -2573,7 +2574,7 @@ form .checkboxgroup {
 	border-bottom: 1px solid #e9e5ef;
 }
 .information .stitre {
-	font: 18px/30px "meb";
+	font: 16px/26px "meb";
 	color: #231942;
 }
 .information .details {
@@ -2625,7 +2626,7 @@ form .checkboxgroup {
 }
 
 .gtitre {
-	font: 25px/30px "meb";
+	font: 22px/30px "meb";
 }
 
 .link-signal {
@@ -2648,7 +2649,7 @@ form .checkboxgroup {
 .stat-detail {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
-	margin-top: 60px;
+	margin-top: 40px;
 }
 
 .stat-detail .item {
@@ -4265,16 +4266,6 @@ footer .footer .mentions li span {
 		grid-template-columns: auto 1fr;
 	}
 
-	.gtitre {
-		font-size: 25px;
-		line-height: 37px;
-	}
-
-	.information .stitre {
-		font-size: 18px;
-		line-height: 28px;
-	}
-
 	.top-detail {
 		padding-bottom: 220px;
 	}
@@ -4654,8 +4645,17 @@ footer .footer .mentions li span {
 	}
 
 	.gtitre {
-		font-size: 22px;
-		line-height: 32px;
+		font-size: 20px;
+		line-height: 28px;
+	}
+	.information .gtitre {
+		padding-bottom: 15px;
+	}
+	.information .details {
+		margin: 20px 0;
+	}
+	.auto-details {
+		margin-top: 20px;
 	}
 
 	.information .stitre {
