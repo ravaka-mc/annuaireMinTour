@@ -2317,7 +2317,7 @@ form .checkboxgroup {
 }
 .logoitem img {
 	max-width: 80%;
-	max-height: 100px;
+	max-height: 100%;
 	width: auto;
 }
 
@@ -2895,7 +2895,7 @@ form .checkboxgroup {
 	padding: 5px 15px;
 }
 .header_nav ul>li .submenu li:not(:last-child) {
-	border-bottom: 1px solid #6e4f7e;
+	border-bottom: 1px solid #8f769d;
 }
 
 .header_nav ul>li .submenu li a {
@@ -4808,7 +4808,7 @@ footer .footer .mentions li span {
 
 /** Step **/
 .step.active { display: block; }
-/*.prev, .btnadd, .step { display: none; }*/
+.prev, .btnadd, .step { display: none; }
 .btn.next, .btn.btnadd {
 	background-image: linear-gradient(to left, #614371 0%, #614371 50%, #231942 50%, #231942 100%);
 }

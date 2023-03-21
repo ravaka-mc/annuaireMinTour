@@ -33,34 +33,34 @@
 					</div>
 					<input type="file" name="{{ form.avatarFile.vars.full_name }}" id="avatar" class="form-control-file" style="display: none;"/>
 					<div class="cat-options">
-						<div class="bloc_editense form-wrap">
-							<div class="card-wrap head">
-								<div class="logo-entreprise">
-									{% if etablissement is defined and etablissement.avatar is not null %}
-										<img src="{{ asset('uploads/etablissements/' ~ etablissement.getAvatar()) }}">
-									{% else %}
-										<img src="{{ asset('admin/img/default-etablissement.svg') }}">
-									{% endif %}
-									<label for="pdp">
-										<span class="replace-img"></span>
-									</label>
-								</div>
-								<div class="form-in-head">
-									<div class="sub-title"><span>Coordonnées</span></div>
-									<div class="form-wrap">
-										<div class="form-control">
-											<label>Dénomination social</label>
-											{{ form_widget(form.nom) }}
-										</div>
-										<div class="form-control">
-											<label>Courte description</label>
-											{{ form_widget(form.auteur) }}
+						<div class="step">
+							<div class="bloc_editense form-wrap">
+								<div class="card-wrap head">
+									<div class="logo-entreprise">
+										{% if etablissement is defined and etablissement.avatar is not null %}
+											<img src="{{ asset('uploads/etablissements/' ~ etablissement.getAvatar()) }}">
+										{% else %}
+											<img src="{{ asset('admin/img/default-etablissement.svg') }}">
+										{% endif %}
+										<label for="pdp">
+											<span class="replace-img"></span>
+										</label>
+									</div>
+									<div class="form-in-head">
+										<div class="sub-title"><span>Coordonnées</span></div>
+										<div class="form-wrap">
+											<div class="form-control">
+												<label>Dénomination social</label>
+												{{ form_widget(form.nom) }}
+											</div>
+											<div class="form-control">
+												<label>Courte description</label>
+												{{ form_widget(form.auteur) }}
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="card-wrap content-ense">
-								<div class="step">
+								<div class="card-wrap content-ense">
 									<div class="half">
 										<div class="form-control">
 											<label for="">Adresse</label>
@@ -87,94 +87,100 @@
 									{% else %}
 										<div id="wrapper-region"></div>
 									{% endif %}
-								</div>
 
-								<div class="step">
-									{% if form.activites is defined %}
-										<div id="wrapper-activites" class="form-control">
-											<label>Activités</label>
-											<div class="custom_checkbox half">
-												{% for child in form.activites|filter(child => not child.rendered) %}
-													<label>
-														{{ child.vars.label }}
-														{{ form_widget(child) }}
-														<span class="checkmark"></span>
-													</label>
-												{% endfor %}
-											</div>
+									{% if form.zoneIntervention is defined %}
+										<div id="wrapper-zone" class="form-control">
+											<label for="">Zone d'intervention</label>
+											{{ form_widget(form.zoneIntervention) }}
 										</div>
 									{% else %}
-										<div id="wrapper-activites"></div>
+										<div id="wrapper-zone"></div>
 									{% endif %}
-									{% if form.classement is defined %}
-										<div id="wrapper-classements" class="form-control">
-											<label>Classements</label>
-											<div class="custom-radio half">
-												{% for child in form.classement|filter(child => not child.rendered) %}
+								</div>
+							</div>
+						</div>
+						{% if form.activites is defined or  form.classement is defined %}
+							<div id="wrapper-classements-activites" class="bloc_editense form-wrap step">
+								{% if form.activites is defined %}
+									<div id="wrapper-activites" class="form-control">
+										<label>Activités</label>
+										<div class="custom_checkbox half">
+											{% for child in form.activites|filter(child => not child.rendered) %}
 												<label>
 													{{ child.vars.label }}
 													{{ form_widget(child) }}
 													<span class="checkmark"></span>
 												</label>
-												{% endfor %}
-											</div>
+											{% endfor %}
 										</div>
-									{% else %}
-										<div id="wrapper-classements"></div>
-									{% endif %}
-								</div>
-
-								<div class="step">
-									{% if form.proprietaire is defined %}
-										<div id="wrapper-proprietaire" class="half">
-											<div class="form-control">
-												<label>Propriétaire</label>
-												{{ form_widget(form.proprietaire) }}
-											</div>
-											<div class="form-control">
-												<label>Gérant</label>
-												{{ form_widget(form.gerant) }}
-											</div>
-										</div>
-									{% else %}
-										<div id="wrapper-proprietaire"></div>
-									{% endif %}
-									<div class="form-control inputright">
-										<label>Etes-vous membre d'un groupement ?</label>
-										<div id="wrapper-member" class="custom-radio">
-											{% for child in form.membre|filter(child => not child.rendered) %}
-											<label>
-												{{ child.vars.label }}
-												{{ form_widget(child) }}
-												<span class="checkmark"></span>
-											</label>
-										{% endfor %}
-										</div>
-									</div>
-									<div class="custom_checkbox slidergrpm">
-										{% for child in form.groupements|filter(child => not child.rendered) %}
-											<label>
-												{{ child.vars.label }}
-												{{ form_widget(child) }}
-												<span class="checkmark"></span>
-											</label>
-										{% endfor %}
-									</div>
-								</div>
-
-								{% if form.zoneIntervention is defined %}
-									<div id="wrapper-zone" class="form-control">
-										<label for="">Zone d'intervention</label>
-										{{ form_widget(form.zoneIntervention) }}
 									</div>
 								{% else %}
-									<div id="wrapper-zone"></div>
+									<div id="wrapper-activites"></div>
+								{% endif %}
+
+								{% if form.classement is defined %}
+									<div id="wrapper-classements" class="form-control">
+										<label>Classements</label>
+										<div class="custom-radio half">
+											{% for child in form.classement|filter(child => not child.rendered) %}
+											<label>
+												{{ child.vars.label }}
+												{{ form_widget(child) }}
+												<span class="checkmark"></span>
+											</label>
+											{% endfor %}
+										</div>
+									</div>
+								{% else %}
+									<div id="wrapper-classements"></div>
 								{% endif %}
 							</div>
+						{% else %}
+							<div id="wrapper-classements-activites"></div>
+						{% endif %}
+						
+						<div class="step">
+							<div class="bloc_editense form-wrap">
+								{% if form.proprietaire is defined %}
+									<div id="wrapper-proprietaire" class="half">
+										<div class="form-control">
+											<label>Propriétaire</label>
+											{{ form_widget(form.proprietaire) }}
+										</div>
+										<div class="form-control">
+											<label>Gérant</label>
+											{{ form_widget(form.gerant) }}
+										</div>
+									</div>
+								{% else %}
+									<div id="wrapper-proprietaire"></div>
+								{% endif %}
+								<div class="form-control inputright">
+									<label>Etes-vous membre d'un groupement ?</label>
+									<div id="wrapper-member" class="custom-radio">
+										{% for child in form.membre|filter(child => not child.rendered) %}
+										<label>
+											{{ child.vars.label }}
+											{{ form_widget(child) }}
+											<span class="checkmark"></span>
+										</label>
+									{% endfor %}
+									</div>
+								</div>
+								<div class="custom_checkbox slidergrpm">
+									{% for child in form.groupements|filter(child => not child.rendered) %}
+										<label>
+											{{ child.vars.label }}
+											{{ form_widget(child) }}
+											<span class="checkmark"></span>
+										</label>
+									{% endfor %}
+								</div>
+							</div>
 						</div>
-
+						
 						{% if form.licenceA is defined %}
-							<div id="wrapper-coordonnees" class="bloc_editense form-wrap">
+							<div id="wrapper-coordonnees" class="bloc_editense form-wrap step">
 								<div class="card-wrap">
 									<div class="form-in-head">
 										<div class="sub-title"><span>Coordonnées</span></div>
@@ -236,102 +242,96 @@
 							<div id="wrapper-coordonnees"></div>
 						{% endif %}
 						
+
 						{% if form.classement is defined %}
-							<div class="step">
-								<div id="wrapper-autorisation" class="bloc_editense form-wrap">
-									<div class="card-wrap">
-										<div class="form-in-head">
-											<div class="sub-title"><span>Autorisation</span></div>
+							<div id="wrapper-autorisation" class="bloc_editense form-wrap step">
+								<div class="card-wrap">
+									<div class="form-in-head">
+										<div class="sub-title"><span>Autorisation</span></div>
+									</div>
+									<div class="half">
+										<div class="form-control">
+											<label for="">Date d’ouverture</label>
+											{{ form_widget(form.dateOuverture) }}
 										</div>
-										<div class="half">
-											<div class="form-control">
-												<label for="">Date d’ouverture</label>
-												{{ form_widget(form.dateOuverture) }}
-											</div>
-											<div class="form-control">
-												<label for="">Référence</label>
-												{{ form_widget(form.reference) }}
-											</div>
-											<div class="form-control">
-												<label for="">NIF</label>
-												{{ form_widget(form.nif) }}
-											</div>
-											<div class="form-control">
-												<label for="">Stat</label>
-												{{ form_widget(form.stat) }}
-											</div>
+										<div class="form-control">
+											<label for="">Référence</label>
+											{{ form_widget(form.reference) }}
+										</div>
+										<div class="form-control">
+											<label for="">NIF</label>
+											{{ form_widget(form.nif) }}
+										</div>
+										<div class="form-control">
+											<label for="">Stat</label>
+											{{ form_widget(form.stat) }}
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="step">
-								<div id="wrapper-infos_supplementaire" class="bloc_editense form-wrap">
-									<div class="card-wrap">
-										<div class="form-in-head">
-											<div class="sub-title"><span>Informations supplémentaires</span></div>
+							
+							<div id="wrapper-infos_supplementaire" class="bloc_editense form-wrap step">
+								<div class="card-wrap">
+									<div class="form-in-head">
+										<div class="sub-title"><span>Informations supplémentaires</span></div>
+									</div>
+									<div class="half">
+										{% if form.nombreChambres is defined %}
+										<div class="form-control">
+											<label for="">Nombre de chambres</label>
+											{{ form_widget(form.nombreChambres) }}
 										</div>
-										<div class="half">
-											{% if form.nombreChambres is defined %}
-											<div class="form-control">
-												<label for="">Nombre de chambres</label>
-												{{ form_widget(form.nombreChambres) }}
-											</div>
-											<div class="form-control">
-												<label for="">Capacité d'accueil</label>
-												{{ form_widget(form.capaciteAccueil) }}
-											</div>
-											{% endif %}
-											<div class="form-control">
-												<label for="">Nombre de couverts</label>
-												{{ form_widget(form.nombreCouverts) }}
-											</div>
-											<div class="form-control">
-												<label for="">Nombre de Salariés</label>
-												{{ form_widget(form.nombreSalaries) }}
-											</div>
+										<div class="form-control">
+											<label for="">Capacité d'accueil</label>
+											{{ form_widget(form.capaciteAccueil) }}
+										</div>
+										{% endif %}
+										<div class="form-control">
+											<label for="">Nombre de couverts</label>
+											{{ form_widget(form.nombreCouverts) }}
+										</div>
+										<div class="form-control">
+											<label for="">Nombre de Salariés</label>
+											{{ form_widget(form.nombreSalaries) }}
 										</div>
 									</div>
 								</div>
 							</div>
 						{% else %}
-							<div class="step">
-								<div id="wrapper-autorisation"></div>
-							</div>
-							<div class="step">
-								<div id="wrapper-infos_supplementaire"></div>
-							</div>
+							<div id="wrapper-autorisation"></div>
+							<div id="wrapper-infos_supplementaire"></div>
 						{% endif %}
-						<div class="step">
-							{% if form.categorieAutorisation is defined %}
-								<div id="wrapper-autorisation2" class="bloc_editense form-wrap">
-									<div class="card-wrap">
-										<div class="form-in-head">
-											<div class="sub-title"><span>Autorisation</span></div>
+						
+						{% if form.categorieAutorisation is defined %}
+							<div id="wrapper-autorisation2" class="bloc_editense form-wrap step">
+								<div class="card-wrap">
+									<div class="form-in-head">
+										<div class="sub-title"><span>Autorisation</span></div>
+									</div>
+									<div class="half">
+										<div class="form-control">
+											<label for="">Catégorie</label>
+											{{ form_widget(form.categorieAutorisation) }}
 										</div>
-										<div class="half">
-											<div class="form-control">
-												<label for="">Catégorie</label>
-												{{ form_widget(form.categorieAutorisation) }}
-											</div>
-											<div class="form-control">
-												<label for="">N° carte et badge professionnel</label>
-												{{ form_widget(form.carteProfessionnelle) }}
-											</div>
-											<div class="form-control">
-												<label for="">NIF</label>
-												{{ form_widget(form.nif) }}
-											</div>
-											<div class="form-control">
-												<label for="">Stat</label>
-												{{ form_widget(form.stat) }}
-											</div>
+										<div class="form-control">
+											<label for="">N° carte et badge professionnel</label>
+											{{ form_widget(form.carteProfessionnelle) }}
+										</div>
+										<div class="form-control">
+											<label for="">NIF</label>
+											{{ form_widget(form.nif) }}
+										</div>
+										<div class="form-control">
+											<label for="">Stat</label>
+											{{ form_widget(form.stat) }}
 										</div>
 									</div>
 								</div>
-							{% else %}
-								<div id="wrapper-autorisation2"></div>
-							{% endif %}
-						</div>
+							</div>
+						{% else %}
+							<div id="wrapper-autorisation2"></div>
+						{% endif %}
+						
 						<div class="t-right mt-50 huhu">
 							{{ form_widget(form._token) }}
 							<button class="btn prev">Précédent</button>
@@ -368,7 +368,7 @@
 			
 			$('.next').click(function() {
 				if (currentStep < totalSteps) {
-					$('.step.active').removeClass('active').next().addClass('active');
+					$('.step.active').removeClass('active').nextAll('.step').eq(0).addClass('active');
 					currentStep++;
 					$('.prev').show();
 				}
@@ -380,7 +380,7 @@
 			
 			$('.prev').click(function() {
 				if (currentStep > 1) {
-					$('.step.active').removeClass('active').prev().addClass('active');
+					$('.step.active').removeClass('active').prevAll('.step').eq(0).addClass('active');
 					currentStep--;
 					$('.next').show();
 					$('.btnadd').hide();
@@ -394,6 +394,12 @@
 				$('#avatar').trigger('click')
 			})
             $('.categories select').on('change', function() {
+				currentStep = 1;
+				$('.step').removeClass('active')
+				$('.step:first').addClass('active');
+				$('.prev').hide();
+				$('.btnadd').hide();
+				$('.next').show();
 				data = {};
 				data[$(this).attr('name')] = $(this).val();
 				$.ajax({
@@ -402,6 +408,7 @@
 					data: data,
 					dataType: 'html',
 					success: function (response) {
+						totalSteps = $(response).find('.step').length;
 						$('#wrapper-activites').replaceWith(
 							$(response).find('#wrapper-activites')
 						);
@@ -429,6 +436,10 @@
 						$('#wrapper-region').replaceWith(
 							$(response).find('#wrapper-region')
 						);
+						$('#wrapper-classements-activites').replaceWith(
+							$(response).find('#wrapper-classements-activites')
+						);
+						
 						changeLicences();
 					}
 				})
