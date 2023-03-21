@@ -205,7 +205,7 @@ class FrontController extends AbstractController
         return $this->render('front/form/profil.html.twig', [
             'categories' => $categories,
             'user' => $user,
-            'class' => '',
+            'class' => 'bg__purplelight',
             'class_wrapper' => ''
         ]);
     }
