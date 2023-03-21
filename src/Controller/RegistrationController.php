@@ -25,7 +25,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/register", priority=3, name="app_register")
+     * @Route("/inscription", priority=3, name="app_register")
      */
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {

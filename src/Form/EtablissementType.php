@@ -107,8 +107,9 @@ class EtablissementType extends AbstractType
     }
 
     private function dynamiqueForm(FormInterface $form, Category $category = null) : void {
+        
         if($category == null) return;
-        $type = $category->getViewType();
+
         switch($category->getViewType()){
             case 'TYPE_1':
                 $form->add('activites', EntityType::class, [

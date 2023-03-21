@@ -4805,3 +4805,10 @@ footer .footer .mentions li span {
 	color: #cc224e;
 	border-right: 1px solid #f8f8f8;
 }
+
+/** Step **/
+.step.active { display: block; }
+/*.prev, .btnadd, .step { display: none; }*/
+.btn.next, .btn.btnadd {
+	background-image: linear-gradient(to left, #614371 0%, #614371 50%, #231942 50%, #231942 100%);
+}
