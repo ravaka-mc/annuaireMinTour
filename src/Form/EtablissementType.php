@@ -18,9 +18,11 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -103,7 +105,7 @@ class EtablissementType extends AbstractType
     private function dynamiqueForm(FormInterface $form, Category $category = null) : void {
         
         if($category == null) return;
-        
+
         $form->add('groupements', EntityType::class, [
             'class' => Groupement::class,
             'choice_label' => 'nom',
@@ -138,8 +140,16 @@ class EtablissementType extends AbstractType
                     'required' => false,
                 ])
                 ->add('reference')
-                ->add('nif')
-                ->add('stat')
+                ->add('nif', TextType::class, [
+                    'constraints' => [
+                        new Regex('/\d{10}/')
+                    ],
+                ])
+                ->add('stat', TextType::class, [
+                    'constraints' => [
+                        new Regex('/\d{17}/')
+                    ],
+                ])
                 ->add('licenceA', CheckboxType::class, [
                     'label'    => 'A',
                     'required' => false,
@@ -199,8 +209,16 @@ class EtablissementType extends AbstractType
                     'required' => false,
                 ])
                 ->add('reference')
-                ->add('nif')
-                ->add('stat')
+                ->add('nif', TextType::class, [
+                    'constraints' => [
+                        new Regex('/\d{10}/')
+                    ],
+                ])
+                ->add('stat', TextType::class, [
+                    'constraints' => [
+                        new Regex('/\d{17}/')
+                    ],
+                ])
                 ->add('nombreChambres')
                 ->add('capaciteAccueil')
                 ->add('nombreCouverts')
@@ -239,8 +257,16 @@ class EtablissementType extends AbstractType
                     'required' => false,
                 ])
                 ->add('reference')
-                ->add('nif')
-                ->add('stat')
+                ->add('nif', TextType::class, [
+                    'constraints' => [
+                        new Regex('/\d{10}/')
+                    ],
+                ])
+                ->add('stat', TextType::class, [
+                    'constraints' => [
+                        new Regex('/\d{17}/')
+                    ],
+                ])
                 ->add('nombreCouverts')
                 ->add('nombreSalaries');
                 break;
@@ -248,8 +274,16 @@ class EtablissementType extends AbstractType
                 $form->add('zoneIntervention')
                 ->add('categorieAutorisation')
                 ->add('carteProfessionnelle')
-                ->add('nif')
-                ->add('stat');
+                ->add('nif', TextType::class, [
+                    'constraints' => [
+                        new Regex('/\d{10}/')
+                    ],
+                ])
+                ->add('stat', TextType::class, [
+                    'constraints' => [
+                        new Regex('/\d{17}/')
+                    ],
+                ]);
                 break;
 
         }
