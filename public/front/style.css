@@ -395,7 +395,6 @@ h3>a {
 
 .categorie h1 {
 	text-align: center;
-	max-width: 960px;
 	margin: 0 auto;
 	font-size: 32px;
 	line-height: 38px;
@@ -2348,7 +2347,7 @@ form .checkboxgroup {
 
 .texteitem ul li .etoile {
 	padding-left: 30px;
-	background: url(images/etoils.svg) left center no-repeat;
+	background: url(images/etoiles.svg) left top no-repeat;
 }
 
 .regions {
@@ -2504,7 +2503,6 @@ form .checkboxgroup {
 
 .top-detail .texteitem .stitre {
 	font-size: 14px;
-	text-transform: uppercase;
 	font-family: "mm";
 	margin-bottom: 10px;
 }
@@ -2518,10 +2516,12 @@ form .checkboxgroup {
 }
 
 .top-detail .wrap-detail {
-	display: flex;
+	display: grid;
+	grid-template-columns: 200px auto;
 	gap: 40px;
 	margin: 0 auto;
 	justify-content: center;
+	align-items: center;
 }
 .wrap-detail h1 {
 	text-align: left;
@@ -2563,7 +2563,7 @@ form .checkboxgroup {
 .information .adresse { background-image: url(images/adresse.svg); background-size: 14px; background-position: top 2px left; }
 .information .email { background-image: url(images/email.svg); }
 .information .telephone { background-image: url(images/telephone.svg); background-position: top 3px left; }
-.information .siteweb { background-image: url(images/siteweb.svg); background: no-repeat left top 3px; }
+.information .siteweb { background-image: url(images/siteweb.svg); background-position: left top 3px; }
 .information .date { background-image: url(images/date.svg); }
 .information .reference { background-image: url(images/reference.svg); background-size: 20px; }
 .information .licence { background-image: url(images/licence.svg); }
@@ -2581,7 +2581,7 @@ form .checkboxgroup {
 	display: grid;
 	grid-template-columns: 290px 1fr 1fr 1fr;
 	gap: 30px;
-	margin: 25px 0;
+	margin: 25px 0 40px;
 }
 .auto-details {
 	display: grid;
@@ -4353,7 +4353,7 @@ footer .footer .mentions li span {
 	}
 
 	.top-detail .wrap-detail {
-		display: grid;
+		grid-template-columns: 1fr;
 		gap: 20px;
 	}
 
@@ -4659,7 +4659,7 @@ footer .footer .mentions li span {
 		padding-bottom: 15px;
 	}
 	.information .details {
-		margin: 20px 0;
+		margin: 20px 0 30px;
 	}
 	.auto-details {
 		margin-top: 20px;
