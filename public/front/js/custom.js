@@ -40,7 +40,7 @@ $(document).ready(function() {
 		  $(currentTab).show();
 		  return false;
 		});
-	});	
+	});
 
 
 	// menu mobile + custom mobile //

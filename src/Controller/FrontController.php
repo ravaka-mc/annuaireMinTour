@@ -246,7 +246,7 @@ class FrontController extends AbstractController
     public function etablissementAdd(Request $request): Response
     {
         $etablissement = new Etablissement();
-        return $this->save($request, $etablissement, 'Ajout', 'Ajouter');
+        return $this->save($request, $etablissement, 'Ajout', 'Terminer');
     }
 
     /**

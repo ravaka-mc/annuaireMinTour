@@ -334,8 +334,8 @@
 						
 						<div class="t-right mt-50 huhu">
 							{{ form_widget(form._token) }}
-							<button class="btn prev">Précédent</button>
-							<button class="btn next">Suivant</button>
+							<a class="btn prev">Précédent</a>
+							<a class="btn next">Suivant</a>
 							<button type="submit" class="btn btnadd">{{ label_btn }}</button>
 						</div>
 					</div>
@@ -370,11 +370,11 @@
 				if (currentStep < totalSteps) {
 					$('.step.active').removeClass('active').nextAll('.step').eq(0).addClass('active');
 					currentStep++;
-					$('.prev').show();
+					$('.prev').css('display', 'inline-block');
 				}
 				if (currentStep == totalSteps) {
 					$('.next').hide();
-					$('.btnadd').show();
+					$('.btnadd').css('display', 'inline-block');
 				}
 			});
 			
