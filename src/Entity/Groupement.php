@@ -29,9 +29,15 @@ class Groupement
      */
     private $etablissements;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="groupements")
+     */
+    private $categories;
+
     public function __construct()
     {
         $this->etablissements = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -73,6 +79,33 @@ class Groupement
     {
         if ($this->etablissements->removeElement($etablissement)) {
             $etablissement->removeGroupement($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Category>
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+            $category->addGroupement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        if ($this->categories->removeElement($category)) {
+            $category->removeGroupement($this);
         }
 
         return $this;

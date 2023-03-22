@@ -150,15 +150,19 @@
 								{% endfor %}
 								</div>
 							</div>
-							<div class="custom_checkbox slidergrpm">
-								{% for child in form.groupements|filter(child => not child.rendered) %}
-									<label>
-										{{ child.vars.label }}
-										{{ form_widget(child) }}
-										<span class="checkmark"></span>
-									</label>
-    							{% endfor %}
-							</div>
+							{% if form.groupements is defined %}
+								<div id="wrapper-groupements" class="custom_checkbox slidergrpm">
+									{% for child in form.groupements|filter(child => not child.rendered) %}
+										<label>
+											{{ child.vars.label }}
+											{{ form_widget(child) }}
+											<span class="checkmark"></span>
+										</label>
+									{% endfor %}
+								</div>
+							{% else %}
+								<div id="wrapper-groupements"></div>
+							{% endif %}
 						</div>
 					</div>
 					{% if form.licenceA is defined %}
@@ -422,6 +426,10 @@
 						$('#wrapper-region').replaceWith(
 							$(response).find('#wrapper-region')
 						);
+						$('#wrapper-groupements').replaceWith(
+							$(response).find('#wrapper-groupements')
+						);
+						
 						changeLicences();
 					}
 				})

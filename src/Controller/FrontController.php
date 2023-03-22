@@ -58,6 +58,7 @@ class FrontController extends AbstractController
     public function index(): Response
     {
         $categories = $this->categoryRepository->findAll();
+        
         $regions = $this->regionRepository->findAll();
         $etablissements = $this->etablissementRepository->findBy([
             'valide' => 1

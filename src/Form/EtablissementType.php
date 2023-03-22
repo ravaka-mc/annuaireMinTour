@@ -79,14 +79,8 @@ class EtablissementType extends AbstractType
                 ],
                 'expanded' => true,
                 'multiple' => false,
-            ])
-            ->add('groupements', EntityType::class, [
-                'class' => Groupement::class,
-                'choice_label' => 'nom',
-                'expanded' => true,
-                'multiple' => true,
-                'required' => false,
             ]);
+            
 
             $builder->addEventListener(
                 FormEvents::PRE_SET_DATA,
@@ -109,6 +103,15 @@ class EtablissementType extends AbstractType
     private function dynamiqueForm(FormInterface $form, Category $category = null) : void {
         
         if($category == null) return;
+        
+        $form->add('groupements', EntityType::class, [
+            'class' => Groupement::class,
+            'choice_label' => 'nom',
+            'expanded' => true,
+            'multiple' => true,
+            'required' => false,
+            'choices' => $category->getGroupements()
+        ]);
 
         switch($category->getViewType()){
             case 'TYPE_1':
