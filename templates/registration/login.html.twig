@@ -19,7 +19,7 @@
 						<!--span class="champ-erreur">Mot de passe incorrect</span-->
                     </div>
                     <div class="linkmdp">
-                        <a href="#">Mot de passe oublié ?</a>
+                        <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a>
                     </div>
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                     <button type="submit" class="btn btn-secondary" ><span>Connexion</span></button>

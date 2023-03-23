@@ -75,6 +75,7 @@ class FrontController extends AbstractController
             'regions' => $regions,
             'etablissements' => $etablissements,
             'class' => '',
+            'active' => 'home',
             'class_wrapper' => ''
         ]);
     }
@@ -105,6 +106,7 @@ class FrontController extends AbstractController
             'categories' => $categories,
             'etablissements' => $etablissements,
             'class' => 'bg__purplelight',
+            'active' => 'dashboard',
             'class_wrapper' => 'categorie'
         ]);
     }
@@ -128,10 +130,10 @@ class FrontController extends AbstractController
             ]);
 
             $message = (new Email())
-            ->from('ramanantsoafitiavana@gmail.com')
-            ->to('testannuaire@yopmail.com')
+            ->from('contact@asako.mg')
+            ->to('ramanantsoafitiavana@gmail.com')
             ->subject('Formulaire de contact')
-            ->html($html);
+            ->html("<p> Ceci est un test</p>");
 
             $mailer->send($message);
 
@@ -144,6 +146,7 @@ class FrontController extends AbstractController
             'categories' => $categories,
             'class' => '',
             'class_wrapper' => '',
+            'active' => 'contact',
             'form' => $form->createView(),
         ]);
     }
@@ -174,6 +177,7 @@ class FrontController extends AbstractController
             'search' => $search,
             'region_id' => $region_id,
             'activite_id' => $activite_id,
+            'active' => 'search',
             'title' => 'Recherche'
         ]);
     }
@@ -214,6 +218,7 @@ class FrontController extends AbstractController
             'categories' => $categories,
             'user' => $user,
             'class' => 'bg__purplelight',
+            'active' => 'profil',
             'class_wrapper' => ''
         ]);
     }
@@ -244,6 +249,7 @@ class FrontController extends AbstractController
             'search' => $search,
             'region_id' => $region_id,
             'activite_id' => $activite_id,
+            'active' => 'region',
             'title' => $region->getNom()
         ]);
     }
@@ -313,6 +319,7 @@ class FrontController extends AbstractController
             'categories' => $categories,
             "errors" => $this->getErrorMessages($form),
             'class' => 'bg__purplelight',
+            'active' => 'dashboard',
             'class_wrapper' => 'categorie'
         ]);
     }
@@ -343,7 +350,7 @@ class FrontController extends AbstractController
             $message = (new Email())
             ->from('ramanantsoafitiavana@gmail.com')
             ->to('testannuaire@yopmail.com')
-            ->subject('Formulaire de contact')
+            ->subject('Formulaire de signaler')
             ->html($html);
 
             $mailer->send($message);
@@ -375,6 +382,7 @@ class FrontController extends AbstractController
             'class_wrapper' => 'categorie',
             'form' => $form->createView(),
             'categories' => $categories,
+            'active' => 'category',
             'etablissement' => $etablissement
         ]);
     }
@@ -434,6 +442,7 @@ class FrontController extends AbstractController
             'search' => $search,
             'region_id' => $region_id,
             'activite_id' => $activite_id,
+            'active' => 'category',
             'title' => $category->getNom()
         ]);
     }

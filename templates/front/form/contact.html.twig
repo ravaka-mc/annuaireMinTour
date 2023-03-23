@@ -12,19 +12,31 @@
 					<div class="formgroup">
 						<label for="">Nom</label>
 						{{ form_widget(form.nom) }}
+						{% if form_errors(form.nom) %}
+							<span class="champ-erreur">Ce champ est obligatoire</span>
+                        {% endif %}
 					</div>
 					<div class="formgroup">
 						<label for="">Prénom</label>
 						{{ form_widget(form.prenom) }}
+						{% if form_errors(form.prenom) %}
+							<span class="champ-erreur">Ce champ est obligatoire</span>
+                        {% endif %}
 					</div>
 				</div>
 				<div class="formgroup">
 					<label for="">E-mail</label>
 					{{ form_widget(form.email) }}
+					{% if form_errors(form.email) %}
+						<span class="champ-erreur">Cet e-mail est déjà utilisé</span>
+					{% endif %}
 				</div>
 				<div class="formgroup">
 					<label for="">Message</label>
 					{{ form_widget(form.message) }}
+					{% if form_errors(form.message) %}
+						<span class="champ-erreur">Ce champ est obligatoire</span>
+					{% endif %}
 				</div>
 				{{ form_widget(form._token) }}
 				<button type="submit" class="btn btn-secondary" ><span>Envoyer</span></button>

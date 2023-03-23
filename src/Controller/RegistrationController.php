@@ -55,6 +55,7 @@ class RegistrationController extends AbstractController
             'form' => $form->createView(),
             'class' => '',
             'class_wrapper' => '',
+            'active' => 'register',
             'categories' => $categories,
         ]);
     }
@@ -75,6 +76,7 @@ class RegistrationController extends AbstractController
             'categories' => $categories,
             'error'         => $error,
             'class'         => '',
+            'active' => 'login',
             'class_wrapper'         => '',
         ]);
     }
