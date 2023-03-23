@@ -17,17 +17,20 @@
                             <label for="">Nom</label>
                             {{ form_widget(form.nom) }}
                             {{ form_errors(form.nom) }}
+							<!--span class="champ-erreur">Ce champ est obligatoire</span-->
                         </div>
                         <div class="formgroup">
                             <label for="">Prénom</label>
                             {{ form_widget(form.prenom) }}
                             {{ form_errors(form.prenom) }}
+							<span class="champ-erreur">Ce champ est obligatoire</span>
                         </div>
                     </div>
                     <div class="formgroup">
                         <label for="">E-mail</label>
                         {{ form_widget(form.email) }}
                         {{ form_errors(form.email) }}
+						<span class="champ-erreur">Cet e-mail est déjà utilisé</span>
                     </div>
                     <div class="formgroup">
                         <label for="">Mot de passe</label>
@@ -37,9 +40,10 @@
                         <label for="">Confirmer mot de passe</label>
                         {{ form_widget(form.password.second) }}
                         {{ form_errors(form.password.first) }}
+						<span class="champ-erreur">Les deux mot de passe ne correspond pas</span>
                     </div>
                     {{ form_widget(form._token) }}
-                    <button type="submit" class="btn btn-secondary" ><span>S’inscrire</span></button>
+                    <button type="submit" class="btn btn-secondary" ><span>S'inscrire</span></button>
                     <div class="blocbottom">
                         <p>Vous avez déjà un compte ?<a href="{{ path('app_login')}}" title="Connectez-vous" ><strong> Connectez-vous</strong></a></p>
                     </div>

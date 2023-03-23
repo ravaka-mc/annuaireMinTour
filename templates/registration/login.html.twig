@@ -8,22 +8,24 @@
             <div class="wrapper">
                 <form action="{{ path('app_login') }}" method="post" class="blocform">
                     <h1>Se connecter</h1>
-                    {% if error %}
-                        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                    {% endif %}
                     <div class="formgroup">
                         <label for="">E-mail</label>
                         <input type="email" name="_username" value="{{ last_username }}" placeholder="" >
+						<!--span class="champ-erreur">Ce champ est obligatoire</span-->
                     </div>
                     <div class="formgroup">
                         <label for="">Mot de passe</label>
                         <input type="password" placeholder=""  name="_password">
+						<!--span class="champ-erreur">Mot de passe incorrect</span-->
                     </div>
                     <div class="linkmdp">
-                        <a href="#"  >Mot de passe oublié ?</a>
+                        <a href="#">Mot de passe oublié ?</a>
                     </div>
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                     <button type="submit" class="btn btn-secondary" ><span>Connexion</span></button>
+					{% if error %}
+                        <div class="erreur-form">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
                     <div class="blocbottom">
                         <p>Pas de compte ? <a href="{{ path('app_register')}}" title="Inscrivez-vous" ><strong>Inscrivez-vous</strong></a></p>
                     </div>

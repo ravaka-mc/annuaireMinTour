@@ -3188,7 +3188,7 @@ textarea::placeholder {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
-	background: url("img/arrow-select.svg") no-repeat right 20px center #fbfbfc;
+	background: url("images/arrow-select.svg") no-repeat right 20px center #fbfbfc;
 }
 
 .form-wrap label i {
@@ -3227,6 +3227,19 @@ textarea::placeholder {
 	min-width: 225px;
 	text-align: center;
 	padding: 0 20px;
+}
+
+.erreur-form {
+	color: #cc224e;
+	border: 1px solid #cc224e;
+	margin: 20px 0;
+	padding: 5px 20px;
+}
+.champ-erreur {
+	display: block;
+	font-size: 12px;
+	margin-top: 2px;
+	color: #cc224e;
 }
 
 .form-wrap .salaire .d-grid {
