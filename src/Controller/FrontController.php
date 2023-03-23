@@ -3,13 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use Twig\Environment;
 use App\Entity\Region;
 use App\Form\UserType;
 use App\Entity\Category;
+use App\Entity\Signaler;
 use App\Form\ContactType;
 use App\Form\SignalerType;
 use App\Entity\Etablissement;
-use App\Entity\Signaler;
 use App\Form\EtablissementType;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Mime\Email;
@@ -40,8 +41,9 @@ class FrontController extends AbstractController
     private $security;
     private $activiteRepository;
     private $signalerRepository;
+    private $twig;
 
-    public function __construct(SignalerRepository $signalerRepository, CategoryRepository $categoryRepository, RegionRepository $regionRepository, EtablissementRepository $etablissementRepository, UserRepository $userRepository, SluggerInterface $slugger, Security $security, ActiviteRepository $activiteRepository){
+    public function __construct(Environment $twig, SignalerRepository $signalerRepository, CategoryRepository $categoryRepository, RegionRepository $regionRepository, EtablissementRepository $etablissementRepository, UserRepository $userRepository, SluggerInterface $slugger, Security $security, ActiviteRepository $activiteRepository){
         $this->categoryRepository = $categoryRepository;
         $this->regionRepository = $regionRepository;
         $this->etablissementRepository = $etablissementRepository;
@@ -50,6 +52,7 @@ class FrontController extends AbstractController
         $this->security = $security;
         $this->activiteRepository = $activiteRepository;
         $this->signalerRepository = $signalerRepository;
+        $this->twig = $twig;
     }
     
     /**
@@ -58,6 +61,7 @@ class FrontController extends AbstractController
     public function index(): Response
     {
         $categories = $this->categoryRepository->findAll();
+        
         $regions = $this->regionRepository->findAll();
         $etablissements = $this->etablissementRepository->findBy([
             'valide' => 1
@@ -119,11 +123,15 @@ class FrontController extends AbstractController
 
             $contactFormData = $form->getData();
             
+            $html = $this->twig->render('front/email/contact.html.twig', [
+                'data' => $contactFormData
+            ]);
+
             $message = (new Email())
             ->from('ramanantsoafitiavana@gmail.com')
             ->to('testannuaire@yopmail.com')
             ->subject('Formulaire de contact')
-            ->html('<p>' . $contactFormData['message'] . '</p>');
+            ->html($html);
 
             $mailer->send($message);
 
@@ -312,7 +320,7 @@ class FrontController extends AbstractController
     /**
      * @Route("/signaler/{slug}", name="app_etablissement_signaler")
      */
-    public function signaler(Request $request, Etablissement $etablissement): Response
+    public function signaler(Request $request, Etablissement $etablissement, MailerInterface $mailer): Response
     {
         $form = $this->createForm(SignalerType::class);
         $form->handleRequest($request);
@@ -326,6 +334,19 @@ class FrontController extends AbstractController
             $signaler->setEmail($signalerFormData['email']);
             $signaler->setMotif($signalerFormData['motif']);
             $signaler->setEtablissement($etablissement);
+            
+            $html = $this->twig->render('front/email/signaler.html.twig', [
+                'data' => $signalerFormData,
+                'etablissement' => $etablissement
+            ]);
+
+            $message = (new Email())
+            ->from('ramanantsoafitiavana@gmail.com')
+            ->to('testannuaire@yopmail.com')
+            ->subject('Formulaire de contact')
+            ->html($html);
+
+            $mailer->send($message);
 
             $this->signalerRepository->add($signaler, true);
         }

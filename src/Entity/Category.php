@@ -67,10 +67,16 @@ class Category
      */
     private $viewType;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Groupement::class, inversedBy="categories")
+     */
+    private $groupements;
+
     public function __construct()
     {
         $this->etablissements = new ArrayCollection();
         $this->activites = new ArrayCollection();
+        $this->groupements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -207,6 +213,30 @@ class Category
     public function setViewType(?string $viewType): self
     {
         $this->viewType = $viewType;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Groupement>
+     */
+    public function getGroupements(): Collection
+    {
+        return $this->groupements;
+    }
+
+    public function addGroupement(Groupement $groupement): self
+    {
+        if (!$this->groupements->contains($groupement)) {
+            $this->groupements[] = $groupement;
+        }
+
+        return $this;
+    }
+
+    public function removeGroupement(Groupement $groupement): self
+    {
+        $this->groupements->removeElement($groupement);
 
         return $this;
     }

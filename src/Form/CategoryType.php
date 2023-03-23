@@ -4,13 +4,13 @@ namespace App\Form;
 
 use App\Entity\Activite;
 use App\Entity\Category;
+use App\Entity\Groupement;
 use App\Repository\ActiviteRepository;
+use App\Repository\GroupementRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -34,6 +34,17 @@ class CategoryType extends AbstractType
                 'query_builder' => function (ActiviteRepository $activiteRepository) {
                     return $activiteRepository->createQueryBuilder('a')
                     ->orderBy('a.nom', 'ASC');
+                },
+            ])
+            ->add('groupements', EntityType::class, [
+                'class' => Groupement::class,
+                'choice_label' => 'nom',
+                'expanded' => false,
+                'multiple' => true,
+                'required' => false,
+                'query_builder' => function (GroupementRepository $groupementRepository) {
+                    return $groupementRepository->createQueryBuilder('g')
+                    ->orderBy('g.nom', 'ASC');
                 },
             ])
             ->add('viewType', ChoiceType::class, [

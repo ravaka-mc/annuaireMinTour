@@ -37,6 +37,10 @@
 					{{ form_widget(form.activites) }}
 				</div>
 				<div class="form-control">
+					<label for="category_activites">Groupements</label>
+					{{ form_widget(form.groupements) }}
+				</div>
+				<div class="form-control">
 					<label for="category_viewType">Type d'affichage</label>
 					{{ form_widget(form.viewType) }}
 				</div>
@@ -62,6 +66,7 @@
 	<script>
 		jQuery(document).ready(function($) {
 			$("#category_activites").selectize();
+			$("#category_groupements").selectize();
 		});
 	</script>
 {% endblock %}
