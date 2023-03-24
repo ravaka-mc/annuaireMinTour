@@ -14,8 +14,8 @@
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
     </head>
-    <body class="{{ class }}"> <!-- class="bg__purplelight" -->
-        <div id="wrapper" class="{{ class_wrapper }}">
+    <body {% if class is defined %}class="{{ class }}"{% endif %}> <!-- class="bg__purplelight" -->
+        <div id="wrapper" {% if class is defined %}class="{{ class_wrapper }}"{% endif %}>
             <header class="header">
                 <div class="wrapper">
                     <div class="header__inner">
@@ -24,8 +24,8 @@
                         </a>
                         <nav class="header_nav">
                             <ul class="header_nav-menu" id="headermenu">
-                                <li><a href="{{ path('app_home') }}" title="Accueil">Accueil</a></li>
-                                <li>
+                                <li {% if active == 'home' %}class="current-menu-item"{% endif %}><a href="{{ path('app_home') }}" title="Accueil">Accueil</a></li>
+                                <li {% if active == 'category' %}class="current-menu-item"{% endif %}>
                                     <a href="#" title="Categories">Categories</a>
                                     <i></i>
                                     <ul class="submenu">
@@ -34,7 +34,7 @@
                                         {% endfor %}
                                     </ul>
                                 </li>
-                                <li><a href="{{ path('app_contact') }}" title="Contact">Contact</a></li>
+                                <li {% if active == 'contact' %}class="current-menu-item"{% endif %}><a href="{{ path('app_contact') }}" title="Contact">Contact</a></li>
                             </ul>
                             <div class="header_right">
                                 {% if is_granted('ROLE_ADMIN') %}
