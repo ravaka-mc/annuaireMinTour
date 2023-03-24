@@ -268,7 +268,7 @@ class FrontController extends AbstractController
      */
     public function etablissementEdit(Request $request, Etablissement $etablissement): Response
     {
-        return $this->save($request, $etablissement, 'Modifie', 'Modifier', true);
+        return $this->save($request, $etablissement, 'Modifie', 'Terminer', true);
     }
 
     /**

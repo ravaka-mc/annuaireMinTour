@@ -42,15 +42,27 @@
                 </form>
         </div>
     </div>
-	<div class="membre">
+	{% if etablissements %}
+	<div class="membre bg_white">
 		<div class="wrapper">
 			<div class="membre__content">
+
 				{% for etablissement in etablissements %}
 					{% include "front/block/etablissement.html.twig" %}
 				{% endfor %}
+
 			</div>
 		</div>
 	</div>
+	{% else %}
+
+	<div class="membre aucun bg_white">
+		<div class="wrapper">
+			Aucun resultat
+		</div>
+	</div>
+
+	{% endif %}
 </main>
 {% endblock %}
 {% block javascripts %}
