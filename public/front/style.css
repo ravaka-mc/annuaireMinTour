@@ -510,7 +510,7 @@ h3>a {
 
 .bg-white .list .option {
 	font: 500 12px/20px "mm";
-	padding: 10px;
+	padding: 5px 10px;
 }
 
 .bg-white .list .option.selected {
