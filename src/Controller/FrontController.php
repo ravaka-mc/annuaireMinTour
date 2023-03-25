@@ -250,6 +250,7 @@ class FrontController extends AbstractController
             'region_id' => $region_id,
             'activite_id' => $activite_id,
             'active' => 'region',
+            'region' => $region,
             'title' => $region->getNom()
         ]);
     }
@@ -306,6 +307,7 @@ class FrontController extends AbstractController
                 $etablissement->setAvatar($fileName);
             }
 
+            $etablissement->setValide(0);
             $this->etablissementRepository->add($etablissement, true);
 
             return $this->redirectToRoute('app_dashboard');
@@ -443,6 +445,7 @@ class FrontController extends AbstractController
             'region_id' => $region_id,
             'activite_id' => $activite_id,
             'active' => 'category',
+            'category' => $category,
             'title' => $category->getNom()
         ]);
     }

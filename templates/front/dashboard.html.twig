@@ -51,7 +51,6 @@
                                         <div class="action">
                                             <div class="infobull"><div class="content"><span>{{ etablissement.refused.raison }}</span></div></div>
                                             <a href="{{ path('app_front_etablissement_edit', {slug:etablissement.slug}) }}" class="edit"></a>
-                                            <a href="{{ path('app_etablissement', {category_slug:etablissement.category.slug, etablissement_slug:etablissement.slug}) }}" class="view"></a>
                                             <a data-fancybox="" data-src="#popup-delete_{{etablissement.id}}" class="delete"></a>
                                         </div>
                                     </td>
@@ -60,7 +59,6 @@
                                     <td>
                                         <div class="action">
                                             <a href="{{ path('app_front_etablissement_edit', {slug:etablissement.slug}) }}" class="edit"></a>
-                                            <a href="{{ path('app_etablissement', {category_slug:etablissement.category.slug, etablissement_slug:etablissement.slug}) }}" class="view"></a>
                                             <a data-fancybox="" data-src="#popup-delete_{{etablissement.id}}" class="delete"></a>
                                         </div>
                                     </td>

@@ -52,7 +52,9 @@
 											<div class="form-control">
 												<label>Dénomination social</label>
 												{{ form_widget(form.nom) }}
-												<!--span class="champ-erreur">Ce champ est obligatoire</span-->
+												{% if form_errors(form.nom) %}
+													<span class="champ-erreur">Ce champ est obligatoire</span>
+												{% endif %}
 											</div>
 											<div class="form-control">
 												<label>Courte description</label>
@@ -66,17 +68,23 @@
 										<div class="form-control">
 											<label for="">Adresse</label>
 											{{ form_widget(form.adresse) }}
-											<!--span class="champ-erreur">Ce champ est obligatoire</span-->
+											{% if form_errors(form.adresse) %}
+												<span class="champ-erreur">Ce champ est obligatoire</span>
+											{% endif %}
 										</div>
 										<div class="form-control">
 											<label for="">Téléphone</label>
 											{{ form_widget(form.telephone) }}
-											<!--span class="champ-erreur">Ce champ est obligatoire</span-->
+											{% if form_errors(form.telephone) %}
+												<span class="champ-erreur">Ce champ est obligatoire</span>
+											{% endif %}
 										</div>
 										<div class="form-control">
 											<label for="">E-mail</label>
 											{{ form_widget(form.email) }}
-											<!--span class="champ-erreur">Ce champ est obligatoire</span-->
+											{% if form_errors(form.email) %}
+												<span class="champ-erreur">Ce champ est obligatoire</span>
+											{% endif %}
 										</div>
 										<div class="form-control">
 											<label for="">Site web</label>
@@ -205,10 +213,16 @@
 										<div class="form-control">
 											<label for="">NIF</label>
 											{{ form_widget(form.nif) }}
+											{% if form_errors(form.nif) %}
+												<span class="champ-erreur">Valeur est invalide</span>
+											{% endif %}
 										</div>
 										<div class="form-control">
 											<label for="">Stat</label>
 											{{ form_widget(form.stat) }}
+											{% if form_errors(form.stat) %}
+												<span class="champ-erreur">Valeur est invalide</span>
+											{% endif %}
 										</div>
 									</div>
 									<label>Licence</label>
@@ -269,10 +283,16 @@
 										<div class="form-control">
 											<label for="">NIF</label>
 											{{ form_widget(form.nif) }}
+											{% if form_errors(form.nif) %}
+												<span class="champ-erreur">Valeur est invalide</span>
+											{% endif %}
 										</div>
 										<div class="form-control">
 											<label for="">Stat</label>
 											{{ form_widget(form.stat) }}
+											{% if form_errors(form.stat) %}
+												<span class="champ-erreur">Valeur est invalide</span>
+											{% endif %}
 										</div>
 									</div>
 								</div>
@@ -328,10 +348,16 @@
 										<div class="form-control">
 											<label for="">NIF</label>
 											{{ form_widget(form.nif) }}
+											{% if form_errors(form.nif) %}
+												<span class="champ-erreur">Valeur est invalide</span>
+											{% endif %}
 										</div>
 										<div class="form-control">
 											<label for="">Stat</label>
 											{{ form_widget(form.stat) }}
+											{% if form_errors(form.stat) %}
+												<span class="champ-erreur">Valeur est invalide</span>
+											{% endif %}
 										</div>
 									</div>
 								</div>
@@ -355,6 +381,23 @@
 {% endblock %}
 {% block javascripts %}
     <script>
+		var numberOnly =(e) => {
+            var ASCIICode = (e.which) ? e.which : e.keyCode
+            if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+                return false;
+            return true;
+        }
+
+		var keypressNumberOnly =() => {
+			$('#etablissement_nif').on('keypress', function(e){
+				return numberOnly(e)
+			})
+
+			$('#etablissement_stat').on('keypress', function(e){
+				return numberOnly(e)
+			})
+		}
+
 		var changeLicences = () => {
 			$('.licence .half').each(function(){
 				let $inp = $(this).find("input[type=checkbox]");
@@ -370,11 +413,32 @@
 		}
 
 		$(document).ready(function () {
+			keypressNumberOnly();
 			var currentStep = 1;
 			var totalSteps = $('.step').length;
 			$('.step:first').addClass('active');
 			
 			$('.next').click(function() {
+				$('.active .champ-erreur').remove();
+				var isrequired = false;
+				$('.active input').each(function(e){
+					if($(this).is(':required') && $(this).val() == ''){
+						$(this).parent().append('<span class="champ-erreur">Ce champ est obligatoire</span>');
+						isrequired = true;
+					} 
+				})
+				
+				if(isrequired) return false;
+
+				var regexMail = /^\w+([-+.'][^\s]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+				var emailValid = regexMail.test($("#etablissement_email").val());
+				if(!emailValid){
+					$("#etablissement_email").parent().append('<span class="champ-erreur">Adresse email invalid</span>');
+					isrequired = true;
+				}
+
+				if(isrequired) return false;
+
 				if (currentStep < totalSteps) {
 					$('.step.active').removeClass('active').nextAll('.step').eq(0).addClass('active');
 					currentStep++;
@@ -452,6 +516,7 @@
 						);
 
 						changeLicences();
+						keypressNumberOnly();
 					}
 				})
 			});

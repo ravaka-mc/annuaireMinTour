@@ -7,8 +7,11 @@
     
     <div class="top-page">
         <div class="wrapper">
-            <h1>Tous les établissement formels d’hébergement 
-                à Madagascar</h1>
+            {% if category is defined %}
+            <h1>Tous les {{ category.nom }} à Madagascar</h1>
+            {% elseif region is defined %}
+            <h1>Tous établissement formels d’hébergement à {{ region.nom }}</h1>
+            {% endif %}
         </div>
     </div>
     <div class="form-search">
