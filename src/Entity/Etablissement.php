@@ -235,6 +235,11 @@ class Etablissement
      */
     private $signalers;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $autreGroupement;
+
     public function __construct()
     {
         $this->groupements = new ArrayCollection();
@@ -800,5 +805,17 @@ class Etablissement
 
     public function __toString(){
         return $this->nom;
+    }
+
+    public function getAutreGroupement(): ?string
+    {
+        return $this->autreGroupement;
+    }
+
+    public function setAutreGroupement(?string $autreGroupement): self
+    {
+        $this->autreGroupement = $autreGroupement;
+
+        return $this;
     }
 }

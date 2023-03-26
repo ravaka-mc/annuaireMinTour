@@ -11,6 +11,8 @@
             <h1>Tous les {{ category.nom }} à Madagascar</h1>
             {% elseif region is defined %}
             <h1>Tous établissement formels d’hébergement à {{ region.nom }}</h1>
+            {% elseif search is defined %}
+            <h1>Résultats de recherche pour {{ search }}</h1>
             {% endif %}
         </div>
     </div>

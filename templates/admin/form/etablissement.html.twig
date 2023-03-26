@@ -163,6 +163,15 @@
 							{% else %}
 								<div id="wrapper-groupements"></div>
 							{% endif %}
+							
+							{% if form.autreGroupement is defined %}
+								<div id="wrapper-autregroupement" class="form-control slidergrpm">
+									<label>Groupe</label>
+									{{ form_widget(form.autreGroupement) }}
+								</div>
+							{% else %}
+								<div id="wrapper-autregroupement"></div>
+							{% endif %}
 						</div>
 					</div>
 					{% if form.licenceA is defined %}
@@ -428,6 +437,9 @@
 						);
 						$('#wrapper-groupements').replaceWith(
 							$(response).find('#wrapper-groupements')
+						);
+						$('#wrapper-autregroupement').replaceWith(
+							$(response).find('#wrapper-autregroupement')
 						);
 						
 						changeLicences();

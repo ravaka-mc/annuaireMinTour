@@ -274,6 +274,7 @@ class EtablissementType extends AbstractType
                 $form->add('zoneIntervention')
                 ->add('categorieAutorisation')
                 ->add('carteProfessionnelle')
+                ->add('autreGroupement')
                 ->add('nif', TextType::class, [
                     'constraints' => [
                         new Regex('/\d{10}/')

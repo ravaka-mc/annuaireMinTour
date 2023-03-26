@@ -4851,4 +4851,4 @@ footer .footer .mentions li span {
 	background-size: 200% 100%;
 	transition: all 300ms ease;
 }
-.prev, .btnadd, .step { display: none; }
+.prev, .btnadd, .step, .form-control.slidergrpm { display: none; }

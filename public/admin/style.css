@@ -1575,3 +1575,7 @@ input, select, textarea {
 	margin-top: 2px;
 	color: #cc224e;
 }
+
+.form-control.slidergrpm{
+	display: none;
+}
