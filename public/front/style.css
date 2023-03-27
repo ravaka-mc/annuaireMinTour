@@ -3055,6 +3055,7 @@ form .checkboxgroup {
 	height: 15px;
 	border-radius: 50%;
 	margin-right: 10px;
+	display: inline-block;
 }
 
 .infobull:hover .content {

@@ -149,11 +149,6 @@ class Etablissement
     private $category;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $valide = false;
-
-    /**
      * @ORM\ManyToMany(targetEntity=Groupement::class, inversedBy="etablissements")
      */
     private $groupements;
@@ -221,11 +216,6 @@ class Etablissement
     private $createdBy;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $refuse;
-
-    /**
      * @ORM\OneToOne(targetEntity=Refuse::class, mappedBy="etablissement", cascade={"persist", "remove"})
      */
     private $refused;
@@ -239,6 +229,16 @@ class Etablissement
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $autreGroupement;
+
+    /**
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    private $statut;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Delete::class, mappedBy="etablissement", cascade={"persist", "remove"})
+     */
+    private $delete;
 
     public function __construct()
     {
@@ -541,18 +541,6 @@ class Etablissement
         return $this;
     }
 
-    public function isValide(): ?bool
-    {
-        return $this->valide;
-    }
-
-    public function setValide(?bool $valide): self
-    {
-        $this->valide = $valide;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Groupement>
      */
@@ -744,18 +732,6 @@ class Etablissement
         return $this;
     }
 
-    public function isRefuse(): ?bool
-    {
-        return $this->refuse;
-    }
-
-    public function setRefuse(?bool $refuse): self
-    {
-        $this->refuse = $refuse;
-
-        return $this;
-    }
-
     public function getRefused(): ?Refuse
     {
         return $this->refused;
@@ -769,6 +745,23 @@ class Etablissement
         }
 
         $this->refused = $refused;
+
+        return $this;
+    }
+
+    public function getDelete(): ?Delete
+    {
+        return $this->delete;
+    }
+
+    public function setDelete(Delete $delete): self
+    {
+        // set the owning side of the relation if necessary
+        if ($delete->getEtablissement() !== $this) {
+            $delete->setEtablissement($this);
+        }
+
+        $this->delete = $delete;
 
         return $this;
     }
@@ -815,6 +808,18 @@ class Etablissement
     public function setAutreGroupement(?string $autreGroupement): self
     {
         $this->autreGroupement = $autreGroupement;
+
+        return $this;
+    }
+
+    public function getStatut(): ?string
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(?string $statut): self
+    {
+        $this->statut = $statut;
 
         return $this;
     }

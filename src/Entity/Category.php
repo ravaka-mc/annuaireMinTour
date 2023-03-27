@@ -151,7 +151,7 @@ class Category
     public function getEtablissements(): Collection
     {
         return $this->etablissements->filter(function(Etablissement $etablissement) {
-            return $etablissement->isValide();
+            return $etablissement->getStatut() == 'valide';
         });;
     }
 

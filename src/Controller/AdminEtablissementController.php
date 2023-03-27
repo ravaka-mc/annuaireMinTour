@@ -104,7 +104,7 @@ class AdminEtablissementController extends AdminController
     public function valide(Etablissement $etablissement): Response
     {
         $date_validation =  new \DateTime();
-        $etablissement->setValide(1);
+        $etablissement->setStatut('valide');
         $etablissement->setDateValidation($date_validation);
         $this->etablissementRepository->add($etablissement, true);
         return $this->redirectToRoute('app_admin_etablissement');
@@ -122,7 +122,7 @@ class AdminEtablissementController extends AdminController
         $refuse->setEtablissement($etablissement);
         $this->refuseRepository->add($refuse, true);
 
-        $etablissement->setRefuse(1);
+        $etablissement->setStatut('refuse');
         $this->etablissementRepository->add($etablissement, true);
 
         return $this->redirectToRoute('app_admin_etablissement');

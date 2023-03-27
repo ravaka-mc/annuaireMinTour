@@ -31,39 +31,41 @@
                     </thead>
                     <tbody>
                         {% for etablissement in etablissements %}
-                            <tr>
-                                <td>{{ etablissement.nom }}</td>
-                                <td>{{ etablissement.getCategory() }}</td>
-                                <td>{{ etablissement.getRegion() }}</td>
-                                <td>{{ etablissement.getCreatedAt()|date('d/m/y') }}</td>
-                                {% if etablissement.isValide() %}
-                                    <td><div class="valide">Validé</div></td>
-                                    <td>
-                                        <div class="action">
-                                            <a href="{{ path('app_front_etablissement_edit', {slug:etablissement.slug}) }}" class="edit"></a>
-                                            <a href="{{ path('app_etablissement', {category_slug:etablissement.category.slug, etablissement_slug:etablissement.slug}) }}" class="view"></a>
-                                            <a data-fancybox="" data-src="#popup-delete_{{etablissement.id}}" class="delete"></a>
-                                        </div>
-                                    </td>
-                                {% elseif etablissement.isRefuse() %}
-                                    <td><div class="refuse">Refusé</div></td>
-                                    <td>
-                                        <div class="action">
-                                            <div class="infobull"><div class="content"><span>{{ etablissement.refused.raison }}</span></div></div>
-                                            <a href="{{ path('app_front_etablissement_edit', {slug:etablissement.slug}) }}" class="edit"></a>
-                                            <a data-fancybox="" data-src="#popup-delete_{{etablissement.id}}" class="delete"></a>
-                                        </div>
-                                    </td>
-                                {% else %}
-                                    <td><div class="en-attente">En attente</div></td>
-                                    <td>
-                                        <div class="action">
-                                            <a href="{{ path('app_front_etablissement_edit', {slug:etablissement.slug}) }}" class="edit"></a>
-                                            <a data-fancybox="" data-src="#popup-delete_{{etablissement.id}}" class="delete"></a>
-                                        </div>
-                                    </td>
-                                {% endif %}
-                            </tr>
+                            {% if etablissement.statut != 'delete' %}
+                                <tr>
+                                    <td>{{ etablissement.nom }}</td>
+                                    <td>{{ etablissement.getCategory() }}</td>
+                                    <td>{{ etablissement.getRegion() }}</td>
+                                    <td>{{ etablissement.getCreatedAt()|date('d/m/y') }}</td>
+                                    {% if etablissement.statut == 'valide' %}
+                                        <td><div class="valide">Validé</div></td>
+                                        <td>
+                                            <div class="action">
+                                                <a href="{{ path('app_front_etablissement_edit', {slug:etablissement.slug}) }}" class="edit"></a>
+                                                <a href="{{ path('app_etablissement', {category_slug:etablissement.category.slug, etablissement_slug:etablissement.slug}) }}" class="view"></a>
+                                                <a data-fancybox="" data-src="#popup-delete_{{etablissement.id}}" class="delete"></a>
+                                            </div>
+                                        </td>
+                                    {% elseif etablissement.statut == 'refuse' %}
+                                        <td><div class="refuse">Refusé</div></td>
+                                        <td>
+                                            <div class="action">
+                                                <div class="infobull"><div class="content"><span>{{ etablissement.refused.raison }}</span></div></div>
+                                                <a href="{{ path('app_front_etablissement_edit', {slug:etablissement.slug}) }}" class="edit"></a>
+                                                <a data-fancybox="" data-src="#popup-delete_{{etablissement.id}}" class="delete"></a>
+                                            </div>
+                                        </td>
+                                    {% else %}
+                                        <td><div class="en-attente">En attente</div></td>
+                                        <td>
+                                            <div class="action">
+                                                <a href="{{ path('app_front_etablissement_edit', {slug:etablissement.slug}) }}" class="edit"></a>
+                                                <a data-fancybox="" data-src="#popup-delete_{{etablissement.id}}" class="delete"></a>
+                                            </div>
+                                        </td>
+                                    {% endif %}
+                                </tr>
+                            {% endif %}
                         {% endfor %}
                     </tbody>
                 </table>
@@ -76,10 +78,21 @@
     <div class="innerpad">
         <p>Êtes vous sûr de vouloir supprimer cette etablissement ?</p>
     </div>
-    <div class="pop_btns">
-        <a href="{{ path('app_front_etablissement_delete', {slug:etablissement.slug}) }}" class="btn-pop confirm">Supprimer</a>
-        <span data-fancybox-close class="btn-pop">Annuler</span>
-    </div>
+    <form class="form-wrap" method="post" action="{{ path('app_front_etablissement_delete', {slug:etablissement.slug}) }}">
+            <ul class="form-error"></ul>
+        <div class="form-control">
+            <label for="nom">Nom</label>
+            <input type="text" value="{{ etablissement.nom}}" disabled="disabled">
+        </div>
+        <div class="form-control">
+            <label for="nom">Raison</label>
+            <textarea name="raison" id=""></textarea>
+        </div>
+        <div class="pop_btns">
+            <button type="submit" class="btn">Supprimer</button>
+            <span data-fancybox-close class="btn-pop">Annuler</span>
+        </div>
+    </form>
 </div>
 {% endfor %}
 {% endblock %}

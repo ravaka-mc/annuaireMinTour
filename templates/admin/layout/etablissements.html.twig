@@ -28,15 +28,20 @@
                         <td>{{ etablissement.getCategory() }}</td>
                         <td>{{ etablissement.getRegion() }}</td>
                         <td>{{ etablissement.getCreatedAt()|date('d/m/y') }}</td>
-                        {% if etablissement.isValide() %}
+                        {% if etablissement.statut == 'valide' %}
                             <td><div class="valide">Validé</div></td>
-                        {% elseif etablissement.isRefuse() %}
+                        {% elseif etablissement.statut == 'refuse' %}
                             <td><div class="refuse">Refusé</div></td>
+                        {% elseif etablissement.statut == 'delete' %}
+                            <td><div class="refuse">Supprimé</div></td>
                         {% else %}
                             <td><div class="en-attente">En attente</div></td>
                         {% endif %}
                         <td>
                             <div class="action">
+                                {% if etablissement.statut == 'delete' %}
+                                <div class="infobull"><div class="content"><span>{{ etablissement.delete.raison }}</span></div></div>
+                                {% endif %}
                                 <a href="{{ path('app_admin_etablissement_edit', {id:etablissement.id}) }}" class="edit"></a>
                                 <a href="{{ path('app_etablissement', {category_slug:etablissement.category.slug, etablissement_slug:etablissement.slug}) }}" class="view"></a>
                                 <a data-fancybox="" data-src="#popup-delete_{{etablissement.id}}" class="delete"></a>

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use Twig\Environment;
+use App\Entity\Delete;
 use App\Entity\Region;
 use App\Form\UserType;
 use App\Entity\Category;
@@ -15,6 +16,7 @@ use App\Form\EtablissementType;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Mime\Email;
 use App\Repository\UserRepository;
+use App\Repository\DeleteRepository;
 use App\Repository\RegionRepository;
 use App\Repository\ActiviteRepository;
 use App\Repository\CategoryRepository;
@@ -41,9 +43,10 @@ class FrontController extends AbstractController
     private $security;
     private $activiteRepository;
     private $signalerRepository;
+    private $deleteRepository;
     private $twig;
 
-    public function __construct(Environment $twig, SignalerRepository $signalerRepository, CategoryRepository $categoryRepository, RegionRepository $regionRepository, EtablissementRepository $etablissementRepository, UserRepository $userRepository, SluggerInterface $slugger, Security $security, ActiviteRepository $activiteRepository){
+    public function __construct(Environment $twig, DeleteRepository $deleteRepository, SignalerRepository $signalerRepository, CategoryRepository $categoryRepository, RegionRepository $regionRepository, EtablissementRepository $etablissementRepository, UserRepository $userRepository, SluggerInterface $slugger, Security $security, ActiviteRepository $activiteRepository){
         $this->categoryRepository = $categoryRepository;
         $this->regionRepository = $regionRepository;
         $this->etablissementRepository = $etablissementRepository;
@@ -52,6 +55,7 @@ class FrontController extends AbstractController
         $this->security = $security;
         $this->activiteRepository = $activiteRepository;
         $this->signalerRepository = $signalerRepository;
+        $this->deleteRepository = $deleteRepository;
         $this->twig = $twig;
     }
     
@@ -64,7 +68,7 @@ class FrontController extends AbstractController
         
         $regions = $this->regionRepository->findAll();
         $etablissements = $this->etablissementRepository->findBy([
-            'valide' => 1
+            'statut' => 'valide'
         ], 
         [
             'created_at' => 'desc'
@@ -275,13 +279,20 @@ class FrontController extends AbstractController
     /**
      * @Route("/dashboard/etablissement/{slug}/delete", name="app_front_etablissement_delete")
      */
-    public function etablissementDelete(Etablissement $etablissement): Response
+    public function etablissementDelete(Request $request, Etablissement $etablissement): Response
     {
         $user = $this->security->getUser();
         if($user != $etablissement->getCreatedBy())
             return $this->redirectToRoute('app_dashboard');
 
-        $this->etablissementRepository->remove($etablissement, true);
+        $raison = $request->request->get('raison');
+        $delete = new Delete();
+        $delete->setRaison($raison);
+        $delete->setEtablissement($etablissement);
+        $this->deleteRepository->add($delete, true);
+
+        $etablissement->setStatut('delete');
+        $this->etablissementRepository->add($etablissement, true);
 
         return $this->redirectToRoute('app_dashboard');
     }
@@ -307,7 +318,7 @@ class FrontController extends AbstractController
                 $etablissement->setAvatar($fileName);
             }
 
-            $etablissement->setValide(0);
+            $etablissement->setStatut('en attente');
             $this->etablissementRepository->add($etablissement, true);
 
             return $this->redirectToRoute('app_dashboard');

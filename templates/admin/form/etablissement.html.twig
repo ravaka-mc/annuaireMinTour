@@ -325,7 +325,7 @@
 					<div class="t-right mt-50">
 						{{ form_widget(form._token) }}
 						<button type="submit" class="btn">{{ label_btn }}</button>
-						{% if is_edit == 1 and etablissement.valide != 1 %}
+						{% if is_edit == 1 and etablissement.statut != 'valide' %}
 						<!-- Modifier en attente -->
 						<a href="{{ path('app_admin_etablissement_valide', {id:etablissement.id}) }}"class="btn green">Valider</a>
 						<button data-fancybox="" data-src="#refuser" class="btn red">Refuser</button>
@@ -336,7 +336,7 @@
            {% include "admin/block/copyright.html.twig" %}
         </section>
     </main>
-	{% if is_edit == 1 and etablissement.valide != 1 %}
+	{% if is_edit == 1 and etablissement.statut != 'valide' %}
 	<div style="display: none; min-width: 400px; max-width: 500px;" id="refuser" class="popup-style">
         <form class="form-wrap" method="post" action="{{ path('app_admin_etablissement_refuse', {id:etablissement.id}) }}">
              <ul class="form-error"></ul>
