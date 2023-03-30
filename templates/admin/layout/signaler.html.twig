@@ -17,6 +17,7 @@
                         <th><span>Email</span></th>
                         <th><span>Etablissements</span></th>
                         <th><span>Motif</span></th>
+                        <th><span>Action</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,6 +28,12 @@
                             <td>{{ signaler.email }}</td>
                             <td>{{ signaler.etablissement }}</td>
                             <td>{{ signaler.motif }}</td>
+							<td>
+								<div class="action">
+									<a href="" class="edit"></a>
+									<a data-fancybox="" data-src="#popup-delete" class="delete"></a>
+								</div>
+							</td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -34,6 +41,16 @@
             {% include "admin/block/copyright.html.twig" %}
         </section>
     </main>
+	<!-- Modal supprimer -->
+	<div id="popup-delete" class="pop_suppr" style="display:none; max-width:500px;">
+		<div class="innerpad">
+			<p>Êtes vous sûr de vouloir supprimer cette signalement ?</p>
+		</div>
+		<div class="pop_btns">
+			<a href="" class="btn-pop confirm">Supprimer</a>
+			<span data-fancybox-close class="btn-pop">Annuler</span>
+		</div>
+	</div>
 {% endblock %}
 {% block javascripts %}
     <script src="{{ asset('admin/js/jquery.fancybox.min.js') }}"></script>

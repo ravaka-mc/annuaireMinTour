@@ -40,7 +40,7 @@
 										{% if etablissement is defined and etablissement.avatar is not null %}
 											<img src="{{ asset('uploads/etablissements/' ~ etablissement.getAvatar()) }}">
 										{% else %}
-											<img src="{{ asset('admin/img/default-etablissement.svg') }}">
+											<img src="{{ asset('front/images/default-etablissement.svg') }}">
 										{% endif %}
 										<label for="pdp">
 											<span class="replace-img"></span>
@@ -386,6 +386,12 @@
 		</div>
 	</div>
 </main>
+<!-- Modal etablissement ajouter -->
+<div id="popup-succesadd" class="pop_sucsadd" style="display:none; max-width:500px;">
+	<div class="innerpad">
+		<p>Votre établissement à été bien ajouté</p>
+	</div>
+</div>
 {% endblock %}
 {% block javascripts %}
     <script>

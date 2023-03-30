@@ -3632,6 +3632,10 @@ textarea::placeholder {
 .popup .fancybox-close-small:after {
 	display: none;
 }
+.pop_sucsadd .innerpad {
+	padding: 100px 20px 20px;
+    background: url(images/checkgreen.svg) no-repeat top 20px center;
+}
 
 footer {
 	color: #fff;
