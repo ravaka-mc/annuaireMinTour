@@ -76,7 +76,7 @@
 {% for etablissement in etablissements %}
 <div id="popup-delete_{{etablissement.id}}" class="pop_suppr" style="display:none; max-width:500px;">
     <div class="innerpad">
-        <p>Êtes vous sûr de vouloir supprimer cette etablissement ?</p>
+        <h6>Êtes vous sûr de vouloir supprimer cette etablissement ?</h6>
     </div>
     <form class="form-wrap" method="post" action="{{ path('app_front_etablissement_delete', {slug:etablissement.slug}) }}">
             <ul class="form-error"></ul>

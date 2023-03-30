@@ -58,7 +58,7 @@
                         <div class="stitre">
                             E-mail
                         </div>
-                        <span>{{ etablissement.email }}</span>
+                        <span><a href="mailto:{{ etablissement.email }}">{{ etablissement.email }}</a></span>
                     </div>
                     {% endif %}
                     {% if etablissement.telephone is not null %}
@@ -66,7 +66,7 @@
                         <div class="stitre">
                             Téléphone
                         </div>
-                        <span>{{ etablissement.telephone }}</span>
+                        <span><a href="tel:{{ etablissement.telephone }}">{{ etablissement.telephone }}</a></span>
                     </div>
                     {% endif %}
                     {% if etablissement.siteWeb is not null %}
@@ -74,7 +74,7 @@
                         <div class="stitre">
                             Site web
                         </div>
-                        <span>{{ etablissement.siteWeb }}</span>
+                        <span><a href="https://{{ etablissement.siteWeb }}" target="_blank">{{ etablissement.siteWeb }}</a></span>
                     </div>
                     {% endif %}
                 </div>

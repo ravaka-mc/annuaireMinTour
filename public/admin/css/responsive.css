@@ -100,6 +100,13 @@ section.logo-menu { padding:0 0 40px; display: grid; grid-template-rows: 15vh 1f
 	.bloc-33 {
 		grid-template-columns: 1fr;
 	}
+	.dtr-data {
+		position: relative;
+	}
+	.infobull {
+		margin-top: -20px;
+		right: -20px;
+	}
 }
 @media(max-width:600px){
     .bloc-50>.item .card { padding: 20px; }
