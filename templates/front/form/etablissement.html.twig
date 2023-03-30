@@ -13,17 +13,6 @@
 		<div class="grid-custom list-etablissement">
 			{% include "front/block/dashboard-nav.html.twig" %}
 			<div class="content-bo_user">
-				<ul class="error">
-					{% for error in errors %}
-						{% if error is iterable %}
-							{% for msg in error %}
-								<li>{{ msg }}</li>
-							{% endfor %}
-						{% else %}
-							<li>{{ error }}</li>
-						{% endif %}
-					{% endfor %}
-				</ul>
 				<form id="frm-etablissement" name="{{ form.vars.full_name }}" method="post" enctype="multipart/form-data">
 					<div class="categories">
 						<div class="card-wrap">

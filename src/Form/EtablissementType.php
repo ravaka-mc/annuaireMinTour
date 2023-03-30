@@ -142,12 +142,12 @@ class EtablissementType extends AbstractType
                 ->add('reference')
                 ->add('nif', TextType::class, [
                     'constraints' => [
-                        new Regex('/\d{10}/')
+                        new Regex('/\d/')
                     ],
                 ])
                 ->add('stat', TextType::class, [
                     'constraints' => [
-                        new Regex('/\d{17}/')
+                        new Regex('/\d/')
                     ],
                 ])
                 ->add('licenceA', CheckboxType::class, [
@@ -211,12 +211,12 @@ class EtablissementType extends AbstractType
                 ->add('reference')
                 ->add('nif', TextType::class, [
                     'constraints' => [
-                        new Regex('/\d{10}/')
+                        new Regex('/\d/')
                     ],
                 ])
                 ->add('stat', TextType::class, [
                     'constraints' => [
-                        new Regex('/\d{17}/')
+                        new Regex('/\d/')
                     ],
                 ])
                 ->add('nombreChambres')
@@ -259,12 +259,12 @@ class EtablissementType extends AbstractType
                 ->add('reference')
                 ->add('nif', TextType::class, [
                     'constraints' => [
-                        new Regex('/\d{10}/')
+                        new Regex('/\d/')
                     ],
                 ])
                 ->add('stat', TextType::class, [
                     'constraints' => [
-                        new Regex('/\d{17}/')
+                        new Regex('/\d/')
                     ],
                 ])
                 ->add('nombreCouverts')
@@ -277,12 +277,12 @@ class EtablissementType extends AbstractType
                 ->add('autreGroupement')
                 ->add('nif', TextType::class, [
                     'constraints' => [
-                        new Regex('/\d{10}/')
+                        new Regex('/\d/')
                     ],
                 ])
                 ->add('stat', TextType::class, [
                     'constraints' => [
-                        new Regex('/\d{17}/')
+                        new Regex('/\d/')
                     ],
                 ]);
                 break;
