@@ -55,7 +55,6 @@ class EtablissementType extends AbstractType
                     new Email(),
                 ],
             ])
-            ->add('siteWeb')
             ->add('avatarFile', FileType::class,[
                 'required' => false,
                 'mapped' => false,
@@ -125,6 +124,7 @@ class EtablissementType extends AbstractType
                     'required' => false,
                     'choices' => $category->getActivites()
                 ])
+                ->add('siteWeb')
                 ->add('proprietaire')
                 ->add('gerant')
                 ->add('region', EntityType::class, [
@@ -176,7 +176,6 @@ class EtablissementType extends AbstractType
                 ]);
                 break;
             case 'TYPE_2':
-            case 'TYPE_3':
                 $form->add('classement', EntityType::class, [
                     'class' => Classement::class,
                     'choice_label' => 'nom',
@@ -186,6 +185,7 @@ class EtablissementType extends AbstractType
                     'placeholder' => false,
                     'required' => false,
                 ])
+                ->add('siteWeb')
                 ->add('proprietaire')
                 ->add('gerant')
                 ->add('region', EntityType::class, [
@@ -224,6 +224,55 @@ class EtablissementType extends AbstractType
                 ->add('nombreCouverts')
                 ->add('nombreSalaries');
                 break;
+            case 'TYPE_3':
+                $form->add('classement', EntityType::class, [
+                    'class' => Classement::class,
+                    'choice_label' => 'nom',
+                    'expanded' => true,
+                    'multiple' => false,
+                    'empty_data' => '',
+                    'placeholder' => false,
+                    'required' => false,
+                ])
+                ->add('siteWeb')
+                ->add('proprietaire')
+                ->add('gerant')
+                ->add('region', EntityType::class, [
+                    'class' => Region::class,
+                    'choice_label' => 'nom',
+                    'expanded' => false,
+                    'multiple' => false,
+                    'placeholder' => '--------------------',
+                    'required' => false,
+                ])
+                ->add('activites', EntityType::class, [
+                    'class' => Activite::class,
+                    'choice_label' => 'nom',
+                    'expanded' => true,
+                    'multiple' => true,
+                    'required' => false,
+                    'choices' => $category->getActivites()
+                ])
+                ->add('dateOuverture', DateType::class, [
+                    'widget' => 'single_text',
+                    'required' => false,
+                ])
+                ->add('reference')
+                ->add('nif', TextType::class, [
+                    'constraints' => [
+                        new Regex('/\d/')
+                    ],
+                ])
+                ->add('stat', TextType::class, [
+                    'constraints' => [
+                        new Regex('/\d/')
+                    ],
+                ])
+                ->add('nombreChambres')
+                ->add('capaciteAccueil')
+                ->add('salleConference')
+                ->add('nombreSalaries');
+                break;
             case 'TYPE_4':
                 $form->add('classement', EntityType::class, [
                     'class' => Classement::class,
@@ -234,6 +283,7 @@ class EtablissementType extends AbstractType
                     'placeholder' => false,
                     'required' => false,
                 ])
+                ->add('siteWeb')
                 ->add('proprietaire')
                 ->add('gerant')
                 ->add('region', EntityType::class, [

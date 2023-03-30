@@ -39,37 +39,14 @@ class EtablissementRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Etablissement[] Returns an array of Etablissement objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('e.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Etablissement
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
-
     /**
      * @return Etablissement[] Returns an array of Etablissement objects
      */
     public function search($keyword = "", $region = "", $activite =""): array
     {
         $query = $this->createQueryBuilder('e')
+        ->andWhere('e.statut = :statut')
+        ->setParameter('statut', 'valide')
         ->andWhere('e.nom LIKE :keyword')
         ->setParameter('keyword', '%' . $keyword . '%')
         ->orderBy('e.created_at', 'DESC');

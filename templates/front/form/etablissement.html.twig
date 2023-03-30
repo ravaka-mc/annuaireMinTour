@@ -75,10 +75,14 @@
 												<span class="champ-erreur">Ce champ est obligatoire</span>
 											{% endif %}
 										</div>
-										<div class="form-control">
-											<label for="">Site web</label>
-											{{ form_widget(form.siteWeb) }}
-										</div>
+										{% if form.siteWeb is defined %}
+											<div id="wrapper-web" class="form-control">
+												<label for="">Site web</label>
+												{{ form_widget(form.siteWeb) }}
+											</div>
+										{% else %}
+											<div id="wrapper-web"></div>
+										{% endif %}
 									</div>
 									{% if form.region is defined %}
 										<div id="wrapper-region" class="form-control">
@@ -311,10 +315,19 @@
 											{{ form_widget(form.capaciteAccueil) }}
 										</div>
 										{% endif %}
-										<div class="form-control">
-											<label for="">Nombre de couverts</label>
-											{{ form_widget(form.nombreCouverts) }}
-										</div>
+										{% if form.nombreCouverts is defined %}
+											<div class="form-control">
+												<label for="">Nombre de couverts</label>
+												{{ form_widget(form.nombreCouverts) }}
+											</div>
+										{% endif %}
+			
+										{% if form.salleConference is defined %}
+											<div class="form-control">
+												<label for="">Salle de conférence</label>
+												{{ form_widget(form.salleConference) }}
+											</div>
+										{% endif %}
 										<div class="form-control">
 											<label for="">Nombre de Salariés</label>
 											{{ form_widget(form.nombreSalaries) }}
@@ -413,7 +426,7 @@
 			keypressNumberOnly();
 			var currentStep = 1;
 			var totalSteps = $('.step').length;
-			$('.step:first').addClass('active');
+			//$('.step:first').addClass('active');
 			
 			$('.next').click(function() {
 				$('.active .champ-erreur').remove();
@@ -465,7 +478,10 @@
             $('.categories select').on('change', function() {
 				currentStep = 1;
 				$('.step').removeClass('active')
-				$('.step:first').addClass('active');
+				
+				if($(this).val() != '')
+					$('.step:first').addClass('active');
+
 				$('.prev').hide();
 				$('.btnadd').hide();
 				$('.next').show();
@@ -513,6 +529,9 @@
 						);
 						$('#wrapper-autregroupement').replaceWith(
 							$(response).find('#wrapper-autregroupement')
+						);
+						$('#wrapper-web').replaceWith(
+							$(response).find('#wrapper-web')
 						);
 						changeLicences();
 						keypressNumberOnly();

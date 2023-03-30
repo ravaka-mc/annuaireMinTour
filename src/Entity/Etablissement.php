@@ -240,6 +240,11 @@ class Etablissement
      */
     private $delete;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $salleConference;
+
     public function __construct()
     {
         $this->groupements = new ArrayCollection();
@@ -820,6 +825,18 @@ class Etablissement
     public function setStatut(?string $statut): self
     {
         $this->statut = $statut;
+
+        return $this;
+    }
+
+    public function getSalleConference(): ?string
+    {
+        return $this->salleConference;
+    }
+
+    public function setSalleConference(?string $salleConference): self
+    {
+        $this->salleConference = $salleConference;
 
         return $this;
     }

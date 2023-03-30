@@ -134,8 +134,8 @@ class FrontController extends AbstractController
             ]);
 
             $message = (new Email())
-            ->from('contact@asako.mg')
-            ->to('ramanantsoafitiavana@gmail.com')
+            ->from('ramanantsoafitiavana@gmail.com')
+            ->to('comptegitmada@gmail.com')
             ->subject('Formulaire de contact')
             ->html("<p> Ceci est un test</p>");
 
@@ -169,6 +169,19 @@ class FrontController extends AbstractController
         $region_id = $request->query->get('region','');
         $activite_id = $request->query->get('activite','');
 
+        $label_search = '';
+        if($search != ''){
+            $label_search = $search;
+        } elseif($region_id != '') {
+            $label_search = $this->regionRepository->findOneBy([
+                'id' => (int) $region_id
+            ]);
+        } elseif($activite_id != ''){
+            $label_search = $this->activiteRepository->findOneBy([
+                'id' => (int) $activite_id
+            ]);
+        }
+
         $etablissements = $this->etablissementRepository->search($search, $region_id, $activite_id);
 
         return $this->render('front/etablissements.html.twig', [
@@ -179,6 +192,7 @@ class FrontController extends AbstractController
             'regions' => $regions,
             'activites' => $activites,
             'search' => $search,
+            'label_search' => $label_search,
             'region_id' => $region_id,
             'activite_id' => $activite_id,
             'active' => 'search',
