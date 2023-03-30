@@ -866,7 +866,7 @@ form textarea {
 	resize: none;
 	border: 1px solid #e9e5ef;
 	padding: 10px;
-	font: 16px/29px "mr";
+	font: 14px/25px "mr";
 	width: 100%;
 	height: 200px;
 	color: #1a141d;
@@ -2395,7 +2395,7 @@ form .checkboxgroup {
 .regions__content--item::after {
 	content: "";
 	position: absolute;
-	top: 12px;
+	top: 6px;
 	left: 20px;
 	width: 23px;
 	height: 23px;
@@ -4810,7 +4810,13 @@ footer .footer .mentions li span {
 		grid-template-columns: 1fr;
 	}
 }
-
+.pop_suppr {
+	padding-bottom: 0;
+}
+.pop_suppr h6 {
+	line-height: 1.5;
+	margin-bottom: 30px;
+}
 .pop_suppr .sub-title {
 	margin-bottom: 5px;
 }
@@ -4822,8 +4828,17 @@ footer .footer .mentions li span {
 .pop_btns {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	border-top: 1px solid #f8f8f8;
+	border: 1px solid #ded8e8;
+	border-bottom: 0;
 	margin-top: 30px;
+}
+.pop_btns .btn {
+	border: 0;
+	border-right: 1px solid #ded8e8;
+	border-radius: 0;
+	background-color: #fff;
+	color: #cc224e;
+	margin: 0;
 }
 
 .pop_btns .btn-pop {
@@ -4837,7 +4852,7 @@ footer .footer .mentions li span {
 
 .pop_suppr .confirm {
 	color: #cc224e;
-	border-right: 1px solid #f8f8f8;
+	border-right: 1px solid #ded8e8;
 }
 
 /** Step **/

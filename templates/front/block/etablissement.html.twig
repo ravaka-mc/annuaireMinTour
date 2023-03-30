@@ -1,6 +1,10 @@
 <div class="membre__content--item">
     <div class="logoitem">
-        <img src="{{ asset('uploads/etablissements/' ~ etablissement.getAvatar()) }}" alt="">
+		{% if etablissement.avatar is not null %}
+			<img src="{{ asset('uploads/etablissements/' ~ etablissement.getAvatar()) }}">
+		{% else %}
+			<img src="{{ asset('front/images/default-etablissement.svg') }}">
+		{% endif %}
     </div>
     <div class="texteitem">
         <div class="titreitem">{{ etablissement.nom }}</div>
