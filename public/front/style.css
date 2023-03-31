@@ -4815,9 +4815,6 @@ footer .footer .mentions li span {
 		grid-template-columns: 1fr;
 	}
 }
-.pop_suppr {
-	padding-bottom: 0;
-}
 .pop_suppr h6 {
 	line-height: 1.5;
 	margin-bottom: 30px;
@@ -4837,12 +4834,11 @@ footer .footer .mentions li span {
 	border-bottom: 0;
 	margin-top: 30px;
 }
-.pop_btns .btn {
+.pop_suppr .pop_btns .btn {
+	background: linear-gradient(to left, #cc224e 0%, #cc224e 50%, #231942 50%, #231942 100%);
+	background-size: 200% 100%;
+	background-position: 100% 0;
 	border: 0;
-	border-right: 1px solid #ded8e8;
-	border-radius: 0;
-	background-color: #fff;
-	color: #cc224e;
 	margin: 0;
 }
 
@@ -4854,10 +4850,24 @@ footer .footer .mentions li span {
 	line-height: 50px;
 	cursor: pointer;
 }
-
-.pop_suppr .confirm {
-	color: #cc224e;
-	border-right: 1px solid #ded8e8;
+.pop_suppr .pop_btns {
+	gap: 20px;
+	align-items: center;
+	border: 0;
+	margin-top: 20px;
+}
+.pop_suppr .pop_btns span {
+	display: inline-block;
+	vertical-align: top;
+	padding: 0 20px;
+	line-height: 46px;
+	text-align: center;
+	background-image: linear-gradient(to left, #614371 0%, #614371 50%, #231942 50%, #231942 100%);
+	background-size: 200% 100%;
+	transition: all 300ms ease;
+	margin: 0;
+	border-radius: 23px;
+	color: #fff;
 }
 
 /** Step **/
