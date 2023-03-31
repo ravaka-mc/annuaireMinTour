@@ -2440,7 +2440,7 @@ form .checkboxgroup {
 .categorie .membre, .membre.bg_white {
 	background: #fff;
 	padding-bottom: 50px;
-	min-height: 40vh;
+	min-height: 55vh;
 }
 
 .membre.aucun {
@@ -2743,6 +2743,7 @@ form .checkboxgroup {
 	display: grid;
 	grid-template-columns: 305px auto;
 	gap: 45px;
+	min-height: 65vh;
 }
 
 .list-etablissement .card {
