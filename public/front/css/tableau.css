@@ -1,7 +1,7 @@
 [class^="custom-table"] { width:100% !important; margin:0 auto; overflow: hidden; border: 1px solid #ebebeb !important; text-align: center;}
 /*.custom-table-alert { max-width:990px;}*/
 [class^="custom-table"] thead [class^="sorting"]{ color:#fff; background-color:#41436a; font:normal 16px/22px "Montserrat"; font-weight: normal; padding:0; border:none;}
-[class^="custom-table"].dataTable tbody td { position:relative; padding:10px; border-bottom: 1px solid #ebebeb; }
+[class^="custom-table"].dataTable tbody td { position:relative; padding:10px; border-bottom: 1px solid #ebebeb; font-family: "Montserrat"; line-height: 18px; }
 [class^="custom-table"].dataTable thead th { padding:0 30px; height:52px; text-transform: uppercase; background: none; background-color: #e5dce9; font-size: 14px; color:#000000; }
 [class^="custom-table"].dataTable thead th:first-child { border-top-left-radius: 5px;}
 [class^="custom-table"].dataTable thead th:last-child { border-top-right-radius: 5px;}
@@ -19,7 +19,6 @@
 .dataTables_wrapper .dataTables_paginate .paginate_button.next { font-size: 0; background: url('../images/next-table.svg') no-repeat center; margin-left: 2px; }
 #table-list_paginate .paginate_button.current { background-color: #41436a; color: #ffffff !important; border: 0; }
 #table-list_paginate .paginate_button:not(.previous):not(.next) { margin: 0 4px; }
-.dataTables_wrapper [class^="custom-table"].dataTable tbody td:first-child { font-family: "Montserrat"; line-height: 18px;}
 #table-list_wrapper [class^="custom-table"] { border-bottom:0 !important; border-bottom-right-radius: 0; border-bottom-left-radius: 0; font-size: 12px; border: none !important; border-radius: 5px; overflow: hidden;}
 .paginate_button:not(.disabled):hover { background-color: #41436a; color: #ffffff; }
 .en-attente, .valide, .refuse { width: 85px; line-height: 33px; border-radius: 16px; font-size: 12px; color: #fff; margin: auto; }
