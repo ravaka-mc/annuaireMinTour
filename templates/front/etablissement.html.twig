@@ -126,7 +126,7 @@
                 </div>
             </div>
         </div>
-        {% if etablissement.category.viewType != 'TYPE_5' %}
+        {% if etablissement.category.viewType != 'TYPE_5' and ( etablissement.capaciteAccueil != '' or etablissement.nombreSalaries != '' or etablissement.nombreChambres != '' or etablissement.nombreCouverts)%}
 		<div class="stat textcenter">
 			<div class="gtitre">
 				L'établissement en quelques chiffres
