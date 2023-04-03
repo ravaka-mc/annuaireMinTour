@@ -46,7 +46,6 @@ class EtablissementType extends AbstractType
         $defaultUser = $this->userRepository->find($user->getId());
 
         $builder
-            ->add('nom')
             ->add('auteur')
             ->add('adresse')
             ->add('telephone')
@@ -124,6 +123,7 @@ class EtablissementType extends AbstractType
                     'required' => false,
                     'choices' => $category->getActivites()
                 ])
+                ->add('nom', TextType::class, ['label' => 'Dénomination sociale'])
                 ->add('siteWeb')
                 ->add('proprietaire')
                 ->add('gerant')
@@ -185,6 +185,7 @@ class EtablissementType extends AbstractType
                     'placeholder' => false,
                     'required' => false,
                 ])
+                ->add('nom', TextType::class, ['label' => 'Dénomination sociale'])
                 ->add('siteWeb')
                 ->add('proprietaire')
                 ->add('gerant')
@@ -234,6 +235,7 @@ class EtablissementType extends AbstractType
                     'placeholder' => false,
                     'required' => false,
                 ])
+                ->add('nom', TextType::class, ['label' => 'Dénomination sociale'])
                 ->add('siteWeb')
                 ->add('proprietaire')
                 ->add('gerant')
@@ -283,6 +285,7 @@ class EtablissementType extends AbstractType
                     'placeholder' => false,
                     'required' => false,
                 ])
+                ->add('nom', TextType::class, ['label' => 'Dénomination sociale'])
                 ->add('siteWeb')
                 ->add('proprietaire')
                 ->add('gerant')
@@ -322,6 +325,7 @@ class EtablissementType extends AbstractType
                 break;
             case 'TYPE_5':
                 $form->add('zoneIntervention')
+                ->add('nom', TextType::class, ['label' => 'Nom et Prénom'])
                 ->add('categorieAutorisation')
                 ->add('carteProfessionnelle')
                 ->add('autreGroupement')
