@@ -43,10 +43,14 @@
 							<div class="form-in-head">
 								<div class="sub-title"><span>Coordonnées</span></div>
 								<div class="form-wrap">
-									<div class="form-control">
-										<label>Dénomination social</label>
+									{% if form.nom is defined %}
+									<div id="wrapper-nom" class="form-control">
+										<label>{{ form.nom.vars.label }}</label>
 										{{ form_widget(form.nom) }}
 									</div>
+									{% else %}
+										<div id="wrapper-nom"></div>
+									{% endif %}
 									<div class="form-control">
 										<label>Courte description</label>
 										{{ form_widget(form.auteur) }}
@@ -317,10 +321,12 @@
 										<label for="">Catégorie</label>
 										{{ form_widget(form.categorieAutorisation) }}
 									</div>
+									{% if form.carteProfessionnelle is defined %}
 									<div class="form-control">
 										<label for="">N° carte et badge professionnel</label>
 										{{ form_widget(form.carteProfessionnelle) }}
 									</div>
+									{% endif %}
 									<div class="form-control">
 										<label for="">NIF</label>
 										{{ form_widget(form.nif) }}
@@ -457,6 +463,10 @@
 						$('#wrapper-web').replaceWith(
 							$(response).find('#wrapper-web')
 						);
+						$('#wrapper-nom').replaceWith(
+							$(response).find('#wrapper-nom')
+						);
+						
 						
 						changeLicences();
 					}
