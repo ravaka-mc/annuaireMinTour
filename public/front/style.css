@@ -2332,6 +2332,7 @@ form .checkboxgroup {
 
 .texteitem {
 	padding: 20px 30px 30px;
+	font-size: 14px;
 }
 
 .texteitem .titreitem {
@@ -2537,7 +2538,7 @@ form .checkboxgroup {
 
 .top-detail .wrap-detail {
 	display: grid;
-	grid-template-columns: 200px auto;
+	grid-template-columns: 150px auto;
 	gap: 40px;
 	margin: 0 auto;
 	justify-content: center;
@@ -2550,7 +2551,7 @@ form .checkboxgroup {
 .top-detail .wrap-detail .images {
 	display: flex;
 	background: #ded9e6;
-	width: 200px;
+	/*width: 200px;*/
 	height: 140px;
 	align-items: center;
 	justify-content: center;
