@@ -126,6 +126,7 @@
                 </div>
             </div>
         </div>
+        {% if etablissement.category.viewType != 'TYPE_5' %}
 		<div class="stat textcenter">
 			<div class="gtitre">
 				L'établissement en quelques chiffres
@@ -178,6 +179,7 @@
 			</div>
 			<a data-fancybox href="#infopop" class="link-signal">Signaler cette établissement</a>
 		</div>
+        {% endif %}
     </div>
 </main>
 <div class="popup" id="infopop">
