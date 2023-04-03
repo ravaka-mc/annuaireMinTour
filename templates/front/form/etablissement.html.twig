@@ -29,7 +29,7 @@
 										{% if etablissement is defined and etablissement.avatar is not null %}
 											<img src="{{ asset('uploads/etablissements/' ~ etablissement.getAvatar()) }}">
 										{% else %}
-											<img src="{{ asset('admin/img/default-etablissement.svg') }}">
+											<img src="{{ asset('front/images/default-etablissement.svg') }}">
 										{% endif %}
 										<label for="pdp">
 											<span class="replace-img"></span>
@@ -200,7 +200,7 @@
 							<div id="wrapper-coordonnees" class="bloc_editense form-wrap step">
 								<div class="card-wrap">
 									<div class="form-in-head">
-										<div class="sub-title"><span>Coordonnées</span></div>
+										<div class="sub-title"><span>Autorisation d'ouverture</span></div>
 									</div>
 									<div class="half">
 										<div class="form-control">
@@ -270,7 +270,7 @@
 							<div id="wrapper-autorisation" class="bloc_editense form-wrap step">
 								<div class="card-wrap">
 									<div class="form-in-head">
-										<div class="sub-title"><span>Autorisation</span></div>
+										<div class="sub-title"><span>Autorisation d'ouverture</span></div>
 									</div>
 									<div class="half">
 										<div class="form-control">
@@ -380,7 +380,7 @@
 							{{ form_widget(form._token) }}
 							<a class="btn prev">Précédent</a>
 							<a class="btn next">Suivant</a>
-							<button type="submit" class="btn btnadd">{{ label_btn }}</button>
+							<button type="submit" class="btn btnadd">{{ label_btn }}</button> <!-- data-fancybox data-src="#popup-succesadd" -->
 						</div>
 					</div>
 				</form>
@@ -388,6 +388,12 @@
 		</div>
 	</div>
 </main>
+<!-- Modal etablissement ajouter -->
+<div id="popup-succesadd" class="pop_sucsadd" style="display:none; max-width:500px;">
+	<div class="innerpad">
+		<p>Votre établissement à été bien ajouté</p>
+	</div>
+</div>
 {% endblock %}
 {% block javascripts %}
     <script>

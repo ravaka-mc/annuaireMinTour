@@ -26,7 +26,7 @@
 #table-list td img { display: inline-block; max-height:70px; max-width: 140px; object-fit:cover; height: auto; }
 .annonces .action { min-width: 122px; }
 /* ajout */
-.custom-table-secteur td { font-size: 14px; }
+.custom-table-secteur td { font-size: 14px; line-height: 20px; }
 .custom-table-secteur th:nth-child(6), .custom-table-secteur td:nth-child(6) {
 	min-width: 130px;
 }

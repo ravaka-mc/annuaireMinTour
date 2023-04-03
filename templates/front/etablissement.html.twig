@@ -15,7 +15,11 @@
             </div>
             <div class="wrap-detail">
                 <div class="images">
-                    <img src="{{ asset('uploads/etablissements/' ~ etablissement.getAvatar()) }}" alt="">
+					{% if etablissement.avatar is not null %}
+						<img src="{{ asset('uploads/etablissements/' ~ etablissement.getAvatar()) }}">
+					{% else %}
+						<img src="{{ asset('front/images/default-etablissement.svg') }}">
+					{% endif %}
                 </div>
                 <div class="texteitem">
                     <h1>{{ etablissement.nom }}</h1>
@@ -205,6 +209,13 @@
 				<button type="submit" class="btn"><span>Signaler</span></button>
 			</div>
 		</form>
+	</div>
+</div>
+
+<!-- Modal signalement succes -->
+<div id="popup-succesadd" class="pop_sucsadd" style="display:none; max-width:500px;">
+	<div class="innerpad">
+		<p>Votre signalement à été bien envoyé</p>
 	</div>
 </div>
 {% endblock %}
