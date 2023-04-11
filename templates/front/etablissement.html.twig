@@ -125,8 +125,9 @@
                 </div>
             </div>
         </div>
-        {% if etablissement.category.viewType != 'TYPE_5' and ( etablissement.capaciteAccueil != '' or etablissement.nombreSalaries != '' or etablissement.nombreChambres != '' or etablissement.nombreCouverts)%}
 		<div class="stat textcenter">
+        {% if etablissement.category.viewType != 'TYPE_5' and ( etablissement.capaciteAccueil != '' or etablissement.nombreSalaries != '' or etablissement.nombreChambres != '' or etablissement.nombreCouverts)%}
+		
 			<div class="gtitre">
 				L'établissement en quelques chiffres
 			</div>
@@ -167,18 +168,20 @@
 				{% if etablissement.nombreCouverts is not null %}
 				<div class="item">
 					<div class="icon">
-						<img src="{{ asset('front/images/salle.svg') }}" alt="">
+						<img src="{{ asset('front/images/couvert.svg') }}" alt="">
 					</div>
 					<div class="texte">
-					<p><span class="numscroller" data-min="1" data-max="{{ etablissement.nombreCouverts}}   " data-delay="5" data-increment="10">{{ etablissement.nombreCouverts}}</span>m <sup>2</sup> </p>
-					<div class="n-titre">Salle de conférence</div>
+					<p><span class="numscroller" data-min="1" data-max="{{ etablissement.nombreCouverts}}   " data-delay="5" data-increment="10">{{ etablissement.nombreCouverts}}</span> </p>
+					<div class="n-titre">Nbre de couvert</div>
 					</div>
+					
 				</div>
 				{% endif %}
 			</div>
-			<a data-fancybox href="#infopop" class="link-signal">Signaler cette établissement</a>
+			{% endif %}
+			<a data-fancybox href="#infopop" class="link-signal">Signaler cet établissement</a>
 		</div>
-        {% endif %}
+        
     </div>
 </main>
 <div class="popup" id="infopop">

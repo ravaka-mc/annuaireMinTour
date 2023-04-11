@@ -2305,7 +2305,7 @@ form .checkboxgroup {
 .membre__content {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	grid-gap: 20px 60px;
+	grid-gap: 20px 20px;
 	padding-top: 30px;
 }
 
@@ -2343,7 +2343,9 @@ form .checkboxgroup {
 
 .texteitem ul li .domaine {
 	padding-left: 30px;
-	background: url(images/etiquette.svg) left center no-repeat;
+	background: url(images/etiquette.svg) left 6px no-repeat;
+	display : block;
+	line-height: 26px;
 }
 
 .texteitem ul li .localisation {
@@ -2541,7 +2543,7 @@ form .checkboxgroup {
 	grid-template-columns: 150px auto;
 	gap: 40px;
 	margin: 0 auto;
-	justify-content: center;
+	/*justify-content: center;*/
 	align-items: center;
 }
 .wrap-detail h1 {
@@ -2574,6 +2576,7 @@ form .checkboxgroup {
 	background: #fff;
 	box-shadow: 0px 10px 30px 3px rgba(0, 0, 0, 0.08);
 	padding: 20px 60px 40px;
+	margin-bottom:45px;
 }
 
 .information .item {
@@ -2664,16 +2667,18 @@ form .checkboxgroup {
 
 .stat {
 	position: relative;
-	padding: 45px 0 50px;
+	padding: 0px 0 50px;
 }
 
 .stat-detail {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
+	display: flex;
+	justify-content: center;
+	flex-flow: row wrap;
 	margin-top: 40px;
 }
 
 .stat-detail .item {
+	width: 25%;
 	text-align: center;
 }
 
@@ -2710,7 +2715,7 @@ form .checkboxgroup {
 	height: 60px;
 	align-items: center;
 }
-
+.stat-detail .item .icon img {width:50px}
 .breadcrumbs {
 	margin-bottom: 45px;
 }
@@ -4332,9 +4337,12 @@ footer .footer .mentions li span {
 	}
 
 	.stat-detail {
-		grid-template-columns: 1fr 1fr;
-		gap: 30px 0;
 		margin-top: 30px;
+		gap: 30px 0;
+	}
+	
+	.stat-detail .item {
+		width: 50%;
 	}
 
 	.stat-detail .item:nth-child(3) .texte {
@@ -4715,11 +4723,11 @@ footer .footer .mentions li span {
 	}
 
 	.stat-detail {
-		grid-template-columns: 1fr;
 		gap: 0;
 	}
 
 	.stat-detail .item {
+		width: 100%;
 		display: grid;
 		grid-template-columns: 80px 1fr;
 		text-align: left;
@@ -4884,3 +4892,4 @@ footer .footer .mentions li span {
 	transition: all 300ms ease;
 }
 .prev, .btnadd, .step, .form-control.slidergrpm { display: none; }
+.categorie main {min-height:90vh}

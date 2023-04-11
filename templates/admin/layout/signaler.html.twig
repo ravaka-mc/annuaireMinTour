@@ -16,7 +16,7 @@
                         <th><span>Nom</span></th>
                         <th><span>Email</span></th>
                         <th><span>Etablissements</span></th>
-                        <th><span>Motif</span></th>
+                        
                         <th><span>Action</span></th>
                     </tr>
                 </thead>
@@ -27,20 +27,29 @@
                             <td>{{ signaler.nom }}</td>
                             <td>{{ signaler.email }}</td>
                             <td>{{ signaler.etablissement }}</td>
-                            <td>{{ signaler.motif }}</td>
+                           
 							<td>
 								<div class="action">
-									<a href="" class="view"></a>
+									<a data-fancybox="" data-src="#edit_{{ signaler.id }}" class="view"></a>
 									<a data-fancybox="" data-src="#popup-delete" class="delete"></a>
 								</div>
 							</td>
                         </tr>
+						
                     {% endfor %}
                 </tbody>
             </table>
             {% include "admin/block/copyright.html.twig" %}
         </section>
     </main>
+	 {% for signaler in signalers %}
+	<div id="edit_{{ signaler.id }}" class="popup-style" style="display:none; max-width:800px;">
+		<div class="sub-title">Motifs</div>
+		<div class="innerpad">
+		<p>{{ signaler.motif }}</p>
+		</div>
+	</div>
+	{% endfor %}
 	<!-- Modal supprimer -->
 	<div id="popup-delete" class="pop_suppr" style="display:none; max-width:500px;">
 		<div class="innerpad">
