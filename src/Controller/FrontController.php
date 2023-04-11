@@ -134,8 +134,8 @@ class FrontController extends AbstractController
             ]);
 
             $message = (new Email())
-            ->from('ramanantsoafitiavana@gmail.com')
-            ->to('comptegitmada@gmail.com')
+            ->from('annuaire@tourisme.gov.mg')
+            ->to('ramanantsoafitiavana@yopmail.com')
             ->subject('Formulaire de contact')
             ->html("<p> Ceci est un test</p>");
 

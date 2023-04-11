@@ -133,7 +133,7 @@ class EtablissementType extends AbstractType
                     'expanded' => false,
                     'multiple' => false,
                     'placeholder' => '--------------------',
-                    'required' => false,
+                    'required' => true,
                 ])
                 ->add('dateOuverture', DateType::class, [
                     'widget' => 'single_text',
