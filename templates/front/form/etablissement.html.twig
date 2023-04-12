@@ -438,8 +438,10 @@
 			keypressNumberOnly();
 			var currentStep = 1;
 			var totalSteps = $('.step').length;
-			//$('.step:first').addClass('active');
-			
+
+			{% if is_edit == true %}
+				$('.step:first').addClass('active');
+			{% endif %}
 			$('.next').click(function() {
 				$('.active .champ-erreur').remove();
 				var isrequired = false;

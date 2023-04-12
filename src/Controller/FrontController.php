@@ -339,6 +339,7 @@ class FrontController extends AbstractController
         }
         
         return $this->render('front/form/etablissement.html.twig', [
+            'is_edit' => $is_edit,
             'form' => $form->createView(),
             'etablissement' => $etablissement,
             'titre' => $titre,
