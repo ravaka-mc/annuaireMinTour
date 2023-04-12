@@ -38,6 +38,7 @@
 						<span class="champ-erreur">Ce champ est obligatoire</span>
 					{% endif %}
 				</div>
+				{{ form_widget(form.captcha) }}
 				{{ form_widget(form._token) }}
 				<button type="submit" class="btn btn-secondary" ><span>Envoyer</span></button>
 			</form>
