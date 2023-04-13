@@ -255,7 +255,7 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('nombreChambres')
                 ->add('capaciteAccueil')
-                ->add('nombreCouverts')
+                ->add('salleConference')
                 ->add('nombreSalaries');
                 break;
             case 'TYPE_3':
@@ -320,6 +320,7 @@ class EtablissementType extends AbstractType
                 ->add('nombreChambres')
                 ->add('capaciteAccueil')
                 ->add('salleConference')
+                ->add('nombreCouverts')
                 ->add('nombreSalaries');
                 break;
             case 'TYPE_4':
