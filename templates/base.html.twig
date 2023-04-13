@@ -39,11 +39,11 @@
                             <div class="header_right">
                                 {% if is_granted('ROLE_ADMIN') %}
                                     <a href="{{ path('app_admin')}}" class="btn btn-primary membrebtn">
-                                        <span>Bonjour, {{ app.user.nom }}</span>
+                                        <span>Mon compte</span>
                                     </a>
                                 {% elseif is_granted('ROLE_ETABLISSEMENT') %}
                                     <a href="{{ path('app_dashboard')}}" class="btn btn-primary membrebtn">
-                                        <span>Bonjour, {{ app.user.nom }}</span>
+                                        <span>Mon compte</span>
                                     </a>
                                 {% else  %}
                                     <a href="{{ path('app_dashboard')}}" class="btn btn-primary membrebtn">

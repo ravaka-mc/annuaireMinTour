@@ -133,7 +133,7 @@ class EtablissementType extends AbstractType
                     'expanded' => false,
                     'multiple' => false,
                     'placeholder' => '--------------------',
-                    'required' => true,
+                    'required' => false,
                 ])
                 ->add('dateOuverture', DateType::class, [
                     'widget' => 'single_text',
@@ -195,7 +195,7 @@ class EtablissementType extends AbstractType
                     'expanded' => false,
                     'multiple' => false,
                     'placeholder' => '--------------------',
-                    'required' => true,
+                    'required' => false,
                 ])
                 ->add('activites', EntityType::class, [
                     'class' => Activite::class,
@@ -245,7 +245,7 @@ class EtablissementType extends AbstractType
                     'expanded' => false,
                     'multiple' => false,
                     'placeholder' => '--------------------',
-                    'required' => true,
+                    'required' => false,
                 ])
                 ->add('activites', EntityType::class, [
                     'class' => Activite::class,
@@ -295,7 +295,7 @@ class EtablissementType extends AbstractType
                     'expanded' => false,
                     'multiple' => false,
                     'placeholder' => '--------------------',
-                    'required' => true,
+                    'required' => false,
                 ])
                 ->add('activites', EntityType::class, [
                     'class' => Activite::class,

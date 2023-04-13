@@ -92,6 +92,9 @@
 										<div id="wrapper-region" class="form-control">
 											<label for="">Region</label>
 											{{ form_widget(form.region) }}
+											{% if form_errors(form.telephone) %}
+												<span class="champ-erreur">Ce champ est obligatoire</span>
+											{% endif %}
 										</div>
 									{% else %}
 										<div id="wrapper-region"></div>
