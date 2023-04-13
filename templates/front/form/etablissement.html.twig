@@ -481,7 +481,16 @@
 
 				var regexMail = /^\w+([-+.'][^\s]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 				var regexNumberOnly = /\d/;
+				var regexPhone = /\d{10}/;
 				var regexCharaterOnly = /[^\d]/;
+
+				if($(".active #etablissement_telephone").length > 0){
+					var emailValid = regexPhone.test($(".active #etablissement_telephone").val());
+					if(!emailValid){
+						$(".active #etablissement_telephone").parent().append('<span class="champ-erreur">Téléphone invalid</span>');
+						isrequired = true;
+					}
+				}
 
 				if($(".active #etablissement_email").length > 0){
 					var emailValid = regexMail.test($(".active #etablissement_email").val());
@@ -561,7 +570,7 @@
 						isrequired = true;
 					} 
 				})
-				
+
 				var regexNumberOnly = /\d/;
 				if($(".active #etablissement_nif").length > 0){
 					var nifValid = regexNumberOnly.test($(".active #etablissement_nif").val());

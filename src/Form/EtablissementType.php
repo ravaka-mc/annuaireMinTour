@@ -20,6 +20,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -50,7 +51,7 @@ class EtablissementType extends AbstractType
             ->add('adresse', TextType::class, [
                 'required' => true,
             ])
-            ->add('telephone', TextType::class, [
+            ->add('telephone', TelType::class, [
                 'required' => true,
             ])
             ->add('email', EmailType::class, [
