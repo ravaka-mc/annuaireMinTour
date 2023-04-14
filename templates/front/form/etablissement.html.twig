@@ -414,12 +414,7 @@
 		</div>
 	</div>
 </main>
-<!-- Modal etablissement ajouter -->
-<div id="popup-succesadd" class="pop_sucsadd" style="display:none; max-width:500px;">
-	<div class="innerpad">
-		<p>Votre établissement à été bien ajouté</p>
-	</div>
-</div>
+
 {% endblock %}
 {% block javascripts %}
     <script>
@@ -430,6 +425,13 @@
             return true;
         }
 
+		var characterOnly =(e) => {
+            var ASCIICode = (e.which) ? e.which : e.keyCode
+            if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+                return true;
+            return false;
+        }
+
 		var keypressNumberOnly =() => {
 			$('#etablissement_nif').on('keypress', function(e){
 				return numberOnly(e)
@@ -437,6 +439,14 @@
 
 			$('#etablissement_stat').on('keypress', function(e){
 				return numberOnly(e)
+			})
+
+			$('#etablissement_proprietaire').on('keypress', function(e){
+				return characterOnly(e)
+			})
+
+			$('#etablissement_gerant').on('keypress', function(e){
+				return characterOnly(e)
 			})
 		}
 
@@ -476,14 +486,67 @@
 						isrequired = true;
 					} 
 				})
+
+				$('.active select').each(function(e){
+					if($(this).is(':required') && $(this).val() == ''){
+						$(this).parent().append('<span class="champ-erreur">Ce champ est obligatoire</span>');
+						isrequired = true;
+					} 
+				})
 				
 				if(isrequired) return false;
 
 				var regexMail = /^\w+([-+.'][^\s]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-				var emailValid = regexMail.test($("#etablissement_email").val());
-				if(!emailValid){
-					$("#etablissement_email").parent().append('<span class="champ-erreur">Adresse email invalid</span>');
-					isrequired = true;
+				var regexNumberOnly = /\d/;
+				var regexPhone = /\d{10}/;
+				var regexCharaterOnly = /[^\d]/;
+
+				if($(".active #etablissement_telephone").length > 0){
+					var emailValid = regexPhone.test($(".active #etablissement_telephone").val());
+					if(!emailValid){
+						$(".active #etablissement_telephone").parent().append('<span class="champ-erreur">Téléphone invalid</span>');
+						isrequired = true;
+					}
+				}
+
+				if($(".active #etablissement_email").length > 0){
+					var emailValid = regexMail.test($(".active #etablissement_email").val());
+					if(!emailValid){
+						$(".active #etablissement_email").parent().append('<span class="champ-erreur">Adresse email invalid</span>');
+						isrequired = true;
+					}
+				}
+
+				if($(".active #etablissement_nif").length > 0){
+					var nifValid = regexNumberOnly.test($(".active #etablissement_nif").val());
+					if(!nifValid){
+						$(".active #etablissement_nif").parent().append('<span class="champ-erreur">La valeur est invalide</span>');
+						isrequired = true;
+					}
+				}
+
+				if($(".active #etablissement_stat").length > 0){
+					var statValid = regexNumberOnly.test($("#etablissement_stat").val());
+					if(!nifValid){
+						$(".active #etablissement_stat").parent().append('<span class="champ-erreur">La valeur est invalide</span>');
+						isrequired = true;
+					}
+				}
+				
+				if($(".active #etablissement_proprietaire").length > 0){
+					var proprietaireValid = regexCharaterOnly.test($("#etablissement_proprietaire").val());
+					if(!proprietaireValid){
+						$(".active #etablissement_proprietaire").parent().append('<span class="champ-erreur">La valeur est invalide</span>');
+						isrequired = true;
+					}
+				}
+
+				if($(".active #etablissement_gerant").length > 0){
+					var gerantValid = regexCharaterOnly.test($("#etablissement_gerant").val());
+					if(!gerantValid){
+						$(".active #etablissement_gerant").parent().append('<span class="champ-erreur">La valeur est invalide</span>');
+						isrequired = true;
+					}
 				}
 
 				if(isrequired) return false;
@@ -513,7 +576,40 @@
 
 			$('.replace-img').click(function(){
 				$('#avatar').trigger('click')
+			});
+
+			$('#frm-etablissement').on('submit',function(){
+				$('.active .champ-erreur').remove();
+				var isrequired = false;
+				$('.active input').each(function(e){
+					if($(this).is(':required') && $(this).val() == ''){
+						$(this).parent().append('<span class="champ-erreur">Ce champ est obligatoire</span>');
+						isrequired = true;
+					} 
+				})
+
+				var regexNumberOnly = /\d/;
+				if($(".active #etablissement_nif").length > 0){
+					var nifValid = regexNumberOnly.test($(".active #etablissement_nif").val());
+					if(!nifValid){
+						$(".active #etablissement_nif").parent().append('<span class="champ-erreur">La valeur est invalide</span>');
+						isrequired = true;
+					}
+				}
+
+				if($(".active #etablissement_stat").length > 0){
+					var statValid = regexNumberOnly.test($("#etablissement_stat").val());
+					if(!nifValid){
+						$(".active #etablissement_stat").parent().append('<span class="champ-erreur">La valeur est invalide</span>');
+						isrequired = true;
+					}
+				}
+
+				if(isrequired) return false;
+
+				return true;
 			})
+
             $('.categories select').on('change', function() {
 				currentStep = 1;
 				$('.step').removeClass('active')

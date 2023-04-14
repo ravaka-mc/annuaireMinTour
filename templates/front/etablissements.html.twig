@@ -13,7 +13,7 @@
 			{% if category.id == 3 %}<h1>Tous les Établissements d'Hébergement et de Restauration à Madagascar</h1>{% endif %}
 			{% if category.id == 4 %}<h1>Tous les Établissements de Restauration à Madagascar</h1>{% endif %}
 			{% if category.id == 5 %}<h1>Tous les Guides à Madagascar</h1>{% endif %}
-            <#h1>Tous les {{ category.nom }} à Madagascar</h1-->
+            <!--h1>Tous les {# category.nom #} à Madagascar</h1-->
             {% elseif region is defined %}
             <h1>Tous les établissement formels d’hébergement à {{ region.nom }}</h1>
             {% elseif label_search is defined %}

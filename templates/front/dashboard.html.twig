@@ -94,10 +94,22 @@
     </form>
 </div>
 {% endfor %}
+<a data-fancybox="" data-src="#popup-succesadd" class="view"></a>
+<!-- Modal etablissement ajouter -->
+<div id="popup-succesadd" class="pop_sucsadd" style="display:none; max-width:500px;">
+	<div class="innerpad">
+		<p>Opération effectuée avec succès</p>
+	</div>
+</div>
 {% endblock %}
 {% block javascripts %}
    <script>
 		$(document).ready(function () {
+            {% if app.session.flashBag.has('success') %}
+				jQuery('a.view').trigger('click')
+                $('#popup-succesadd .innerpad').html("<p>{{ app.session.flashBag.get('success')[0] }}</p>")
+			{% endif %}
+
 			$.fn.dataTable.Responsive.breakpoints = [{
 				name: 'desktop',
 				width: Infinity

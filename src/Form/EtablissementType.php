@@ -20,6 +20,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -47,12 +48,17 @@ class EtablissementType extends AbstractType
 
         $builder
             ->add('auteur')
-            ->add('adresse')
-            ->add('telephone')
+            ->add('adresse', TextType::class, [
+                'required' => true,
+            ])
+            ->add('telephone', TelType::class, [
+                'required' => true,
+            ])
             ->add('email', EmailType::class, [
                 'constraints' => [
                     new Email(),
                 ],
+                'required' => true,
             ])
             ->add('avatarFile', FileType::class,[
                 'required' => false,
@@ -125,30 +131,44 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('nom', TextType::class, ['label' => 'Dénomination sociale'])
                 ->add('siteWeb')
-                ->add('proprietaire')
-                ->add('gerant')
+                ->add('proprietaire', TextType::class, [
+                    'constraints' => [
+                        new Regex('/[^\d]/')
+                    ],
+                    'required' => true,
+                ])
+                ->add('gerant', TextType::class, [
+                    'constraints' => [
+                        new Regex('/[^\d]/')
+                    ],
+                    'required' => true,
+                ])
                 ->add('region', EntityType::class, [
                     'class' => Region::class,
                     'choice_label' => 'nom',
                     'expanded' => false,
                     'multiple' => false,
                     'placeholder' => '--------------------',
-                    'required' => false,
+                    'required' => true,
                 ])
                 ->add('dateOuverture', DateType::class, [
                     'widget' => 'single_text',
                     'required' => false,
                 ])
-                ->add('reference')
+                ->add('reference', TextType::class, [
+                    'required' => true,
+                ])
                 ->add('nif', TextType::class, [
                     'constraints' => [
                         new Regex('/\d/')
                     ],
+                    'required' => true,
                 ])
                 ->add('stat', TextType::class, [
                     'constraints' => [
                         new Regex('/\d/')
                     ],
+                    'required' => true,
                 ])
                 ->add('licenceA', CheckboxType::class, [
                     'label'    => 'A',
@@ -187,15 +207,25 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('nom', TextType::class, ['label' => 'Dénomination sociale'])
                 ->add('siteWeb')
-                ->add('proprietaire')
-                ->add('gerant')
+                ->add('proprietaire', TextType::class, [
+                    'constraints' => [
+                        new Regex('/[^\d]/')
+                    ],
+                    'required' => true,
+                ])
+                ->add('gerant', TextType::class, [
+                    'constraints' => [
+                        new Regex('/[^\d]/')
+                    ],
+                    'required' => true,
+                ])
                 ->add('region', EntityType::class, [
                     'class' => Region::class,
                     'choice_label' => 'nom',
                     'expanded' => false,
                     'multiple' => false,
                     'placeholder' => '--------------------',
-                    'required' => false,
+                    'required' => true,
                 ])
                 ->add('activites', EntityType::class, [
                     'class' => Activite::class,
@@ -209,20 +239,24 @@ class EtablissementType extends AbstractType
                     'widget' => 'single_text',
                     'required' => false,
                 ])
-                ->add('reference')
+                ->add('reference', TextType::class, [
+                    'required' => true,
+                ])
                 ->add('nif', TextType::class, [
                     'constraints' => [
                         new Regex('/\d/')
                     ],
+                    'required' => true,
                 ])
                 ->add('stat', TextType::class, [
                     'constraints' => [
                         new Regex('/\d/')
                     ],
+                    'required' => true,
                 ])
                 ->add('nombreChambres')
                 ->add('capaciteAccueil')
-                ->add('nombreCouverts')
+                ->add('salleConference')
                 ->add('nombreSalaries');
                 break;
             case 'TYPE_3':
@@ -237,15 +271,25 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('nom', TextType::class, ['label' => 'Dénomination sociale'])
                 ->add('siteWeb')
-                ->add('proprietaire')
-                ->add('gerant')
+                ->add('proprietaire', TextType::class, [
+                    'constraints' => [
+                        new Regex('/[^\d]/')
+                    ],
+                    'required' => true,
+                ])
+                ->add('gerant', TextType::class, [
+                    'required' => true,
+                    'constraints' => [
+                        new Regex('/[^\d]/')
+                    ],
+                ])
                 ->add('region', EntityType::class, [
                     'class' => Region::class,
                     'choice_label' => 'nom',
                     'expanded' => false,
                     'multiple' => false,
                     'placeholder' => '--------------------',
-                    'required' => false,
+                    'required' => true,
                 ])
                 ->add('activites', EntityType::class, [
                     'class' => Activite::class,
@@ -259,20 +303,25 @@ class EtablissementType extends AbstractType
                     'widget' => 'single_text',
                     'required' => false,
                 ])
-                ->add('reference')
+                ->add('reference', TextType::class, [
+                    'required' => true,
+                ])
                 ->add('nif', TextType::class, [
                     'constraints' => [
                         new Regex('/\d/')
                     ],
+                    'required' => true,
                 ])
                 ->add('stat', TextType::class, [
                     'constraints' => [
                         new Regex('/\d/')
                     ],
+                    'required' => true,
                 ])
                 ->add('nombreChambres')
                 ->add('capaciteAccueil')
                 ->add('salleConference')
+                ->add('nombreCouverts')
                 ->add('nombreSalaries');
                 break;
             case 'TYPE_4':
@@ -287,15 +336,25 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('nom', TextType::class, ['label' => 'Dénomination sociale'])
                 ->add('siteWeb')
-                ->add('proprietaire')
-                ->add('gerant')
+                ->add('proprietaire', TextType::class, [
+                    'required' => true,
+                    'constraints' => [
+                        new Regex('/[^\d]/')
+                    ],
+                ])
+                ->add('gerant', TextType::class, [
+                    'required' => true,
+                    'constraints' => [
+                        new Regex('/[^\d]/')
+                    ],
+                ])
                 ->add('region', EntityType::class, [
                     'class' => Region::class,
                     'choice_label' => 'nom',
                     'expanded' => false,
                     'multiple' => false,
                     'placeholder' => '--------------------',
-                    'required' => false,
+                    'required' => true,
                 ])
                 ->add('activites', EntityType::class, [
                     'class' => Activite::class,
@@ -309,16 +368,20 @@ class EtablissementType extends AbstractType
                     'widget' => 'single_text',
                     'required' => false,
                 ])
-                ->add('reference')
+                ->add('reference', TextType::class, [
+                    'required' => true,
+                ])
                 ->add('nif', TextType::class, [
                     'constraints' => [
                         new Regex('/\d/')
                     ],
+                    'required' => true,
                 ])
                 ->add('stat', TextType::class, [
                     'constraints' => [
                         new Regex('/\d/')
                     ],
+                    'required' => true,
                 ])
                 ->add('nombreCouverts')
                 ->add('nombreSalaries');

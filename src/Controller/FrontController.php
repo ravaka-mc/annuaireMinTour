@@ -141,7 +141,7 @@ class FrontController extends AbstractController
 
             $mailer->send($message);
 
-            $this->addFlash('success', 'Your message has been sent');
+            $this->addFlash('success', 'Votre message à été bien envoyé');
 
             return $this->redirectToRoute('app_contact');
         }
@@ -335,6 +335,11 @@ class FrontController extends AbstractController
             $etablissement->setStatut('en attente');
             $this->etablissementRepository->add($etablissement, true);
 
+            if($is_edit)
+                $this->addFlash('success', 'Etablissement a été bien modifié');
+            else
+                $this->addFlash('success', 'Etablissement a été bien ajouté');
+
             return $this->redirectToRoute('app_dashboard');
         }
         
@@ -383,10 +388,10 @@ class FrontController extends AbstractController
 
             $mailer->send($message);
 
+            $this->addFlash('success', 'Votre signalement à été bien envoyé');
+
             $this->signalerRepository->add($signaler, true);
         }
-
-        $error = $this->getErrorMessages($form);
 
         return $this->redirectToRoute('app_etablissement', [
             'category_slug' => $etablissement->getCategory()->getSlug(),
