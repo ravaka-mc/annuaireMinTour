@@ -49,10 +49,10 @@
 											{% else %}
 												<div id="wrapper-nom"></div>
 											{% endif %}
-											<div class="form-control">
+											<!--div class="form-control">
 												<label>Courte description</label>
 												{{ form_widget(form.auteur) }}
-											</div>
+											</div-->
 										</div>
 									</div>
 								</div>
@@ -64,6 +64,14 @@
 											{% if form_errors(form.adresse) %}
 												<span class="champ-erreur">Ce champ est obligatoire</span>
 											{% endif %}
+										</div>
+										<div class="form-control">
+											<label for="">Ville</label>
+											<input type="text" id="" name="">
+										</div>
+										<div class="form-control">
+											<label for="">Code postal</label>
+											<input type="text" id="" name="">
 										</div>
 										<div class="form-control">
 											<label for="">Téléphone</label>
@@ -233,9 +241,9 @@
 											{% endif %}
 										</div>
 									</div>
-									<label>Licence</label>
+									<la!bel>Licence</label>
 									<div class="custom_checkbox licence">
-										<div class="half">
+										<div class="half tri">
 											<label>A <span style="color: #a2a2a2">(Agence de voyage)</span>
 												{{ form_widget(form.licenceA) }}
 												<div class="checkmark"></div>
@@ -244,18 +252,24 @@
 												<label>Obtention</label>
 												{{ form_widget(form.dateLicenceA) }}
 											</div>
+											<div class="form-control notselected reference">
+												<input type="text" id="" name="" placeholder="Référence" disabled>
+											</div>
 										</div>
-										<div class="half">
+										<div class="half tri">
 											<label>B <span style="color: #a2a2a2">(Tour-opérateur)</span>
 												{{ form_widget(form.licenceB) }}
 												<div class="checkmark"></div>
 											</label>
-											<div class="obtention notselected">
+											<div class="obtention notselected ">
 												<label>Obtention</label>
 												{{ form_widget(form.dateLicenceB) }}
 											</div>
+											<div class="form-control notselected reference">
+												<input type="text" id="" name="" placeholder="Référence" disabled>
+											</div>
 										</div>
-										<div class="half">
+										<div class="half tri">
 											<label>C <span style="color: #a2a2a2">(Prestation touristiques spécialisées)</span>
 												{{ form_widget(form.licenceC) }}
 												<div class="checkmark"></div>
@@ -263,6 +277,9 @@
 											<div class="obtention notselected">
 												<label>Obtention</label>
 												{{ form_widget(form.dateLicenceC) }}
+											</div>
+											<div class="form-control notselected reference">
+												<input type="text" id="" name="" placeholder="Référence" disabled>
 											</div>
 										</div>
 									</div>
@@ -444,9 +461,14 @@
 				let self = $(this);
 				$inp.change(function() {
 					if(this.checked) {
-						self.find('.obtention').removeClass('notselected')
+						self.find('.obtention').removeClass('notselected'),
+						self.find('.reference').removeClass('notselected'),
+						self.find('.reference input').prop('disabled', false)
+						
 					} else {
-						self.find('.obtention').addClass('notselected')
+						self.find('.obtention').addClass('notselected'),
+						self.find('.reference').addClass('notselected'),
+						self.find('.reference input').prop('disabled', true)
 					}
 				});
 			});
