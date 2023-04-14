@@ -1,19 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reset your password{% endblock %}
+{% block title %}Réinitialiser votre mot de passe{% endblock %}
 
 {% block body %}
     <main>
         <div class="bgcontainerdefault">
             <div class="wrapper">
                 <form action="{{ path('app_forgot_password_request') }}" method="post" class="blocform">
-                    <h1>Reset your password</h1>
+                    <h1>Réinitialiser votre mot de passe</h1>
                     <div class="formgroup">
                         <label for="">E-mail</label>
                         {{ form_widget(resetForm.plainPassword) }}
                     </div>
                     {{ form_widget(resetForm._token) }}
-                    <button type="submit" class="btn btn-secondary" ><span>Reset password</span></button>
+                    <button type="submit" class="btn btn-secondary" ><span>Réinitialiser</span></button>
                 </form>
             </div>
         </div>
