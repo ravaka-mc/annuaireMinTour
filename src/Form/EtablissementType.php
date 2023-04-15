@@ -48,6 +48,12 @@ class EtablissementType extends AbstractType
 
         $builder
             ->add('auteur')
+            ->add('ville', TextType::class, [
+                'required' => true,
+            ])
+            ->add('codePostal', TextType::class, [
+                'required' => true,
+            ])
             ->add('adresse', TextType::class, [
                 'required' => true,
             ])
@@ -151,24 +157,24 @@ class EtablissementType extends AbstractType
                     'placeholder' => '--------------------',
                     'required' => true,
                 ])
-                ->add('dateOuverture', DateType::class, [
-                    'widget' => 'single_text',
-                    'required' => false,
-                ])
                 ->add('reference', TextType::class, [
                     'required' => true,
                 ])
                 ->add('nif', TextType::class, [
                     'constraints' => [
-                        new Regex('/\d/')
+                        new Regex([
+                            'pattern' => '/\d/',
+                            'message' => 'La valeur du NIF est incorrecte',
+                        ])
                     ],
-                    'required' => true,
                 ])
                 ->add('stat', TextType::class, [
                     'constraints' => [
-                        new Regex('/\d/')
+                        new Regex([
+                            'pattern' => '/\d/',
+                            'message' => 'La valeur du Stat est incorrecte',
+                        ])
                     ],
-                    'required' => true,
                 ])
                 ->add('licenceA', CheckboxType::class, [
                     'label'    => 'A',
@@ -244,19 +250,22 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('nif', TextType::class, [
                     'constraints' => [
-                        new Regex('/\d/')
+                        new Regex([
+                            'pattern' => '/\d/',
+                            'message' => 'La valeur du NIF est incorrecte',
+                        ])
                     ],
-                    'required' => true,
                 ])
                 ->add('stat', TextType::class, [
                     'constraints' => [
-                        new Regex('/\d/')
+                        new Regex([
+                            'pattern' => '/\d/',
+                            'message' => 'La valeur du Stat est incorrecte',
+                        ])
                     ],
-                    'required' => true,
                 ])
                 ->add('nombreChambres')
                 ->add('capaciteAccueil')
-                ->add('salleConference')
                 ->add('nombreSalaries');
                 break;
             case 'TYPE_3':
@@ -308,15 +317,19 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('nif', TextType::class, [
                     'constraints' => [
-                        new Regex('/\d/')
+                        new Regex([
+                            'pattern' => '/\d/',
+                            'message' => 'La valeur du NIF est incorrecte',
+                        ])
                     ],
-                    'required' => true,
                 ])
                 ->add('stat', TextType::class, [
                     'constraints' => [
-                        new Regex('/\d/')
+                        new Regex([
+                            'pattern' => '/\d/',
+                            'message' => 'La valeur du Stat est incorrecte',
+                        ])
                     ],
-                    'required' => true,
                 ])
                 ->add('nombreChambres')
                 ->add('capaciteAccueil')
@@ -373,15 +386,19 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('nif', TextType::class, [
                     'constraints' => [
-                        new Regex('/\d/')
+                        new Regex([
+                            'pattern' => '/\d/',
+                            'message' => 'La valeur du NIF est incorrecte',
+                        ])
                     ],
-                    'required' => true,
                 ])
                 ->add('stat', TextType::class, [
                     'constraints' => [
-                        new Regex('/\d/')
+                        new Regex([
+                            'pattern' => '/\d/',
+                            'message' => 'La valeur du Stat est incorrecte',
+                        ])
                     ],
-                    'required' => true,
                 ])
                 ->add('nombreCouverts')
                 ->add('nombreSalaries');
@@ -394,12 +411,18 @@ class EtablissementType extends AbstractType
                 ->add('autreGroupement')
                 ->add('nif', TextType::class, [
                     'constraints' => [
-                        new Regex('/\d/')
+                        new Regex([
+                            'pattern' => '/\d/',
+                            'message' => 'La valeur du NIF est incorrecte',
+                        ])
                     ],
                 ])
                 ->add('stat', TextType::class, [
                     'constraints' => [
-                        new Regex('/\d/')
+                        new Regex([
+                            'pattern' => '/\d/',
+                            'message' => 'La valeur du Stat est incorrecte',
+                        ])
                     ],
                 ]);
                 break;

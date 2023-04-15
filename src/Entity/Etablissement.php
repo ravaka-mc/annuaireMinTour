@@ -245,6 +245,16 @@ class Etablissement
      */
     private $salleConference;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $ville;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $codePostal;
+
     public function __construct()
     {
         $this->groupements = new ArrayCollection();
@@ -837,6 +847,30 @@ class Etablissement
     public function setSalleConference(?string $salleConference): self
     {
         $this->salleConference = $salleConference;
+
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(?string $ville): self
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getCodePostal(): ?string
+    {
+        return $this->codePostal;
+    }
+
+    public function setCodePostal(?string $codePostal): self
+    {
+        $this->codePostal = $codePostal;
 
         return $this;
     }
