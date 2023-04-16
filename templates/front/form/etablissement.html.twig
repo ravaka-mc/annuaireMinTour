@@ -515,13 +515,13 @@
 
 				var regexMail = /^\w+([-+.'][^\s]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 				var regexNumberOnly = /\d/;
-				var regexPhone = /\d{10}/;
+				var regexPhone = /^\+261\s?\d{2}\s?\d{2}\s?\d{3}\s?\d{2}$/;
 				var regexCharaterOnly = /[^\d]/;
 				
 				if($(".active #etablissement_telephone").length > 0){
 					var emailValid = regexPhone.test($(".active #etablissement_telephone").val());
 					if(!emailValid){
-						$(".active #etablissement_telephone").parent().append('<span class="champ-erreur">Téléphone invalid</span>');
+						$(".active #etablissement_telephone").parent().append('<span class="champ-erreur">Téléphone invalid (+261XX XX XXX XX)</span>');
 						isrequired = true;
 					}
 				}
