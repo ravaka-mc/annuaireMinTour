@@ -299,14 +299,20 @@ class FrontController extends AbstractController
         if($user != $etablissement->getCreatedBy())
             return $this->redirectToRoute('app_dashboard');
 
-        $raison = $request->request->get('raison');
-        $delete = new Delete();
-        $delete->setRaison($raison);
-        $delete->setEtablissement($etablissement);
-        $this->deleteRepository->add($delete, true);
+        if($etablissement->getStatut() == 'valide'){
+            $raison = $request->request->get('raison');
+            $delete = new Delete();
+            $delete->setRaison($raison);
+            $delete->setEtablissement($etablissement);
+            $this->deleteRepository->add($delete, true);
 
-        $etablissement->setStatut('delete');
-        $this->etablissementRepository->add($etablissement, true);
+            $etablissement->setStatut('delete');
+            $this->etablissementRepository->add($etablissement, true);
+        } else {
+            $this->etablissementRepository->remove($etablissement, true);
+        }
+
+        $this->addFlash('success', 'Votre Etablissement a été bien supprimé');
 
         return $this->redirectToRoute('app_dashboard');
     }
