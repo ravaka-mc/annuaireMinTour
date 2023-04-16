@@ -158,9 +158,6 @@ class EtablissementType extends AbstractType
                     'placeholder' => '--------------------',
                     'required' => true,
                 ])
-                ->add('reference', TextType::class, [
-                    'required' => true,
-                ])
                 ->add('nif', TextType::class, [
                     'constraints' => [
                         new Regex([

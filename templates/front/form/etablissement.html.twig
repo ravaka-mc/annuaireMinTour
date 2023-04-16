@@ -223,10 +223,12 @@
 											{{ form_widget(form.dateOuverture) }}
 										</div>
 										{% endif %}
+										{% if form.reference is defined %}
 										<div class="form-control">
 											<label for="">Référence</label>
 											{{ form_widget(form.reference) }}
 										</div>
+										{% endif %}
 										<div class="form-control">
 											<label for="">NIF</label>
 											{{ form_widget(form.nif) }}
@@ -304,10 +306,12 @@
 											{{ form_widget(form.dateOuverture) }}
 										</div>
 										{% endif %}
+										{% if form.reference is defined %}
 										<div class="form-control">
 											<label for="">Référence</label>
 											{{ form_widget(form.reference) }}
 										</div>
+										{% endif %}
 										<div class="form-control">
 											<label for="">NIF</label>
 											{{ form_widget(form.nif) }}
