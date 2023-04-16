@@ -49,10 +49,10 @@
 											{% else %}
 												<div id="wrapper-nom"></div>
 											{% endif %}
-											<!--div class="form-control">
+											{# <div class="form-control">
 												<label>Courte description</label>
 												{{ form_widget(form.auteur) }}
-											</div-->
+											</div> #}
 										</div>
 									</div>
 								</div>
@@ -67,12 +67,23 @@
 										</div>
 										<div class="form-control">
 											<label for="">Ville</label>
-											<input type="text" id="" name="">
+											{{ form_widget(form.ville) }}
 										</div>
 										<div class="form-control">
-											<label for="">Code postal</label>
-											<input type="text" id="" name="">
+											<label for="">Code Postal</label>
+											{{ form_widget(form.codePostal) }}
 										</div>
+										{% if form.region is defined %}
+											<div id="wrapper-region" class="form-control">
+												<label for="">Region</label>
+												{{ form_widget(form.region) }}
+												{% if form_errors(form.telephone) %}
+													<span class="champ-erreur">Ce champ est obligatoire</span>
+												{% endif %}
+											</div>
+										{% else %}
+											<div id="wrapper-region"></div>
+										{% endif %}
 										<div class="form-control">
 											<label for="">Téléphone</label>
 											{{ form_widget(form.telephone) }}
@@ -96,18 +107,6 @@
 											<div id="wrapper-web"></div>
 										{% endif %}
 									</div>
-									{% if form.region is defined %}
-										<div id="wrapper-region" class="form-control">
-											<label for="">Region</label>
-											{{ form_widget(form.region) }}
-											{% if form_errors(form.telephone) %}
-												<span class="champ-erreur">Ce champ est obligatoire</span>
-											{% endif %}
-										</div>
-									{% else %}
-										<div id="wrapper-region"></div>
-									{% endif %}
-
 									{% if form.zoneIntervention is defined %}
 										<div id="wrapper-zone" class="form-control">
 											<label for="">Zone d'intervention</label>
@@ -218,10 +217,12 @@
 										<div class="sub-title"><span>Autorisation d'ouverture</span></div>
 									</div>
 									<div class="half">
+										{% if form.dateOuverture is defined %}
 										<div class="form-control">
 											<label for="">Date d’ouverture</label>
 											{{ form_widget(form.dateOuverture) }}
 										</div>
+										{% endif %}
 										<div class="form-control">
 											<label for="">Référence</label>
 											{{ form_widget(form.reference) }}
@@ -297,10 +298,12 @@
 										<div class="sub-title"><span>Autorisation d'ouverture</span></div>
 									</div>
 									<div class="half">
+										{% if form.dateOuverture is defined %}
 										<div class="form-control">
 											<label for="">Date d’ouverture</label>
 											{{ form_widget(form.dateOuverture) }}
 										</div>
+										{% endif %}
 										<div class="form-control">
 											<label for="">Référence</label>
 											{{ form_widget(form.reference) }}

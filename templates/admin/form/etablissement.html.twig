@@ -7,7 +7,7 @@
         <section id="contenu">
             {% include "admin/block/logout.html.twig" %}
             <div class="title bb">{{ titre }} établissement</div>
-			<ul class="error">
+			<ul class="champ-erreur">
 				{% for error in errors %}
 					{% if error is iterable %}
 						{% for msg in error %}
@@ -51,10 +51,10 @@
 									{% else %}
 										<div id="wrapper-nom"></div>
 									{% endif %}
-									<div class="form-control">
+									{# <div class="form-control">
 										<label>Courte description</label>
 										{{ form_widget(form.auteur) }}
-									</div>
+									</div> #}
 								</div>
 							</div>
 						</div>
@@ -70,6 +70,22 @@
 									<label for="">Adresse</label>
 									{{ form_widget(form.adresse) }}
 								</div>
+								<div class="form-control">
+									<label for="">Ville</label>
+									{{ form_widget(form.ville) }}
+								</div>
+								<div class="form-control">
+									<label for="">Code Postal</label>
+									{{ form_widget(form.codePostal) }}
+								</div>
+								{% if form.region is defined %}
+									<div id="wrapper-region" class="form-control">
+										<label for="">Region</label>
+										{{ form_widget(form.region) }}
+									</div>
+								{% else %}
+									<div id="wrapper-region"></div>
+								{% endif %}
 								<div class="form-control">
 									<label for="">Téléphone</label>
 									{{ form_widget(form.telephone) }}
@@ -138,13 +154,9 @@
 										{{ form_widget(form.gerant) }}
 									</div>
 								</div>
-								<div id="wrapper-region" class="form-control">
-									<label for="">Region</label>
-									{{ form_widget(form.region) }}
-								</div>
+								
 							{% else %}
 								<div id="wrapper-proprietaire"></div>
-								<div id="wrapper-region"></div>
 							{% endif %}
 							<div class="form-control inputright">
 								<label>Etes-vous membre d'un groupement ?</label>
@@ -189,10 +201,12 @@
 								<div class="sub-title"><span>Autorisation d'ouverture</span></div>
 							</div>
 							<div class="half">
-								<div class="form-control">
-									<label for="">Date d’ouverture</label>
-									{{ form_widget(form.dateOuverture) }}
-								</div>
+								{% if form.dateOuverture is defined %}
+										<div class="form-control">
+											<label for="">Date d’ouverture</label>
+											{{ form_widget(form.dateOuverture) }}
+										</div>
+										{% endif %}
 								<div class="form-control">
 									<label for="">Référence</label>
 									{{ form_widget(form.reference) }}
@@ -251,10 +265,12 @@
 									<div class="sub-title"><span>Autorisation d'ouverture</span></div>
 								</div>
 								<div class="half">
-									<div class="form-control">
-										<label for="">Date d’ouverture</label>
-										{{ form_widget(form.dateOuverture) }}
-									</div>
+									{% if form.dateOuverture is defined %}
+										<div class="form-control">
+											<label for="">Date d’ouverture</label>
+											{{ form_widget(form.dateOuverture) }}
+										</div>
+									{% endif %}
 									<div class="form-control">
 										<label for="">Référence</label>
 										{{ form_widget(form.reference) }}

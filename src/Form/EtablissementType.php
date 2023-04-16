@@ -27,6 +27,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
@@ -48,6 +49,12 @@ class EtablissementType extends AbstractType
 
         $builder
             ->add('auteur')
+            ->add('ville', TextType::class, [
+                'required' => true,
+            ])
+            ->add('codePostal', TextType::class, [
+                'required' => true,
+            ])
             ->add('adresse', TextType::class, [
                 'required' => true,
             ])
@@ -151,24 +158,24 @@ class EtablissementType extends AbstractType
                     'placeholder' => '--------------------',
                     'required' => true,
                 ])
-                ->add('dateOuverture', DateType::class, [
-                    'widget' => 'single_text',
-                    'required' => false,
-                ])
                 ->add('reference', TextType::class, [
                     'required' => true,
                 ])
                 ->add('nif', TextType::class, [
                     'constraints' => [
-                        new Regex('/\d/')
+                        new Regex([
+                            'pattern' => '/\d/',
+                            'message' => 'La valeur du NIF est incorrecte',
+                        ])
                     ],
-                    'required' => true,
                 ])
                 ->add('stat', TextType::class, [
                     'constraints' => [
-                        new Regex('/\d/')
+                        new Regex([
+                            'pattern' => '/\d/',
+                            'message' => 'La valeur du Stat est incorrecte',
+                        ])
                     ],
-                    'required' => true,
                 ])
                 ->add('licenceA', CheckboxType::class, [
                     'label'    => 'A',
@@ -244,20 +251,29 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('nif', TextType::class, [
                     'constraints' => [
-                        new Regex('/\d/')
+                        new Regex([
+                            'pattern' => '/\d/',
+                            'message' => 'La valeur du NIF est incorrecte',
+                        ])
                     ],
-                    'required' => true,
                 ])
                 ->add('stat', TextType::class, [
                     'constraints' => [
-                        new Regex('/\d/')
+                        new Regex([
+                            'pattern' => '/\d/',
+                            'message' => 'La valeur du Stat est incorrecte',
+                        ])
                     ],
+                ])
+                ->add('nombreChambres', IntegerType::class, [
                     'required' => true,
                 ])
-                ->add('nombreChambres')
-                ->add('capaciteAccueil')
-                ->add('salleConference')
-                ->add('nombreSalaries');
+                ->add('capaciteAccueil', IntegerType::class, [
+                    'required' => true,
+                ])
+                ->add('nombreSalaries', IntegerType::class, [
+                    'required' => true,
+                ]);
                 break;
             case 'TYPE_3':
                 $form->add('classement', EntityType::class, [
@@ -308,21 +324,35 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('nif', TextType::class, [
                     'constraints' => [
-                        new Regex('/\d/')
+                        new Regex([
+                            'pattern' => '/\d/',
+                            'message' => 'La valeur du NIF est incorrecte',
+                        ])
                     ],
-                    'required' => true,
                 ])
                 ->add('stat', TextType::class, [
                     'constraints' => [
-                        new Regex('/\d/')
+                        new Regex([
+                            'pattern' => '/\d/',
+                            'message' => 'La valeur du Stat est incorrecte',
+                        ])
                     ],
+                ])
+                ->add('nombreChambres', IntegerType::class, [
                     'required' => true,
                 ])
-                ->add('nombreChambres')
-                ->add('capaciteAccueil')
-                ->add('salleConference')
-                ->add('nombreCouverts')
-                ->add('nombreSalaries');
+                ->add('capaciteAccueil', IntegerType::class, [
+                    'required' => true,
+                ])
+                ->add('salleConference', IntegerType::class, [
+                    'required' => true,
+                ])
+                ->add('nombreCouverts', IntegerType::class, [
+                    'required' => true,
+                ])
+                ->add('nombreSalaries', IntegerType::class, [
+                    'required' => true,
+                ]);
                 break;
             case 'TYPE_4':
                 $form->add('classement', EntityType::class, [
@@ -373,18 +403,26 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('nif', TextType::class, [
                     'constraints' => [
-                        new Regex('/\d/')
+                        new Regex([
+                            'pattern' => '/\d/',
+                            'message' => 'La valeur du NIF est incorrecte',
+                        ])
                     ],
-                    'required' => true,
                 ])
                 ->add('stat', TextType::class, [
                     'constraints' => [
-                        new Regex('/\d/')
+                        new Regex([
+                            'pattern' => '/\d/',
+                            'message' => 'La valeur du Stat est incorrecte',
+                        ])
                     ],
+                ])
+                ->add('nombreCouverts', IntegerType::class, [
                     'required' => true,
                 ])
-                ->add('nombreCouverts')
-                ->add('nombreSalaries');
+                ->add('nombreSalaries', IntegerType::class, [
+                    'required' => true,
+                ]);
                 break;
             case 'TYPE_5':
                 $form->add('zoneIntervention')
@@ -394,12 +432,18 @@ class EtablissementType extends AbstractType
                 ->add('autreGroupement')
                 ->add('nif', TextType::class, [
                     'constraints' => [
-                        new Regex('/\d/')
+                        new Regex([
+                            'pattern' => '/\d/',
+                            'message' => 'La valeur du NIF est incorrecte',
+                        ])
                     ],
                 ])
                 ->add('stat', TextType::class, [
                     'constraints' => [
-                        new Regex('/\d/')
+                        new Regex([
+                            'pattern' => '/\d/',
+                            'message' => 'La valeur du Stat est incorrecte',
+                        ])
                     ],
                 ]);
                 break;
