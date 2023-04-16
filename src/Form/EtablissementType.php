@@ -27,6 +27,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
@@ -264,9 +265,15 @@ class EtablissementType extends AbstractType
                         ])
                     ],
                 ])
-                ->add('nombreChambres')
-                ->add('capaciteAccueil')
-                ->add('nombreSalaries');
+                ->add('nombreChambres', IntegerType::class, [
+                    'required' => true,
+                ])
+                ->add('capaciteAccueil', IntegerType::class, [
+                    'required' => true,
+                ])
+                ->add('nombreSalaries', IntegerType::class, [
+                    'required' => true,
+                ]);
                 break;
             case 'TYPE_3':
                 $form->add('classement', EntityType::class, [
@@ -331,11 +338,21 @@ class EtablissementType extends AbstractType
                         ])
                     ],
                 ])
-                ->add('nombreChambres')
-                ->add('capaciteAccueil')
-                ->add('salleConference')
-                ->add('nombreCouverts')
-                ->add('nombreSalaries');
+                ->add('nombreChambres', IntegerType::class, [
+                    'required' => true,
+                ])
+                ->add('capaciteAccueil', IntegerType::class, [
+                    'required' => true,
+                ])
+                ->add('salleConference', IntegerType::class, [
+                    'required' => true,
+                ])
+                ->add('nombreCouverts', IntegerType::class, [
+                    'required' => true,
+                ])
+                ->add('nombreSalaries', IntegerType::class, [
+                    'required' => true,
+                ]);
                 break;
             case 'TYPE_4':
                 $form->add('classement', EntityType::class, [
@@ -400,8 +417,12 @@ class EtablissementType extends AbstractType
                         ])
                     ],
                 ])
-                ->add('nombreCouverts')
-                ->add('nombreSalaries');
+                ->add('nombreCouverts', IntegerType::class, [
+                    'required' => true,
+                ])
+                ->add('nombreSalaries', IntegerType::class, [
+                    'required' => true,
+                ]);
                 break;
             case 'TYPE_5':
                 $form->add('zoneIntervention')
