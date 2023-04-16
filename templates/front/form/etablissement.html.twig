@@ -223,10 +223,12 @@
 											{{ form_widget(form.dateOuverture) }}
 										</div>
 										{% endif %}
+										{% if form.reference is defined %}
 										<div class="form-control">
 											<label for="">Référence</label>
 											{{ form_widget(form.reference) }}
 										</div>
+										{% endif %}
 										<div class="form-control">
 											<label for="">NIF</label>
 											{{ form_widget(form.nif) }}
@@ -304,10 +306,12 @@
 											{{ form_widget(form.dateOuverture) }}
 										</div>
 										{% endif %}
+										{% if form.reference is defined %}
 										<div class="form-control">
 											<label for="">Référence</label>
 											{{ form_widget(form.reference) }}
 										</div>
+										{% endif %}
 										<div class="form-control">
 											<label for="">NIF</label>
 											{{ form_widget(form.nif) }}
@@ -477,6 +481,16 @@
 			var currentStep = 1;
 			var totalSteps = $('.step').length;
 
+			$('input[type="file"]').on('change', function() {
+				var regexAvatar = /(\.jpg|\.jpeg|\.png|\.svg)$/i;
+				const file = this.files[0];
+			
+				if (!regexAvatar.exec(file.name)) {
+					$(".logo-entreprise").next().append('<span class="champ-erreur">Veuillez uploader un fichier valide (jpeg, png, svg)</span>');
+					return false;
+				}
+			})
+
 			{% if is_edit == true %}
 				$('.step:first').addClass('active');
 			{% endif %}
@@ -503,7 +517,7 @@
 				var regexNumberOnly = /\d/;
 				var regexPhone = /\d{10}/;
 				var regexCharaterOnly = /[^\d]/;
-
+				
 				if($(".active #etablissement_telephone").length > 0){
 					var emailValid = regexPhone.test($(".active #etablissement_telephone").val());
 					if(!emailValid){
