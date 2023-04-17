@@ -159,6 +159,7 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('nom', TextType::class, ['label' => 'Dénomination sociale'])
                 ->add('siteWeb', TextType::class, [
+                    'required' => false,
                     'constraints' => [
                         new Regex([
                             'pattern' => '/^((?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9\-.]+\.[a-zA-Z]{2,}(?:\/[\w\-\.]*)*\/?)$/',
@@ -239,6 +240,7 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('nom', TextType::class, ['label' => 'Dénomination sociale'])
                 ->add('siteWeb', TextType::class, [
+                    'required' => false,
                     'constraints' => [
                         new Regex([
                             'pattern' => '/^((?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9\-.]+\.[a-zA-Z]{2,}(?:\/[\w\-\.]*)*\/?)$/',
@@ -319,6 +321,7 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('nom', TextType::class, ['label' => 'Dénomination sociale'])
                 ->add('siteWeb', TextType::class, [
+                    'required' => false,
                     'constraints' => [
                         new Regex([
                             'pattern' => '/^((?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9\-.]+\.[a-zA-Z]{2,}(?:\/[\w\-\.]*)*\/?)$/',
@@ -405,6 +408,7 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('nom', TextType::class, ['label' => 'Dénomination sociale'])
                 ->add('siteWeb', TextType::class, [
+                    'required' => false,
                     'constraints' => [
                         new Regex([
                             'pattern' => '/^((?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9\-.]+\.[a-zA-Z]{2,}(?:\/[\w\-\.]*)*\/?)$/',
