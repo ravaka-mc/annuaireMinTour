@@ -2,13 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoryRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use App\Repository\CategoryRepository;
+use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
@@ -150,9 +151,11 @@ class Category
      */
     public function getEtablissements(): Collection
     {
-        return $this->etablissements->filter(function(Etablissement $etablissement) {
-            return $etablissement->getStatut() == 'valide';
-        });
+        $criteria = Criteria::create()
+        ->where(Criteria::expr()->eq('statut', 'valide'))
+        ->orderBy(['dateValidation' => 'DESC']);
+
+        return $this->etablissements->matching($criteria);
     }
 
     public function addEtablissement(Etablissement $etablissement): self

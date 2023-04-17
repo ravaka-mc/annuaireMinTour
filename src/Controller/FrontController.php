@@ -252,10 +252,13 @@ class FrontController extends AbstractController
         $activites = $this->activiteRepository->findAll();
 
         $search = $request->query->get('s','');
-        $region_id = $request->query->get('region','');
+        $region_id = $region->getId();
         $activite_id = $request->query->get('activite','');
 
         $etablissements = $region->getEtablissements();
+
+        if($search != '' || $region_id != '' || $activite_id != '')
+            $etablissements = $this->etablissementRepository->search($search, $region_id, $activite_id);
 
         return $this->render('front/etablissements.html.twig', [
             'class' => 'categorie',
@@ -470,6 +473,9 @@ class FrontController extends AbstractController
         $search = $request->query->get('s','');
         $region_id = $request->query->get('region','');
         $activite_id = $request->query->get('activite','');
+
+        if($search != '' || $region_id != '' || $activite_id != '')
+            $etablissements = $this->etablissementRepository->search($search, $region_id, $activite_id, $category->getID());
 
         return $this->render('front/etablissements.html.twig', [
             'class' => 'categorie',

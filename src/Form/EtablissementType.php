@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use DateTime;
 use App\Entity\User;
 use App\Entity\Region;
 use App\Entity\Activite;
@@ -192,6 +193,9 @@ class EtablissementType extends AbstractType
                 ->add('dateLicenceA', DateType::class, [
                     'widget' => 'single_text',
                     'required' => false,
+                    'disabled_dates' => [
+                        new DateTime('2023-04-15'),
+                    ],
                 ])
                 ->add('licenceB', CheckboxType::class, [
                     'label'    => 'B',
