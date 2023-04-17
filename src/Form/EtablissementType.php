@@ -92,7 +92,9 @@ class EtablissementType extends AbstractType
             ])
             ->add('createdBy', EntityType::class, [
                 'class' => User::class,
-                'choice_label' => 'nom',
+                'choice_label' => function ($createdBy) {
+                    return $createdBy->getDisplayName();
+                },
                 'expanded' => false,
                 'multiple' => false,
                 'required' => false,
@@ -193,9 +195,6 @@ class EtablissementType extends AbstractType
                 ->add('dateLicenceA', DateType::class, [
                     'widget' => 'single_text',
                     'required' => false,
-                    'disabled_dates' => [
-                        new DateTime('2023-04-15'),
-                    ],
                 ])
                 ->add('licenceB', CheckboxType::class, [
                     'label'    => 'B',
