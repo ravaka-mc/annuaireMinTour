@@ -23,7 +23,13 @@
     </div>
     <div class="form-search">
         <div class="wrapper">
-            <form action="{{ path('app_search') }}" class="bg-white">
+            {% if category is defined %}
+                <form action="{{ path('app_category', {slug:category.slug}) }}" class="bg-white">
+            {% elseif region is defined %}
+                 <form action="{{ path('app_region', {slug:region.slug}) }}" class="bg-white">
+            {% else %}
+                <form action="{{ path('app_search') }}" class="bg-white">
+            {% endif %}
                 <div>
                     <div class="formgroup searchgroup">
                         <input type="text" name="s" placeholder="Rechercher" value="{{ search }}">

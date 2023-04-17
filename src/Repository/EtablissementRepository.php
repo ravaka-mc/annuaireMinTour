@@ -42,7 +42,7 @@ class EtablissementRepository extends ServiceEntityRepository
     /**
      * @return Etablissement[] Returns an array of Etablissement objects
      */
-    public function search($keyword = "", $region = "", $activite =""): array
+    public function search($keyword = "", $region = "", $activite ="", $category=""): array
     {
         $query = $this->createQueryBuilder('e')
         ->andWhere('e.statut = :statut')
@@ -55,7 +55,12 @@ class EtablissementRepository extends ServiceEntityRepository
         if($region != ""){
             $query = $query->andWhere('e.region = :region')
             ->setParameter('region', $region);
-        } 
+        }
+
+        if($category != ""){
+            $query = $query->andWhere('e.category = :category')
+            ->setParameter('category', $category);
+        }
 
         if($activite != ""){
             $query = $query->join('e.activites', 'activite')

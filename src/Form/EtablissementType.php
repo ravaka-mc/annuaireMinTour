@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use DateTime;
 use App\Entity\User;
 use App\Entity\Region;
 use App\Entity\Activite;
@@ -91,7 +92,9 @@ class EtablissementType extends AbstractType
             ])
             ->add('createdBy', EntityType::class, [
                 'class' => User::class,
-                'choice_label' => 'nom',
+                'choice_label' => function ($createdBy) {
+                    return $createdBy->getDisplayName();
+                },
                 'expanded' => false,
                 'multiple' => false,
                 'required' => false,

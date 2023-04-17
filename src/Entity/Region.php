@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\RegionRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\RegionRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=RegionRepository::class)
@@ -86,9 +87,11 @@ class Region
      */
     public function getEtablissements(): Collection
     {
-        return $this->etablissements->filter(function(Etablissement $etablissement) {
-            return $etablissement->getStatut() == 'valide';
-        });
+        $criteria = Criteria::create()
+        ->where(Criteria::expr()->eq('statut', 'valide'))
+        ->orderBy(['dateValidation' => 'DESC']);
+
+        return $this->etablissements->matching($criteria);
     }
 
     public function addEtablissement(Etablissement $etablissement): self
