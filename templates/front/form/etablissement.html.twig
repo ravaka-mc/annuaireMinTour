@@ -534,6 +534,14 @@
 					}
 				}
 
+				if($(".active #etablissement_codePostal").length > 0){
+					var codePostalValid = regexNumberOnly.test($(".active #etablissement_codePostal").val());
+					if(!codePostalValid){
+						$(".active #etablissement_codePostal").parent().append('<span class="champ-erreur">La valeur est invalide</span>');
+						isrequired = true;
+					}
+				}
+
 				if($(".active #etablissement_nif").length > 0){
 					var nifValid = regexNumberOnly.test($(".active #etablissement_nif").val());
 					if(!nifValid){
