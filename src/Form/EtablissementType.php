@@ -63,6 +63,7 @@ class EtablissementType extends AbstractType
                     ])
                 ],
             ])
+            
             ->add('adresse', TextType::class, [
                 'required' => true,
             ])
@@ -157,7 +158,14 @@ class EtablissementType extends AbstractType
                     'choices' => $category->getActivites()
                 ])
                 ->add('nom', TextType::class, ['label' => 'Dénomination sociale'])
-                ->add('siteWeb')
+                ->add('siteWeb', TextType::class, [
+                    'constraints' => [
+                        new Regex([
+                            'pattern' => '/^((?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9\-.]+\.[a-zA-Z]{2,}(?:\/[\w\-\.]*)*\/?)$/',
+                            'message' => 'La valeur du Site Web est incorrecte',
+                        ])
+                    ],
+                ])
                 ->add('proprietaire', TextType::class, [
                     'constraints' => [
                         new Regex('/[^\d]/')
@@ -230,7 +238,14 @@ class EtablissementType extends AbstractType
                     'required' => false,
                 ])
                 ->add('nom', TextType::class, ['label' => 'Dénomination sociale'])
-                ->add('siteWeb')
+                ->add('siteWeb', TextType::class, [
+                    'constraints' => [
+                        new Regex([
+                            'pattern' => '/^((?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9\-.]+\.[a-zA-Z]{2,}(?:\/[\w\-\.]*)*\/?)$/',
+                            'message' => 'La valeur du Site Web est incorrecte',
+                        ])
+                    ],
+                ])
                 ->add('proprietaire', TextType::class, [
                     'constraints' => [
                         new Regex('/[^\d]/')
@@ -303,7 +318,14 @@ class EtablissementType extends AbstractType
                     'required' => false,
                 ])
                 ->add('nom', TextType::class, ['label' => 'Dénomination sociale'])
-                ->add('siteWeb')
+                ->add('siteWeb', TextType::class, [
+                    'constraints' => [
+                        new Regex([
+                            'pattern' => '/^((?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9\-.]+\.[a-zA-Z]{2,}(?:\/[\w\-\.]*)*\/?)$/',
+                            'message' => 'La valeur du Site Web est incorrecte',
+                        ])
+                    ],
+                ])
                 ->add('proprietaire', TextType::class, [
                     'constraints' => [
                         new Regex('/[^\d]/')
@@ -382,7 +404,14 @@ class EtablissementType extends AbstractType
                     'required' => false,
                 ])
                 ->add('nom', TextType::class, ['label' => 'Dénomination sociale'])
-                ->add('siteWeb')
+                ->add('siteWeb', TextType::class, [
+                    'constraints' => [
+                        new Regex([
+                            'pattern' => '/^((?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9\-.]+\.[a-zA-Z]{2,}(?:\/[\w\-\.]*)*\/?)$/',
+                            'message' => 'La valeur du Site Web est incorrecte',
+                        ])
+                    ],
+                ])
                 ->add('proprietaire', TextType::class, [
                     'required' => true,
                     'constraints' => [

@@ -521,11 +521,20 @@
 				var regexNumberOnly = /\d/;
 				var regexPhone = /^\+261\s?\d{2}\s?\d{2}\s?\d{3}\s?\d{2}$/;
 				var regexCharaterOnly = /[^\d]/;
-				
+				var regexSiteWeb = /^((?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9\-.]+\.[a-zA-Z]{2,}(?:\/[\w\-\.]*)*\/?)$/
+
 				if($(".active #etablissement_telephone").length > 0){
 					var emailValid = regexPhone.test($(".active #etablissement_telephone").val());
 					if(!emailValid){
 						$(".active #etablissement_telephone").parent().append('<span class="champ-erreur">Téléphone invalid (+261XX XX XXX XX)</span>');
+						isrequired = true;
+					}
+				}
+
+				if($(".active #etablissement_siteWeb").length > 0){
+					var siteWebValid = regexSiteWeb.test($(".active #etablissement_siteWeb").val());
+					if(!siteWebValid){
+						$(".active #etablissement_siteWeb").parent().append('<span class="champ-erreur">Site Web invalid</span>');
 						isrequired = true;
 					}
 				}
