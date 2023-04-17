@@ -56,6 +56,12 @@ class EtablissementType extends AbstractType
             ])
             ->add('codePostal', TextType::class, [
                 'required' => true,
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/\d/',
+                        'message' => 'La valeur du Code postal est incorrecte',
+                    ])
+                ],
             ])
             ->add('adresse', TextType::class, [
                 'required' => true,
