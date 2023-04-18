@@ -533,7 +533,7 @@
 
 				if($(".active #etablissement_siteWeb").length > 0){
 					var siteWebValid = regexSiteWeb.test($(".active #etablissement_siteWeb").val());
-					if(!siteWebValid){
+					if(!siteWebValid && $("#etablissement_siteWeb").val() != ''){
 						$(".active #etablissement_siteWeb").parent().append('<span class="champ-erreur">Site Web invalid</span>');
 						isrequired = true;
 					}
@@ -541,7 +541,7 @@
 
 				if($(".active #etablissement_email").length > 0){
 					var emailValid = regexMail.test($(".active #etablissement_email").val());
-					if(!emailValid){
+					if(!emailValid && $("#etablissement_email").val() != ''){
 						$(".active #etablissement_email").parent().append('<span class="champ-erreur">Adresse email invalid</span>');
 						isrequired = true;
 					}
@@ -549,7 +549,7 @@
 
 				if($(".active #etablissement_codePostal").length > 0){
 					var codePostalValid = regexNumberOnly.test($(".active #etablissement_codePostal").val());
-					if(!codePostalValid){
+					if(!codePostalValid && $("#etablissement_codePostal").val() != ''){
 						$(".active #etablissement_codePostal").parent().append('<span class="champ-erreur">La valeur est invalide</span>');
 						isrequired = true;
 					}
@@ -557,7 +557,7 @@
 
 				if($(".active #etablissement_nif").length > 0){
 					var nifValid = regexNumberOnly.test($(".active #etablissement_nif").val());
-					if(!nifValid){
+					if(!nifValid && $("#etablissement_nif").val() != ''){
 						$(".active #etablissement_nif").parent().append('<span class="champ-erreur">La valeur est invalide</span>');
 						isrequired = true;
 					}
@@ -565,7 +565,7 @@
 
 				if($(".active #etablissement_stat").length > 0){
 					var statValid = regexNumberOnly.test($("#etablissement_stat").val());
-					if(!nifValid){
+					if(!nifValid && $("#etablissement_stat").val() != ''){
 						$(".active #etablissement_stat").parent().append('<span class="champ-erreur">La valeur est invalide</span>');
 						isrequired = true;
 					}
@@ -573,7 +573,7 @@
 				
 				if($(".active #etablissement_proprietaire").length > 0){
 					var proprietaireValid = regexCharaterOnly.test($("#etablissement_proprietaire").val());
-					if(!proprietaireValid){
+					if(!proprietaireValid && $("#etablissement_proprietaire").val() != ''){
 						$(".active #etablissement_proprietaire").parent().append('<span class="champ-erreur">La valeur est invalide</span>');
 						isrequired = true;
 					}
@@ -581,7 +581,7 @@
 
 				if($(".active #etablissement_gerant").length > 0){
 					var gerantValid = regexCharaterOnly.test($("#etablissement_gerant").val());
-					if(!gerantValid){
+					if(!gerantValid && $("#etablissement_gerant").val() != ''){
 						$(".active #etablissement_gerant").parent().append('<span class="champ-erreur">La valeur est invalide</span>');
 						isrequired = true;
 					}
@@ -629,7 +629,7 @@
 				var regexNumberOnly = /\d/;
 				if($(".active #etablissement_nif").length > 0){
 					var nifValid = regexNumberOnly.test($(".active #etablissement_nif").val());
-					if(!nifValid){
+					if(!nifValid && $("#etablissement_nif").val() != ''){
 						$(".active #etablissement_nif").parent().append('<span class="champ-erreur">La valeur est invalide</span>');
 						isrequired = true;
 					}
@@ -637,7 +637,7 @@
 
 				if($(".active #etablissement_stat").length > 0){
 					var statValid = regexNumberOnly.test($("#etablissement_stat").val());
-					if(!nifValid){
+					if(!nifValid && $("#etablissement_stat").val() != ''){
 						$(".active #etablissement_stat").parent().append('<span class="champ-erreur">La valeur est invalide</span>');
 						isrequired = true;
 					}
