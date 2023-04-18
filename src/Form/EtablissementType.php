@@ -171,13 +171,13 @@ class EtablissementType extends AbstractType
                     'constraints' => [
                         new Regex('/[^\d]/')
                     ],
-                    'required' => true,
+                    'required' => false,
                 ])
                 ->add('gerant', TextType::class, [
                     'constraints' => [
                         new Regex('/[^\d]/')
                     ],
-                    'required' => true,
+                    'required' => false,
                 ])
                 ->add('region', EntityType::class, [
                     'class' => Region::class,
@@ -188,6 +188,7 @@ class EtablissementType extends AbstractType
                     'required' => true,
                 ])
                 ->add('nif', TextType::class, [
+                    'required' => false,
                     'constraints' => [
                         new Regex([
                             'pattern' => '/\d/',
@@ -196,6 +197,7 @@ class EtablissementType extends AbstractType
                     ],
                 ])
                 ->add('stat', TextType::class, [
+                    'required' => false,
                     'constraints' => [
                         new Regex([
                             'pattern' => '/\d/',
@@ -252,13 +254,13 @@ class EtablissementType extends AbstractType
                     'constraints' => [
                         new Regex('/[^\d]/')
                     ],
-                    'required' => true,
+                    'required' => false,
                 ])
                 ->add('gerant', TextType::class, [
                     'constraints' => [
                         new Regex('/[^\d]/')
                     ],
-                    'required' => true,
+                    'required' => false,
                 ])
                 ->add('region', EntityType::class, [
                     'class' => Region::class,
@@ -284,6 +286,7 @@ class EtablissementType extends AbstractType
                     'required' => true,
                 ])
                 ->add('nif', TextType::class, [
+                    'required' => false,
                     'constraints' => [
                         new Regex([
                             'pattern' => '/\d/',
@@ -292,6 +295,7 @@ class EtablissementType extends AbstractType
                     ],
                 ])
                 ->add('stat', TextType::class, [
+                    'required' => false,
                     'constraints' => [
                         new Regex([
                             'pattern' => '/\d/',
@@ -333,10 +337,10 @@ class EtablissementType extends AbstractType
                     'constraints' => [
                         new Regex('/[^\d]/')
                     ],
-                    'required' => true,
+                    'required' => false,
                 ])
                 ->add('gerant', TextType::class, [
-                    'required' => true,
+                    'required' => false,
                     'constraints' => [
                         new Regex('/[^\d]/')
                     ],
@@ -365,6 +369,7 @@ class EtablissementType extends AbstractType
                     'required' => true,
                 ])
                 ->add('nif', TextType::class, [
+                    'required' => false,
                     'constraints' => [
                         new Regex([
                             'pattern' => '/\d/',
@@ -373,6 +378,7 @@ class EtablissementType extends AbstractType
                     ],
                 ])
                 ->add('stat', TextType::class, [
+                    'required' => false,
                     'constraints' => [
                         new Regex([
                             'pattern' => '/\d/',
@@ -417,13 +423,13 @@ class EtablissementType extends AbstractType
                     ],
                 ])
                 ->add('proprietaire', TextType::class, [
-                    'required' => true,
+                    'required' => false,
                     'constraints' => [
                         new Regex('/[^\d]/')
                     ],
                 ])
                 ->add('gerant', TextType::class, [
-                    'required' => true,
+                    'required' => false,
                     'constraints' => [
                         new Regex('/[^\d]/')
                     ],
@@ -452,6 +458,7 @@ class EtablissementType extends AbstractType
                     'required' => true,
                 ])
                 ->add('nif', TextType::class, [
+                    'required' => false,
                     'constraints' => [
                         new Regex([
                             'pattern' => '/\d/',
@@ -460,6 +467,7 @@ class EtablissementType extends AbstractType
                     ],
                 ])
                 ->add('stat', TextType::class, [
+                    'required' => false,
                     'constraints' => [
                         new Regex([
                             'pattern' => '/\d/',
@@ -481,6 +489,7 @@ class EtablissementType extends AbstractType
                 ->add('carteProfessionnelle')
                 ->add('autreGroupement')
                 ->add('nif', TextType::class, [
+                    'required' => false,
                     'constraints' => [
                         new Regex([
                             'pattern' => '/\d/',
@@ -489,6 +498,7 @@ class EtablissementType extends AbstractType
                     ],
                 ])
                 ->add('stat', TextType::class, [
+                    'required' => false,
                     'constraints' => [
                         new Regex([
                             'pattern' => '/\d/',
