@@ -2,46 +2,34 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
-use App\Entity\Region;
-use App\Form\UserType;
-use App\Entity\Category;
-use App\Form\RegionType;
-use App\Form\CategoryType;
-use App\Entity\Etablissement;
-use App\Form\EtablissementType;
+
 use Symfony\Component\Form\Form;
-use App\Repository\UserRepository;
-use App\Repository\RegionRepository;
 use App\Repository\CategoryRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use App\Repository\EtablissementRepository;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AdminDashboardController extends AbstractController
 {
     private $categoryRepository;
-    private $regionRepository;
-    private $etablissementRepository;
-    private $userRepository;
-
-    public function __construct(CategoryRepository $categoryRepository, RegionRepository $regionRepository, EtablissementRepository $etablissementRepository, UserRepository $userRepository){
+    private $security;
+    
+    public function __construct(CategoryRepository $categoryRepository,  Security $security){
         $this->categoryRepository = $categoryRepository;
-        $this->regionRepository = $regionRepository;
-        $this->etablissementRepository = $etablissementRepository;
-        $this->userRepository = $userRepository;
+        $this->security = $security;
     }
 
     /**
      * @Route("/admin/", name="app_admin")
      */
-    public function dashboard(Request $request, EntityManagerInterface $entityManager): Response
-    {
+    public function dashboard(): Response
+    {   
+        $user = $this->security->getUser();
+
+        if(in_array('ROLE_ETABLISSEMENT', $user->getRoles()))
+            return $this->redirectToRoute('app_dashboard');
+
         return $this->render('admin/layout/dashboard.html.twig', [
             'categories' => $this->categoryRepository->findAll(),
         ]);

@@ -1,10 +1,7 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}Page non trouvée{% endblock %}
 {% block body %}
-    <h1>Page not found</h1>
-
-    <p>
-        The requested page couldn't be located. Checkout for any URL
-        misspelling or <a href="#">return to the homepage</a>.
-    </p>
+    <div class="notfound">
+				403 <span>Oups! Page interdite</span>
+	</div>
 {% endblock %}
