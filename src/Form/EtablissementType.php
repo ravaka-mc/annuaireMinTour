@@ -495,7 +495,14 @@ class EtablissementType extends AbstractType
             case 'TYPE_5':
                 $form->add('zoneIntervention')
                 ->add('nom', TextType::class, ['label' => 'Nom et Prénom'])
-                ->add('categorieAutorisation')
+                ->add('categorieAutorisation', ChoiceType::class, [
+                    'choices' => [
+                        'Guide National' => 'GUIDE_NATIONAL',
+                        'Guide Régional' => 'GUIDE_REGIONAL',
+                        'Guide Local' => 'GUIDE_LOCAL',
+                        'Guide spécialisé' => 'GUIDE_SPECIALISE',
+                    ],
+                ])
                 ->add('carteProfessionnelle')
                 ->add('autreGroupement')
                 ->add('nif', TextType::class, [

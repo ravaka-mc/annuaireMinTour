@@ -84,7 +84,7 @@
 										{{ form_widget(form.region) }}
 									</div>
 								{% else %}
-									<div id="wrapper-region"></div>
+									<div id="wrapper-region" style="display: none;"></div>
 								{% endif %}
 								{% if form.region is defined %}
 									<div id="wrapper-district" class="form-control">
@@ -92,7 +92,7 @@
 										{{ form_widget(form.district) }}
 									</div>
 								{% else %}
-									<div id="wrapper-district"></div>
+									<div id="wrapper-district" style="display: none;"></div>
 								{% endif %}
 								<div class="form-control">
 									<label for="">Téléphone</label>
