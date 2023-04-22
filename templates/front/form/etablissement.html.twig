@@ -84,6 +84,14 @@
 										{% else %}
 											<div id="wrapper-region"></div>
 										{% endif %}
+										{% if form.region is defined %}
+											<div id="wrapper-district" class="form-control">
+												<label for="">District</label>
+												{{ form_widget(form.district) }}
+											</div>
+										{% else %}
+											<div id="wrapper-district"></div>
+										{% endif %}
 										<div class="form-control">
 											<label for="">Téléphone</label>
 											{{ form_widget(form.telephone) }}
@@ -480,6 +488,25 @@
 			});
 		}
 
+
+		var changeRegion = () => {
+			if($('#etablissement_region').length > 0) {
+				$('#etablissement_region').on('change', function() {
+					$.ajax({
+						type: 'get',
+						url: '{{ path('app_region_district') }}',
+						data: {
+							region_id :  $(this).val()
+						},
+						dataType: 'json',
+						success: function (response) {
+							$('#etablissement_district').html(response.html);
+						}
+					})
+				})
+			}
+		}
+
 		$(document).ready(function () {
 			keypressNumberOnly();
 			var currentStep = 1;
@@ -709,8 +736,12 @@
 						$('#wrapper-nom').replaceWith(
 							$(response).find('#wrapper-nom')
 						);
+						$('#wrapper-district').replaceWith(
+							$(response).find('#wrapper-district')
+						);
 						changeLicences();
 						keypressNumberOnly();
+						changeRegion();
 					}
 				})
 			});

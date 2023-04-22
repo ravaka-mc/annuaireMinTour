@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\DistrictRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -33,6 +35,16 @@ class District
      * @ORM\ManyToOne(targetEntity=Region::class, inversedBy="districts")
      */
     private $region;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Etablissement::class, mappedBy="district")
+     */
+    private $etablissements;
+
+    public function __construct()
+    {
+        $this->etablissements = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -71,6 +83,36 @@ class District
     public function setRegion(?Region $region): self
     {
         $this->region = $region;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Etablissement>
+     */
+    public function getEtablissements(): Collection
+    {
+        return $this->etablissements;
+    }
+
+    public function addEtablissement(Etablissement $etablissement): self
+    {
+        if (!$this->etablissements->contains($etablissement)) {
+            $this->etablissements[] = $etablissement;
+            $etablissement->setDistrict($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEtablissement(Etablissement $etablissement): self
+    {
+        if ($this->etablissements->removeElement($etablissement)) {
+            // set the owning side to null (unless already changed)
+            if ($etablissement->getDistrict() === $this) {
+                $etablissement->setDistrict(null);
+            }
+        }
 
         return $this;
     }

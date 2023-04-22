@@ -255,6 +255,11 @@ class Etablissement
      */
     private $codePostal;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=District::class, inversedBy="etablissements")
+     */
+    private $district;
+
     public function __construct()
     {
         $this->groupements = new ArrayCollection();
@@ -871,6 +876,18 @@ class Etablissement
     public function setCodePostal(?string $codePostal): self
     {
         $this->codePostal = $codePostal;
+
+        return $this;
+    }
+
+    public function getDistrict(): ?District
+    {
+        return $this->district;
+    }
+
+    public function setDistrict(?District $district): self
+    {
+        $this->district = $district;
 
         return $this;
     }

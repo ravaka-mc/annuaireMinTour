@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Entity\Region;
 use App\Entity\Activite;
 use App\Entity\Category;
+use App\Entity\District;
 use App\Entity\Classement;
 use App\Entity\Groupement;
 use App\Entity\Etablissement;
@@ -46,8 +47,8 @@ class EtablissementType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $user = $this->security->getUser();
-        $defaultUser = $this->userRepository->find($user->getId());
+        // $user = $this->security->getUser();
+        // $defaultUser = $this->userRepository->find($user->getId());
 
         $builder
             ->add('auteur')
@@ -145,6 +146,15 @@ class EtablissementType extends AbstractType
             'multiple' => true,
             'required' => false,
             'choices' => $category->getGroupements()
+        ]);
+
+        $form->add('district', EntityType::class, [
+            'class' => District::class,
+            'choice_label' => 'nom',
+            'expanded' => false,
+            'multiple' => false,
+            'placeholder' => '--------------------',
+            'required' => true,
         ]);
 
         switch($category->getViewType()){
