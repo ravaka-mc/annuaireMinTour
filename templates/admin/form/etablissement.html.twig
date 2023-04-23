@@ -337,9 +337,25 @@
 										</div>
 									{% endif %}
 									<div class="form-control">
-										<label for="">Nombre de Salariés</label>
+										<label for="">Nombre de Salariés Homme</label>
 										{{ form_widget(form.nombreSalaries) }}
 									</div>
+									<div class="form-control">
+										<label for="">Nombre de Salariés Femme</label>
+										{{ form_widget(form.nombreSalaireFemme) }}
+									</div>
+									{% if form.nombreLit is defined %}
+										<div class="form-control">
+											<label for="">Nombre de lit</label>
+											{{ form_widget(form.nombreLit) }}
+										</div>
+									{% endif %}
+									{% if form.superficieSalle is defined %}
+										<div class="form-control">
+											<label for="">Superficie Salle de conférencee</label>
+											{{ form_widget(form.superficieSalle) }}
+										</div>
+									{% endif %}
 								</div>
 							</div>
 						</div>

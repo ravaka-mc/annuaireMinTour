@@ -260,6 +260,26 @@ class Etablissement
      */
     private $district;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nombreLit;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $superficieSalle;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nombreVoiture;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nombreSalaireFemme;
+
     public function __construct()
     {
         $this->groupements = new ArrayCollection();
@@ -888,6 +908,54 @@ class Etablissement
     public function setDistrict(?District $district): self
     {
         $this->district = $district;
+
+        return $this;
+    }
+
+    public function getNombreLit(): ?int
+    {
+        return $this->nombreLit;
+    }
+
+    public function setNombreLit(?int $nombreLit): self
+    {
+        $this->nombreLit = $nombreLit;
+
+        return $this;
+    }
+
+    public function getSuperficieSalle(): ?int
+    {
+        return $this->superficieSalle;
+    }
+
+    public function setSuperficieSalle(?int $superficieSalle): self
+    {
+        $this->superficieSalle = $superficieSalle;
+
+        return $this;
+    }
+
+    public function getNombreVoiture(): ?int
+    {
+        return $this->nombreVoiture;
+    }
+
+    public function setNombreVoiture(?int $nombreVoiture): self
+    {
+        $this->nombreVoiture = $nombreVoiture;
+
+        return $this;
+    }
+
+    public function getNombreSalaireFemme(): ?int
+    {
+        return $this->nombreSalaireFemme;
+    }
+
+    public function setNombreSalaireFemme(?int $nombreSalaireFemme): self
+    {
+        $this->nombreSalaireFemme = $nombreSalaireFemme;
 
         return $this;
     }

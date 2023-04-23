@@ -321,6 +321,18 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('nombreSalaries', IntegerType::class, [
                     'required' => true,
+                ])
+                ->add('nombreSalaireFemme', IntegerType::class, [
+                    'required' => true,
+                ])
+                ->add('nombreLit', IntegerType::class, [
+                    'required' => true,
+                ])
+                ->add('superficieSalle', IntegerType::class, [
+                    'required' => true,
+                ])
+                ->add('salleConference', IntegerType::class, [
+                    'required' => true,
                 ]);
                 break;
             case 'TYPE_3':
@@ -410,6 +422,9 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('nombreSalaries', IntegerType::class, [
                     'required' => true,
+                ])
+                ->add('nombreSalaireFemme', IntegerType::class, [
+                    'required' => true,
                 ]);
                 break;
             case 'TYPE_4':
@@ -489,6 +504,9 @@ class EtablissementType extends AbstractType
                     'required' => true,
                 ])
                 ->add('nombreSalaries', IntegerType::class, [
+                    'required' => true,
+                ])
+                ->add('nombreSalaireFemme', IntegerType::class, [
                     'required' => true,
                 ]);
                 break;
