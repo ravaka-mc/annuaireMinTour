@@ -15,13 +15,17 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class RegistrationController extends AbstractController
 {
     private $categoryRepository;
+    private $tokenStorage;
 
-    public function __construct(CategoryRepository $categoryRepository){ 
+    public function __construct(CategoryRepository $categoryRepository, TokenStorageInterface $tokenStorage){ 
         $this->categoryRepository = $categoryRepository;
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -48,7 +52,11 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_home');
+            // Authenticate the user
+            $token = new UsernamePasswordToken($user, 'main', $user->getRoles());
+            $this->tokenStorage->setToken($token);
+
+            return $this->redirectToRoute('app_admin');
         }
 
         return $this->render('registration/register.html.twig', [
