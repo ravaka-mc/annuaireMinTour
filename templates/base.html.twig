@@ -42,10 +42,17 @@
                                         <span>Mon compte</span>
                                     </a>
                                 {% elseif is_granted('ROLE_ETABLISSEMENT') %}
+								<div class="has-sub">
                                     <a href="{{ path('app_dashboard')}}" class="btn btn-primary membrebtn">
                                         <span>Mon compte</span>
                                     </a>
-                                {% else  %}
+									<div class="sub-compte">
+										<div class="activeitem"><a href="{{ path('app_dashboard') }}"><img src="{{ asset('front/images/etablissement.svg') }}" alt=""> Mes etablissements</a></div>
+										<div><a href="{{ path('app_profil') }}"><img src="{{ asset('front/images/profil.svg') }}" alt="">Profil</a></div>
+										<a class="deconnexion" href="{{ path('app_logout') }}"><img src="{{ asset('front/images/deconnecte.svg') }}" alt="">Se déconnecter</a>
+									</div>
+								</div>
+                                {% else %}
                                     <a href="{{ path('app_dashboard')}}" class="btn btn-primary membrebtn">
                                         <span>Espace membre</span>
                                     </a>
