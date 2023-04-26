@@ -333,7 +333,11 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('salleConference', IntegerType::class, [
                     'required' => true,
+                ])
+                ->add('autreActivite', TextType::class, [
+                    'required' => false,
                 ]);
+                
                 break;
             case 'TYPE_3':
                 $form->add('classement', EntityType::class, [
@@ -513,13 +517,15 @@ class EtablissementType extends AbstractType
             case 'TYPE_5':
                 $form->add('zoneIntervention')
                 ->add('nom', TextType::class, ['label' => 'Nom et Prénom'])
-                ->add('categorieAutorisation', ChoiceType::class, [
+                ->add('categorieGuide', ChoiceType::class, [
                     'choices' => [
                         'Guide National' => 'GUIDE_NATIONAL',
                         'Guide Régional' => 'GUIDE_REGIONAL',
                         'Guide Local' => 'GUIDE_LOCAL',
                         'Guide spécialisé' => 'GUIDE_SPECIALISE',
                     ],
+                    'expanded' => true,
+                    'multiple' => true,
                 ])
                 ->add('carteProfessionnelle')
                 ->add('autreGroupement')

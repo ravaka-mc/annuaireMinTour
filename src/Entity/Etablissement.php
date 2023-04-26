@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\EtablissementRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -13,6 +14,7 @@ use Symfony\Component\HttpFoundation\File\File;
 /**
  * @ORM\Entity(repositoryClass=EtablissementRepository::class)
  * @Vich\Uploadable
+ * @UniqueEntity(fields={"nom"}, message="Ce nom est déjà utilisé.")
  */
 class Etablissement
 {
@@ -24,7 +26,7 @@ class Etablissement
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $nom;
 
@@ -279,6 +281,21 @@ class Etablissement
      * @ORM\Column(type="integer", nullable=true)
      */
     private $nombreSalaireFemme;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $autreActivite;
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $categorieGuide = [];
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $agrement;
 
     public function __construct()
     {
@@ -956,6 +973,42 @@ class Etablissement
     public function setNombreSalaireFemme(?int $nombreSalaireFemme): self
     {
         $this->nombreSalaireFemme = $nombreSalaireFemme;
+
+        return $this;
+    }
+
+    public function getAutreActivite(): ?string
+    {
+        return $this->autreActivite;
+    }
+
+    public function setAutreActivite(?string $autreActivite): self
+    {
+        $this->autreActivite = $autreActivite;
+
+        return $this;
+    }
+
+    public function getCategorieGuide(): ?array
+    {
+        return $this->categorieGuide;
+    }
+
+    public function setCategorieGuide(?array $categorieGuide): self
+    {
+        $this->categorieGuide = $categorieGuide;
+
+        return $this;
+    }
+
+    public function getAgrement(): ?string
+    {
+        return $this->agrement;
+    }
+
+    public function setAgrement(?string $agrement): self
+    {
+        $this->agrement = $agrement;
 
         return $this;
     }

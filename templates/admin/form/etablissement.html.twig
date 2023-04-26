@@ -130,10 +130,23 @@
 											<span class="checkmark"></span>
 										</label>
 									{% endfor %}
+									<label>
+										Autre
+										<input type="checkbox" id="etablissement_activites_autre" >
+										<span class="checkmark"></span>
+									</label>
 								</div>
 							</div>
 							{% else %}
 								<div id="wrapper-activites"></div>
+							{% endif %}
+							{% if form.autreActivite is defined %}
+								<div id="wrapper-autreActivite" class="form-control">
+									<label>Préciser</label>
+									{{ form_widget(form.autreActivite) }}
+								</div>
+							{% else %}
+								<div id="wrapper-autreActivite"></div>
 							{% endif %}
 							{% if form.classement is defined %}
 							<div id="wrapper-classements" class="form-control">
@@ -363,7 +376,7 @@
 						<div id="wrapper-autorisation"></div>
 						<div id="wrapper-infos_supplementaire"></div>
 					{% endif %}
-					{% if form.categorieAutorisation is defined %}
+					{% if form.categorieGuide is defined %}
 						<div id="wrapper-autorisation2" class="bloc_editense form-wrap">
 							<div class="card-wrap">
 								<div class="form-in-head">
@@ -372,7 +385,15 @@
 								<div class="half">
 									<div class="form-control">
 										<label for="">Catégorie</label>
-										{{ form_widget(form.categorieAutorisation) }}
+										<div class="custom_checkbox">
+											{% for child in form.categorieGuide|filter(child => not child.rendered) %}
+											<label>
+												{{ child.vars.label }}
+												{{ form_widget(child) }}
+												<span class="checkmark"></span>
+											</label>
+											{% endfor %}
+										</div>
 									</div>
 									{% if form.carteProfessionnelle is defined %}
 									<div class="form-control">
@@ -471,7 +492,21 @@
 			}
 		}
 
+		var changeAutreActivite = () => {
+			$('#wrapper-autreActivite').hide();
+			$('#etablissement_activites_autre').on('change', function(){
+				if($(this).is(":checked")){
+					$('#wrapper-autreActivite').show();
+				} else {
+					$('#wrapper-autreActivite').hide();
+				}
+			})
+		}
+
 		jQuery(document).ready(function($) {
+
+			changeRegion();
+			
 			$("#etablissement_createdBy").selectize();
 			
 			$('.replace-img').click(function(){
@@ -541,9 +576,13 @@
 						$('#wrapper-district').replaceWith(
 							$(response).find('#wrapper-district')
 						);
+						$('#wrapper-autreActivite').replaceWith(
+							$(response).find('#wrapper-autreActivite')
+						);
 						
 						changeLicences();
 						changeRegion();
+						changeAutreActivite();
 					}
 				})
 			});
