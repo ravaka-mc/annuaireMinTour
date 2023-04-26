@@ -110,6 +110,14 @@
 								{% else %}
 									<div id="wrapper-web"></div>
 								{% endif %}
+								<div class="form-control">
+									<label for="">Facebook</label>
+									{{ form_widget(form.facebook) }}
+								</div>
+								<div class="form-control">
+									<label for="">Linkedin</label>
+									{{ form_widget(form.linkedin) }}
+								</div>
 							</div>
 							{% if form.zoneIntervention is defined %}
 							<div id="wrapper-zone" class="form-control">
@@ -255,7 +263,7 @@
 										{{ form_widget(form.dateLicenceA) }}
 									</div>
 									<div class="form-control notselected reference">
-										<input type="text" id="" name="" placeholder="Référence" disabled>
+										{{ form_widget(form.referenceA) }}
 									</div>
 								</div>
 								<div class="half tri">
@@ -268,7 +276,7 @@
 										{{ form_widget(form.dateLicenceB) }}
 									</div>
 									<div class="form-control notselected reference">
-										<input type="text" id="" name="" placeholder="Référence" disabled>
+										{{ form_widget(form.referenceB) }}
 									</div>
 								</div>
 								<div class="half tri">
@@ -281,7 +289,7 @@
 										{{ form_widget(form.dateLicenceC) }}
 									</div>
 									<div class="form-control notselected reference">
-										<input type="text" id="" name="" placeholder="Référence" disabled>
+										{{ form_widget(form.referenceC) }}
 									</div>
 								</div>
 							</div>

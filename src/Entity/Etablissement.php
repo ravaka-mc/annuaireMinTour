@@ -297,6 +297,31 @@ class Etablissement
      */
     private $agrement;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $facebook;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $linkedin;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $referenceA;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $referenceB;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $referenceC;
+
     public function __construct()
     {
         $this->groupements = new ArrayCollection();
@@ -1009,6 +1034,66 @@ class Etablissement
     public function setAgrement(?string $agrement): self
     {
         $this->agrement = $agrement;
+
+        return $this;
+    }
+
+    public function getFacebook(): ?string
+    {
+        return $this->facebook;
+    }
+
+    public function setFacebook(?string $facebook): self
+    {
+        $this->facebook = $facebook;
+
+        return $this;
+    }
+
+    public function getLinkedin(): ?string
+    {
+        return $this->linkedin;
+    }
+
+    public function setLinkedin(?string $linkedin): self
+    {
+        $this->linkedin = $linkedin;
+
+        return $this;
+    }
+
+    public function getReferenceA(): ?string
+    {
+        return $this->referenceA;
+    }
+
+    public function setReferenceA(?string $referenceA): self
+    {
+        $this->referenceA = $referenceA;
+
+        return $this;
+    }
+
+    public function getReferenceB(): ?string
+    {
+        return $this->referenceB;
+    }
+
+    public function setReferenceB(?string $referenceB): self
+    {
+        $this->referenceB = $referenceB;
+
+        return $this;
+    }
+
+    public function getReferenceC(): ?string
+    {
+        return $this->referenceC;
+    }
+
+    public function setReferenceC(?string $referenceC): self
+    {
+        $this->referenceC = $referenceC;
 
         return $this;
     }
