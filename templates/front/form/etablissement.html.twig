@@ -143,7 +143,7 @@
 					{% if form.activites is defined or  form.classement is defined %}
 						<div id="wrapper-classements-activites" class="bloc_editense form-wrap step">
 							{% if form.activites is defined %}
-								<div id="wrapper-activites" class="form-control">
+								<div id="wrapper-activites" class="card-wrap form-control">
 									<label>Activités</label>
 									<div class="custom_checkbox half">
 										{% for child in form.activites|filter(child => not child.rendered) %}
@@ -161,15 +161,17 @@
 
 							{% if form.classement is defined %}
 								<div id="wrapper-classements" class="form-control">
-									<label>Classement</label>
-									<div class="custom-radio half">
-										{% for child in form.classement|filter(child => not child.rendered) %}
-										<label>
-											{{ child.vars.label }}
-											{{ form_widget(child) }}
-											<span class="checkmark"></span>
-										</label>
-										{% endfor %}
+									<div class="card-wrap">
+										<label>Classement</label>
+										<div class="custom-radio half">
+											{% for child in form.classement|filter(child => not child.rendered) %}
+											<label>
+												{{ child.vars.label }}
+												{{ form_widget(child) }}
+												<span class="checkmark"></span>
+											</label>
+											{% endfor %}
+										</div>
 									</div>
 								</div>
 							{% else %}
@@ -182,7 +184,8 @@
 					
 					<div class="step">
 						<div class="bloc_editense form-wrap">
-							{% if form.proprietaire is defined %}
+							<div class="card-wrap">
+								{% if form.proprietaire is defined %}
 								<div id="wrapper-proprietaire" class="half">
 									<div class="form-control">
 										<label>Propriétaire</label>
@@ -193,42 +196,43 @@
 										{{ form_widget(form.gerant) }}
 									</div>
 								</div>
-							{% else %}
-								<div id="wrapper-proprietaire"></div>
-							{% endif %}
-							<div class="form-control inputright">
-								<label>Etes-vous membre d'un groupement ?</label>
-								<div id="wrapper-member" class="custom-radio">
-									{% for child in form.membre|filter(child => not child.rendered) %}
-									<label>
-										{{ child.vars.label }}
-										{{ form_widget(child) }}
-										<span class="checkmark"></span>
-									</label>
-								{% endfor %}
-								</div>
-							</div>
-							{% if form.groupements is defined %}
-								<div id="wrapper-groupements" class="custom_checkbox slidergrpm">
-									{% for child in form.groupements|filter(child => not child.rendered) %}
+								{% else %}
+									<div id="wrapper-proprietaire"></div>
+								{% endif %}
+								<div class="form-control inputright">
+									<label>Etes-vous membre d'un groupement ?</label>
+									<div id="wrapper-member" class="custom-radio">
+										{% for child in form.membre|filter(child => not child.rendered) %}
 										<label>
 											{{ child.vars.label }}
 											{{ form_widget(child) }}
 											<span class="checkmark"></span>
 										</label>
 									{% endfor %}
+									</div>
 								</div>
-							{% else %}
-								<div id="wrapper-groupements"></div>
-							{% endif %}
-							{% if form.autreGroupement is defined %}
-								<div id="wrapper-autregroupement" class="form-control slidergrpm">
-									<label>Groupe</label>
-									{{ form_widget(form.autreGroupement) }}
-								</div>
-							{% else %}
-								<div id="wrapper-autregroupement"></div>
-							{% endif %}
+								{% if form.groupements is defined %}
+									<div id="wrapper-groupements" class="custom_checkbox slidergrpm">
+										{% for child in form.groupements|filter(child => not child.rendered) %}
+											<label>
+												{{ child.vars.label }}
+												{{ form_widget(child) }}
+												<span class="checkmark"></span>
+											</label>
+										{% endfor %}
+									</div>
+								{% else %}
+									<div id="wrapper-groupements"></div>
+								{% endif %}
+								{% if form.autreGroupement is defined %}
+									<div id="wrapper-autregroupement" class="form-control slidergrpm">
+										<label>Groupe</label>
+										{{ form_widget(form.autreGroupement) }}
+									</div>
+								{% else %}
+									<div id="wrapper-autregroupement"></div>
+								{% endif %}
+							</div>
 						</div>
 					</div>
 					
