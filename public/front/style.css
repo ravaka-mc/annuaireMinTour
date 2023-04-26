@@ -2607,10 +2607,12 @@ form .checkboxgroup {
 	margin: 25px 0 40px;
 }
 .auto-details {
-	display: grid;
-	grid-template-columns: 290px 1fr 2fr;
-	gap: 30px;
+	display: flex;
+	gap: 50px;
 	margin-top: 30px;
+}
+.auto-details .item:first-child {
+	width: 270px;
 }
 
 .information .licence-detail {
@@ -2683,7 +2685,7 @@ form .checkboxgroup {
 
 .stat-detail .item p {
 	position: relative;
-	font: 800 45px/42px "meb";
+	font: 25px/28px "meb";
 	color: #231942;
 	margin-bottom: 5px;
 }
@@ -2695,7 +2697,7 @@ form .checkboxgroup {
 }
 
 .stat-detail .item .texte {
-	padding-top: 30px;
+	padding-top: 10px;
 }
 
 .stat-detail .item:not(:first-child) .texte {
@@ -2703,7 +2705,7 @@ form .checkboxgroup {
 }
 
 .stat-detail .item .n-titre {
-	font: 800 18px/30px "meb";
+	font: 15px/24px "meb";
 	color: #231942;
 	text-transform: uppercase;
 }
@@ -4145,6 +4147,13 @@ footer .footer .mentions li span {
 	.information-detail {
 		padding: 20px 30px 40px;
 	}
+	.auto-details {
+		flex-wrap: wrap;
+		gap: 20px 40px;
+	}
+	.auto-details .item:first-child {
+		width: auto;
+	}
 }
 
 @media (max-width: 1050px) {
@@ -4348,10 +4357,6 @@ footer .footer .mentions li span {
 	.information .details {
 		grid-template-columns: 1fr 1fr;
 		gap: 30px 10px;
-	}
-
-	.auto-details {
-		grid-template-columns: 1fr 1fr;
 	}
 
 	.information-detail {
@@ -4856,8 +4861,11 @@ footer .footer .mentions li span {
 	.bloc_editense .head {
 		grid-template-columns: auto;
 	}
-	.information .details, .auto-details {
+	.information .details {
 		grid-template-columns: 1fr;
+		gap: 20px;
+	}
+	.auto-details {
 		gap: 20px;
 	}
 	.page-profil .grid-50 {
