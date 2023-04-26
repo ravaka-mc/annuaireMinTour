@@ -59,22 +59,6 @@
 													<span class="champ-erreur">Ce champ est obligatoire</span>
 												{% endif %}
 											</div>
-<<<<<<< HEAD
-										{% else %}
-											<div id="wrapper-region" style="display: none;"></div>
-										{% endif %}
-										{% if form.region is defined %}
-											<div id="wrapper-district" class="form-control">
-												<label for="">District</label>
-												{{ form_widget(form.district) }}
-											</div>
-										{% else %}
-											<div id="wrapper-district" style="display: none;"></div>
-										{% endif %}
-										<div class="form-control">
-											<label for="">Téléphone</label>
-											{{ form_widget(form.telephone) }}
-=======
 										</div>
 									</div>
 								</div>
@@ -93,7 +77,6 @@
 										<div id="wrapper-region" class="form-control">
 											<label for="">Region</label>
 											{{ form_widget(form.region) }}
->>>>>>> origin/integrateur
 											{% if form_errors(form.telephone) %}
 												<span class="champ-erreur">Ce champ est obligatoire</span>
 											{% endif %}
@@ -364,29 +347,6 @@
 										{% if form_errors(form.stat) %}
 											<span class="champ-erreur">Valeur est invalide</span>
 										{% endif %}
-<<<<<<< HEAD
-										<div class="form-control">
-											<label for="">Nombre de Salariés Homme</label>
-											{{ form_widget(form.nombreSalaries) }}
-										</div>
-										<div class="form-control">
-											<label for="">Nombre de Salariés Femme</label>
-											{{ form_widget(form.nombreSalaireFemme) }}
-										</div>
-										{% if form.nombreLit is defined %}
-											<div class="form-control">
-												<label for="">Nombre de lit</label>
-												{{ form_widget(form.nombreLit) }}
-											</div>
-										{% endif %}
-										{% if form.superficieSalle is defined %}
-											<div class="form-control">
-												<label for="">Superficie Salle de conférencee</label>
-												{{ form_widget(form.superficieSalle) }}
-											</div>
-										{% endif %}
-=======
->>>>>>> origin/integrateur
 									</div>
 								</div>
 							</div>
