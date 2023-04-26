@@ -629,20 +629,18 @@ h3>a {
 }
 
 .deconnexion {
-	display: inline-flex;
+	display: flex;
+	flex-wrap: wrap;
 	vertical-align: top;
 	gap: 15px;
 	text-transform: uppercase;
 	align-items: center;
-	padding: 10px 50px;
-	border-radius: 25px;
-	border: 1px solid #ded8e8;
+	padding: 10px 20px;
 	background: #f1eef6;
-	color: #b4acb8;
 	box-shadow: 0 17px 30px 0 rgba(0, 0, 0, 0.03);
 }
 
-.deconnexion:hover {
+/*.deconnexion:hover {
 	border-color: #231942;
 	background-color: #231942;
 	color: white;
@@ -656,7 +654,7 @@ h3>a {
 .deconnexion img {
 	opacity: 0.4;
 	transition: all 0.4s ease;
-}
+}*/
 
 .btn-plus {
 	font: 18px/28px "gplbold";
@@ -2609,10 +2607,12 @@ form .checkboxgroup {
 	margin: 25px 0 40px;
 }
 .auto-details {
-	display: grid;
-	grid-template-columns: 290px 1fr 2fr;
-	gap: 30px;
+	display: flex;
+	gap: 50px;
 	margin-top: 30px;
+}
+.auto-details .item:first-child {
+	width: 270px;
 }
 
 .information .licence-detail {
@@ -2685,7 +2685,7 @@ form .checkboxgroup {
 
 .stat-detail .item p {
 	position: relative;
-	font: 800 45px/42px "meb";
+	font: 25px/28px "meb";
 	color: #231942;
 	margin-bottom: 5px;
 }
@@ -2697,7 +2697,7 @@ form .checkboxgroup {
 }
 
 .stat-detail .item .texte {
-	padding-top: 30px;
+	padding-top: 10px;
 }
 
 .stat-detail .item:not(:first-child) .texte {
@@ -2705,7 +2705,7 @@ form .checkboxgroup {
 }
 
 .stat-detail .item .n-titre {
-	font: 800 18px/30px "meb";
+	font: 15px/24px "meb";
 	color: #231942;
 	text-transform: uppercase;
 }
@@ -2789,6 +2789,10 @@ form .checkboxgroup {
 	transition: all 0.4s ease;
 }
 
+.content-bo_user {
+	margin: 50px auto;
+	max-width: 1100px;
+}
 .content-bo_user .headtitle {
 	display: flex;
 	justify-content: space-between;
@@ -2953,6 +2957,39 @@ form .checkboxgroup {
 .header_right {
 	margin-left: 10px;
 }
+.has-sub {
+	position: relative;
+}
+.sub-compte {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	top: calc(100% + 10px);
+	background-color: #ffffff;
+	width: 230px;
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.4s ease-in-out;
+}
+.sub-compte div a {
+	display: flex;
+	justify-content: start;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 10px;
+	line-height: 50px;
+	padding: 0 20px;
+}
+.sub-compte div:first-child {
+	border-bottom: 1px solid #f7f7f7;
+}
+.has-sub:hover .sub-compte {
+	opacity: 1;
+	visibility: visible;
+}
+.sub-compte a:hover {
+	background-color: #d9cbe1;
+}
 
 .link {
 	color: #1a141d;
@@ -3116,7 +3153,6 @@ form .checkboxgroup {
 }
 
 .categories label {
-	text-transform: uppercase;
 	font: 16px/30px "meb";
 	color: #614371;
 	display: inline-block;
@@ -3137,8 +3173,9 @@ form .checkboxgroup {
 
 .categories .card-wrap {
 	display: grid;
-	grid-template-columns: 125px 1fr;
+	grid-template-columns: 280px 1fr;
 	gap: 20px;
+	max-width: 850px;
 }
 
 /* Form */
@@ -3906,7 +3943,7 @@ footer .footer .mentions li span {
 		display: none;
 	}
 
-	.header .btn {
+	.header .has-sub {
 		display: inline-block;
 		vertical-align: middle;
 	}
@@ -4109,6 +4146,13 @@ footer .footer .mentions li span {
 
 	.information-detail {
 		padding: 20px 30px 40px;
+	}
+	.auto-details {
+		flex-wrap: wrap;
+		gap: 20px 40px;
+	}
+	.auto-details .item:first-child {
+		width: auto;
 	}
 }
 
@@ -4313,10 +4357,6 @@ footer .footer .mentions li span {
 	.information .details {
 		grid-template-columns: 1fr 1fr;
 		gap: 30px 10px;
-	}
-
-	.auto-details {
-		grid-template-columns: 1fr 1fr;
 	}
 
 	.information-detail {
@@ -4821,8 +4861,11 @@ footer .footer .mentions li span {
 	.bloc_editense .head {
 		grid-template-columns: auto;
 	}
-	.information .details, .auto-details {
+	.information .details {
 		grid-template-columns: 1fr;
+		gap: 20px;
+	}
+	.auto-details {
 		gap: 20px;
 	}
 	.page-profil .grid-50 {

@@ -10,66 +10,63 @@
         </div>
     </div>
     <div class="wrapper">
-        <div class="grid-custom list-etablissement">
-            {% include "front/block/dashboard-nav.html.twig" %}
-            <div class="content-bo_user">
-                <div class="headtitle">
-                    <div class="title">Mes établissements</div>
-                    <a href="{{ path('app_front_etablissement_add') }}" class="btn btn-primary"><span>Ajouter un établissement</span></a>
-                </div>
-                <table id="table-list" class="custom-table-secteur">
-                    <thead>
-                        <tr>
-                            <th><span>Nom</span></th>
-                            <th><span>Catégorie</span></th>
-                            <th><span>Region</span></th>
-                            <th><span>Date</span></th>
-                            <th><span>Etat</span></th>
-                            <th><span></span></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for etablissement in etablissements %}
-                            {% if etablissement.statut != 'delete' %}
-                                <tr>
-                                    <td>{{ etablissement.nom }}</td>
-                                    <td>{{ etablissement.getCategory() }}</td>
-                                    <td>{{ etablissement.getRegion() }}</td>
-                                    <td>{{ etablissement.getCreatedAt()|date('d/m/y') }}</td>
-                                    {% if etablissement.statut == 'valide' %}
-                                        <td><div class="valide">Validé</div></td>
-                                        <td>
-                                            <div class="action">
-                                                <a href="{{ path('app_front_etablissement_edit', {slug:etablissement.slug}) }}" class="edit"></a>
-                                                <a href="{{ path('app_etablissement', {category_slug:etablissement.category.slug, etablissement_slug:etablissement.slug}) }}" class="view"></a>
-                                                <a data-fancybox="" data-src="#popup-delete_{{etablissement.id}}" class="delete"></a>
-                                            </div>
-                                        </td>
-                                    {% elseif etablissement.statut == 'refuse' %}
-                                        <td><div class="refuse">Refusé</div></td>
-                                        <td>
-                                            <div class="action">
-                                                <div class="infobull"><div class="content"><span>{{ etablissement.refused.raison }}</span></div></div>
-                                                <a href="{{ path('app_front_etablissement_edit', {slug:etablissement.slug}) }}" class="edit"></a>
-                                                <a data-fancybox="" data-src="#popup-delete_{{etablissement.id}}" class="delete"></a>
-                                            </div>
-                                        </td>
-                                    {% else %}
-                                        <td><div class="en-attente">En attente</div></td>
-                                        <td>
-                                            <div class="action">
-                                                <a href="{{ path('app_front_etablissement_edit', {slug:etablissement.slug}) }}" class="edit"></a>
-                                                <a data-fancybox="" data-src="#popup-delete_{{etablissement.id}}" class="delete"></a>
-                                            </div>
-                                        </td>
-                                    {% endif %}
-                                </tr>
-                            {% endif %}
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
+		<div class="content-bo_user">
+			<div class="headtitle">
+				<div class="title">Mes établissements</div>
+				<a href="{{ path('app_front_etablissement_add') }}" class="btn btn-primary"><span>Ajouter un établissement</span></a>
+			</div>
+			<table id="table-list" class="custom-table-secteur">
+				<thead>
+					<tr>
+						<th><span>Nom</span></th>
+						<th><span>Catégorie</span></th>
+						<th><span>Region</span></th>
+						<th><span>Date</span></th>
+						<th><span>Etat</span></th>
+						<th><span></span></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for etablissement in etablissements %}
+						{% if etablissement.statut != 'delete' %}
+							<tr>
+								<td>{{ etablissement.nom }}</td>
+								<td>{{ etablissement.getCategory() }}</td>
+								<td>{{ etablissement.getRegion() }}</td>
+								<td>{{ etablissement.getCreatedAt()|date('d/m/y') }}</td>
+								{% if etablissement.statut == 'valide' %}
+									<td><div class="valide">Validé</div></td>
+									<td>
+										<div class="action">
+											<a href="{{ path('app_front_etablissement_edit', {slug:etablissement.slug}) }}" class="edit"></a>
+											<a href="{{ path('app_etablissement', {category_slug:etablissement.category.slug, etablissement_slug:etablissement.slug}) }}" class="view"></a>
+											<a data-fancybox="" data-src="#popup-delete_{{etablissement.id}}" class="delete"></a>
+										</div>
+									</td>
+								{% elseif etablissement.statut == 'refuse' %}
+									<td><div class="refuse">Refusé</div></td>
+									<td>
+										<div class="action">
+											<div class="infobull"><div class="content"><span>{{ etablissement.refused.raison }}</span></div></div>
+											<a href="{{ path('app_front_etablissement_edit', {slug:etablissement.slug}) }}" class="edit"></a>
+											<a data-fancybox="" data-src="#popup-delete_{{etablissement.id}}" class="delete"></a>
+										</div>
+									</td>
+								{% else %}
+									<td><div class="en-attente">En attente</div></td>
+									<td>
+										<div class="action">
+											<a href="{{ path('app_front_etablissement_edit', {slug:etablissement.slug}) }}" class="edit"></a>
+											<a data-fancybox="" data-src="#popup-delete_{{etablissement.id}}" class="delete"></a>
+										</div>
+									</td>
+								{% endif %}
+							</tr>
+						{% endif %}
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
     </div>
 </main>
 {% for etablissement in etablissements %}
