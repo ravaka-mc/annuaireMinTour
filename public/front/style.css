@@ -835,7 +835,7 @@ form label {
 }
 
 form input {
-	font: 14px/20px "mr";
+	font: 13px/20px "mr";
 	color: #1a141d;
 	width: 100%;
 	border: 1px solid #e9e5ef;
@@ -843,11 +843,11 @@ form input {
 }
 
 form input::-moz-placeholder {
-	font: 16px/29px "mr";
+	font: 13px/29px "mr";
 }
 
 form input::placeholder {
-	font: 16px/29px "mr";
+	font: 13px/29px "mr";
 }
 
 form input[readonly] {
@@ -3198,7 +3198,7 @@ form .checkboxgroup {
 .categories select {
 	background: url(images/arrow-select.svg) no-repeat right 18px center #fff;
 	padding: 0 35px;
-	height: 30px;
+	height: 40px;
 	border: 0;
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -3212,6 +3212,7 @@ form .checkboxgroup {
 	grid-template-columns: 280px 1fr;
 	gap: 20px;
 	max-width: 850px;
+	align-items: center;
 }
 
 /* Form */
@@ -4687,7 +4688,7 @@ footer .footer .mentions li span {
 	}
 
 	.blocform input {
-		font-size: 14px;
+		font-size: 13px;
 		height: 40px;
 	}
 
