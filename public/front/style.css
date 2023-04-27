@@ -2641,7 +2641,7 @@ form .checkboxgroup {
 	margin-top: 30px;
 }
 .auto-details .item:first-child {
-	width: 270px;
+	min-width: 270px;
 }
 
 .information .licence-detail {
@@ -2708,7 +2708,7 @@ form .checkboxgroup {
 }
 
 .stat-detail .item {
-	width: 25%;
+	width: 16.66%;
 	text-align: center;
 }
 
@@ -4189,7 +4189,7 @@ footer .footer .mentions li span {
 		gap: 20px 40px;
 	}
 	.auto-details .item:first-child {
-		width: auto;
+		min-width: auto;
 	}
 }
 
@@ -4424,12 +4424,9 @@ footer .footer .mentions li span {
 	}
 	
 	.stat-detail .item {
-		width: 50%;
+		width: 33%;
 	}
 
-	.stat-detail .item:nth-child(3) .texte {
-		border: none;
-	}
 
 	.stat-detail .item p {
 		font-size: 30px;
