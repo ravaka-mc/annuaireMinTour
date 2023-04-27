@@ -442,90 +442,48 @@
 								<!-- contenu html -->
 								<label class="sub-stitle">Catégorie</label>
 								<div class="cat-check grid-25 custom_checkbox">
-									<div class="item">
-										<label>Guide National
-											<input type="checkbox" id="etablissement_categorieGuide_0" name="etablissement[categorieGuide][]" value="GUIDE_NATIONAL">
-											<span class="checkmark"></span>
-										</label>
-									</div>
-									<div class="item">
-										<label>Guide Régional
-											<input type="checkbox" id="etablissement_categorieGuide_1" name="etablissement[categorieGuide][]" value="GUIDE_REGIONAL">
-											<span class="checkmark"></span>
-										</label>
-										<div class="sub-check" style="display:none">
-											<div id="wrapper-region" class="form-control">
-												<select id="etablissement_region" name="etablissement[region]" required="required"><option value="" selected="selected">Choisir votre région</option><option value="1">Alaotra-Mangoro</option><option value="2">Amoron'i Mania</option><option value="3">Analamanga</option><option value="4">Analanjirofo</option><option value="5">Androy</option><option value="6">Anôsy</option><option value="7">Atsimo-Andrefana</option><option value="8">Atsimo-Atsinanana</option><option value="9">Atsinanana</option><option value="10">Betsiboka</option><option value="11">Boeny</option><option value="12">Bongolava</option><option value="13">Diana</option><option value="14">Fitovinany</option><option value="15">Haute Matsiatra</option><option value="16">Ihorombe</option><option value="17">Itasy</option><option value="18">Melaky</option><option value="19">Menabe</option><option value="20">Nosy Be</option><option value="21">Sainte Marie</option><option value="22">Sava</option><option value="23">Sofia</option><option value="24">Vakinakaratra</option><option value="25">Vatovavy</option></select>
-											</div>
-										</div>
-									</div>
-									<div class="item">
-										<label>Guide Local
-											<input type="checkbox" id="etablissement_categorieGuide_2" name="etablissement[categorieGuide][]" value="GUIDE_LOCAL">
-											<span class="checkmark"></span>
-										</label>
-										<div class="sub-check" style="display:none">
-											<input type="text" id="etablissement_zoneIntervention" name="etablissement[zoneIntervention]" placeholder="Zone d'intervention" maxlength="255">
-										</div>
-									</div>
-									<div class="item">
-										<label>Guide spécialisé
-											<input type="checkbox" id="etablissement_categorieGuide_3" name="etablissement[categorieGuide][]" value="GUIDE_SPECIALISE">
-											<span class="checkmark"></span>
-										</label>
-										<div class="sub-check" style="display:none">
-											<label>Lorem ipsum
-												<input type="checkbox" id="" name="" value="GUIDE_REGIONAL">
+									{% for child in form.categorieGuide|filter(child => not child.rendered) %}
+										<div class="item">
+											<label>
+												{{ child.vars.label }}
+												{{ form_widget(child) }}
 												<span class="checkmark"></span>
 											</label>
-											<label>Lorem ipsum
-												<input type="checkbox" id="" name="" value="GUIDE_REGIONAL">
-												<span class="checkmark"></span>
-											</label>
-											<div class="has_sub-check">
-												<label>Autres
-													<input type="checkbox" id="" name="" value="GUIDE_REGIONAL">
-													<span class="checkmark"></span>
-												</label>
-												<input type="text" placeholder="A preciser" style="display: none;">
-											</div>
+											{% if child.vars.value == 'GUIDE_REGIONAL' %}
+												{% if form.region is defined %}
+													<div id="wrapper-region"  class="sub-check" id="wrapper-preciser" style="display:none">
+														<div class="form-control">
+															{{ form_widget(form.region) }}
+															{% if form_errors(form.region) %}
+																<span class="champ-erreur">Ce champ est obligatoire</span>
+															{% endif %}
+														</div>
+													</div>
+												{% endif %}
+											{% endif %}
+											{% if child.vars.value == 'GUIDE_LOCAL' %}
+												{% if form.zoneIntervention is defined %}
+													<div class="sub-check" id="wrapper-zone" class="form-control" style="display: none;">
+														{{ form_widget(form.zoneIntervention) }}
+													</div>
+												{% endif %}
+											{% endif %}
+											{% if child.vars.value == 'GUIDE_SPECIALISE' %}
+												<div class="sub-check" id="wrapper-preciser" style="display:none">
+													<div class="form-control">
+														{{ form_widget(form.categorieAutorisation) }}
+														{% if form_errors(form.categorieAutorisation) %}
+															<span class="champ-erreur">Valeur est invalide</span>
+														{% endif %}
+													</div>
+												</div>
+											{% endif %}
 										</div>
-									</div>
+									{% endfor %}
 								</div>
 								<!-- end contenu html -->
 
 								<div class="half">
-									<div class="custom_checkbox">
-										{% for child in form.categorieGuide|filter(child => not child.rendered) %}
-										<label>
-											{{ child.vars.label }}
-											{{ form_widget(child) }}
-											<span class="checkmark"></span>
-										</label>
-										{% endfor %}
-									</div>
-									<div id="wrapper-preciser" class="form-control" style="display: none;">
-										<label for="">À préciser</label>
-										{{ form_widget(form.categorieAutorisation) }}
-										{% if form_errors(form.categorieAutorisation) %}
-											<span class="champ-erreur">Valeur est invalide</span>
-										{% endif %}
-									</div>
-									{% if form.zoneIntervention is defined %}
-										<div id="wrapper-zone" class="form-control" style="display: none;">
-											<label for="">Zone d'intervention</label>
-											{{ form_widget(form.zoneIntervention) }}
-										</div>
-									{% endif %}
-									{% if form.region is defined %}
-										<div id="wrapper-region" class="form-control" style="display: none;">
-											<label for="">Region</label>
-											{{ form_widget(form.region) }}
-											{% if form_errors(form.region) %}
-												<span class="champ-erreur">Ce champ est obligatoire</span>
-											{% endif %}
-										</div>
-									{% endif %}
 									{% if form.carteProfessionnelle is defined %}
 									<div class="form-control">
 										<label for="">N° carte et badge professionnel</label>
