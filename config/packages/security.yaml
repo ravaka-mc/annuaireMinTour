@@ -24,7 +24,7 @@ security:
                 login_path: app_login
                 check_path: app_login
                 enable_csrf: true
-                default_target_path: app_home
+                default_target_path: app_admin
                 target_path_parameter: go_to
             
             logout:
@@ -40,7 +40,7 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/admin, roles: [ROLE_ADMIN, ROLE_ETABLISSEMENT] }
         - { path: ^/dashboard, roles: [ROLE_ADMIN, ROLE_ETABLISSEMENT] }
         - { path: ^/, roles: [ROLE_ADMIN, ROLE_ETABLISSEMENT, IS_AUTHENTICATED_ANONYMOUSLY] }
 

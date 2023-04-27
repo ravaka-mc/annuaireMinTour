@@ -43,9 +43,15 @@ class Region
      */
     private $etablissements;
 
+    /**
+     * @ORM\OneToMany(targetEntity=District::class, mappedBy="region")
+     */
+    private $districts;
+
     public function __construct()
     {
         $this->etablissements = new ArrayCollection();
+        $this->districts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -118,5 +124,35 @@ class Region
 
     public function __toString(){
         return $this->nom;
+    }
+
+    /**
+     * @return Collection<int, District>
+     */
+    public function getDistricts(): Collection
+    {
+        return $this->districts;
+    }
+
+    public function addDistrict(District $district): self
+    {
+        if (!$this->districts->contains($district)) {
+            $this->districts[] = $district;
+            $district->setRegion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDistrict(District $district): self
+    {
+        if ($this->districts->removeElement($district)) {
+            // set the owning side to null (unless already changed)
+            if ($district->getRegion() === $this) {
+                $district->setRegion(null);
+            }
+        }
+
+        return $this;
     }
 }

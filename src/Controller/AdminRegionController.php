@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use Twig\Environment;
 use App\Entity\Region;
 use App\Form\UserType;
 use App\Entity\Category;
@@ -24,9 +25,11 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class AdminRegionController extends AdminController
 {
     private $regionRepository;
+    private $twig;
 
-    public function __construct(RegionRepository $regionRepository){
+    public function __construct(RegionRepository $regionRepository, Environment $twig){
         $this->regionRepository = $regionRepository;
+        $this->twig = $twig;
     }
 
 
@@ -92,5 +95,26 @@ class AdminRegionController extends AdminController
         $this->regionRepository->add($region, true);
 
         return $this->redirectToRoute('app_admin_region');
+    }
+
+    /**
+     * @Route("/region/district", name="app_region_district")
+     */
+    public function getRegionDistrict(Request $request): Response
+    {
+        $region_id = $request->query->get('region_id');
+        
+        $region = $this->regionRepository->findOneBy([
+            'id' => (int) $region_id,
+        ]);
+
+        $districts = $region->getDistricts();
+        $html = $this->twig->render('admin/block/district.html.twig', [
+            'districts' => $districts
+        ]);
+
+        return new JsonResponse([
+            "html" => $html
+        ]);
     }
 }

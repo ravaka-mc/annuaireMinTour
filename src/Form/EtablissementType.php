@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Entity\Region;
 use App\Entity\Activite;
 use App\Entity\Category;
+use App\Entity\District;
 use App\Entity\Classement;
 use App\Entity\Groupement;
 use App\Entity\Etablissement;
@@ -46,8 +47,8 @@ class EtablissementType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $user = $this->security->getUser();
-        $defaultUser = $this->userRepository->find($user->getId());
+        // $user = $this->security->getUser();
+        // $defaultUser = $this->userRepository->find($user->getId());
 
         $builder
             ->add('auteur')
@@ -76,20 +77,13 @@ class EtablissementType extends AbstractType
                 ],
                 'required' => true,
             ])
-            ->add('avatarFile', FileType::class,[
+            ->add('facebook', TextType::class, [
                 'required' => false,
-                'mapped' => false,
-                'constraints' => [
-                    new File([
-                        'mimeTypes' => [
-                            'image/jpeg',
-                            'image/png',
-                            'image/svg+xml',
-                        ],
-                        'mimeTypesMessage' => 'Veuillez uploader un fichier valide (jpeg, png, svg)',
-                    ]),
-                ],
             ])
+            ->add('linkedin', TextType::class, [
+                'required' => false,
+            ])
+            
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'nom',
@@ -157,6 +151,28 @@ class EtablissementType extends AbstractType
                     'required' => false,
                     'choices' => $category->getActivites()
                 ])
+                ->add('avatarFile', FileType::class,[
+                    'required' => false,
+                    'mapped' => false,
+                    'constraints' => [
+                        new File([
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/png',
+                                'image/svg+xml',
+                            ],
+                            'mimeTypesMessage' => 'Veuillez uploader un fichier valide (jpeg, png, svg)',
+                        ]),
+                    ],
+                ])
+                ->add('district', EntityType::class, [
+                    'class' => District::class,
+                    'choice_label' => 'nom',
+                    'expanded' => false,
+                    'multiple' => false,
+                    'placeholder' => '--------------------',
+                    'required' => true,
+                ])
                 ->add('nom', TextType::class, ['label' => 'Dénomination sociale'])
                 ->add('siteWeb', TextType::class, [
                     'required' => false,
@@ -171,13 +187,13 @@ class EtablissementType extends AbstractType
                     'constraints' => [
                         new Regex('/[^\d]/')
                     ],
-                    'required' => true,
+                    'required' => false,
                 ])
                 ->add('gerant', TextType::class, [
                     'constraints' => [
                         new Regex('/[^\d]/')
                     ],
-                    'required' => true,
+                    'required' => false,
                 ])
                 ->add('region', EntityType::class, [
                     'class' => Region::class,
@@ -188,6 +204,7 @@ class EtablissementType extends AbstractType
                     'required' => true,
                 ])
                 ->add('nif', TextType::class, [
+                    'required' => true,
                     'constraints' => [
                         new Regex([
                             'pattern' => '/\d/',
@@ -196,6 +213,7 @@ class EtablissementType extends AbstractType
                     ],
                 ])
                 ->add('stat', TextType::class, [
+                    'required' => true,
                     'constraints' => [
                         new Regex([
                             'pattern' => '/\d/',
@@ -226,6 +244,24 @@ class EtablissementType extends AbstractType
                 ->add('dateLicenceC', DateType::class, [
                     'widget' => 'single_text',
                     'required' => false,
+                ])
+                ->add('referenceA', TextType::class, [
+                    'required' => false,   
+                    'attr' => [
+                        'placeholder' => 'Référence A'
+                    ]
+                ])
+                ->add('referenceB', TextType::class, [
+                    'required' => false,  
+                    'attr' => [
+                        'placeholder' => 'Référence B'
+                    ]
+                ])
+                ->add('referenceC', TextType::class, [   
+                    'attr' => [
+                        'placeholder' => 'Référence C'
+                    ],
+                    'required' => false,
                 ]);
                 break;
             case 'TYPE_2':
@@ -237,6 +273,28 @@ class EtablissementType extends AbstractType
                     'empty_data' => '',
                     'placeholder' => false,
                     'required' => false,
+                ])
+                ->add('avatarFile', FileType::class,[
+                    'required' => false,
+                    'mapped' => false,
+                    'constraints' => [
+                        new File([
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/png',
+                                'image/svg+xml',
+                            ],
+                            'mimeTypesMessage' => 'Veuillez uploader un fichier valide (jpeg, png, svg)',
+                        ]),
+                    ],
+                ])
+                ->add('district', EntityType::class, [
+                    'class' => District::class,
+                    'choice_label' => 'nom',
+                    'expanded' => false,
+                    'multiple' => false,
+                    'placeholder' => '--------------------',
+                    'required' => true,
                 ])
                 ->add('nom', TextType::class, ['label' => 'Dénomination sociale'])
                 ->add('siteWeb', TextType::class, [
@@ -252,13 +310,13 @@ class EtablissementType extends AbstractType
                     'constraints' => [
                         new Regex('/[^\d]/')
                     ],
-                    'required' => true,
+                    'required' => false,
                 ])
                 ->add('gerant', TextType::class, [
                     'constraints' => [
                         new Regex('/[^\d]/')
                     ],
-                    'required' => true,
+                    'required' => false,
                 ])
                 ->add('region', EntityType::class, [
                     'class' => Region::class,
@@ -284,6 +342,7 @@ class EtablissementType extends AbstractType
                     'required' => true,
                 ])
                 ->add('nif', TextType::class, [
+                    'required' => true,
                     'constraints' => [
                         new Regex([
                             'pattern' => '/\d/',
@@ -292,6 +351,7 @@ class EtablissementType extends AbstractType
                     ],
                 ])
                 ->add('stat', TextType::class, [
+                    'required' => true,
                     'constraints' => [
                         new Regex([
                             'pattern' => '/\d/',
@@ -307,7 +367,23 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('nombreSalaries', IntegerType::class, [
                     'required' => true,
+                ])
+                ->add('nombreSalaireFemme', IntegerType::class, [
+                    'required' => true,
+                ])
+                ->add('nombreLit', IntegerType::class, [
+                    'required' => true,
+                ])
+                ->add('superficieSalle', IntegerType::class, [
+                    'required' => true,
+                ])
+                ->add('salleConference', IntegerType::class, [
+                    'required' => true,
+                ])
+                ->add('autreActivite', TextType::class, [
+                    'required' => false,
                 ]);
+                
                 break;
             case 'TYPE_3':
                 $form->add('classement', EntityType::class, [
@@ -318,6 +394,28 @@ class EtablissementType extends AbstractType
                     'empty_data' => '',
                     'placeholder' => false,
                     'required' => false,
+                ])
+                ->add('avatarFile', FileType::class,[
+                    'required' => false,
+                    'mapped' => false,
+                    'constraints' => [
+                        new File([
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/png',
+                                'image/svg+xml',
+                            ],
+                            'mimeTypesMessage' => 'Veuillez uploader un fichier valide (jpeg, png, svg)',
+                        ]),
+                    ],
+                ])
+                ->add('district', EntityType::class, [
+                    'class' => District::class,
+                    'choice_label' => 'nom',
+                    'expanded' => false,
+                    'multiple' => false,
+                    'placeholder' => '--------------------',
+                    'required' => true,
                 ])
                 ->add('nom', TextType::class, ['label' => 'Dénomination sociale'])
                 ->add('siteWeb', TextType::class, [
@@ -333,10 +431,10 @@ class EtablissementType extends AbstractType
                     'constraints' => [
                         new Regex('/[^\d]/')
                     ],
-                    'required' => true,
+                    'required' => false,
                 ])
                 ->add('gerant', TextType::class, [
-                    'required' => true,
+                    'required' => false,
                     'constraints' => [
                         new Regex('/[^\d]/')
                     ],
@@ -365,6 +463,7 @@ class EtablissementType extends AbstractType
                     'required' => true,
                 ])
                 ->add('nif', TextType::class, [
+                    'required' => true,
                     'constraints' => [
                         new Regex([
                             'pattern' => '/\d/',
@@ -373,6 +472,7 @@ class EtablissementType extends AbstractType
                     ],
                 ])
                 ->add('stat', TextType::class, [
+                    'required' => true,
                     'constraints' => [
                         new Regex([
                             'pattern' => '/\d/',
@@ -394,6 +494,9 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('nombreSalaries', IntegerType::class, [
                     'required' => true,
+                ])
+                ->add('nombreSalaireFemme', IntegerType::class, [
+                    'required' => true,
                 ]);
                 break;
             case 'TYPE_4':
@@ -406,6 +509,28 @@ class EtablissementType extends AbstractType
                     'placeholder' => false,
                     'required' => false,
                 ])
+                ->add('avatarFile', FileType::class,[
+                    'required' => false,
+                    'mapped' => false,
+                    'constraints' => [
+                        new File([
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/png',
+                                'image/svg+xml',
+                            ],
+                            'mimeTypesMessage' => 'Veuillez uploader un fichier valide (jpeg, png, svg)',
+                        ]),
+                    ],
+                ])
+                ->add('district', EntityType::class, [
+                    'class' => District::class,
+                    'choice_label' => 'nom',
+                    'expanded' => false,
+                    'multiple' => false,
+                    'placeholder' => '--------------------',
+                    'required' => true,
+                ])
                 ->add('nom', TextType::class, ['label' => 'Dénomination sociale'])
                 ->add('siteWeb', TextType::class, [
                     'required' => false,
@@ -417,13 +542,13 @@ class EtablissementType extends AbstractType
                     ],
                 ])
                 ->add('proprietaire', TextType::class, [
-                    'required' => true,
+                    'required' => false,
                     'constraints' => [
                         new Regex('/[^\d]/')
                     ],
                 ])
                 ->add('gerant', TextType::class, [
-                    'required' => true,
+                    'required' => false,
                     'constraints' => [
                         new Regex('/[^\d]/')
                     ],
@@ -452,6 +577,7 @@ class EtablissementType extends AbstractType
                     'required' => true,
                 ])
                 ->add('nif', TextType::class, [
+                    'required' => true,
                     'constraints' => [
                         new Regex([
                             'pattern' => '/\d/',
@@ -460,6 +586,7 @@ class EtablissementType extends AbstractType
                     ],
                 ])
                 ->add('stat', TextType::class, [
+                    'required' => true,
                     'constraints' => [
                         new Regex([
                             'pattern' => '/\d/',
@@ -472,15 +599,38 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('nombreSalaries', IntegerType::class, [
                     'required' => true,
+                ])
+                ->add('nombreSalaireFemme', IntegerType::class, [
+                    'required' => true,
                 ]);
                 break;
             case 'TYPE_5':
                 $form->add('zoneIntervention')
                 ->add('nom', TextType::class, ['label' => 'Nom et Prénom'])
-                ->add('categorieAutorisation')
+                ->add('categorieGuide', ChoiceType::class, [
+                    'choices' => [
+                        'Guide National' => 'GUIDE_NATIONAL',
+                        'Guide Régional' => 'GUIDE_REGIONAL',
+                        'Guide Local' => 'GUIDE_LOCAL',
+                        'Guide spécialisé' => 'GUIDE_SPECIALISE',
+                    ],
+                    'expanded' => true,
+                    'multiple' => true,
+                ])
                 ->add('carteProfessionnelle')
                 ->add('autreGroupement')
+                ->add('agrement')
+                ->add('categorieAutorisation')
+                ->add('region', EntityType::class, [
+                    'class' => Region::class,
+                    'choice_label' => 'nom',
+                    'expanded' => false,
+                    'multiple' => false,
+                    'placeholder' => '--------------------',
+                    'required' => true,
+                ])
                 ->add('nif', TextType::class, [
+                    'required' => false,
                     'constraints' => [
                         new Regex([
                             'pattern' => '/\d/',
@@ -489,6 +639,7 @@ class EtablissementType extends AbstractType
                     ],
                 ])
                 ->add('stat', TextType::class, [
+                    'required' => false,
                     'constraints' => [
                         new Regex([
                             'pattern' => '/\d/',

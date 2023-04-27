@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\EtablissementRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -13,6 +14,7 @@ use Symfony\Component\HttpFoundation\File\File;
 /**
  * @ORM\Entity(repositoryClass=EtablissementRepository::class)
  * @Vich\Uploadable
+ * @UniqueEntity(fields={"nom"}, message="Ce nom est déjà utilisé.")
  */
 class Etablissement
 {
@@ -24,7 +26,7 @@ class Etablissement
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $nom;
 
@@ -254,6 +256,71 @@ class Etablissement
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $codePostal;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=District::class, inversedBy="etablissements")
+     */
+    private $district;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nombreLit;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $superficieSalle;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nombreVoiture;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nombreSalaireFemme;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $autreActivite;
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $categorieGuide = [];
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $agrement;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $facebook;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $linkedin;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $referenceA;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $referenceB;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $referenceC;
 
     public function __construct()
     {
@@ -871,6 +938,162 @@ class Etablissement
     public function setCodePostal(?string $codePostal): self
     {
         $this->codePostal = $codePostal;
+
+        return $this;
+    }
+
+    public function getDistrict(): ?District
+    {
+        return $this->district;
+    }
+
+    public function setDistrict(?District $district): self
+    {
+        $this->district = $district;
+
+        return $this;
+    }
+
+    public function getNombreLit(): ?int
+    {
+        return $this->nombreLit;
+    }
+
+    public function setNombreLit(?int $nombreLit): self
+    {
+        $this->nombreLit = $nombreLit;
+
+        return $this;
+    }
+
+    public function getSuperficieSalle(): ?int
+    {
+        return $this->superficieSalle;
+    }
+
+    public function setSuperficieSalle(?int $superficieSalle): self
+    {
+        $this->superficieSalle = $superficieSalle;
+
+        return $this;
+    }
+
+    public function getNombreVoiture(): ?int
+    {
+        return $this->nombreVoiture;
+    }
+
+    public function setNombreVoiture(?int $nombreVoiture): self
+    {
+        $this->nombreVoiture = $nombreVoiture;
+
+        return $this;
+    }
+
+    public function getNombreSalaireFemme(): ?int
+    {
+        return $this->nombreSalaireFemme;
+    }
+
+    public function setNombreSalaireFemme(?int $nombreSalaireFemme): self
+    {
+        $this->nombreSalaireFemme = $nombreSalaireFemme;
+
+        return $this;
+    }
+
+    public function getAutreActivite(): ?string
+    {
+        return $this->autreActivite;
+    }
+
+    public function setAutreActivite(?string $autreActivite): self
+    {
+        $this->autreActivite = $autreActivite;
+
+        return $this;
+    }
+
+    public function getCategorieGuide(): ?array
+    {
+        return $this->categorieGuide;
+    }
+
+    public function setCategorieGuide(?array $categorieGuide): self
+    {
+        $this->categorieGuide = $categorieGuide;
+
+        return $this;
+    }
+
+    public function getAgrement(): ?string
+    {
+        return $this->agrement;
+    }
+
+    public function setAgrement(?string $agrement): self
+    {
+        $this->agrement = $agrement;
+
+        return $this;
+    }
+
+    public function getFacebook(): ?string
+    {
+        return $this->facebook;
+    }
+
+    public function setFacebook(?string $facebook): self
+    {
+        $this->facebook = $facebook;
+
+        return $this;
+    }
+
+    public function getLinkedin(): ?string
+    {
+        return $this->linkedin;
+    }
+
+    public function setLinkedin(?string $linkedin): self
+    {
+        $this->linkedin = $linkedin;
+
+        return $this;
+    }
+
+    public function getReferenceA(): ?string
+    {
+        return $this->referenceA;
+    }
+
+    public function setReferenceA(?string $referenceA): self
+    {
+        $this->referenceA = $referenceA;
+
+        return $this;
+    }
+
+    public function getReferenceB(): ?string
+    {
+        return $this->referenceB;
+    }
+
+    public function setReferenceB(?string $referenceB): self
+    {
+        $this->referenceB = $referenceB;
+
+        return $this;
+    }
+
+    public function getReferenceC(): ?string
+    {
+        return $this->referenceC;
+    }
+
+    public function setReferenceC(?string $referenceC): self
+    {
+        $this->referenceC = $referenceC;
 
         return $this;
     }
