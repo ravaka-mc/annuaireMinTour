@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\File\File;
 /**
  * @ORM\Entity(repositoryClass=EtablissementRepository::class)
  * @Vich\Uploadable
- * @UniqueEntity(fields={"nom"}, message="Ce nom est déjà utilisé.")
+ * @UniqueEntity(fields={"nom"}, message="Cet établissement est déjà inscrit. Si vous voulez gérer cet établissement, vous pouvez nous contacter")
  */
 class Etablissement
 {
