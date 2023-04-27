@@ -442,6 +442,7 @@ section.logo-menu::-webkit-scrollbar {
 	background-position: left 65px center;
 	font-size: 15px;
 	line-height: 60px;
+	text-transform: inherit;
 }
 
 
