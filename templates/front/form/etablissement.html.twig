@@ -448,7 +448,7 @@
 										</label>
 										{% endfor %}
 									</div>
-									<div class="form-control">
+									<div id="wrapper-preciser" class="form-control" style="display: none;">
 										<label for="">À préciser</label>
 										{{ form_widget(form.categorieAutorisation) }}
 										{% if form_errors(form.categorieAutorisation) %}
@@ -456,23 +456,19 @@
 										{% endif %}
 									</div>
 									{% if form.zoneIntervention is defined %}
-										<div id="wrapper-zone" class="form-control">
+										<div id="wrapper-zone" class="form-control" style="display: none;">
 											<label for="">Zone d'intervention</label>
 											{{ form_widget(form.zoneIntervention) }}
 										</div>
-									{% else %}
-										<div id="wrapper-zone"></div>
 									{% endif %}
 									{% if form.region is defined %}
-										<div id="wrapper-region" class="form-control">
+										<div id="wrapper-region" class="form-control" style="display: none;">
 											<label for="">Region</label>
 											{{ form_widget(form.region) }}
 											{% if form_errors(form.region) %}
 												<span class="champ-erreur">Ce champ est obligatoire</span>
 											{% endif %}
 										</div>
-									{% else %}
-										<div id="wrapper-region" style="display: none;"></div>
 									{% endif %}
 									{% if form.carteProfessionnelle is defined %}
 									<div class="form-control">
@@ -599,6 +595,43 @@
 							$('#etablissement_district').html(response.html);
 						}
 					})
+				})
+			}
+		}
+
+
+		var changeCategory = () => {
+			if($('.select-category').length > 0) {
+				$('.select-category').on('change', function() {
+					value = $(this).val();
+					isActive = $(this).is(':checked');
+					if(value == 'GUIDE_REGIONAL' && isActive) {
+						$('#wrapper-region').show();
+						$('#etablissement_region').attr('required', 'required')
+					} 
+					if(value == 'GUIDE_REGIONAL' && !isActive){
+						$('#wrapper-region').hide();
+						$('#etablissement_region').removeAttr('required')
+					}
+
+					if(value == 'GUIDE_LOCAL' && isActive) {
+						$('#wrapper-zone').show();
+						$('#etablissement_zoneIntervention').attr('required', 'required')
+					} 
+					if(value == 'GUIDE_LOCAL' && !isActive){
+						$('#wrapper-zone').hide();
+						$('#etablissement_zoneIntervention').removeAttr('required')
+					}
+
+					if(value == 'GUIDE_SPECIALISE' && isActive) {
+						$('#wrapper-preciser').show();
+						$('#etablissement_categorieAutorisation').attr('required', 'required')
+					} 
+					if(value == 'GUIDE_SPECIALISE' && !isActive){
+						$('#wrapper-preciser').hide();
+						$('#etablissement_categorieAutorisation').removeAttr('required')
+					}
+					console.log(value, isActive);
 				})
 			}
 		}
@@ -848,6 +881,7 @@
 						changeLicences();
 						keypressNumberOnly();
 						changeRegion();
+						changeCategory();
 					}
 				})
 			});

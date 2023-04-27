@@ -614,6 +614,9 @@ class EtablissementType extends AbstractType
                         'Guide Local' => 'GUIDE_LOCAL',
                         'Guide spécialisé' => 'GUIDE_SPECIALISE',
                     ],
+                    'choice_attr' => function ($choice, $key, $value) {
+                        return ['class' => 'select-category'];
+                    },
                     'expanded' => true,
                     'multiple' => true,
                 ])
