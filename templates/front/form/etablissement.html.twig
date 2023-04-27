@@ -29,9 +29,9 @@
 										<div id="wrapper-avatar" class="logo-entreprise">
 											<input type="file" name="{{ form.avatarFile.vars.full_name }}" id="avatar" class="form-control-file" style="display: none;"/>
 											{% if etablissement is defined and etablissement.avatar is not null %}
-												<img src="{{ asset('uploads/etablissements/' ~ etablissement.getAvatar()) }}">
+												<img id="avatar-img" src="{{ asset('uploads/etablissements/' ~ etablissement.getAvatar()) }}">
 											{% else %}
-												<img src="{{ asset('front/images/default-etablissement.svg') }}">
+												<img id="avatar-img" src="{{ asset('front/images/default-etablissement.svg') }}">
 											{% endif %}
 											<label for="pdp">
 												<span class="replace-img"></span>
@@ -891,6 +891,18 @@
 							$('#avatar').trigger('click')
 						});
 						
+
+						$('#avatar').change(function () {
+							fileSize = this.files[0].size;
+							var MAX_FILE_SIZE = 2 * 1024 * 1024;
+							if (fileSize > MAX_FILE_SIZE) {
+								alert('Photo de profil trop large, taille max 2M')
+							} else {
+								var image = document.getElementById('avatar-img');
+								image.src = URL.createObjectURL(event.target.files[0]);
+							}
+						})
+
 						changeLicences();
 						keypressNumberOnly();
 						changeRegion();
