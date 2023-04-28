@@ -27,8 +27,10 @@
 				</div>
 				<div id="voyage" class="cat-options">
 					<div class="bloc_editense form-wrap">
-						<div class="card-wrap head">
-							{% if form.avatarFile is defined %}
+						<div class="card-wrap form-in-head">
+							<div class="sub-title"><span>Coordonnées</span></div>
+							<div class="head">
+								{% if form.avatarFile is defined %}
 								<div id="wrapper-avatar" class="logo-entreprise">
 									<input type="file" name="{{ form.avatarFile.vars.full_name }}" id="avatar" class="form-control-file" style="display: none;"/>
 									{% if etablissement is defined and etablissement.avatar is not null %}
@@ -40,25 +42,25 @@
 										<span class="replace-img"></span>
 									</label>
 								</div>
-							{% else %}
-								<div id="wrapper-avatar"><img src="{{ asset('front/images/default-etablissement.svg') }}"></div>
-							{% endif %}
+								{% else %}
+									<div id="wrapper-avatar"><img src="{{ asset('front/images/default-etablissement.svg') }}"></div>
+								{% endif %}
 							
-							<div class="form-in-head">
-								<div class="sub-title"><span>Coordonnées</span></div>
-								<div class="form-wrap">
-									{% if form.nom is defined %}
-									<div id="wrapper-nom" class="form-control">
-										<label>{{ form.nom.vars.label }}</label>
-										{{ form_widget(form.nom) }}
+								<div>
+									<div class="form-wrap">
+										{% if form.nom is defined %}
+										<div id="wrapper-nom" class="form-control">
+											<label>{{ form.nom.vars.label }}</label>
+											{{ form_widget(form.nom) }}
+										</div>
+										{% else %}
+											<div id="wrapper-nom"></div>
+										{% endif %}
+										{# <div class="form-control">
+											<label>Courte description</label>
+											{{ form_widget(form.auteur) }}
+										</div> #}
 									</div>
-									{% else %}
-										<div id="wrapper-nom"></div>
-									{% endif %}
-									{# <div class="form-control">
-										<label>Courte description</label>
-										{{ form_widget(form.auteur) }}
-									</div> #}
 								</div>
 							</div>
 						</div>
@@ -265,9 +267,9 @@
 									<div class="obtention notselected">
 										<label>Obtention</label>
 										{{ form_widget(form.dateLicenceA) }}
-									</div>
-									<div class="form-control notselected reference">
-										{{ form_widget(form.referenceA) }}
+										<div class="form-control reference">
+											{{ form_widget(form.referenceA) }}
+										</div>
 									</div>
 								</div>
 								<div class="half tri">
@@ -278,9 +280,9 @@
 									<div class="obtention notselected">
 										<label>Obtention</label>
 										{{ form_widget(form.dateLicenceB) }}
-									</div>
-									<div class="form-control notselected reference">
-										{{ form_widget(form.referenceB) }}
+										<div class="form-control reference">
+											{{ form_widget(form.referenceB) }}
+										</div>
 									</div>
 								</div>
 								<div class="half tri">
@@ -291,9 +293,9 @@
 									<div class="obtention notselected">
 										<label>Obtention</label>
 										{{ form_widget(form.dateLicenceC) }}
-									</div>
-									<div class="form-control notselected reference">
-										{{ form_widget(form.referenceC) }}
+										<div class="form-control reference">
+											{{ form_widget(form.referenceC) }}
+										</div>
 									</div>
 								</div>
 							</div>
