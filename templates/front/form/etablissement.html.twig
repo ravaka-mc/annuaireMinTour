@@ -29,9 +29,9 @@
 										<div id="wrapper-avatar" class="logo-entreprise">
 											<input type="file" name="{{ form.avatarFile.vars.full_name }}" id="avatar" class="form-control-file" style="display: none;"/>
 											{% if etablissement is defined and etablissement.avatar is not null %}
-												<img src="{{ asset('uploads/etablissements/' ~ etablissement.getAvatar()) }}">
+												<img id="avatar-img" src="{{ asset('uploads/etablissements/' ~ etablissement.getAvatar()) }}">
 											{% else %}
-												<img src="{{ asset('front/images/default-etablissement.svg') }}">
+												<img id="avatar-img" src="{{ asset('front/images/default-etablissement.svg') }}">
 											{% endif %}
 											<label for="pdp">
 												<span class="replace-img"></span>
@@ -442,80 +442,48 @@
 								<!-- contenu html -->
 								<label class="sub-stitle">Catégorie</label>
 								<div class="cat-check grid-25 custom_checkbox">
-									<div class="item">
-										<label>Guide National
-											<input type="checkbox" id="etablissement_categorieGuide_0" name="etablissement[categorieGuide][]" value="GUIDE_NATIONAL">
-											<span class="checkmark"></span>
-										</label>
-									</div>
-									<div class="item">
-										<label>Guide Régional
-											<input type="checkbox" id="etablissement_categorieGuide_1" name="etablissement[categorieGuide][]" value="GUIDE_REGIONAL">
-											<span class="checkmark"></span>
-										</label>
-										<div class="sub-check" style="display:none">
-											<div id="wrapper-region" class="form-control">
-												<select id="etablissement_region" name="etablissement[region]" required="required"><option value="" selected="selected">Choisir votre région</option><option value="1">Alaotra-Mangoro</option><option value="2">Amoron'i Mania</option><option value="3">Analamanga</option><option value="4">Analanjirofo</option><option value="5">Androy</option><option value="6">Anôsy</option><option value="7">Atsimo-Andrefana</option><option value="8">Atsimo-Atsinanana</option><option value="9">Atsinanana</option><option value="10">Betsiboka</option><option value="11">Boeny</option><option value="12">Bongolava</option><option value="13">Diana</option><option value="14">Fitovinany</option><option value="15">Haute Matsiatra</option><option value="16">Ihorombe</option><option value="17">Itasy</option><option value="18">Melaky</option><option value="19">Menabe</option><option value="20">Nosy Be</option><option value="21">Sainte Marie</option><option value="22">Sava</option><option value="23">Sofia</option><option value="24">Vakinakaratra</option><option value="25">Vatovavy</option></select>
-											</div>
+									{% for child in form.categorieGuide|filter(child => not child.rendered) %}
+										<div class="item">
+											<label>
+												{{ child.vars.label }}
+												{{ form_widget(child) }}
+												<span class="checkmark"></span>
+											</label>
+											{% if child.vars.value == 'GUIDE_REGIONAL' %}
+												{% if form.region is defined %}
+													<div id="wrapper-region"  class="sub-check" id="wrapper-preciser" style="display:none">
+														<div class="form-control">
+															{{ form_widget(form.region) }}
+															{% if form_errors(form.region) %}
+																<span class="champ-erreur">Ce champ est obligatoire</span>
+															{% endif %}
+														</div>
+													</div>
+												{% endif %}
+											{% endif %}
+											{% if child.vars.value == 'GUIDE_LOCAL' %}
+												{% if form.zoneIntervention is defined %}
+													<div class="sub-check" id="wrapper-zone" class="form-control" style="display: none;">
+														{{ form_widget(form.zoneIntervention) }}
+													</div>
+												{% endif %}
+											{% endif %}
+											{% if child.vars.value == 'GUIDE_SPECIALISE' %}
+												<div class="sub-check" id="wrapper-preciser" style="display:none">
+													<div class="form-control">
+														{{ form_widget(form.categorieAutorisation) }}
+														{% if form_errors(form.categorieAutorisation) %}
+															<span class="champ-erreur">Valeur est invalide</span>
+														{% endif %}
+													</div>
+												</div>
+											{% endif %}
 										</div>
-									</div>
-									<div class="item">
-										<label>Guide Local
-											<input type="checkbox" id="etablissement_categorieGuide_2" name="etablissement[categorieGuide][]" value="GUIDE_LOCAL">
-											<span class="checkmark"></span>
-										</label>
-										<div class="sub-check" style="display:none">
-											<input type="text" id="etablissement_zoneIntervention" name="etablissement[zoneIntervention]" placeholder="Zone d'intervention" maxlength="255">
-										</div>
-									</div>
-									<div class="item">
-										<label>Guide spécialisé
-											<input type="checkbox" id="etablissement_categorieGuide_3" name="etablissement[categorieGuide][]" value="GUIDE_SPECIALISE">
-											<span class="checkmark"></span>
-										</label>
-										<div class="sub-check" style="display:none">
-											<input type="text" placeholder="A preciser">
-										</div>
-									</div>
+									{% endfor %}
 								</div>
 								<!-- end contenu html -->
 
 								<div class="half">
-									<div class="custom_checkbox">
-										{% for child in form.categorieGuide|filter(child => not child.rendered) %}
-										<label>
-											{{ child.vars.label }}
-											{{ form_widget(child) }}
-											<span class="checkmark"></span>
-										</label>
-										{% endfor %}
-									</div>
-									<div class="form-control">
-										<label for="">À préciser</label>
-										{{ form_widget(form.categorieAutorisation) }}
-										{% if form_errors(form.categorieAutorisation) %}
-											<span class="champ-erreur">Valeur est invalide</span>
-										{% endif %}
-									</div>
-									{% if form.zoneIntervention is defined %}
-										<div id="wrapper-zone" class="form-control">
-											<label for="">Zone d'intervention</label>
-											{{ form_widget(form.zoneIntervention) }}
-										</div>
-									{% else %}
-										<div id="wrapper-zone"></div>
-									{% endif %}
-									{% if form.region is defined %}
-										<div id="wrapper-region" class="form-control">
-											<label for="">Region</label>
-											{{ form_widget(form.region) }}
-											{% if form_errors(form.region) %}
-												<span class="champ-erreur">Ce champ est obligatoire</span>
-											{% endif %}
-										</div>
-									{% else %}
-										<div id="wrapper-region" style="display: none;"></div>
-									{% endif %}
 									{% if form.carteProfessionnelle is defined %}
 									<div class="form-control">
 										<label for="">N° carte et badge professionnel</label>
@@ -644,22 +612,41 @@
 			}
 		}
 
-		var catcheck = () => {
-			$('.cat-check .item > label, .has_sub-check label').each(function(){
-				let $inp = $(this).children("input");
-				let self = $(this);
-				
-				if($inp.is(':checked')) {
-					self.next('.sub-check').show();
-				}
-				$inp.change(function() {
-					if(this.checked) {
-						self.next().slideDown();
-					} else {
-						self.next().slideUp();
+
+		var changeCategory = () => {
+			if($('.select-category').length > 0) {
+				$('.select-category').on('change', function() {
+					value = $(this).val();
+					isActive = $(this).is(':checked');
+					if(value == 'GUIDE_REGIONAL' && isActive) {
+						$('#wrapper-region').show();
+						$('#etablissement_region').attr('required', 'required')
+					} 
+					if(value == 'GUIDE_REGIONAL' && !isActive){
+						$('#wrapper-region').hide();
+						$('#etablissement_region').removeAttr('required')
 					}
-				});
-			});
+
+					if(value == 'GUIDE_LOCAL' && isActive) {
+						$('#wrapper-zone').show();
+						$('#etablissement_zoneIntervention').attr('required', 'required')
+					} 
+					if(value == 'GUIDE_LOCAL' && !isActive){
+						$('#wrapper-zone').hide();
+						$('#etablissement_zoneIntervention').removeAttr('required')
+					}
+
+					if(value == 'GUIDE_SPECIALISE' && isActive) {
+						$('#wrapper-preciser').show();
+						$('#etablissement_categorieAutorisation').attr('required', 'required')
+					} 
+					if(value == 'GUIDE_SPECIALISE' && !isActive){
+						$('#wrapper-preciser').hide();
+						$('#etablissement_categorieAutorisation').removeAttr('required')
+					}
+					console.log(value, isActive);
+				})
+			}
 		}
 
 		$(document).ready(function () {
@@ -904,10 +891,22 @@
 							$('#avatar').trigger('click')
 						});
 						
+
+						$('#avatar').change(function () {
+							fileSize = this.files[0].size;
+							var MAX_FILE_SIZE = 2 * 1024 * 1024;
+							if (fileSize > MAX_FILE_SIZE) {
+								alert('Photo de profil trop large, taille max 2M')
+							} else {
+								var image = document.getElementById('avatar-img');
+								image.src = URL.createObjectURL(event.target.files[0]);
+							}
+						})
+
 						changeLicences();
 						keypressNumberOnly();
 						changeRegion();
-						catcheck();
+						changeCategory();
 					}
 				});
 			});

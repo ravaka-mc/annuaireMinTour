@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Inscription{% endblock %}
 
 {% block body %}
     {% for flash_error in app.flashes('verify_email_error') %}
@@ -48,6 +48,7 @@
 						    <span class="champ-erreur">Les deux mot de passe ne correspond pas</span>
                         {% endif %}
                     </div>
+                    {{ form_widget(form.captcha) }}
                     {{ form_widget(form._token) }}
                     <button type="submit" class="btn btn-secondary" ><span>S'inscrire</span></button>
                     <div class="blocbottom">

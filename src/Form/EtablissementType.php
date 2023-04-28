@@ -605,7 +605,12 @@ class EtablissementType extends AbstractType
                 ]);
                 break;
             case 'TYPE_5':
-                $form->add('zoneIntervention')
+                $form->add('zoneIntervention', TextType::class, [
+                    'required' => false,   
+                    'attr' => [
+                        'placeholder' => 'Zone d\'intervention'
+                    ]
+                ])
                 ->add('nom', TextType::class, ['label' => 'Nom et Prénom'])
                 ->add('categorieGuide', ChoiceType::class, [
                     'choices' => [
@@ -614,13 +619,21 @@ class EtablissementType extends AbstractType
                         'Guide Local' => 'GUIDE_LOCAL',
                         'Guide spécialisé' => 'GUIDE_SPECIALISE',
                     ],
+                    'choice_attr' => function ($choice, $key, $value) {
+                        return ['class' => 'select-category'];
+                    },
                     'expanded' => true,
                     'multiple' => true,
                 ])
                 ->add('carteProfessionnelle')
                 ->add('autreGroupement')
                 ->add('agrement')
-                ->add('categorieAutorisation')
+                ->add('categorieAutorisation', TextType::class, [
+                    'required' => false,   
+                    'attr' => [
+                        'placeholder' => 'À préciser'
+                    ]
+                ])
                 ->add('region', EntityType::class, [
                     'class' => Region::class,
                     'choice_label' => 'nom',

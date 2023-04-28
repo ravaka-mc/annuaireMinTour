@@ -215,6 +215,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     public function getDisplayName(){
-        return sprintf('%s %s', $this->nom, $this->prenom);
+        return sprintf('%s', $this->email);
     }
 }
