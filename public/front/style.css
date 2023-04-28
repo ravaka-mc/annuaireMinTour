@@ -2755,7 +2755,7 @@ form .checkboxgroup {
 }
 
 .stat-detail .item .texte {
-	padding-top: 10px;
+	padding: 5px 10px 0;
 }
 
 .stat-detail .item:not(:first-child) .texte {
@@ -2763,7 +2763,7 @@ form .checkboxgroup {
 }
 
 .stat-detail .item .n-titre {
-	font: 15px/24px "meb";
+	font: 14px/24px "meb";
 	color: #231942;
 	text-transform: uppercase;
 }
@@ -2774,7 +2774,7 @@ form .checkboxgroup {
 	height: 60px;
 	align-items: center;
 }
-.stat-detail .item .icon img {width:50px}
+.stat-detail .item .icon img {width:40px;}
 .breadcrumbs {
 	margin-bottom: 45px;
 }
@@ -3901,7 +3901,6 @@ footer .footer .mentions li span {
 	}
 
 	.scroll .custom-logo-link {
-		transform: scale(0.8);
 		top: 15px;
 	}
 
