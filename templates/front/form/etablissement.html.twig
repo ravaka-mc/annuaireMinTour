@@ -38,7 +38,7 @@
 											</label>
 										</div>
 									{% else %}
-										<div id="wrapper-avatar"><img src="{{ asset('front/images/default-etablissement.svg') }}"></div>
+										<div id="wrapper-avatar"><img src="{{ asset('front/images/profil-guide.svg') }}"></div>
 									{% endif %}
 									<div>
 										<div class="form-wrap">
@@ -438,8 +438,6 @@
 								<div class="form-in-head">
 									<div class="sub-title"><span>Autorisation</span></div>
 								</div>
-
-								<!-- contenu html -->
 								<label class="sub-stitle">Catégorie</label>
 								<div class="cat-check grid-25 custom_checkbox">
 									{% for child in form.categorieGuide|filter(child => not child.rendered) %}
@@ -481,7 +479,6 @@
 										</div>
 									{% endfor %}
 								</div>
-								<!-- end contenu html -->
 
 								<div class="half">
 									{% if form.carteProfessionnelle is defined %}
@@ -612,6 +609,7 @@
 			}
 		}
 
+		
 
 		var changeCategory = () => {
 			if($('.select-category').length > 0) {
@@ -663,7 +661,7 @@
 					$(".logo-entreprise").next().append('<span class="champ-erreur">Veuillez uploader un fichier valide (jpeg, png, svg)</span>');
 					return false;
 				}
-			})
+			});
 
 			{% if is_edit == true %}
 				$('.step:first').addClass('active');
@@ -891,7 +889,6 @@
 							$('#avatar').trigger('click')
 						});
 						
-
 						$('#avatar').change(function () {
 							fileSize = this.files[0].size;
 							var MAX_FILE_SIZE = 2 * 1024 * 1024;

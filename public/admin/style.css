@@ -1273,7 +1273,7 @@ input, select, textarea {
 }
 
 .card-wrap {
-	max-width: 650px;
+	max-width: 750px;
 	margin: 0 auto;
 }
 
@@ -1528,10 +1528,14 @@ input, select, textarea {
 .obtention {
 	position: relative;
 	display: grid;
-	grid-template-columns: 1fr 130px;
+	grid-template-columns: 1fr 130px 130px;
 	align-items: center;
 	gap: 20px;
 	text-align: right;
+}
+.obtention label {
+	margin-left: 0;
+	padding-left: 0;
 }
 .obtention.notselected {
 	opacity: 0.25;
@@ -1549,6 +1553,9 @@ input, select, textarea {
 }
 .licence .half {
 	align-items: center;
+}
+.licence .half.tri {
+	grid-template-columns: 1fr auto;
 }
 .licence.custom_checkbox label {
 	margin-bottom: 0;
