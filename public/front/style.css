@@ -2755,7 +2755,7 @@ form .checkboxgroup {
 }
 
 .stat-detail .item .texte {
-	padding-top: 10px;
+	padding: 10px 10px 0;
 }
 
 .stat-detail .item:not(:first-child) .texte {
@@ -2763,7 +2763,7 @@ form .checkboxgroup {
 }
 
 .stat-detail .item .n-titre {
-	font: 15px/24px "meb";
+	font: 14px/24px "meb";
 	color: #231942;
 	text-transform: uppercase;
 }
