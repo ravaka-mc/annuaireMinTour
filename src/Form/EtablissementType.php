@@ -132,15 +132,6 @@ class EtablissementType extends AbstractType
         
         if($category == null) return;
 
-        $form->add('groupements', EntityType::class, [
-            'class' => Groupement::class,
-            'choice_label' => 'nom',
-            'expanded' => true,
-            'multiple' => true,
-            'required' => false,
-            'choices' => $category->getGroupements()
-        ]);
-
         switch($category->getViewType()){
             case 'TYPE_1':
                 $form->add('activites', EntityType::class, [
@@ -150,6 +141,14 @@ class EtablissementType extends AbstractType
                     'multiple' => true,
                     'required' => false,
                     'choices' => $category->getActivites()
+                ])
+                ->add('groupements', EntityType::class, [
+                    'class' => Groupement::class,
+                    'choice_label' => 'nom',
+                    'expanded' => true,
+                    'multiple' => true,
+                    'required' => false,
+                    'choices' => $category->getGroupements()
                 ])
                 ->add('avatarFile', FileType::class,[
                     'required' => false,
@@ -274,6 +273,14 @@ class EtablissementType extends AbstractType
                     'placeholder' => false,
                     'required' => false,
                 ])
+                ->add('groupements', EntityType::class, [
+                    'class' => Groupement::class,
+                    'choice_label' => 'nom',
+                    'expanded' => true,
+                    'multiple' => true,
+                    'required' => false,
+                    'choices' => $category->getGroupements()
+                ])
                 ->add('avatarFile', FileType::class,[
                     'required' => false,
                     'mapped' => false,
@@ -395,6 +402,14 @@ class EtablissementType extends AbstractType
                     'placeholder' => false,
                     'required' => false,
                 ])
+                ->add('groupements', EntityType::class, [
+                    'class' => Groupement::class,
+                    'choice_label' => 'nom',
+                    'expanded' => true,
+                    'multiple' => true,
+                    'required' => false,
+                    'choices' => $category->getGroupements()
+                ])
                 ->add('avatarFile', FileType::class,[
                     'required' => false,
                     'mapped' => false,
@@ -513,6 +528,14 @@ class EtablissementType extends AbstractType
                     'empty_data' => '',
                     'placeholder' => false,
                     'required' => false,
+                ])
+                ->add('groupements', EntityType::class, [
+                    'class' => Groupement::class,
+                    'choice_label' => 'nom',
+                    'expanded' => true,
+                    'multiple' => true,
+                    'required' => false,
+                    'choices' => $category->getGroupements()
                 ])
                 ->add('avatarFile', FileType::class,[
                     'required' => false,

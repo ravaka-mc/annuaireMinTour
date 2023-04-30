@@ -335,11 +335,14 @@ class FrontController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $etablissement->setCreatedBy($user);
-            $avatarFile = $form->get('avatarFile')->getData();
-            if ($avatarFile) {
-                $fileName = $this->upload($avatarFile);
-                $etablissement->setAvatar($fileName);
+            if($form->has('avatarFile')){
+                $avatarFile = $form->get('avatarFile')->getData();
+                if ($avatarFile) {
+                    $fileName = $this->upload($avatarFile);
+                    $etablissement->setAvatar($fileName);
+                }
             }
+
 
             $etablissement->setStatut('en attente');
             $this->etablissementRepository->add($etablissement, true);
