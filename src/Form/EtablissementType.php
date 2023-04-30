@@ -497,6 +497,11 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('nombreSalaireFemme', IntegerType::class, [
                     'required' => true,
+                ])->add('nombreLit', IntegerType::class, [
+                    'required' => true,
+                ])
+                ->add('nombreResto', IntegerType::class, [
+                    'required' => true,
                 ]);
                 break;
             case 'TYPE_4':

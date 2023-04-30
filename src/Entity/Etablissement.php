@@ -322,6 +322,11 @@ class Etablissement
      */
     private $referenceC;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nombreResto;
+
     public function __construct()
     {
         $this->groupements = new ArrayCollection();
@@ -1094,6 +1099,18 @@ class Etablissement
     public function setReferenceC(?string $referenceC): self
     {
         $this->referenceC = $referenceC;
+
+        return $this;
+    }
+
+    public function getNombreResto(): ?int
+    {
+        return $this->nombreResto;
+    }
+
+    public function setNombreResto(?int $nombreResto): self
+    {
+        $this->nombreResto = $nombreResto;
 
         return $this;
     }

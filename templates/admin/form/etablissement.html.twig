@@ -406,6 +406,12 @@
 											{{ form_widget(form.nombreLit) }}
 										</div>
 									{% endif %}
+									{% if form.nombreResto is defined %}
+										<div class="form-control">
+											<label for="">Nombre de restaurant</label>
+											{{ form_widget(form.nombreResto) }}
+										</div>
+									{% endif %}
 									{% if form.superficieSalle is defined %}
 										<div class="form-control">
 											<label for="">Superficie Salle de conférencee</label>
