@@ -228,9 +228,88 @@ var hasError = () => {
     return _error;
 }
 
+var changeLicenceB = () => {
+    if($('#etablissement_licenceB').length > 0) {
+        $("[id^='etablissement_activites_']").parent('label').hide();
+        $('#etablissement_licenceB').change(function() {
+            if(!$(this).is(':checked')){
+                $.ajax({
+                    type: 'get',
+                    url: app_category_licence_b,
+                    data: {
+                        category_id :  $('#etablissement_category').val()
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        $.each(response.data, function(index, value) {
+                            $('#etablissement_activites_' + value).parent('label').hide();
+                        });
+                    }
+                })
+            } else {
+                $.ajax({
+                    type: 'get',
+                    url: app_category_licence_b,
+                    data: {
+                        category_id :  $('#etablissement_category').val()
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        $.each(response.data, function(index, value) {
+                            $('#etablissement_activites_' + value).parent('label').show();
+                        });
+                    }
+                })
+            }
+            
+        });
+    }
+}
+
+var changeLicenceC = () => {
+    if($('#etablissement_licenceC').length > 0) {
+        $("[id^='etablissement_activites_']").parent('label').hide();
+        $('#etablissement_licenceC').change(function() {
+            if(!$(this).is(':checked')){
+                $.ajax({
+                    type: 'get',
+                    url: app_category_licence_c,
+                    data: {
+                        category_id :  $('#etablissement_category').val()
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        $.each(response.data, function(index, value) {
+                            $('#etablissement_activites_' + value).parent('label').hide();
+                        });
+                    }
+                })
+            } else {
+                $.ajax({
+                    type: 'get',
+                    url: app_category_licence_c,
+                    data: {
+                        category_id :  $('#etablissement_category').val()
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        $.each(response.data, function(index, value) {
+                            $('#etablissement_activites_' + value).parent('label').show();
+                        });
+                    }
+                })
+            }
+            
+        });
+    }
+}
+
 $(document).ready(function () {
     changeRegion();
     keypressNumberOnly();
+    changeLicenceC();
+    changeLicenceB();
+    
     var currentStep = 1;
     var totalSteps = $('.step').length;
 
@@ -322,6 +401,8 @@ $(document).ready(function () {
                 changeCategory();
                 changeMember();
                 changeAutreActivite();
+                changeLicenceC();
+                changeLicenceB();
             }
         });
     });
