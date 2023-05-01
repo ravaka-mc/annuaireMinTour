@@ -182,18 +182,6 @@ class EtablissementType extends AbstractType
                         ])
                     ],
                 ])
-                ->add('proprietaire', TextType::class, [
-                    'constraints' => [
-                        new Regex('/[^\d]/')
-                    ],
-                    'required' => false,
-                ])
-                ->add('gerant', TextType::class, [
-                    'constraints' => [
-                        new Regex('/[^\d]/')
-                    ],
-                    'required' => false,
-                ])
                 ->add('region', EntityType::class, [
                     'class' => Region::class,
                     'choice_label' => 'nom',
@@ -313,18 +301,6 @@ class EtablissementType extends AbstractType
                         ])
                     ],
                 ])
-                ->add('proprietaire', TextType::class, [
-                    'constraints' => [
-                        new Regex('/[^\d]/')
-                    ],
-                    'required' => false,
-                ])
-                ->add('gerant', TextType::class, [
-                    'constraints' => [
-                        new Regex('/[^\d]/')
-                    ],
-                    'required' => false,
-                ])
                 ->add('region', EntityType::class, [
                     'class' => Region::class,
                     'choice_label' => 'nom',
@@ -387,6 +363,10 @@ class EtablissementType extends AbstractType
                 ->add('salleConference', IntegerType::class, [
                     'required' => true,
                 ])
+                ->add('activiteAutre', CheckboxType::class, [
+                    'label'    => 'Autre',
+                    'required' => false,
+                ])
                 ->add('autreActivite', TextType::class, [
                     'required' => false,
                 ]);
@@ -440,18 +420,6 @@ class EtablissementType extends AbstractType
                             'pattern' => '/^((?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9\-.]+\.[a-zA-Z]{2,}(?:\/[\w\-\.]*)*\/?)$/',
                             'message' => 'La valeur du Site Web est incorrecte',
                         ])
-                    ],
-                ])
-                ->add('proprietaire', TextType::class, [
-                    'constraints' => [
-                        new Regex('/[^\d]/')
-                    ],
-                    'required' => false,
-                ])
-                ->add('gerant', TextType::class, [
-                    'required' => false,
-                    'constraints' => [
-                        new Regex('/[^\d]/')
                     ],
                 ])
                 ->add('region', EntityType::class, [
@@ -567,18 +535,6 @@ class EtablissementType extends AbstractType
                             'pattern' => '/^((?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9\-.]+\.[a-zA-Z]{2,}(?:\/[\w\-\.]*)*\/?)$/',
                             'message' => 'La valeur du Site Web est incorrecte',
                         ])
-                    ],
-                ])
-                ->add('proprietaire', TextType::class, [
-                    'required' => false,
-                    'constraints' => [
-                        new Regex('/[^\d]/')
-                    ],
-                ])
-                ->add('gerant', TextType::class, [
-                    'required' => false,
-                    'constraints' => [
-                        new Regex('/[^\d]/')
                     ],
                 ])
                 ->add('region', EntityType::class, [

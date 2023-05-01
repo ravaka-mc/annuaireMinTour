@@ -36,6 +36,28 @@ class CategoryType extends AbstractType
                     ->orderBy('a.nom', 'ASC');
                 },
             ])
+            ->add('activitesLicenceB', EntityType::class, [
+                'class' => Activite::class,
+                'choice_label' => 'nom',
+                'expanded' => false,
+                'multiple' => true,
+                'required' => false,
+                'query_builder' => function (ActiviteRepository $activiteRepository) {
+                    return $activiteRepository->createQueryBuilder('a')
+                    ->orderBy('a.nom', 'ASC');
+                },
+            ])
+            ->add('activitesLicenceC', EntityType::class, [
+                'class' => Activite::class,
+                'choice_label' => 'nom',
+                'expanded' => false,
+                'multiple' => true,
+                'required' => false,
+                'query_builder' => function (ActiviteRepository $activiteRepository) {
+                    return $activiteRepository->createQueryBuilder('a')
+                    ->orderBy('a.nom', 'ASC');
+                },
+            ])
             ->add('groupements', EntityType::class, [
                 'class' => Groupement::class,
                 'choice_label' => 'nom',

@@ -73,11 +73,25 @@ class Category
      */
     private $groupements;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Activite::class, inversedBy="categoriesLicenceB")
+     * @ORM\JoinTable(name="category_activite_licence_b")
+     */
+    private $activitesLicenceB;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Activite::class, inversedBy="categoriesLicenceC")
+     * @ORM\JoinTable(name="category_activite_licence_c")
+     */
+    private $activitesLicenceC;
+
     public function __construct()
     {
         $this->etablissements = new ArrayCollection();
         $this->activites = new ArrayCollection();
         $this->groupements = new ArrayCollection();
+        $this->activitesLicenceB = new ArrayCollection();
+        $this->activitesLicenceC = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -240,6 +254,54 @@ class Category
     public function removeGroupement(Groupement $groupement): self
     {
         $this->groupements->removeElement($groupement);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Activite>
+     */
+    public function getActivitesLicenceB(): Collection
+    {
+        return $this->activitesLicenceB;
+    }
+
+    public function addActivitesLicenceB(Activite $activitesLicenceB): self
+    {
+        if (!$this->activitesLicenceB->contains($activitesLicenceB)) {
+            $this->activitesLicenceB[] = $activitesLicenceB;
+        }
+
+        return $this;
+    }
+
+    public function removeActivitesLicenceB(Activite $activitesLicenceB): self
+    {
+        $this->activitesLicenceB->removeElement($activitesLicenceB);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Activite>
+     */
+    public function getActivitesLicenceC(): Collection
+    {
+        return $this->activitesLicenceC;
+    }
+
+    public function addActivitesLicenceC(Activite $activitesLicenceC): self
+    {
+        if (!$this->activitesLicenceC->contains($activitesLicenceC)) {
+            $this->activitesLicenceC[] = $activitesLicenceC;
+        }
+
+        return $this;
+    }
+
+    public function removeActivitesLicenceC(Activite $activitesLicenceC): self
+    {
+        $this->activitesLicenceC->removeElement($activitesLicenceC);
 
         return $this;
     }

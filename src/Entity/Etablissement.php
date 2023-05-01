@@ -327,6 +327,11 @@ class Etablissement
      */
     private $nombreResto;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $activiteAutre;
+
     public function __construct()
     {
         $this->groupements = new ArrayCollection();
@@ -1111,6 +1116,18 @@ class Etablissement
     public function setNombreResto(?int $nombreResto): self
     {
         $this->nombreResto = $nombreResto;
+
+        return $this;
+    }
+
+    public function isActiviteAutre(): ?bool
+    {
+        return $this->activiteAutre;
+    }
+
+    public function setActiviteAutre(?bool $activiteAutre): self
+    {
+        $this->activiteAutre = $activiteAutre;
 
         return $this;
     }

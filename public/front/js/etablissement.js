@@ -58,6 +58,18 @@ var changeLicences = () => {
     });
 }
 
+var changeAutreActivite = () => {
+    $('#wrapper-autreActivite').hide();
+    $('#etablissement_activiteAutre').on('change', function(){
+        if($(this).is(":checked")){
+            $('#wrapper-autreActivite').show();
+        } else {
+            $('#wrapper-autreActivite').hide();
+        }
+    })
+    $('#etablissement_activiteAutre:checked').trigger('change');
+}
+
 var changeRegion = () => {
     if($('#etablissement_region').length > 0) {
         $('#etablissement_region').on('change', function() {
@@ -308,11 +320,13 @@ $(document).ready(function () {
                 keypressNumberOnly();
                 changeRegion();
                 changeCategory();
-                changeMember()
+                changeMember();
+                changeAutreActivite();
             }
         });
     });
     changeMember();
     changeLicences();
     changeCategory();
+    changeAutreActivite();
 });

@@ -199,10 +199,23 @@
 												<span class="checkmark"></span>
 											</label>
 										{% endfor %}
+										{% if form.activiteAutre is defined %}
+											<label>
+												Autre
+												{{ form_widget(form.activiteAutre) }}
+												<span class="checkmark"></span>
+											</label>
+										{% endif %}
 									</div>
+									{% if form.autreActivite is defined %}
+										<div id="wrapper-autreActivite" class="form-control">
+											<label>Préciser</label>
+											{{ form_widget(form.autreActivite) }}
+										</div>
+									{% endif %}
 								</div>
 							{% endif %}
-
+							
 							{% if form.classement is defined %}
 								<div id="wrapper-classements" class="form-control">
 									<div class="card-wrap">
@@ -225,18 +238,6 @@
 						<div class="step">
 							<div class="bloc_editense form-wrap">
 								<div class="card-wrap">
-									{% if form.proprietaire is defined %}
-										<div id="wrapper-proprietaire" class="half">
-											<div class="form-control">
-												<label>Propriétaire</label>
-												{{ form_widget(form.proprietaire) }}
-											</div>
-											<div class="form-control">
-												<label>Gérant</label>
-												{{ form_widget(form.gerant) }}
-											</div>
-										</div>
-									{% endif %}
 									<div class="form-control inputright">
 										<label>Etes-vous membre d'un groupement ?</label>
 										<div id="wrapper-member" class="custom-radio">

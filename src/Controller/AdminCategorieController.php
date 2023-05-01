@@ -123,4 +123,36 @@ class AdminCategorieController extends AdminController
 
         return $fileName;
     }
-}
+
+    /**
+     *  @Route("/category/activite-licence-b", name="app_category_licence_b")
+     */
+    public function getActivitesLicenceBCategory(Request $request){
+        $category_id = $request->query->get('category_id');
+        $category =  $this->categoryRepository->findOneBy(['id' => (int) $category_id]);
+
+        $data = $category->getActivitesLicenceB()->map(function($activite) {
+            return $activite->getId();
+        })->toArray();
+
+        return new JsonResponse([
+            "data" => $data
+        ]);
+    }
+
+    /**
+     *  @Route("/category/activite-licence-c", name="app_category_licence_c")
+     */
+    public function getActivitesLicenceCCategory(Request $request){
+        $category_id = $request->query->get('category_id');
+        $category =  $this->categoryRepository->findOneBy(['id' => (int) $category_id]);
+
+        $data = $category->getActivitesLicenceC()->map(function($activite) {
+            return $activite->getId();
+        })->toArray();
+        
+        return new JsonResponse([
+            "data" => $data
+        ]);
+    }
+}   
