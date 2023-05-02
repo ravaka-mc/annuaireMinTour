@@ -555,7 +555,7 @@
 				$('#etablissement_region').on('change', function() {
 					$.ajax({
 						type: 'get',
-						url: app_region_district,
+						url: '{{ path('app_region_district') }}',
 						data: {
 							region_id :  $(this).val()
 						},
