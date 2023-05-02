@@ -2671,10 +2671,8 @@ form .checkboxgroup {
 	min-width: 270px;
 }
 
-.information .licence-detail {
-	display: grid;
-	grid-template-columns: 180px 1fr;
-	align-items: center;
+.information .licence-detail > div {
+	margin-bottom: 10px;
 }
 
 .information .licence-detail p {
@@ -2687,11 +2685,21 @@ form .checkboxgroup {
 }
 
 .information .licence-date {
-	position: relative;
-	padding-left: 20px;
+	display: inline-block;
+	vertical-align: top;
+}
+.information .licence-date strong {
+	color: #614371;
 }
 
-.information .licence-date::after {
+.information .licence-ref {
+	position: relative;
+	padding-left: 15px;
+	margin-left: 10px;
+	display: inline-block;
+	vertical-align: top;
+}
+.information .licence-ref::after {
 	position: absolute;
 	content: "";
 	background: #1a141d;
@@ -2700,10 +2708,6 @@ form .checkboxgroup {
 	left: 0;
 	top: 50%;
 	transform: translateY(-50%);
-}
-
-.information .licence-date strong {
-	color: #614371;
 }
 
 .gtitre {

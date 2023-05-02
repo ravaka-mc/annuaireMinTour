@@ -1528,7 +1528,7 @@ input, select, textarea {
 .obtention {
 	position: relative;
 	display: grid;
-	grid-template-columns: 1fr 130px 130px;
+	grid-template-columns: 1fr 130px;
 	align-items: center;
 	gap: 20px;
 	text-align: right;
@@ -1555,7 +1555,7 @@ input, select, textarea {
 	align-items: center;
 }
 .licence .half.tri {
-	grid-template-columns: 1fr auto;
+	grid-template-columns: 1fr auto 130px;
 }
 .licence.custom_checkbox label {
 	margin-bottom: 0;

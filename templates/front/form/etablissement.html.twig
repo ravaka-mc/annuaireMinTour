@@ -39,7 +39,7 @@
 												</label>
 											</div>
 										{% else %}
-											<div id="wrapper-avatar">
+											<div id="wrapper-avatar" class="logo-entreprise">
 												<img src="{{ asset('front/images/profil-guide.svg') }}">
 											</div>
 										{% endif %}
@@ -209,7 +209,7 @@
 									</div>
 									{% if form.autreActivite is defined %}
 										<div id="wrapper-autreActivite" class="form-control">
-											<label>Préciser</label>
+											<!--label>Préciser</label-->
 											{{ form_widget(form.autreActivite) }}
 										</div>
 									{% endif %}
@@ -263,7 +263,7 @@
 									{% endif %}
 									{% if form.autreGroupement is defined %}
 										<div id="wrapper-autregroupement" class="form-control slidergrpm">
-											<label>À préciser Groupe</label>
+											<label>Groupe</label>
 											{{ form_widget(form.autreGroupement) }}
 										</div>
 									{% endif %}

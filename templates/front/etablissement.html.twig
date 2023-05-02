@@ -113,16 +113,25 @@
                         </div>
                         <div class="licence-detail">
                             {% if etablissement.licenceA %}
-                            <p><span class="licence-class">A</span> (Agence de voyage)</p> <span
-                                class="licence-date">Le <strong>{{ etablissement.dateLicenceA|date('d / m / Y') }}</strong></span>
+							<div>
+								<p><span class="licence-class">A</span> (Agence de voyage)</p>
+								<span class="licence-date">Le <strong>{{ etablissement.dateLicenceA|date('d / m / Y') }}</strong></span>
+								<div class="licence-ref">test</div>
+							</div>
                             {% endif %}
                             {% if etablissement.licenceB %}
-                            <p><span class="licence-class">B</span> (Tour-opérateur)</p> <span
-                                class="licence-date">Le <strong>{{ etablissement.dateLicenceA|date('d / m / Y') }}</strong></span>
+							<div>
+								<p><span class="licence-class">B</span> (Tour-opérateur)</p>
+								<span class="licence-date">Le <strong>{{ etablissement.dateLicenceA|date('d / m / Y') }}</strong></span>
+								<div class="licence-ref">test 2</div>
+							</div>
                             {% endif %}
                             {% if etablissement.licenceC %}
-                            <p><span class="licence-class">C</span>(Agence de voyage)</p> <span
-                                class="licence-date">Le <strong>{{ etablissement.dateLicenceA|date('d / m / Y') }}</strong></span>
+                            <div>
+								<p><span class="licence-class">C</span>(Agence de voyage)</p>
+								<span class="licence-date">Le <strong>{{ etablissement.dateLicenceA|date('d / m / Y') }}</strong></span>
+								<div class="licence-ref">test 3</div>
+							</div>
                             {% endif %}
                         </div>
                     </div>

@@ -369,6 +369,9 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('autreActivite', TextType::class, [
                     'required' => false,
+					'attr' => [
+                        'placeholder' => 'A préciser'
+                    ]
                 ]);
                 
                 break;
@@ -610,7 +613,12 @@ class EtablissementType extends AbstractType
                     'multiple' => true,
                 ])
                 ->add('carteProfessionnelle')
-                ->add('autreGroupement')
+                ->add('autreGroupement', TextType::class, [
+					'required' => false,
+					'attr' => [
+                        'placeholder' => 'À préciser'
+                    ]
+				])
                 ->add('agrement')
                 ->add('categorieAutorisation', TextType::class, [
                     'required' => false,   
