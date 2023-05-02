@@ -441,6 +441,7 @@
 						{% endif %}
 					</div>
 					<div class="t-right">
+						<input type="hidden" id="etablissement-id" value="{{ etablissement.id }}">
 						{{ form_widget(form._token) }}
 						<a class="btn prev">Précédent</a>
 						<a class="btn next">Suivant</a>
@@ -465,6 +466,7 @@
 		const app_region_district = "{{ path('app_region_district')|escape('js') }}";
 		const app_category_licence_b = "{{ path('app_category_licence_b')|escape('js') }}";
 		const app_category_licence_c = "{{ path('app_category_licence_c')|escape('js') }}";
+		const app_sous_activites = "{{ path('app_sous_activites')|escape('js') }}";
 	</script>
 	<script src="{{ asset('front/js/etablissement.js') }}"></script>
 {% endblock %}

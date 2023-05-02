@@ -263,6 +263,7 @@ var changeLicenceB = () => {
             }
             
         });
+        $('#etablissement_licenceB:checked').trigger('change')
     }
 }
 
@@ -301,6 +302,32 @@ var changeLicenceC = () => {
             }
             
         });
+        $('#etablissement_licenceC:checked').trigger('change');
+    }
+}
+
+var changeActivite = () => {
+    if($("[id^='etablissement_activites_']").length > 0) {
+        $("[id^='etablissement_activites_']").on('change', function() {
+            var that = $(this);
+            if(that.is(':checked')){
+                $.ajax({
+                    type: 'get',
+                    url: app_sous_activites,
+                    data: {
+                        activite_id :  that.val(),
+                        etablissement_id : $('#etablissement-id').val()
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        that.next().after(response.html);
+                    }
+                })
+            } else {
+                $('#wrapper-sous-activites').remove();
+            }
+        })
+        $("[id^='etablissement_activites_']").trigger('change')
     }
 }
 
@@ -309,6 +336,11 @@ $(document).ready(function () {
     keypressNumberOnly();
     changeLicenceC();
     changeLicenceB();
+    changeActivite();
+    changeMember();
+    changeLicences();
+    changeCategory();
+    changeAutreActivite();
     
     var currentStep = 1;
     var totalSteps = $('.step').length;
@@ -403,11 +435,8 @@ $(document).ready(function () {
                 changeAutreActivite();
                 changeLicenceC();
                 changeLicenceB();
+                changeActivite();
             }
         });
     });
-    changeMember();
-    changeLicences();
-    changeCategory();
-    changeAutreActivite();
 });

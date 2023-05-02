@@ -63,6 +63,12 @@
 										</div>
 									</div>
 								</div>
+								<div class="card-wrap content-ense">
+									<div class="form-wrap">
+										<label>Auteur</label>
+										{{ form_widget(form.createdBy) }}
+									</div>
+								</div>
 							</div>
 							<div class="card-wrap content-ense">
 								<div id="wrapper-not-guide" class="half">
@@ -189,7 +195,7 @@
 								</div>
 							</div>
 						{% endif %}
-
+		
 						
 						{% if form.activites is defined %}
 							<div class="bloc_editense form-wrap">
@@ -446,6 +452,7 @@
 
 					<div class="t-right mt-50">
 						{{ form_widget(form._token) }}
+						<input type="hidden" id="etablissement-id" value="{{ etablissement.id }}">
 						<button type="submit" class="btn">{{ label_btn }}</button>
 						{% if is_edit == 1 and etablissement.statut != 'valide' %}
 						<!-- Modifier en attente -->
@@ -567,6 +574,31 @@
 			}
 		}
 
+		var changeActivite = () => {
+			if($("[id^='etablissement_activites_']").length > 0) {
+				$("[id^='etablissement_activites_']").on('change', function() {
+					var that = $(this);
+					if(that.is(':checked')){
+						$.ajax({
+							type: 'get',
+							url: '{{ path('app_sous_activites') }}',
+							data: {
+								activite_id :  that.val(),
+								etablissement_id : $('#etablissement-id').val()
+							},
+							dataType: 'json',
+							success: function (response) {
+								that.next().after(response.html);
+							}
+						})
+					} else {
+						$('#wrapper-sous-activites').remove();
+					}
+				})
+				$("[id^='etablissement_activites_']").trigger('change')
+			}
+		}
+
 		var changeAutreActivite = () => {
 			$('#wrapper-autreActivite').hide();
 			$('#etablissement_activiteAutre').on('change', function(){
@@ -662,6 +694,7 @@
 					}
 					
 				});
+				$('#etablissement_licenceB:checked').trigger('change')
 			}
 		}
 
@@ -700,6 +733,7 @@
 					}
 					
 				});
+				$('#etablissement_licenceC:checked').trigger('change')
 			}
 		}
 
@@ -710,6 +744,7 @@
 			changeMember();
 			changeLicenceB();
 			changeLicenceC();
+			changeActivite();
 
 			$("#etablissement_createdBy").selectize();
 			
@@ -764,6 +799,7 @@
 						changeMember();
 						changeLicenceB();
 						changeLicenceC();
+						changeActivite();
 					}
 				})
 			});
