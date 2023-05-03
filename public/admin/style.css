@@ -1322,7 +1322,7 @@ input, select, textarea {
 
 .logo-entreprise {
 	position: relative;
-	border: 1px solid #ded8e8;
+	border: 2px solid #ded8e8;
 	background-color: #fff;
 	border-radius: 8px;
 	box-shadow: 20px 0 45px rgba(0, 0, 0, .05);
