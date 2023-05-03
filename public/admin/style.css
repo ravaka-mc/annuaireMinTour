@@ -1305,7 +1305,9 @@ input, select, textarea {
 	grid-template-columns: 125px 1fr;
 	gap: 20px;
 }
-
+.custom_checkbox .sub-check {
+	margin-bottom: 10px !important;
+}
 .bloc_editense {
 	padding: 45px 60px 50px;
 	background-color: #fff;
