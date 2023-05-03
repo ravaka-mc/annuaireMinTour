@@ -2518,7 +2518,7 @@ form .checkboxgroup {
 
 .top-detail .texteitem h1 {
 	color: #1a141d;
-	margin-bottom:3px;
+	margin-bottom:10px;
 }
 
 .top-detail .texteitem .stitre {
@@ -3743,6 +3743,10 @@ label.nopad {
 .information .activite li {
 	padding-left: 20px;
 	background: url(images/check.svg) no-repeat left top 4px / 15px;
+}
+.facultatif {
+	font-size: 11px;
+	text-transform: initial;
 }
 
 .popup {
