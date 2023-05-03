@@ -91,19 +91,19 @@
 										</div>
 										{% if form.siteWeb is defined %}
 											<div id="wrapper-web" class="form-control">
-												<label for="">Site web</label>
+												<label for="">Site web <span class="facultatif">(facultatif)</span></label>
 												{{ form_widget(form.siteWeb) }}
 											</div>
 										{% endif %}
 										{% if form.facebook is defined %}
 											<div class="form-control">
-												<label for="">Facebook</label>
+												<label for="">Facebook <span class="facultatif">(facultatif)</span></label>
 												{{ form_widget(form.facebook) }}
 											</div>
 										{% endif %}
 										{% if form.linkedin is defined %}
 											<div class="form-control">
-												<label for="">Linkedin</label>
+												<label for="">Linkedin <span class="facultatif">(facultatif)</span></label>
 												{{ form_widget(form.linkedin) }}
 											</div>
 										{% endif %}
@@ -118,7 +118,7 @@
 									<div class="form-in-head">
 										<div class="sub-title"><span>Autorisation d'ouverture</span></div>
 									</div>
-									<label>Licence</label>
+									<label>Licence <span class="facultatif">(facultatif)</span></label>
 									<div class="custom_checkbox licence">
 										<div class="half tri">
 											<label>A <span style="color: #a2a2a2">(Agence de voyage)</span>
@@ -163,7 +163,7 @@
 									<div class="half">
 										{% if form.dateOuverture is defined %}
 										<div class="form-control">
-											<label for="">Date d’ouverture</label>
+											<label for="">Date d’ouverture </label>
 											{{ form_widget(form.dateOuverture) }}
 										</div>
 										{% endif %}
@@ -190,7 +190,7 @@
 							<div id="wrapper-classements-activites" class="bloc_editense form-wrap step">
 								{% if form.activites is defined %}
 									<div id="wrapper-activites" class="card-wrap form-control">
-										<label>Activités</label>
+										<label>Activités <span class="facultatif">(facultatif)</span></label>
 										<div class="custom_checkbox half">
 											{% for child in form.activites|filter(child => not child.rendered) %}
 												<label>
@@ -219,7 +219,7 @@
 								{% if form.classement is defined %}
 									<div id="wrapper-classements" class="form-control">
 										<div class="card-wrap">
-											<label>Classement</label>
+											<label>Classement <span class="facultatif">(facultatif)</span></label>
 											<div class="custom-radio half">
 												{% for child in form.classement|filter(child => not child.rendered) %}
 												<label>
@@ -280,7 +280,7 @@
 									<div class="half">
 										{% if form.dateOuverture is defined %}
 										<div class="form-control">
-											<label for="">Date d’ouverture</label>
+											<label for="">Date d’ouverture <span class="facultatif">(facultatif)</span></label>
 											{{ form_widget(form.dateOuverture) }}
 										</div>
 										{% endif %}

@@ -1317,6 +1317,10 @@ input, select, textarea {
 .bloc_editense :last-child {
 	margin-bottom: 0 !important;
 }
+.facultatif {
+	font-size: 12px;
+	text-transform: initial;
+}
 
 .bloc_editense .head {
 	display: grid;

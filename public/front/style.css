@@ -3744,6 +3744,10 @@ label.nopad {
 	padding-left: 20px;
 	background: url(images/check.svg) no-repeat left top 4px / 15px;
 }
+.facultatif {
+	font-size: 12px;
+	text-transform: initial;
+}
 
 .popup {
 	display: none;
