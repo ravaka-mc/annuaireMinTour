@@ -1307,10 +1307,13 @@ input, select, textarea {
 }
 
 .bloc_editense {
-	padding: 45px 60px 60px;
+	padding: 45px 60px 50px;
 	background-color: #fff;
 	margin-bottom: 20px;
 	border-radius: 5px;
+}
+.bloc_editense :last-child {
+	margin-bottom: 0 !important;
 }
 
 .bloc_editense .head {
@@ -1555,7 +1558,11 @@ input, select, textarea {
 	align-items: center;
 }
 .licence .half.tri {
-	grid-template-columns: 1fr auto 130px;
+	grid-template-columns: 1fr auto 140px;
+	gap: 10px;
+}
+.reference input {
+	font-size: 12px;
 }
 .licence.custom_checkbox label {
 	margin-bottom: 0;
