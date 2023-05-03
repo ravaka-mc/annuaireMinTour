@@ -1,0 +1,9 @@
+<div id="wrapper-sous-activites">
+    {% for activite in sousActivites %}
+        <label>
+            {{ activite.nom }}
+            <input type="checkbox" id="etablissement_activites_{{ activite.id }}" name="etablissement[activites][]" value="{{ activite.id }}" {% if activite.id in activite_ids %}checked="checked"{% endif %}>
+            <span class="checkmark"></span>
+        </label>
+    {% endfor %}
+</div>

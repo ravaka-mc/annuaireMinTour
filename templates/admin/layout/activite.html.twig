@@ -47,6 +47,10 @@
                 <label for="nom">Nom</label>
                 {{ form_widget(form.nom) }}
             </div>
+            <div class="form-control">
+                <label for="nom">Parent</label>
+                {{ form_widget(form.parent) }}
+            </div>
             {{ form_widget(form._token) }}
             <div class="pbtn full"><button type="submit" class="btn red">Ajouter activite</button></div>
         </form>
@@ -58,6 +62,15 @@
                 <div class="form-control">
                     <label for="nom">Nom</label>
                     <input type="text" name="nom" value="{{ activite.nom }}">
+                </div>
+                <div class="form-control">
+                    <label for="parent">Parent</label>
+                    <select name="parent" tabindex="0">
+                        <option value=""></option>
+                        {% for parent in activites %}
+                            <option value="{{ parent.id }}" {% if activite.parent == parent %}selected="selected"{% endif %}>{{ parent.nom }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
                 <div class="pbtn full"><button type="submit" class="btn red">Enregistrer</button></div>
             </form>

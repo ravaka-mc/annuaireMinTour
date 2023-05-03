@@ -39,7 +39,7 @@
 												</label>
 											</div>
 										{% else %}
-											<div id="wrapper-avatar" class="logo-entreprise">
+											<div id="wrapper-avatar">
 												<img src="{{ asset('front/images/profil-guide.svg') }}">
 											</div>
 										{% endif %}
@@ -186,54 +186,54 @@
 							</div>
 						{% endif %}
 
-						
-						<div id="wrapper-classements-activites" class="bloc_editense form-wrap step">
-							{% if form.activites is defined %}
-								<div id="wrapper-activites" class="card-wrap form-control">
-									<label>Activités</label>
-									<div class="custom_checkbox half">
-										{% for child in form.activites|filter(child => not child.rendered) %}
-											<label>
-												{{ child.vars.label }}
-												{{ form_widget(child) }}
-												<span class="checkmark"></span>
-											</label>
-										{% endfor %}
-										{% if form.activiteAutre is defined %}
-											<label>
-												Autre
-												{{ form_widget(form.activiteAutre) }}
-												<span class="checkmark"></span>
-											</label>
+						{% if form.activites is defined or form.classement is defined %}
+							<div id="wrapper-classements-activites" class="bloc_editense form-wrap step">
+								{% if form.activites is defined %}
+									<div id="wrapper-activites" class="card-wrap form-control">
+										<label>Activités</label>
+										<div class="custom_checkbox half">
+											{% for child in form.activites|filter(child => not child.rendered) %}
+												<label>
+													{{ child.vars.label }}
+													{{ form_widget(child) }}
+													<span class="checkmark"></span>
+												</label>
+											{% endfor %}
+											{% if form.activiteAutre is defined %}
+												<label>
+													Autre
+													{{ form_widget(form.activiteAutre) }}
+													<span class="checkmark"></span>
+												</label>
+											{% endif %}
+										</div>
+										{% if form.autreActivite is defined %}
+											<div id="wrapper-autreActivite" class="form-control">
+												<label>Préciser</label>
+												{{ form_widget(form.autreActivite) }}
+											</div>
 										{% endif %}
 									</div>
-									{% if form.autreActivite is defined %}
-										<div id="wrapper-autreActivite" class="form-control">
-											<!--label>Préciser</label-->
-											{{ form_widget(form.autreActivite) }}
-										</div>
-									{% endif %}
-								</div>
-							{% endif %}
-							
-							{% if form.classement is defined %}
-								<div id="wrapper-classements" class="form-control">
-									<div class="card-wrap">
-										<label>Classement</label>
-										<div class="custom-radio half">
-											{% for child in form.classement|filter(child => not child.rendered) %}
-											<label>
-												{{ child.vars.label }}
-												{{ form_widget(child) }}
-												<span class="checkmark"></span>
-											</label>
-											{% endfor %}
+								{% endif %}
+								
+								{% if form.classement is defined %}
+									<div id="wrapper-classements" class="form-control">
+										<div class="card-wrap">
+											<label>Classement</label>
+											<div class="custom-radio half">
+												{% for child in form.classement|filter(child => not child.rendered) %}
+												<label>
+													{{ child.vars.label }}
+													{{ form_widget(child) }}
+													<span class="checkmark"></span>
+												</label>
+												{% endfor %}
+											</div>
 										</div>
 									</div>
-								</div>
-							{% endif %}
-						</div>
-						
+								{% endif %}
+							</div>
+						{% endif %}
 						
 						<div class="step">
 							<div class="bloc_editense form-wrap">
@@ -263,7 +263,7 @@
 									{% endif %}
 									{% if form.autreGroupement is defined %}
 										<div id="wrapper-autregroupement" class="form-control slidergrpm">
-											<label>Groupe</label>
+											<label>À préciser Groupe</label>
 											{{ form_widget(form.autreGroupement) }}
 										</div>
 									{% endif %}
@@ -441,6 +441,7 @@
 						{% endif %}
 					</div>
 					<div class="t-right">
+						<input type="hidden" id="etablissement-id" value="{{ etablissement.id }}">
 						{{ form_widget(form._token) }}
 						<a class="btn prev">Précédent</a>
 						<a class="btn next">Suivant</a>
@@ -465,6 +466,7 @@
 		const app_region_district = "{{ path('app_region_district')|escape('js') }}";
 		const app_category_licence_b = "{{ path('app_category_licence_b')|escape('js') }}";
 		const app_category_licence_c = "{{ path('app_category_licence_c')|escape('js') }}";
+		const app_sous_activites = "{{ path('app_sous_activites')|escape('js') }}";
 	</script>
 	<script src="{{ asset('front/js/etablissement.js') }}"></script>
 {% endblock %}

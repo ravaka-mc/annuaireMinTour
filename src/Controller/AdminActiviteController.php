@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use Twig\Environment;
 use App\Entity\Activite;
 use App\Form\ActiviteType;
 use App\Repository\ActiviteRepository;
+use App\Repository\EtablissementRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,9 +15,13 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class AdminActiviteController extends AdminController
 {
     private $activiteRepository;
+    private $twig;
+    private $etablissementRepository;
 
-    public function __construct(ActiviteRepository $activiteRepository){
+    public function __construct(ActiviteRepository $activiteRepository, Environment $twig, EtablissementRepository $etablissementRepository){
         $this->activiteRepository = $activiteRepository;
+        $this->twig = $twig;
+        $this->etablissementRepository = $etablissementRepository;
     }
 
 
@@ -27,7 +33,9 @@ class AdminActiviteController extends AdminController
         $activite = new Activite();
         $form = $this->createForm(ActiviteType::class, $activite);
 
-        $activites = $this->activiteRepository->findAll();
+        $activites = $this->activiteRepository->findBy([], [
+            'nom' => 'asc'
+        ]);
 
         return $this->render('admin/layout/activite.html.twig', [
             'form' => $form->createView(),
@@ -76,10 +84,43 @@ class AdminActiviteController extends AdminController
     public function edit(Request $request, Activite $activite): Response
     {
         $nom = $request->request->get('nom');
+        $parent_id = $request->request->get('parent', 0);
+
+        if($parent_id != 0){
+            $activite->setParent($this->activiteRepository->findOneBy(['id' => (int) $parent_id]));
+        }
         
         $activite->setNom($nom);
         $this->activiteRepository->add($activite, true);
 
         return $this->redirectToRoute('app_admin_activite');
+    }
+
+
+    /**
+     *  @Route("/activite/sous-activites", name="app_sous_activites")
+     */
+    public function getSousActivites(Request $request){
+        $activite_id = $request->query->get('activite_id'); 
+        $etablissement_id = $request->query->get('etablissement_id', '');
+        $activite_ids = [];
+        if($etablissement_id != '') {
+            $etablissement = $this->etablissementRepository->findOneBy(['id' => (int) $etablissement_id]);
+            foreach ($etablissement->getActivites() as $activite){
+                $activite_ids[] = $activite->getId();
+            }
+        }
+
+        $activite =  $this->activiteRepository->findOneBy(['id' => (int) $activite_id]);
+        $sousActivites = $activite->getEnfants();
+        
+        $html = $this->twig->render('admin/block/sous-activites.html.twig', [
+            'sousActivites' => $sousActivites,
+            'activite_ids' => $activite_ids
+        ]);
+        
+        return new JsonResponse([
+            "html" => $html
+        ]);
     }
 }
