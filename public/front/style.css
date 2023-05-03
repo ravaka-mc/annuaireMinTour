@@ -3479,7 +3479,7 @@ label.nopad {
 
 .logo-entreprise {
 	position: relative;
-	border: 1px solid #ded8e8;
+	border: 2px solid #ded8e8;
 	background-color: #fff;
 	box-shadow: 20px 0 45px rgba(0, 0, 0, 0.05);
 	width: 150px;
@@ -3488,6 +3488,7 @@ label.nopad {
 	align-items: center;
 	justify-content: center;
 	margin: 0 auto;
+	border-radius: 10px;
 }
 
 .logo-entreprise img {
@@ -3498,13 +3499,17 @@ label.nopad {
 }
 
 .logo-entreprise label {
-	width: auto;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: 20px;
+	height: 15px;
 }
 
 .replace-img {
 	position: absolute;
-	top: 10px;
-	right: 10px;
+	top: 0;
+	right: 0;
 	background: url(images/replace-image.svg) no-repeat center;
 	width: 20px;
 	height: 15px;
