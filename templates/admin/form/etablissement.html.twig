@@ -245,42 +245,7 @@
 							</div>
 						{% endif %}
 					
-						
-						<div class="bloc_editense form-wrap">
-							<div class="card-wrap">
-								<div class="form-control inputright">
-									<label>Etes-vous membre d'un groupement ?</label>
-									<div id="wrapper-member" class="custom-radio">
-										{% for child in form.membre|filter(child => not child.rendered) %}
-										<label>
-											{{ child.vars.label }}
-											{{ form_widget(child) }}
-											<span class="checkmark"></span>
-										</label>
-									{% endfor %}
-									</div>
-								</div>
-								{% if form.groupements is defined %}
-									<div id="wrapper-groupements" class="custom_checkbox slidergrpm">
-										{% for child in form.groupements|filter(child => not child.rendered) %}
-											<label>
-												{{ child.vars.label }}
-												{{ form_widget(child) }}
-												<span class="checkmark"></span>
-											</label>
-										{% endfor %}
-									</div>
-								{% endif %}
-								{% if form.autreGroupement is defined %}
-									<div id="wrapper-autregroupement" class="form-control slidergrpm">
-										<label>Groupe</label>
-										{{ form_widget(form.autreGroupement) }}
-									</div>
-								{% endif %}
-							</div>
-						</div>
-						
-						{% if form.classement is defined %}
+						{% if form.dateOuverture is defined %}
 							<div id="wrapper-autorisation" class="bloc_editense form-wrap">
 								<div class="card-wrap">
 									<div class="form-in-head">
@@ -316,7 +281,18 @@
 									</div>
 								</div>
 							</div>
-							
+						{% endif %}
+
+						{% 
+							if form.nombreChambres is defined or 
+						 		form.nombreCouverts is defined or 
+						 		form.salleConference is defined or 
+						 		form.nombreSalaries is defined or 
+						 		form.nombreSalaireFemme is defined or 
+						 		form.nombreLit is defined or 
+						 		form.nombreResto is defined or 
+						 		form.superficieSalle is defined 
+						%}
 							<div id="wrapper-infos_supplementaire" class="bloc_editense form-wrap">
 								<div class="card-wrap">
 									<div class="form-in-head">
@@ -346,14 +322,18 @@
 												{{ form_widget(form.salleConference) }}
 											</div>
 										{% endif %}
+										{% if form.nombreSalaries is defined %}
 										<div class="form-control">
 											<label for="">Nombre de Salariés Homme</label>
 											{{ form_widget(form.nombreSalaries) }}
 										</div>
+										{% endif %}
+										{% if form.nombreSalaireFemme is defined %}
 										<div class="form-control">
 											<label for="">Nombre de Salariés Femme</label>
 											{{ form_widget(form.nombreSalaireFemme) }}
 										</div>
+										{% endif %}
 										{% if form.nombreLit is defined %}
 											<div class="form-control">
 												<label for="">Nombre de lit</label>
@@ -370,6 +350,12 @@
 											<div class="form-control">
 												<label for="">Superficie Salle de conférencee</label>
 												{{ form_widget(form.superficieSalle) }}
+											</div>
+										{% endif %}
+										{% if form.nombreVoiture is defined %}
+											<div class="form-control">
+												<label for="">Nombre de voiture</label>
+												{{ form_widget(form.nombreVoiture) }}
 											</div>
 										{% endif %}
 									</div>
@@ -445,6 +431,42 @@
 											{{ form_widget(form.agrement) }}
 										</div>
 									</div>
+								</div>
+							</div>
+						{% endif %}
+
+						{% if form.membre is defined or form.groupements is defined or form.autreGroupement is defined %}
+							<div class="bloc_editense form-wrap">
+								<div class="card-wrap">
+									<div class="form-control inputright">
+										<label>Etes-vous membre d'un groupement ?</label>
+										<div id="wrapper-member" class="custom-radio">
+											{% for child in form.membre|filter(child => not child.rendered) %}
+											<label>
+												{{ child.vars.label }}
+												{{ form_widget(child) }}
+												<span class="checkmark"></span>
+											</label>
+										{% endfor %}
+										</div>
+									</div>
+									{% if form.groupements is defined %}
+										<div id="wrapper-groupements" class="custom_checkbox slidergrpm">
+											{% for child in form.groupements|filter(child => not child.rendered) %}
+												<label>
+													{{ child.vars.label }}
+													{{ form_widget(child) }}
+													<span class="checkmark"></span>
+												</label>
+											{% endfor %}
+										</div>
+									{% endif %}
+									{% if form.autreGroupement is defined %}
+										<div id="wrapper-autregroupement" class="form-control slidergrpm">
+											<label>Groupe</label>
+											{{ form_widget(form.autreGroupement) }}
+										</div>
+									{% endif %}
 								</div>
 							</div>
 						{% endif %}
@@ -737,6 +759,23 @@
 			}
 		}
 
+		var changeAvatar = () => {
+			$('.replace-img').click(function(){
+				$('#avatar').trigger('click')
+			})
+
+			$('#avatar').change(function () {
+				fileSize = this.files[0].size;
+				var MAX_FILE_SIZE = 2 * 1024 * 1024;
+				if (fileSize > MAX_FILE_SIZE) {
+					alert('Photo de profil trop large, taille max 2M')
+				} else {
+					var image = document.getElementById('avatar-img');
+					image.src = URL.createObjectURL(event.target.files[0]);
+				}
+			})
+		}
+
 		jQuery(document).ready(function($) {
 
 			changeRegion();
@@ -745,12 +784,14 @@
 			changeLicenceB();
 			changeLicenceC();
 			changeActivite();
+			changeAvatar();
 
 			$("#etablissement_createdBy").selectize();
 			
 			$('.replace-img').click(function(){
 				$('#avatar').trigger('click')
 			})
+
 			$('.nstSlider').nstSlider({
 				"rounding": {
 					"100": "100"
@@ -788,10 +829,6 @@
 							}
 						})
 
-						$('.replace-img').click(function(){
-							$('#avatar').trigger('click')
-						});
-
 						changeLicences();
 						changeRegion();
 						changeAutreActivite();
@@ -800,6 +837,7 @@
 						changeLicenceB();
 						changeLicenceC();
 						changeActivite();
+						changeAvatar();
 					}
 				})
 			});

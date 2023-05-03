@@ -244,6 +244,15 @@ class EtablissementType extends AbstractType
                         'placeholder' => 'N° de référence B'
                     ]
                 ])
+                ->add('nombreSalaries', IntegerType::class, [
+                    'required' => true,
+                ])
+                ->add('nombreSalaireFemme', IntegerType::class, [
+                    'required' => true,
+                ])
+                ->add('nombreVoiture', IntegerType::class, [
+                    'required' => true,
+                ])
                 ->add('referenceC', TextType::class, [   
                     'attr' => [
                         'placeholder' => 'N° de référence C'

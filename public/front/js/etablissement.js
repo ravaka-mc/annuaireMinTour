@@ -141,8 +141,33 @@ var changeMember = () => {
 var hasError = () => {
     var _error = false;
 
+    $.ajax({
+        async: false,
+        type: 'get',
+        url: app_etablissement_exist,
+        data: {
+            etablissement_nom :  $('#etablissement_nom').val()
+        },
+        dataType: 'json',
+        success: function(response) {
+            $('#etablissement_nom').removeClass('error');
+            if(response.exist){
+                $('#etablissement_nom').parent().append('<span class="champ-erreur"Cet établissement est déjà inscrit. Si vous voulez gérer cet établissement, vous pouvez nous contacter</span>');
+                $('#etablissement_nom').addClass('error')
+                _error = true;
+            } 
+        }
+    });
+
     $('.active input').each(function(e){
         if($(this).is(':required') && $(this).val() == ''){
+            $(this).parent().append('<span class="champ-erreur">Ce champ est obligatoire</span>');
+            _error = true;
+        } 
+    })
+
+    $('.active input[type="checkbox"]').each(function(e){
+        if($(this).is(':required') && !$(this).is(':checked')){
             $(this).parent().append('<span class="champ-erreur">Ce champ est obligatoire</span>');
             _error = true;
         } 
@@ -161,13 +186,13 @@ var hasError = () => {
     var regexCharaterOnly = /[^\d]/;
     var regexSiteWeb = /^((?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9\-.]+\.[a-zA-Z]{2,}(?:\/[\w\-\.]*)*\/?)$/
 
-    if($(".active #etablissement_telephone").length > 0){
+    /*if($(".active #etablissement_telephone").length > 0){
         var emailValid = regexPhone.test($(".active #etablissement_telephone").val());
         if(!emailValid){
             $(".active #etablissement_telephone").parent().append('<span class="champ-erreur">Téléphone invalid (+261XX XX XXX XX)</span>');
             _error = true;
         }
-    }
+    }*/
 
     if($(".active #etablissement_siteWeb").length > 0){
         var siteWebValid = regexSiteWeb.test($(".active #etablissement_siteWeb").val());
@@ -228,11 +253,26 @@ var hasError = () => {
     return _error;
 }
 
+var changeLicenceA = () => {
+    if($('#etablissement_licenceA').length > 0) {
+        $('#etablissement_licenceA').change(function() {
+            if($(this).is(':checked')){
+                $('#etablissement_dateLicenceA').attr('required', 'required')
+                $('#etablissement_referenceA').attr('required', 'required')
+            } else {
+                $('#etablissement_dateLicenceA').removeAttr('required')
+                $('#etablissement_referenceA').removeAttr('required')
+            }
+        });
+    }
+}
 var changeLicenceB = () => {
     if($('#etablissement_licenceB').length > 0) {
         $("[id^='etablissement_activites_']").parent('label').hide();
         $('#etablissement_licenceB').change(function() {
             if(!$(this).is(':checked')){
+                $('#etablissement_dateLicenceB').removeAttr('required')
+                $('#etablissement_referenceB').removeAttr('required')
                 $.ajax({
                     type: 'get',
                     url: app_category_licence_b,
@@ -247,6 +287,8 @@ var changeLicenceB = () => {
                     }
                 })
             } else {
+                $('#etablissement_dateLicenceB').attr('required', 'required')
+                $('#etablissement_referenceB').attr('required', 'required')
                 $.ajax({
                     type: 'get',
                     url: app_category_licence_b,
@@ -272,6 +314,8 @@ var changeLicenceC = () => {
         $("[id^='etablissement_activites_']").parent('label').hide();
         $('#etablissement_licenceC').change(function() {
             if(!$(this).is(':checked')){
+                $('#etablissement_dateLicenceC').removeAttr('required')
+                $('#etablissement_referenceC').removeAttr('required')
                 $.ajax({
                     type: 'get',
                     url: app_category_licence_c,
@@ -286,6 +330,8 @@ var changeLicenceC = () => {
                     }
                 })
             } else {
+                $('#etablissement_dateLicenceC').attr('required', 'required')
+                $('#etablissement_referenceC').attr('required', 'required')
                 $.ajax({
                     type: 'get',
                     url: app_category_licence_c,
@@ -331,9 +377,27 @@ var changeActivite = () => {
     }
 }
 
+var changeAvatar = () => {
+    $('.replace-img').click(function(){
+        $('#avatar').trigger('click')
+    })
+
+    $('#avatar').change(function () {
+        fileSize = this.files[0].size;
+        var MAX_FILE_SIZE = 2 * 1024 * 1024;
+        if (fileSize > MAX_FILE_SIZE) {
+            alert('Photo de profil trop large, taille max 2M')
+        } else {
+            var image = document.getElementById('avatar-img');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        }
+    })
+}
+
 $(document).ready(function () {
     changeRegion();
     keypressNumberOnly();
+    changeLicenceA();
     changeLicenceC();
     changeLicenceB();
     changeActivite();
@@ -341,7 +405,8 @@ $(document).ready(function () {
     changeLicences();
     changeCategory();
     changeAutreActivite();
-    
+    changeAvatar();
+
     var currentStep = 1;
     var totalSteps = $('.step').length;
 
@@ -362,6 +427,12 @@ $(document).ready(function () {
 
         if(hasError()) return false;
 
+        if($('#etablissement_licenceA').length > 0 && (!$('#etablissement_licenceB').is(':checked') && 
+        !$('#etablissement_licenceC').is(':checked')) && $('#wrapper-coordonnees.active').length > 0) {
+            $('.step.active').removeClass('active').nextAll('.step').eq(0).addClass('active');
+            currentStep++;
+        }
+
         if (currentStep < totalSteps) {
             $('.step.active').removeClass('active').nextAll('.step').eq(0).addClass('active');
             currentStep++;
@@ -374,6 +445,12 @@ $(document).ready(function () {
     });
     
     $('.prev').click(function() {
+        if($('#etablissement_licenceA').length > 0 && (!$('#etablissement_licenceB').is(':checked') 
+        && !$('#etablissement_licenceC').is(':checked'))  && $('#wrapper-infos_supplementaire.active').length > 0){
+            $('.step.active').removeClass('active').prevAll('.step').eq(0).addClass('active');
+            currentStep--;
+        }
+        
         if (currentStep > 1) {
             $('.step.active').removeClass('active').prevAll('.step').eq(0).addClass('active');
             currentStep--;
@@ -414,18 +491,7 @@ $(document).ready(function () {
                     $(response).find('#wrapper-field')
                 );
 
-                $('.step:first').addClass('active');
-
-                $('#avatar').change(function () {
-                    fileSize = this.files[0].size;
-                    var MAX_FILE_SIZE = 2 * 1024 * 1024;
-                    if (fileSize > MAX_FILE_SIZE) {
-                        alert('Photo de profil trop large, taille max 2M')
-                    } else {
-                        var image = document.getElementById('avatar-img');
-                        image.src = URL.createObjectURL(event.target.files[0]);
-                    }
-                })
+                $('.step:first').addClass('active');     
 
                 changeLicences();
                 keypressNumberOnly();
@@ -433,9 +499,11 @@ $(document).ready(function () {
                 changeCategory();
                 changeMember();
                 changeAutreActivite();
+                changeLicenceA();
                 changeLicenceC();
                 changeLicenceB();
                 changeActivite();
+                changeAvatar();
             }
         });
     });

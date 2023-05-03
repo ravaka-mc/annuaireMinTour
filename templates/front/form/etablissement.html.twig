@@ -235,43 +235,7 @@
 							</div>
 						{% endif %}
 						
-						<div class="step">
-							<div class="bloc_editense form-wrap">
-								<div class="card-wrap">
-									<div class="form-control inputright">
-										<label>Etes-vous membre d'un groupement ?</label>
-										<div id="wrapper-member" class="custom-radio">
-											{% for child in form.membre|filter(child => not child.rendered) %}
-											<label>
-												{{ child.vars.label }}
-												{{ form_widget(child) }}
-												<span class="checkmark"></span>
-											</label>
-										{% endfor %}
-										</div>
-									</div>
-									{% if form.groupements is defined %}
-										<div id="wrapper-groupements" class="custom_checkbox slidergrpm">
-											{% for child in form.groupements|filter(child => not child.rendered) %}
-												<label>
-													{{ child.vars.label }}
-													{{ form_widget(child) }}
-													<span class="checkmark"></span>
-												</label>
-											{% endfor %}
-										</div>
-									{% endif %}
-									{% if form.autreGroupement is defined %}
-										<div id="wrapper-autregroupement" class="form-control slidergrpm">
-											<label>À préciser Groupe</label>
-											{{ form_widget(form.autreGroupement) }}
-										</div>
-									{% endif %}
-								</div>
-							</div>
-						</div>
-						
-						{% if form.classement is defined %}
+						{% if form.dateOuverture is defined %}
 							<div id="wrapper-autorisation" class="bloc_editense form-wrap step">
 								<div class="card-wrap">
 									<div class="form-in-head">
@@ -307,7 +271,18 @@
 									</div>
 								</div>
 							</div>
-							
+						{% endif %}
+
+						{% 
+							if form.nombreChambres is defined or 
+								form.nombreCouverts is defined or 
+								form.salleConference is defined or 
+								form.nombreSalaries is defined or 
+								form.nombreSalaireFemme is defined or 
+								form.nombreLit is defined or 
+								form.nombreResto is defined or 
+								form.superficieSalle is defined 
+						%}
 							<div id="wrapper-infos_supplementaire" class="bloc_editense form-wrap step">
 								<div class="card-wrap">
 									<div class="form-in-head">
@@ -361,6 +336,12 @@
 											<div class="form-control">
 												<label for="">Superficie Salle de conférencee</label>
 												{{ form_widget(form.superficieSalle) }}
+											</div>
+										{% endif %}
+										{% if form.nombreVoiture is defined %}
+											<div class="form-control">
+												<label for="">Nombre de voiture</label>
+												{{ form_widget(form.nombreVoiture) }}
 											</div>
 										{% endif %}
 									</div>
@@ -439,6 +420,44 @@
 								</div>
 							</div>
 						{% endif %}
+
+						{% if form.membre is defined or form.groupements is defined or form.autreGroupement is defined %}
+							<div class="step">
+								<div class="bloc_editense form-wrap">
+									<div class="card-wrap">
+										<div class="form-control inputright">
+											<label>Etes-vous membre d'un groupement ?</label>
+											<div id="wrapper-member" class="custom-radio">
+												{% for child in form.membre|filter(child => not child.rendered) %}
+												<label>
+													{{ child.vars.label }}
+													{{ form_widget(child) }}
+													<span class="checkmark"></span>
+												</label>
+											{% endfor %}
+											</div>
+										</div>
+										{% if form.groupements is defined %}
+											<div id="wrapper-groupements" class="custom_checkbox slidergrpm">
+												{% for child in form.groupements|filter(child => not child.rendered) %}
+													<label>
+														{{ child.vars.label }}
+														{{ form_widget(child) }}
+														<span class="checkmark"></span>
+													</label>
+												{% endfor %}
+											</div>
+										{% endif %}
+										{% if form.autreGroupement is defined %}
+											<div id="wrapper-autregroupement" class="form-control slidergrpm">
+												<label>À préciser Groupe</label>
+												{{ form_widget(form.autreGroupement) }}
+											</div>
+										{% endif %}
+									</div>
+								</div>
+							</div>
+						{% endif %}
 					</div>
 					<div class="t-right">
 						<input type="hidden" id="etablissement-id" value="{{ etablissement.id }}">
@@ -467,6 +486,7 @@
 		const app_category_licence_b = "{{ path('app_category_licence_b')|escape('js') }}";
 		const app_category_licence_c = "{{ path('app_category_licence_c')|escape('js') }}";
 		const app_sous_activites = "{{ path('app_sous_activites')|escape('js') }}";
+		const app_etablissement_exist = "{{ path('app_etablissement_exist')|escape('js') }}";
 	</script>
 	<script src="{{ asset('front/js/etablissement.js') }}"></script>
 {% endblock %}

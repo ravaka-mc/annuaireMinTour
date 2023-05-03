@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -163,6 +164,18 @@ class AdminEtablissementController extends AdminController
         $file->move($this->getParameter('upload_etablissement'), $fileName);
 
         return $fileName;
+    }
+
+    /**
+     *  @Route("/etablissement/exist", name="app_etablissement_exist")
+     */
+    public function etablissementExist(Request $request){
+        $etablissement_nom = $request->query->get('etablissement_nom'); 
+        $etablissement = $this->etablissementRepository->findOneBy(['nom' => $etablissement_nom]);
+
+        return new JsonResponse([
+            "exist" => ($etablissement) ? true : false
+        ]);
     }
     
 }
