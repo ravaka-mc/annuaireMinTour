@@ -2675,7 +2675,7 @@ form .checkboxgroup {
 	margin-bottom: 10px;
 }
 
-.information .licence-detail p {
+.information .auto-details p {
 	margin-bottom: 0;
 }
 
@@ -3432,7 +3432,7 @@ label.nopad {
 	margin-bottom: 5px;
 }
 .sub-check {
-	margin-top: 10px;
+	margin: 5px 0 10px;
 }
 .sub-check select, .sub-check input {
 	font-size: 12px;
@@ -3732,6 +3732,17 @@ label.nopad {
 
 .licence.custom_checkbox label {
 	margin-bottom: 0;
+}
+
+.information .catry {
+	background-image: url(images/etiquette.svg);
+}
+.information .activite {
+	background-image: url(images/activite.svg);
+}
+.information .activite li {
+	padding-left: 20px;
+	background: url(images/check.svg) no-repeat left top 4px / 15px;
 }
 
 .popup {

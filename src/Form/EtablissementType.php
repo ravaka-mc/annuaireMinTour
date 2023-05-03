@@ -235,18 +235,18 @@ class EtablissementType extends AbstractType
                 ->add('referenceA', TextType::class, [
                     'required' => false,   
                     'attr' => [
-                        'placeholder' => 'Référence A'
+                        'placeholder' => 'N° de référence A'
                     ]
                 ])
                 ->add('referenceB', TextType::class, [
                     'required' => false,  
                     'attr' => [
-                        'placeholder' => 'Référence B'
+                        'placeholder' => 'N° de référence B'
                     ]
                 ])
                 ->add('referenceC', TextType::class, [   
                     'attr' => [
-                        'placeholder' => 'Référence C'
+                        'placeholder' => 'N° de référence C'
                     ],
                     'required' => false,
                 ]);

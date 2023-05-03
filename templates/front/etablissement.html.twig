@@ -90,22 +90,40 @@
                     Autorisation d'ouverture
                 </div>
                 <div class="auto-details">
-                    {% if etablissement.dateOuverture is not null %}
-                    <div class="item date">
-                        <div class="stitre">
-                            Date d'ouverture
-                        </div>
-                        <span>{{ etablissement.dateOuverture|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}</span>
-                    </div>
-                    {% endif %}
-                    {% if etablissement.reference is not null %}
-                    <div class="item reference">
-                        <div class="stitre">
-                            N° de référence
-                        </div>
-                        <span>{{ etablissement.reference }}</span>
-                    </div>
-                    {% endif %}
+					<div class="item catry">
+						<div class="stitre">
+							Catégorie
+						</div>
+						<div><strong>Catégorie : </strong>Guide régionale, Spécialisé</div>
+						<div><strong>Région : </strong>Analamanga </div>
+						<div><strong>Spécialisation : </strong>Lorem ipsum</div>
+					</div>
+					<div class="item activite">
+						<div class="stitre">
+							Activité
+						</div>
+						<ul>
+							<li>Agence de Voyages</li>
+							<li>Auberge</li>
+							<li>Buffet</li>
+						</ul>
+					</div>
+					{% if etablissement.dateOuverture is not null %}
+					<div class="item date">
+						<div class="stitre">
+							Date d'ouverture
+						</div>
+						<span>{{ etablissement.dateOuverture|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}</span>
+					</div>
+					{% endif %}
+					{% if etablissement.reference is not null %}
+					<div class="item reference">
+						<div class="stitre">
+							N° de référence
+						</div>
+						<span>{{ etablissement.reference }}</span>
+					</div>
+					{% endif %}
                     {% if etablissement.licenceA or etablissement.licenceB or etablissement.licenceC%}
                     <div class="item licence">
                         <div class="stitre">
