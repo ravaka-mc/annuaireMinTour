@@ -15,11 +15,15 @@
             </div>
             <div class="wrap-detail">
                 <div class="images">
+				{% if etablissement.category.viewType != 'TYPE_5'%}
 					{% if etablissement.avatar is not null %}
 						<img src="{{ asset('uploads/etablissements/' ~ etablissement.getAvatar()) }}">
 					{% else %}
 						<img src="{{ asset('front/images/default-etablissement.svg') }}">
 					{% endif %}
+				{% else %}
+					<img src="{{ asset('front/images/profil-guide.svg') }}">
+				{% endif %}
                 </div>
                 <div class="texteitem">
                     <h1>{{ etablissement.nom }}</h1>
