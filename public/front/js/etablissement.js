@@ -140,7 +140,7 @@ var changeMember = () => {
 
 var hasError = () => {
     var _error = false;
-    if(is_edit == false)
+    if(is_edit == false){
         $.ajax({
             async: false,
             type: 'get',
