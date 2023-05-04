@@ -152,8 +152,7 @@ var hasError = () => {
             success: function(response) {
                 $('#etablissement_nom').removeClass('error');
                 if(response.exist){
-                    $('#etablissement_nom').parent().append('<span class="champ-erreur"Cet établissement est déjà inscrit. Si vous voulez gérer cet établissement, vous pouvez nous contacter</span>');
-                    $('#etablissement_nom').addClass('error')
+                    $('#etablissement_nom').parent().append('<span class="champ-erreur">Cet établissement est déjà inscrit. Si vous voulez gérer cet établissement, vous pouvez nous contacter</span>');
                     _error = true;
                 } 
             }
