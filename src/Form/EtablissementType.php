@@ -641,7 +641,7 @@ class EtablissementType extends AbstractType
                     'expanded' => false,
                     'multiple' => false,
                     'placeholder' => '--------------------',
-                    'required' => true,
+                    'required' => false,
                 ])
                 ->add('nif', TextType::class, [
                     'required' => false,
