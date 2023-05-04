@@ -122,18 +122,6 @@
 						{% endif %}
 					</div>
 					{% endif %}
-					{% if etablissement.activites|length > 0 %}
-						<div class="item activite">
-							<div class="stitre">
-								Activité
-							</div>
-							<ul>
-								{% for activite in etablissement.activites %}
-									<li>{{ activite.nom }}</li>
-								{% endfor %}
-							</ul>
-						</div>
-					{% endif %}
 					{% if etablissement.dateOuverture is not null %}
 						<div class="item date">
 							<div class="stitre">
@@ -166,20 +154,32 @@
                             {% if etablissement.licenceB %}
 							<div>
 								<p><span class="licence-class">B</span> (Tour-opérateur)</p>
-								<span class="licence-date">Le <strong>{{ etablissement.dateLicenceA|date('d / m / Y') }}</strong></span>
+								<span class="licence-date">Le <strong>{{ etablissement.dateLicenceB|date('d / m / Y') }}</strong></span>
 								<div class="licence-ref">{{ etablissement.referenceB }}</div>
 							</div>
                             {% endif %}
                             {% if etablissement.licenceC %}
                             <div>
 								<p><span class="licence-class">C</span>(Agence de voyage)</p>
-								<span class="licence-date">Le <strong>{{ etablissement.dateLicenceA|date('d / m / Y') }}</strong></span>
+								<span class="licence-date">Le <strong>{{ etablissement.dateLicenceC|date('d / m / Y') }}</strong></span>
 								<div class="licence-ref">{{ etablissement.referenceC }}</div>
 							</div>
                             {% endif %}
                         </div>
                     </div>
                     {% endif %}
+					{% if etablissement.activites|length > 0 %}
+						<div class="item activite">
+							<div class="stitre">
+								Activité
+							</div>
+							<ul>
+								{% for activite in etablissement.activites %}
+									<li>{{ activite.nom }}</li>
+								{% endfor %}
+							</ul>
+						</div>
+					{% endif %}
                 </div>
             </div>
         </div>
@@ -234,17 +234,6 @@
 					</div>
 				</div>
 				{% endif %}
-                {% if etablissement.salleConference is not null %}
-				<div class="item">
-					<div class="icon">
-						<img src="{{ asset('front/images/salle.svg') }}" alt="">
-					</div>
-					<div class="texte">
-						<p><span class="numscroller" data-min="1" data-max="{{ etablissement.salleConference}}" data-delay="5" data-increment="10">{{ etablissement.salleConference}}</span> m2</p>
-						<div class="n-titre">Salle de conférence</div>
-					</div>
-				</div>
-				{% endif %}
 				{% if etablissement.nombreLit is not null %}
 				<div class="item">
 					<div class="icon">
@@ -278,6 +267,17 @@
 					</div>
 				</div>
 				{% endif %}
+				{% if etablissement.salleConference is not null %}
+				<div class="item">
+					<div class="icon">
+						<img src="{{ asset('front/images/salle.svg') }}" alt="">
+					</div>
+					<div class="texte">
+						<p><span class="numscroller" data-min="1" data-max="{{ etablissement.salleConference}}" data-delay="5" data-increment="10">{{ etablissement.salleConference}}</span> m2</p>
+						<div class="n-titre">Superficie salle</div>
+					</div>
+				</div>
+				{% endif %}
 				{% if etablissement.superficieSalle is not null %}
 				<div class="item">
 					<div class="icon">
@@ -285,7 +285,7 @@
 					</div>
 					<div class="texte">
 						<p><span class="numscroller" data-min="1" data-max="{{ etablissement.superficieSalle }}" data-delay="5" data-increment="10">{{ etablissement.superficieSalle }}</span> </p>
-						<div class="n-titre">Superficie salle</div>
+						<div class="n-titre">Salle de conférence</div>
 					</div>
 				</div>
 				{% endif %}
