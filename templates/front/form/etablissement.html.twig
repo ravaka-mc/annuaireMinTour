@@ -306,12 +306,6 @@
 											</div>
 										{% endif %}
 			
-										{% if form.salleConference is defined %}
-											<div class="form-control">
-												<label for="">Salle de conférence</label>
-												{{ form_widget(form.salleConference) }}
-											</div>
-										{% endif %}
 										<div class="form-control">
 											<label for="">Nombre de Salariés Homme</label>
 											{{ form_widget(form.nombreSalaries) }}
@@ -330,6 +324,12 @@
 											<div class="form-control">
 												<label for="">Nombre de restaurant</label>
 												{{ form_widget(form.nombreResto) }}
+											</div>
+										{% endif %}
+										{% if form.salleConference is defined %}
+											<div class="form-control">
+												<label for="">Salle de conférence</label>
+												{{ form_widget(form.salleConference) }}
 											</div>
 										{% endif %}
 										{% if form.superficieSalle is defined %}
@@ -405,6 +405,10 @@
 										</div>
 										{% endif %}
 										<div class="form-control">
+											<label for="">Agrément</label>
+											{{ form_widget(form.agrement) }}
+										</div>
+										<div class="form-control">
 											<label for="">NIF</label>
 											{{ form_widget(form.nif) }}
 										</div>
@@ -412,10 +416,7 @@
 											<label for="">Stat</label>
 											{{ form_widget(form.stat) }}
 										</div>
-										<div class="form-control">
-											<label for="">Agrément</label>
-											{{ form_widget(form.agrement) }}
-										</div>
+
 									</div>
 								</div>
 							</div>

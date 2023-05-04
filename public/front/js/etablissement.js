@@ -184,7 +184,8 @@ var hasError = () => {
     var regexPhone = /^\+261\s?\d{2}\s?\d{2}\s?\d{3}\s?\d{2}$/;
     var regexCharaterOnly = /[^\d]/;
     var regexSiteWeb = /^((?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9\-.]+\.[a-zA-Z]{2,}(?:\/[\w\-\.]*)*\/?)$/
-
+    var regexFacebook = /(?:https?:\/\/)?(?:www\.)?(mbasic.facebook|m\.facebook|facebook|fb)\.(com|me)\/(?:(?:\w\.)*#!\/)?(?:pages\/)?(?:[\w\-\.]*\/)*([\w\-\.]*)/i
+    var regexLinkedin = /^(http(s)?:\/\/)?([\w]+\.)?linkedin\.com\/(pub|in|profile)\/([-a-zA-Z0-9]+)\/*/i
     /*if($(".active #etablissement_telephone").length > 0){
         var emailValid = regexPhone.test($(".active #etablissement_telephone").val());
         if(!emailValid){
@@ -205,6 +206,22 @@ var hasError = () => {
         var emailValid = regexMail.test($(".active #etablissement_email").val());
         if(!emailValid && $("#etablissement_email").val() != ''){
             $(".active #etablissement_email").parent().append('<span class="champ-erreur">Adresse email invalid</span>');
+            _error = true;
+        }
+    }
+
+    if($(".active #etablissement_linkedin").length > 0){
+        var linkedinValid = regexLinkedin.test($(".active #etablissement_linkedin").val());
+        if(!linkedinValid && $("#etablissement_linkedin").val() != ''){
+            $(".active #etablissement_linkedin").parent().append('<span class="champ-erreur">url invalid</span>');
+            _error = true;
+        }
+    }
+
+    if($(".active #etablissement_facebook").length > 0){
+        var facebookValid = regexFacebook.test($(".active #etablissement_facebook").val());
+        if(!facebookValid && $("#etablissement_facebook").val() != ''){
+            $(".active #etablissement_facebook").parent().append('<span class="champ-erreur">url invalid</span>');
             _error = true;
         }
     }

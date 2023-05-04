@@ -251,7 +251,7 @@ class EtablissementType extends AbstractType
                     'required' => true,
                 ])
                 ->add('nombreVoiture', IntegerType::class, [
-                    'required' => true,
+                    'required' => false,
                 ])
                 ->add('referenceC', TextType::class, [   
                     'attr' => [
