@@ -140,25 +140,25 @@ var changeMember = () => {
 
 var hasError = () => {
     var _error = false;
-
-    $.ajax({
-        async: false,
-        type: 'get',
-        url: app_etablissement_exist,
-        data: {
-            etablissement_nom :  $('#etablissement_nom').val()
-        },
-        dataType: 'json',
-        success: function(response) {
-            $('#etablissement_nom').removeClass('error');
-            if(response.exist){
-                $('#etablissement_nom').parent().append('<span class="champ-erreur"Cet établissement est déjà inscrit. Si vous voulez gérer cet établissement, vous pouvez nous contacter</span>');
-                $('#etablissement_nom').addClass('error')
-                _error = true;
-            } 
-        }
-    });
-
+    if(is_edit == false)
+        $.ajax({
+            async: false,
+            type: 'get',
+            url: app_etablissement_exist,
+            data: {
+                etablissement_nom :  $('#etablissement_nom').val()
+            },
+            dataType: 'json',
+            success: function(response) {
+                $('#etablissement_nom').removeClass('error');
+                if(response.exist){
+                    $('#etablissement_nom').parent().append('<span class="champ-erreur"Cet établissement est déjà inscrit. Si vous voulez gérer cet établissement, vous pouvez nous contacter</span>');
+                    $('#etablissement_nom').addClass('error')
+                    _error = true;
+                } 
+            }
+        });
+    }   
     $('.active input').each(function(e){
         if($(this).is(':required') && $(this).val() == ''){
             $(this).parent().append('<span class="champ-erreur">Ce champ est obligatoire</span>');

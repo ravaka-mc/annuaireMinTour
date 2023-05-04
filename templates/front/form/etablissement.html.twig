@@ -477,9 +477,9 @@
 {% block javascripts %}
     <script>
 		{% if is_edit == true %}
-			var is_edit = true;
+			const is_edit = true;
 		{% else %}
-			var is_edit = false;
+			const is_edit = false;
 		{% endif %}
 		const app_front_etablissement_add = "{{ path('app_front_etablissement_add')|escape('js') }}";
 		const app_region_district = "{{ path('app_region_district')|escape('js') }}";
