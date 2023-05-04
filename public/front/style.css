@@ -2862,7 +2862,7 @@ form .checkboxgroup {
 	padding-bottom: 20px;
 	margin-bottom: 30px;
 	border-bottom: 1px solid #d8cfe7;
-	gap: 30px;
+	gap: 10px 30px;
 }
 
 .content-bo_user .headtitle .title {
@@ -3238,7 +3238,7 @@ form .checkboxgroup {
 	-moz-appearance: none;
 	appearance: none;
 	width: 100%;
-	font: 500 14px/20px "Montserrat";
+	font: 14px/20px "mm";
 }
 
 .categories .card-wrap {
@@ -3291,19 +3291,19 @@ form .checkboxgroup {
 input,
 select,
 textarea {
-	font: 500 14px/20px "Montserrat";
+	font: 14px/20px "mm";
 }
 
 input::-moz-placeholder,
 select::-moz-placeholder,
 textarea::-moz-placeholder {
-	font: 500 14px/20px "Montserrat";
+	font: 14px/20px "mm";
 }
 
 input::placeholder,
 select::placeholder,
 textarea::placeholder {
-	font: 500 14px/20px "Montserrat";
+	font: 14px/20px "mm";
 }
 
 .form-wrap select,
@@ -3403,8 +3403,11 @@ textarea::placeholder {
 }
 
 .inputright {
-	display: grid;
-	grid-template-columns: 1fr auto;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	gap: 0 10px;
 	margin-bottom: 0;
 }
 
@@ -3417,6 +3420,7 @@ textarea::placeholder {
 .inputright label,
 .inputright .custom-radio label {
 	margin-bottom: 0;
+	width: initial;
 }
 
 .custom_checkbox.slidergrpm {
@@ -4264,9 +4268,6 @@ footer .footer .mentions li span {
 }
 
 @media (max-width: 1050px) {
-	.categorie .top-page {
-		padding-bottom: 150px;
-	}
 	.bg-white {
 		max-width: 450px;
 		margin: 0 auto;
@@ -4507,7 +4508,7 @@ footer .footer .mentions li span {
 		padding: 15px 20px 0;
 	}
 	.categorie .top-page {
-		padding-bottom: 130px;
+		padding: 130px 0 50px;
 	}
 	
 	.cat-check {
@@ -4667,10 +4668,15 @@ footer .footer .mentions li span {
 	.list-etablissement .card li a {
 		min-height: 55px;
 	}
-
+	.content-bo_user {
+		margin: 30px 0 40px;
+	}
 	.content-bo_user .headtitle {
 		display: grid;
 		grid-template-columns: auto;
+	}
+	.content-bo_user .headtitle .btn {
+		height: 45px;
 	}
 
 	.bandeau {
@@ -4760,6 +4766,11 @@ footer .footer .mentions li span {
 	.blocform input {
 		font-size: 13px;
 		height: 40px;
+	}
+
+	.categories select {
+		padding-left: 10px;
+		color: #010a2e;
 	}
 
 	footer .footer .logo {
@@ -4947,7 +4958,7 @@ footer .footer .mentions li span {
 		right: 20px;
 	}
 	.categorie .top-page {
-		padding-bottom: 50px;
+		padding-bottom: 40px;
 	}
 }
 
