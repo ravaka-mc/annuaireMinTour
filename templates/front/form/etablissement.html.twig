@@ -244,7 +244,7 @@
 									<div class="half">
 										{% if form.dateOuverture is defined %}
 										<div class="form-control">
-											<label for="">Date d’ouverture <span class="facultatif">(facultatif)</span></label>
+											<label for="">Date d’ouverture</label>
 											{{ form_widget(form.dateOuverture) }}
 										</div>
 										{% endif %}
@@ -258,14 +258,14 @@
 											<label for="">NIF</label>
 											{{ form_widget(form.nif) }}
 											{% if form_errors(form.nif) %}
-												<span class="champ-erreur">Valeur est invalide</span>
+												<span class="champ-erreur">La valeur est invalide</span>
 											{% endif %}
 										</div>
 										<div class="form-control">
 											<label for="">Stat</label>
 											{{ form_widget(form.stat) }}
 											{% if form_errors(form.stat) %}
-												<span class="champ-erreur">Valeur est invalide</span>
+												<span class="champ-erreur">La valeur est invalide</span>
 											{% endif %}
 										</div>
 									</div>
@@ -334,13 +334,13 @@
 										{% endif %}
 										{% if form.superficieSalle is defined %}
 											<div class="form-control">
-												<label for="">Superficie Salle de conférencee</label>
+												<label for="">Surface salle de conférence</label>
 												{{ form_widget(form.superficieSalle) }}
 											</div>
 										{% endif %}
 										{% if form.nombreVoiture is defined %}
 											<div class="form-control">
-												<label for="">Nombre de voiture</label>
+												<label for="">Nombre de voiture <span class="facultatif">(facultatif)</span></label>
 												{{ form_widget(form.nombreVoiture) }}
 											</div>
 										{% endif %}
@@ -388,7 +388,7 @@
 														<div class="form-control">
 															{{ form_widget(form.categorieAutorisation) }}
 															{% if form_errors(form.categorieAutorisation) %}
-																<span class="champ-erreur">Valeur est invalide</span>
+																<span class="champ-erreur">La valeur est invalide</span>
 															{% endif %}
 														</div>
 													</div>
