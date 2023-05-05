@@ -471,7 +471,7 @@ class FrontController extends AbstractController
         $etablissements = $category->getEtablissements();
 
         $regions = $this->regionRepository->findAll();
-        $activites = $this->activiteRepository->findAll();
+        $activites = $category->getActivites();
 
         $search = $request->query->get('s','');
         $region_id = $request->query->get('region','');

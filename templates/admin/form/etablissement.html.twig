@@ -459,11 +459,17 @@
 													<span class="checkmark"></span>
 												</label>
 											{% endfor %}
+											{% if form.groupementAutre is defined %}
+											<label>
+												Autre
+												{{ form_widget(form.groupementAutre) }}
+												<span class="checkmark"></span>
+											</label>
+										{% endif %}
 										</div>
 									{% endif %}
 									{% if form.autreGroupement is defined %}
-										<div id="wrapper-autregroupement" class="form-control slidergrpm">
-											<label>Groupe</label>
+										<div id="wrapper-autregroupement" class="form-control{% if form.groupements is not defined %} slidergrpm{% endif %}" {% if form.groupements is defined %}style="display:none"{% endif %}>
 											{{ form_widget(form.autreGroupement) }}
 										</div>
 									{% endif %}
@@ -633,6 +639,17 @@
 			$('#etablissement_activiteAutre:checked').trigger('change')
 		}
 
+		var changeAutreGroupement = () => {
+			$('#etablissement_groupementAutre').on('change', function(){
+				if($(this).is(":checked")){
+					$('#wrapper-autregroupement').show();
+				} else {
+					$('#wrapper-autregroupement').hide();
+				}
+			})
+			$('#etablissement_groupementAutre:checked').trigger('change');
+		}
+
 		var changeCategory = () => {
 			if($('.select-category').length > 0) {
 				$('.select-category').on('change', function() {
@@ -776,15 +793,23 @@
 			})
 		}
 
-		jQuery(document).ready(function($) {
-
+		var initFunction = () => {
+			changeAutreGroupement();
+			changeAutreActivite();
+			changeLicences();
 			changeRegion();
+			
 			changeCategory();
 			changeMember();
 			changeLicenceB();
 			changeLicenceC();
 			changeActivite();
 			changeAvatar();
+		} 
+
+		jQuery(document).ready(function($) {
+
+			initFunction();
 
 			$("#etablissement_createdBy").selectize();
 			
@@ -829,15 +854,7 @@
 							}
 						})
 
-						changeLicences();
-						changeRegion();
-						changeAutreActivite();
-						changeCategory();
-						changeMember();
-						changeLicenceB();
-						changeLicenceC();
-						changeActivite();
-						changeAvatar();
+						initFunction();
 					}
 				})
 			});

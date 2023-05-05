@@ -88,8 +88,6 @@ var changeRegion = () => {
     }
 }
 
-
-
 var changeCategory = () => {
     if($('.select-category').length > 0) {
         $('.select-category').on('change', function() {
@@ -410,7 +408,19 @@ var changeAvatar = () => {
     })
 }
 
-$(document).ready(function () {
+var changeAutreGroupement = () => {
+
+    $('#etablissement_groupementAutre').on('change', function(){
+        if($(this).is(":checked")){
+            $('#wrapper-autregroupement').show();
+        } else {
+            $('#wrapper-autregroupement').hide();
+        }
+    })
+    $('#etablissement_groupementAutre:checked').trigger('change');
+}
+
+var initFunction = () => {
     changeRegion();
     keypressNumberOnly();
     changeLicenceA();
@@ -421,7 +431,13 @@ $(document).ready(function () {
     changeLicences();
     changeCategory();
     changeAutreActivite();
+    changeAutreGroupement();
     changeAvatar();
+}
+
+$(document).ready(function () {
+    
+    initFunction();
 
     var currentStep = 1;
     var totalSteps = $('.step').length;
@@ -508,18 +524,7 @@ $(document).ready(function () {
                 );
 
                 $('.step:first').addClass('active');     
-
-                changeLicences();
-                keypressNumberOnly();
-                changeRegion();
-                changeCategory();
-                changeMember();
-                changeAutreActivite();
-                changeLicenceA();
-                changeLicenceC();
-                changeLicenceB();
-                changeActivite();
-                changeAvatar();
+                initFunction();
             }
         });
     });
