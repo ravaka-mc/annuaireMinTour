@@ -14,22 +14,6 @@
                      {% if form_errors(form._token) %}
                         <span class="champ-erreur">{{ form_errors(form._token) }}</span>
                      {% endif %}
-                    <div class="grid-50">
-                        <div class="formgroup">
-                            <label for="">Nom</label>
-                            {{ form_widget(form.nom) }}
-                            {% if form_errors(form.nom) %}
-							    <span class="champ-erreur">Ce champ est obligatoire</span>
-                            {% endif %}
-                        </div>
-                        <div class="formgroup">
-                            <label for="">Prénom</label>
-                            {{ form_widget(form.prenom) }}
-                            {% if form_errors(form.prenom) %}
-							    <span class="champ-erreur">Ce champ est obligatoire</span>
-                            {% endif %}
-                        </div>
-                    </div>
                     <div class="formgroup">
                         <label for="">E-mail</label>
                         {{ form_widget(form.email) }}
