@@ -44,16 +44,20 @@
                             {% endfor %}
                         </select>
                     </div>
+                    
                     <div class="formgroup searchgroup">
-                        <label for="activite-select">Activités</label>
-                        <select name="activite" id="activite-select">
-                            <option value=""></option>
-                            {% for activite in activites %}
-                                <option value="{{ activite.id }}" {% if activite.id == activite_id %}selected{% endif %}>{{ activite.nom }}</option>
-                            {% endfor %}
-                        </select>
+                        {% if activites|length > 0 %}
+                            <label for="activite-select">Activités</label>
+                            <select name="activite" id="activite-select">
+                                <option value=""></option>
+                                {% for activite in activites %}
+                                    <option value="{{ activite.id }}" {% if activite.id == activite_id %}selected{% endif %}>{{ activite.nom }}</option>
+                                {% endfor %}
+                            </select>
+                        {% endif %}
                         <button type="submit" class="btn-filter"><span>Filtrer</span></button>
                     </div>
+                    
                 </div>
                 </form>
         </div>

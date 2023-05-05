@@ -332,6 +332,11 @@ class Etablissement
      */
     private $activiteAutre;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $groupementAutre;
+
     public function __construct()
     {
         $this->groupements = new ArrayCollection();
@@ -1128,6 +1133,18 @@ class Etablissement
     public function setActiviteAutre(?bool $activiteAutre): self
     {
         $this->activiteAutre = $activiteAutre;
+
+        return $this;
+    }
+
+    public function isGroupementAutre(): ?bool
+    {
+        return $this->groupementAutre;
+    }
+
+    public function setGroupementAutre(?bool $groupementAutre): self
+    {
+        $this->groupementAutre = $groupementAutre;
 
         return $this;
     }

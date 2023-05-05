@@ -150,6 +150,16 @@ class EtablissementType extends AbstractType
                     'required' => false,
                     'choices' => $category->getGroupements()
                 ])
+                ->add('groupementAutre', CheckboxType::class, [
+                    'label'    => 'Autre',
+                    'required' => false,
+                ])
+                ->add('autreGroupement', TextType::class, [
+					'required' => false,
+					'attr' => [
+                        'placeholder' => 'À préciser'
+                    ]
+				])
                 ->add('avatarFile', FileType::class,[
                     'required' => false,
                     'mapped' => false,
@@ -278,6 +288,16 @@ class EtablissementType extends AbstractType
                     'required' => false,
                     'choices' => $category->getGroupements()
                 ])
+                ->add('autreGroupement', TextType::class, [
+					'required' => false,
+					'attr' => [
+                        'placeholder' => 'À préciser'
+                    ]
+				])
+                ->add('groupementAutre', CheckboxType::class, [
+                    'label'    => 'Autre',
+                    'required' => false,
+                ])
                 ->add('avatarFile', FileType::class,[
                     'required' => false,
                     'mapped' => false,
@@ -328,7 +348,7 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('dateOuverture', DateType::class, [
                     'widget' => 'single_text',
-                    'required' => false,
+                    'required' => true,
                 ])
                 ->add('reference', TextType::class, [
                     'required' => true,
@@ -402,6 +422,16 @@ class EtablissementType extends AbstractType
                     'required' => false,
                     'choices' => $category->getGroupements()
                 ])
+                ->add('autreGroupement', TextType::class, [
+					'required' => false,
+					'attr' => [
+                        'placeholder' => 'À préciser'
+                    ]
+				])
+                ->add('groupementAutre', CheckboxType::class, [
+                    'label'    => 'Autre',
+                    'required' => false,
+                ])
                 ->add('avatarFile', FileType::class,[
                     'required' => false,
                     'mapped' => false,
@@ -452,7 +482,7 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('dateOuverture', DateType::class, [
                     'widget' => 'single_text',
-                    'required' => false,
+                    'required' => true,
                 ])
                 ->add('reference', TextType::class, [
                     'required' => true,
@@ -517,6 +547,16 @@ class EtablissementType extends AbstractType
                     'required' => false,
                     'choices' => $category->getGroupements()
                 ])
+                ->add('autreGroupement', TextType::class, [
+					'required' => false,
+					'attr' => [
+                        'placeholder' => 'À préciser'
+                    ]
+				])
+                ->add('groupementAutre', CheckboxType::class, [
+                    'label'    => 'Autre',
+                    'required' => false,
+                ])
                 ->add('avatarFile', FileType::class,[
                     'required' => false,
                     'mapped' => false,
@@ -567,7 +607,7 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('dateOuverture', DateType::class, [
                     'widget' => 'single_text',
-                    'required' => false,
+                    'required' => true,
                 ])
                 ->add('reference', TextType::class, [
                     'required' => true,

@@ -430,12 +430,13 @@
 											<label>Etes-vous membre d'un groupement ?</label>
 											<div id="wrapper-member" class="custom-radio">
 												{% for child in form.membre|filter(child => not child.rendered) %}
-												<label>
-													{{ child.vars.label }}
-													{{ form_widget(child) }}
-													<span class="checkmark"></span>
-												</label>
-											{% endfor %}
+													<label>
+														{{ child.vars.label }}
+														{{ form_widget(child) }}
+														<span class="checkmark"></span>
+													</label>
+												{% endfor %}
+												
 											</div>
 										</div>
 										{% if form.groupements is defined %}
@@ -447,10 +448,17 @@
 														<span class="checkmark"></span>
 													</label>
 												{% endfor %}
+												{% if form.groupementAutre is defined %}
+													<label>
+														Autre
+														{{ form_widget(form.groupementAutre) }}
+														<span class="checkmark"></span>
+													</label>
+												{% endif %}
 											</div>
 										{% endif %}
 										{% if form.autreGroupement is defined %}
-											<div id="wrapper-autregroupement" class="form-control slidergrpm">
+											<div id="wrapper-autregroupement" class="form-control{% if form.groupements is not defined %} slidergrpm{% endif %}" {% if form.groupements is defined %}style="display:none"{% endif %}>
 												{{ form_widget(form.autreGroupement) }}
 											</div>
 										{% endif %}
