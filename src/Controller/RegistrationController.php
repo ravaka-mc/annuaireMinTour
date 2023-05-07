@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use Twig\Environment;
+use Symfony\Component\Mime\Email;
 use App\Form\RegistrationFormType;
 use Symfony\Component\Mime\Address;
 use App\Repository\CategoryRepository;
@@ -22,10 +24,12 @@ class RegistrationController extends AbstractController
 {
     private $categoryRepository;
     private $tokenStorage;
+    private $twig;
 
-    public function __construct(CategoryRepository $categoryRepository, TokenStorageInterface $tokenStorage){ 
+    public function __construct(CategoryRepository $categoryRepository, TokenStorageInterface $tokenStorage, Environment $twig,){ 
         $this->categoryRepository = $categoryRepository;
         $this->tokenStorage = $tokenStorage;
+        $this->twig = $twig;
     }
 
     /**
@@ -55,6 +59,15 @@ class RegistrationController extends AbstractController
             // Authenticate the user
             $token = new UsernamePasswordToken($user, 'main', $user->getRoles());
             $this->tokenStorage->setToken($token);
+
+
+            $html = $this->twig->render('front/email/inscription.html.twig', []);
+
+            $message = (new Email())
+            ->from('annuaire@tourisme.gov.mg')
+            ->to($user->getEmail())
+            ->subject('Formulaire de contact')
+            ->html($html);
 
             return $this->redirectToRoute('app_admin');
         }
