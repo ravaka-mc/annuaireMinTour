@@ -26,7 +26,7 @@ class RegistrationController extends AbstractController
     private $tokenStorage;
     private $twig;
 
-    public function __construct(CategoryRepository $categoryRepository, TokenStorageInterface $tokenStorage, Environment $twig,){ 
+    public function __construct(CategoryRepository $categoryRepository, TokenStorageInterface $tokenStorage, Environment $twig){ 
         $this->categoryRepository = $categoryRepository;
         $this->tokenStorage = $tokenStorage;
         $this->twig = $twig;
