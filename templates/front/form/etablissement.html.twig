@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Espace membre{% endblock %}
-
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+{% endblock %}
 {% block body %}
 <main>
 	<div class="top-page">
@@ -483,6 +485,7 @@
 
 {% endblock %}
 {% block javascripts %}
+	<script src="{{ asset('front/js/jquery-ui.js') }}"></script>
     <script>
 		{% if is_edit == true %}
 			const is_edit = true;

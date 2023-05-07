@@ -163,6 +163,19 @@ var hasError = () => {
         } 
     })
 
+    if($('.active #etablissement_licenceC').length > 0){
+        if(!$('.active #etablissement_licenceC').is(':checked') && !$('.actitve #etablissement_licenceB').is(':checked') 
+        && !$('.active #etablissement_licenceA').is(':checked')){
+            $('.active #etablissement_licenceC').parent().append('<span class="champ-erreur">Vous devez sélectionner au moins une licence pour continuer</span>');
+            _error = true;
+        }
+    }
+
+    if($('.active #etablissement_dateOuverture').length > 0 && $('.active #etablissement_dateOuverture').val() == ''){
+        $('.active #etablissement_dateOuverture').parent().append('<span class="champ-erreur">Ce champ est obligatoire</span>');
+        _error = true;
+    }
+    
     $('.active input[type="checkbox"]').each(function(e){
         if($(this).is(':required') && !$(this).is(':checked')){
             $(this).parent().append('<span class="champ-erreur">Ce champ est obligatoire</span>');
@@ -433,6 +446,15 @@ var initFunction = () => {
     changeAutreActivite();
     changeAutreGroupement();
     changeAvatar();
+    $( ".datepicker" ).datepicker({
+        maxDate: -1,
+        dateFormat: "dd/mm/yy",
+        dayNamesMin: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+        monthNames: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+        monthNamesShort: ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sept", "Oct", "Nov", "Déc"],
+        nextText: "Suivant",
+        prevText: "Précédent"
+    })
 }
 
 $(document).ready(function () {

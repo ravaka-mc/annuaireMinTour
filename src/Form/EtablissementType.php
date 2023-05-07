@@ -225,6 +225,11 @@ class EtablissementType extends AbstractType
                 ->add('dateLicenceA', DateType::class, [
                     'widget' => 'single_text',
                     'required' => false,
+                    'html5' => false,
+                    'attr' => [
+                        'class' => 'datepicker',
+                    ],
+                    'format' => 'dd/MM/yyyy',
                 ])
                 ->add('licenceB', CheckboxType::class, [
                     'label'    => 'B',
@@ -233,6 +238,11 @@ class EtablissementType extends AbstractType
                 ->add('dateLicenceB', DateType::class, [
                     'widget' => 'single_text',
                     'required' => false,
+                    'html5' => false,
+                    'attr' => [
+                        'class' => 'datepicker',
+                    ],
+                    'format' => 'dd/MM/yyyy',
                 ])
                 ->add('licenceC', CheckboxType::class, [
                     'label'    => 'C',
@@ -241,6 +251,11 @@ class EtablissementType extends AbstractType
                 ->add('dateLicenceC', DateType::class, [
                     'widget' => 'single_text',
                     'required' => false,
+                    'html5' => false,
+                    'attr' => [
+                        'class' => 'datepicker',
+                    ],
+                    'format' => 'dd/MM/yyyy',
                 ])
                 ->add('referenceA', TextType::class, [
                     'required' => false,   
@@ -348,7 +363,12 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('dateOuverture', DateType::class, [
                     'widget' => 'single_text',
-                    'required' => true,
+                    'required' => false,
+                    'html5' => false,
+                    'attr' => [
+                        'class' => 'datepicker',
+                    ],
+                    'format' => 'dd/MM/yyyy',
                 ])
                 ->add('reference', TextType::class, [
                     'required' => true,
@@ -482,7 +502,12 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('dateOuverture', DateType::class, [
                     'widget' => 'single_text',
-                    'required' => true,
+                    'required' => false,
+                    'html5' => false,
+                    'attr' => [
+                        'class' => 'datepicker',
+                    ],
+                    'format' => 'dd/MM/yyyy',
                 ])
                 ->add('reference', TextType::class, [
                     'required' => true,
@@ -607,7 +632,12 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('dateOuverture', DateType::class, [
                     'widget' => 'single_text',
-                    'required' => true,
+                    'required' => false,
+                    'html5' => false,
+                    'attr' => [
+                        'class' => 'datepicker',
+                    ],
+                    'format' => 'dd/MM/yyyy',
                 ])
                 ->add('reference', TextType::class, [
                     'required' => true,
