@@ -11,6 +11,7 @@ use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -35,7 +36,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/inscription", priority=3, name="app_register")
      */
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
         $categories = $this->categoryRepository->findAll();
         
@@ -68,6 +69,8 @@ class RegistrationController extends AbstractController
             ->to($user->getEmail())
             ->subject('Formulaire de contact')
             ->html($html);
+
+            $mailer->send($message);
 
             return $this->redirectToRoute('app_admin');
         }
