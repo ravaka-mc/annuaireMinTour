@@ -164,7 +164,7 @@ var hasError = () => {
     })
 
     if($('.active #etablissement_licenceC').length > 0){
-        if(!$('.active #etablissement_licenceC').is(':checked') && !$('.actitve #etablissement_licenceB').is(':checked') 
+        if(!$('.active #etablissement_licenceC').is(':checked') && !$('.active #etablissement_licenceB').is(':checked')
         && !$('.active #etablissement_licenceA').is(':checked')){
             $('.active #etablissement_licenceC').parent().append('<span class="champ-erreur">Vous devez sélectionner au moins une licence pour continuer</span>');
             _error = true;
@@ -196,7 +196,7 @@ var hasError = () => {
     var regexCharaterOnly = /[^\d]/;
     var regexSiteWeb = /^((?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9\-.]+\.[a-zA-Z]{2,}(?:\/[\w\-\.]*)*\/?)$/
     var regexFacebook = /(?:https?:\/\/)?(?:www\.)?(mbasic.facebook|m\.facebook|facebook|fb)\.(com|me)\/(?:(?:\w\.)*#!\/)?(?:pages\/)?(?:[\w\-\.]*\/)*([\w\-\.]*)/i
-    var regexLinkedin = /^(http(s)?:\/\/)?([\w]+\.)?linkedin\.com\/(pub|in|profile)\/([-a-zA-Z0-9]+)\/*/i
+    var regexLinkedin = /^(http(s)?:\/\/)?([\w]+\.)?linkedin\.com\/(pub|in|profile|company)\/([-a-zA-Z0-9]+)\/*/i
     /*if($(".active #etablissement_telephone").length > 0){
         var emailValid = regexPhone.test($(".active #etablissement_telephone").val());
         if(!emailValid){
