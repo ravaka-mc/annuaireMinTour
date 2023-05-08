@@ -61,6 +61,11 @@ class Activite
      */
     private $enfants;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="activitesLicenceA")
+     */
+    private $categoriesLicenceA;
+
     public function __construct()
     {
         $this->etablissements = new ArrayCollection();
@@ -69,6 +74,7 @@ class Activite
         $this->categoriesLicenceB = new ArrayCollection();
         $this->categoriesLicenceC = new ArrayCollection();
         $this->enfants = new ArrayCollection();
+        $this->categoriesLicenceA = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -265,6 +271,33 @@ class Activite
             if ($enfant->getParent() === $this) {
                 $enfant->setParent(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Category>
+     */
+    public function getCategoriesLicenceA(): Collection
+    {
+        return $this->categoriesLicenceA;
+    }
+
+    public function addCategoriesLicenceA(Category $categoriesLicenceA): self
+    {
+        if (!$this->categoriesLicenceA->contains($categoriesLicenceA)) {
+            $this->categoriesLicenceA[] = $categoriesLicenceA;
+            $categoriesLicenceA->addActivitesLicenceA($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategoriesLicenceA(Category $categoriesLicenceA): self
+    {
+        if ($this->categoriesLicenceA->removeElement($categoriesLicenceA)) {
+            $categoriesLicenceA->removeActivitesLicenceA($this);
         }
 
         return $this;

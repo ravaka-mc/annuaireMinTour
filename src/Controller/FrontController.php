@@ -342,8 +342,15 @@ class FrontController extends AbstractController
                     $etablissement->setAvatar($fileName);
                 }
             }
-
-
+            if($form->has('licenceA')){
+                if($form->get('licenceA')->getData()){
+                    $category = $form->get('category')->getData();
+                    $activiteslicenceA = $category->getActivitesLicenceA();
+                    foreach($activiteslicenceA as $activite){
+                        $etablissement->addActivite($activite);
+                    }
+                }
+            }
             $etablissement->setStatut('en attente');
             $this->etablissementRepository->add($etablissement, true);
 
