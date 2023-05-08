@@ -192,18 +192,18 @@ var hasError = () => {
 
     var regexMail = /^\w+([-+.'][^\s]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
     var regexNumberOnly = /\d/;
-    var regexPhone = /^\+261\s?\d{2}\s?\d{2}\s?\d{3}\s?\d{2}$/;
+    var regexPhone = /^\d{2}\s?\d{2}\s?\d{3}\s?\d{2}$/;
     var regexCharaterOnly = /[^\d]/;
     var regexSiteWeb = /^((?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9\-.]+\.[a-zA-Z]{2,}(?:\/[\w\-\.]*)*\/?)$/
     var regexFacebook = /(?:https?:\/\/)?(?:www\.)?(mbasic.facebook|m\.facebook|facebook|fb)\.(com|me)\/(?:(?:\w\.)*#!\/)?(?:pages\/)?(?:[\w\-\.]*\/)*([\w\-\.]*)/i
     var regexLinkedin = /^(http(s)?:\/\/)?([\w]+\.)?linkedin\.com\/(pub|in|profile|company)\/([-a-zA-Z0-9]+)\/*/i
-    /*if($(".active #etablissement_telephone").length > 0){
-        var emailValid = regexPhone.test($(".active #etablissement_telephone").val());
-        if(!emailValid){
-            $(".active #etablissement_telephone").parent().append('<span class="champ-erreur">Téléphone invalid (+261XX XX XXX XX)</span>');
+    if($(".active #etablissement_telephone").length > 0){
+        var phoneValid = regexPhone.test($(".active #etablissement_telephone").val());
+        if(!phoneValid){
+            $(".active #etablissement_telephone").parents('.form-control').append('<span class="champ-erreur">Téléphone invalid</span>');
             _error = true;
         }
-    }*/
+    }
 
     if($(".active #etablissement_siteWeb").length > 0){
         var siteWebValid = regexSiteWeb.test($(".active #etablissement_siteWeb").val());

@@ -85,7 +85,10 @@
 										{% endif %}
 										<div class="form-control">
 											<label for="">Téléphone</label>
-											{{ form_widget(form.telephone) }}
+											<div class="input-box">
+												<span class="prefix">+261</span>
+												{{ form_widget(form.telephone) }}
+											</div>
 										</div>
 										<div class="form-control">
 											<label for="">E-mail</label>
