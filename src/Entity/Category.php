@@ -85,6 +85,12 @@ class Category
      */
     private $activitesLicenceC;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Activite::class, inversedBy="categoriesLicenceA")
+     * @ORM\JoinTable(name="category_activite_licence_a")
+     */
+    private $activitesLicenceA;
+
     public function __construct()
     {
         $this->etablissements = new ArrayCollection();
@@ -92,6 +98,7 @@ class Category
         $this->groupements = new ArrayCollection();
         $this->activitesLicenceB = new ArrayCollection();
         $this->activitesLicenceC = new ArrayCollection();
+        $this->activitesLicenceA = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -302,6 +309,30 @@ class Category
     public function removeActivitesLicenceC(Activite $activitesLicenceC): self
     {
         $this->activitesLicenceC->removeElement($activitesLicenceC);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Activite>
+     */
+    public function getActivitesLicenceA(): Collection
+    {
+        return $this->activitesLicenceA;
+    }
+
+    public function addActivitesLicenceA(Activite $activitesLicenceA): self
+    {
+        if (!$this->activitesLicenceA->contains($activitesLicenceA)) {
+            $this->activitesLicenceA[] = $activitesLicenceA;
+        }
+
+        return $this;
+    }
+
+    public function removeActivitesLicenceA(Activite $activitesLicenceA): self
+    {
+        $this->activitesLicenceA->removeElement($activitesLicenceA);
 
         return $this;
     }

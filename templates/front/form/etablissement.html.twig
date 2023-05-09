@@ -85,7 +85,10 @@
 										{% endif %}
 										<div class="form-control">
 											<label for="">Téléphone</label>
-											{{ form_widget(form.telephone) }}
+											<div class="input-box">
+												<span class="prefix">+261</span>
+												{{ form_widget(form.telephone) }}
+											</div>
 										</div>
 										<div class="form-control">
 											<label for="">E-mail</label>
@@ -330,13 +333,13 @@
 										{% endif %}
 										{% if form.salleConference is defined %}
 											<div class="form-control">
-												<label for="">Salle de conférence</label>
+												<label for="">Nombre de salle de conférence</label>
 												{{ form_widget(form.salleConference) }}
 											</div>
 										{% endif %}
 										{% if form.superficieSalle is defined %}
 											<div class="form-control">
-												<label for="">Surface salle de conférence</label>
+												<label for="">Surface salle de conférence <span class="facultatif">(en m2)</span></label>
 												{{ form_widget(form.superficieSalle) }}
 											</div>
 										{% endif %}
@@ -475,7 +478,6 @@
 						<a class="btn prev">Précédent</a>
 						<a class="btn next">Suivant</a>
 						<button type="submit" class="btn btnadd">{{ label_btn }}</button> 
-						<!-- data-fancybox data-src="#popup-succesadd" -->
 					</div>
 				</div>
 			</form>

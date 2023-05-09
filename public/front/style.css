@@ -5111,3 +5111,31 @@ div#wrapper-proprietaire { margin-bottom:15px; }
 }
 .pop_suppr {text-align:center}
 .error{border: 1px solid #ff0000!important;}
+.input-box {
+	display: flex;
+	align-items: center;
+	background: #fbfbfc;
+	border: 1px solid #ded8e8;
+	border-radius: 4px;
+	padding-left: 0.5rem;
+	overflow: hidden;
+}
+
+.input-box .prefix {
+	font-weight: 300;
+	font-size: 14px;
+	color: #999;
+}
+
+.input-box input {
+	flex-grow: 1;
+	font-size: 14px;
+	background: #fff;
+	border: none;
+	outline: none;
+	padding: 0.5rem;
+}
+
+.input-box:focus-within {
+	border-color: #777;
+}

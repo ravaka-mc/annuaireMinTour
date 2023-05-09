@@ -37,6 +37,10 @@
 					{{ form_widget(form.activites) }}
 				</div>
 				<div class="form-control">
+					<label for="category_activites">Activités Licence A</label>
+					{{ form_widget(form.activitesLicenceA) }}
+				</div>
+				<div class="form-control">
 					<label for="category_activites">Activités Licence B</label>
 					{{ form_widget(form.activitesLicenceB) }}
 				</div>
@@ -74,6 +78,7 @@
 	<script>
 		jQuery(document).ready(function($) {
 			$("#category_activites").selectize();
+			$("#category_activitesLicenceA").selectize();
 			$("#category_activitesLicenceB").selectize();
 			$("#category_activitesLicenceC").selectize();
 			$("#category_groupements").selectize();
