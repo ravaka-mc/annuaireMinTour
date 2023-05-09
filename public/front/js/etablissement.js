@@ -158,7 +158,11 @@ var hasError = () => {
     }   
     $('.active input').each(function(e){
         if($(this).is(':required') && $(this).val() == ''){
-            $(this).parent().append('<span class="champ-erreur">Ce champ est obligatoire</span>');
+            if($(this).is('#etablissement_telephone')){
+                $(".active #etablissement_telephone").parents('.form-control').append('<span class="champ-erreur">Ce champ est obligatoire</span>');
+            } else {
+                $(this).parent().append('<span class="champ-erreur">Ce champ est obligatoire</span>');
+            }
             _error = true;
         } 
     })
@@ -199,7 +203,7 @@ var hasError = () => {
     var regexLinkedin = /^(http(s)?:\/\/)?([\w]+\.)?linkedin\.com\/(pub|in|profile|company)\/([-a-zA-Z0-9]+)\/*/i
     if($(".active #etablissement_telephone").length > 0){
         var phoneValid = regexPhone.test($(".active #etablissement_telephone").val());
-        if(!phoneValid){
+        if(!phoneValid && $(".active #etablissement_telephone").val() != ''){
             $(".active #etablissement_telephone").parents('.form-control').append('<span class="champ-erreur">Téléphone invalide</span>');
             _error = true;
         }
