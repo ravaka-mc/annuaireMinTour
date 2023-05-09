@@ -200,7 +200,7 @@ var hasError = () => {
     if($(".active #etablissement_telephone").length > 0){
         var phoneValid = regexPhone.test($(".active #etablissement_telephone").val());
         if(!phoneValid){
-            $(".active #etablissement_telephone").parents('.form-control').append('<span class="champ-erreur">Téléphone invalid</span>');
+            $(".active #etablissement_telephone").parents('.form-control').append('<span class="champ-erreur">Téléphone invalide</span>');
             _error = true;
         }
     }
@@ -208,7 +208,7 @@ var hasError = () => {
     if($(".active #etablissement_siteWeb").length > 0){
         var siteWebValid = regexSiteWeb.test($(".active #etablissement_siteWeb").val());
         if(!siteWebValid && $("#etablissement_siteWeb").val() != ''){
-            $(".active #etablissement_siteWeb").parent().append('<span class="champ-erreur">Site Web invalid</span>');
+            $(".active #etablissement_siteWeb").parent().append('<span class="champ-erreur">Site Web invalide</span>');
             _error = true;
         }
     }
@@ -216,7 +216,7 @@ var hasError = () => {
     if($(".active #etablissement_email").length > 0){
         var emailValid = regexMail.test($(".active #etablissement_email").val());
         if(!emailValid && $("#etablissement_email").val() != ''){
-            $(".active #etablissement_email").parent().append('<span class="champ-erreur">Adresse email invalid</span>');
+            $(".active #etablissement_email").parent().append('<span class="champ-erreur">Adresse email invalide</span>');
             _error = true;
         }
     }
@@ -224,7 +224,7 @@ var hasError = () => {
     if($(".active #etablissement_linkedin").length > 0){
         var linkedinValid = regexLinkedin.test($(".active #etablissement_linkedin").val());
         if(!linkedinValid && $("#etablissement_linkedin").val() != ''){
-            $(".active #etablissement_linkedin").parent().append('<span class="champ-erreur">url invalid</span>');
+            $(".active #etablissement_linkedin").parent().append('<span class="champ-erreur">url invalide</span>');
             _error = true;
         }
     }
@@ -232,7 +232,7 @@ var hasError = () => {
     if($(".active #etablissement_facebook").length > 0){
         var facebookValid = regexFacebook.test($(".active #etablissement_facebook").val());
         if(!facebookValid && $("#etablissement_facebook").val() != ''){
-            $(".active #etablissement_facebook").parent().append('<span class="champ-erreur">url invalid</span>');
+            $(".active #etablissement_facebook").parent().append('<span class="champ-erreur">url invalide</span>');
             _error = true;
         }
     }
