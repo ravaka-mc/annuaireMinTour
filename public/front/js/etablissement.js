@@ -139,7 +139,7 @@ var changeMember = () => {
 var hasError = () => {
     var _error = false;
     if(is_edit == false){
-        $.ajax({
+        /*$.ajax({
             async: false,
             type: 'get',
             url: app_etablissement_exist,
@@ -154,7 +154,7 @@ var hasError = () => {
                     _error = true;
                 } 
             }
-        });
+        });*/
     }   
     $('.active input').each(function(e){
         if($(this).is(':required') && $(this).val() == ''){

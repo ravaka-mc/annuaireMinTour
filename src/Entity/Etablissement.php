@@ -14,7 +14,6 @@ use Symfony\Component\HttpFoundation\File\File;
 /**
  * @ORM\Entity(repositoryClass=EtablissementRepository::class)
  * @Vich\Uploadable
- * @UniqueEntity(fields={"nom"}, message="Cet établissement est déjà inscrit. Si vous voulez gérer cet établissement, vous pouvez nous contacter")
  */
 class Etablissement
 {
@@ -26,7 +25,7 @@ class Etablissement
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $nom;
 
