@@ -83,7 +83,7 @@
 							<div class="stitre">
 								Téléphone
 							</div>
-							<span><a href="tel:{{ etablissement.telephone }}">{{ etablissement.telephone }}</a></span>
+							<span><a href="tel:+261{{ etablissement.telephone|trim }}">+261 {{ etablissement.telephone }}</a></span>
 						</div>
                     {% endif %}
                     {% if etablissement.siteWeb is not null %}

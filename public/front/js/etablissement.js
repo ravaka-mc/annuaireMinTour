@@ -196,6 +196,8 @@ var hasError = () => {
 
     var regexMail = /^\w+([-+.'][^\s]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
     var regexNumberOnly = /\d/;
+    var regexNif = /\d{10}$/;
+    var regexStat = /\d{17}$/;
     var regexPhone = /^\d{2}\s?\d{2}\s?\d{3}\s?\d{2}$/;
     var regexCharaterOnly = /[^\d]/;
     var regexSiteWeb = /^((?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9\-.]+\.[a-zA-Z]{2,}(?:\/[\w\-\.]*)*\/?)$/
@@ -250,16 +252,18 @@ var hasError = () => {
     }
 
     if($(".active #etablissement_nif").length > 0){
-        var nifValid = regexNumberOnly.test($(".active #etablissement_nif").val());
-        if(!nifValid && $("#etablissement_nif").val() != ''){
+        var nif = $(".active #etablissement_nif").val();
+        var nifValid = regexNif.test(nif);
+        if((!nifValid && nif != '') || nif.length != 10){
             $(".active #etablissement_nif").parent().append('<span class="champ-erreur">La valeur est invalide</span>');
             _error = true;
         }
     }
 
     if($(".active #etablissement_stat").length > 0){
-        var statValid = regexNumberOnly.test($("#etablissement_stat").val());
-        if(!nifValid && $("#etablissement_stat").val() != ''){
+        var stat = $("#etablissement_stat").val();
+        var statValid = regexStat.test(stat);
+        if((!statValid && stat != '') || stat.length != 17){
             $(".active #etablissement_stat").parent().append('<span class="champ-erreur">La valeur est invalide</span>');
             _error = true;
         }
@@ -458,7 +462,23 @@ var initFunction = () => {
         monthNamesShort: ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sept", "Oct", "Nov", "Déc"],
         nextText: "Suivant",
         prevText: "Précédent"
-    })
+    });
+    $('.select-category').on('change', function() {
+        var checked = $(this).prop('checked');
+        if (checked) {
+            $('.select-category').not(this).prop('checked', false);
+            $('.select-category').not(this).trigger('change');
+        }
+    });
+    
+}
+
+var hiddenCategory = (step) => {
+    if(step != 1){
+        $('.categories').hide();
+    } else {
+        $('.categories').show();
+    }
 }
 
 $(document).ready(function () {
@@ -484,7 +504,7 @@ $(document).ready(function () {
         $('.active .champ-erreur').remove();
 
         if(hasError()) return false;
-
+        
         if($('#etablissement_licenceA').length > 0 && (!$('#etablissement_licenceB').is(':checked') && 
         !$('#etablissement_licenceC').is(':checked')) && $('#wrapper-coordonnees.active').length > 0) {
             $('.step.active').removeClass('active').nextAll('.step').eq(0).addClass('active');
@@ -500,6 +520,8 @@ $(document).ready(function () {
             $('.next').hide();
             $('.btnadd').css('display', 'inline-block');
         }
+
+        hiddenCategory(currentStep);
     });
     
     $('.prev').click(function() {
@@ -518,6 +540,8 @@ $(document).ready(function () {
         if (currentStep == 1) {
             $('.prev').hide();
         }
+
+        hiddenCategory(currentStep);
     });
 
 

@@ -271,12 +271,21 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('nombreSalaries', IntegerType::class, [
                     'required' => true,
+                    'attr' => [
+                        'min' => 0
+                    ]
                 ])
                 ->add('nombreSalaireFemme', IntegerType::class, [
                     'required' => true,
+                    'attr' => [
+                        'min' => 0
+                    ]
                 ])
                 ->add('nombreVoiture', IntegerType::class, [
                     'required' => false,
+                    'attr' => [
+                        'min' => 0
+                    ]
                 ])
                 ->add('referenceC', TextType::class, [   
                     'attr' => [
@@ -393,24 +402,45 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('nombreChambres', IntegerType::class, [
                     'required' => true,
+                    'attr' => [
+                        'min' => 0
+                    ]
                 ])
                 ->add('capaciteAccueil', IntegerType::class, [
                     'required' => true,
+                    'attr' => [
+                        'min' => 0
+                    ]
                 ])
                 ->add('nombreSalaries', IntegerType::class, [
                     'required' => true,
+                    'attr' => [
+                        'min' => 0
+                    ]
                 ])
                 ->add('nombreSalaireFemme', IntegerType::class, [
                     'required' => true,
+                    'attr' => [
+                        'min' => 0
+                    ]
                 ])
                 ->add('nombreLit', IntegerType::class, [
                     'required' => true,
+                    'attr' => [
+                        'min' => 0
+                    ]
                 ])
                 ->add('superficieSalle', IntegerType::class, [
                     'required' => true,
+                    'attr' => [
+                        'min' => 0
+                    ]
                 ])
                 ->add('salleConference', IntegerType::class, [
                     'required' => true,
+                    'attr' => [
+                        'min' => 0
+                    ]
                 ])
                 ->add('activiteAutre', CheckboxType::class, [
                     'label'    => 'Autre',
@@ -532,26 +562,51 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('nombreChambres', IntegerType::class, [
                     'required' => true,
+                    'attr' => [
+                        'min' => 0
+                    ]
                 ])
                 ->add('capaciteAccueil', IntegerType::class, [
                     'required' => true,
+                    'attr' => [
+                        'min' => 0
+                    ]
                 ])
                 ->add('salleConference', IntegerType::class, [
                     'required' => true,
+                    'attr' => [
+                        'min' => 0
+                    ]
                 ])
                 ->add('nombreCouverts', IntegerType::class, [
                     'required' => true,
+                    'attr' => [
+                        'min' => 0
+                    ]
                 ])
                 ->add('nombreSalaries', IntegerType::class, [
                     'required' => true,
+                    'attr' => [
+                        'min' => 0
+                    ]
                 ])
                 ->add('nombreSalaireFemme', IntegerType::class, [
                     'required' => true,
-                ])->add('nombreLit', IntegerType::class, [
+                    'attr' => [
+                        'min' => 0
+                    ]
+                ])
+                ->add('nombreLit', IntegerType::class, [
                     'required' => true,
+                    'attr' => [
+                        'min' => 0
+                    ]
                 ])
                 ->add('nombreResto', IntegerType::class, [
                     'required' => true,
+                    'attr' => [
+                        'min' => 0
+                    ]
                 ]);
                 break;
             case 'TYPE_4':
@@ -662,12 +717,21 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('nombreCouverts', IntegerType::class, [
                     'required' => true,
+                    'attr' => [
+                        'min' => 0
+                    ]
                 ])
                 ->add('nombreSalaries', IntegerType::class, [
                     'required' => true,
+                    'attr' => [
+                        'min' => 0
+                    ]
                 ])
                 ->add('nombreSalaireFemme', IntegerType::class, [
                     'required' => true,
+                    'attr' => [
+                        'min' => 0
+                    ]
                 ]);
                 break;
             case 'TYPE_5':
