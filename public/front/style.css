@@ -3613,7 +3613,7 @@ label.nopad {
 	opacity: 0;
 }
 
-.form-wrap input[type=date] {
+.form-wrap input[type=date],.form-wrap input.datepicker  {
 	background: url(images/calendrier-blue.svg) no-repeat right 13px center;
 	padding: 8px;
 	font-size: 12px;
@@ -5125,6 +5125,7 @@ div#wrapper-proprietaire { margin-bottom:15px; }
 	font-weight: 300;
 	font-size: 14px;
 	color: #999;
+	padding-right: 10px;
 }
 
 .input-box input {
