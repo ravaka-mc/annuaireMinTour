@@ -29,6 +29,7 @@
 									<div class="sub-title"><span>Coordonnées</span></div>
 									<div class="head">
 										{% if form.avatarFile is defined %}
+										<div>
 											<div id="wrapper-avatar" class="logo-entreprise">
 												<input type="file" name="{{ form.avatarFile.vars.full_name }}" id="avatar" class="form-control-file" style="display: none;"/>
 												{% if etablissement is defined and etablissement.avatar is not null %}
@@ -39,6 +40,8 @@
 												<label for="pdp">
 													<span class="replace-img"></span>
 												</label>
+											</div>
+											<span class="facultatif">Insérer votre logo</span>
 											</div>
 										{% else %}
 											<div id="wrapper-avatar" class="logo-entreprise">
@@ -345,7 +348,7 @@
 										{% endif %}
 										{% if form.nombreVoiture is defined %}
 											<div class="form-control">
-												<label for="">Nombre de voiture <span class="facultatif">(facultatif)</span></label>
+												<label for="">Nombre de transports motorisés <span class="facultatif">(facultatif)</span></label>
 												{{ form_widget(form.nombreVoiture) }}
 											</div>
 										{% endif %}
