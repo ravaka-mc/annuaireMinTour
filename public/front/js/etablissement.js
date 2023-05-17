@@ -189,21 +189,22 @@ var hasError = () => {
         if(!isckecked){
             _error = true;
             $('#wrapper-activites').append('<span class="champ-erreur">Vous devez sélectionner au moins une activité pour continuer</span>');
-            return;
         }
     }
 
-    if($('.active .cb-activite').length > 0) {
-        var isckecked = false;
-        $('.active .cb-activite').each(function () {
-            if($(this).is(':checked')){
-                isckecked = true;
-            }
-        })
+    if($('.active .required-activites').length == 0) {
+        if($('.active .cb-activite').length > 0) {
+            var isckecked = false;
+            $('.active .cb-activite').each(function () {
+                if($(this).is(':checked')){
+                    isckecked = true;
+                }
+            })
 
-        if(!isckecked){
-            _error = true;
-            $('#wrapper-activites').append('<span class="champ-erreur">Vous devez sélectionner au moins une activité pour continuer</span>');
+            if(!isckecked){
+                _error = true;
+                $('#wrapper-activites').append('<span class="champ-erreur">Vous devez sélectionner au moins une activité pour continuer</span>');
+            }
         }
     }
 
