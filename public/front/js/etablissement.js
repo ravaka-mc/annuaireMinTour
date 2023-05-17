@@ -13,6 +13,9 @@ var characterOnly =(e) => {
 }
 
 var keypressNumberOnly =() => {
+    $('input[type=number]').on('keypress', function(e){
+        return numberOnly(e)
+    })
     $('#etablissement_nif').on('keypress', function(e){
         return numberOnly(e)
     })
@@ -318,6 +321,7 @@ var changeLicenceB = () => {
                     success: function (response) {
                         $.each(response.data, function(index, value) {
                             $('#etablissement_activites_' + value).parent('label').hide();
+                            $('#etablissement_activites_' + value).removeClass('required-activites');
                         });
                     }
                 })
@@ -334,6 +338,7 @@ var changeLicenceB = () => {
                     success: function (response) {
                         $.each(response.data, function(index, value) {
                             $('#etablissement_activites_' + value).parent('label').show();
+                            $('#etablissement_activites_' + value).addClass('required-activites');
                         });
                     }
                 })
@@ -361,6 +366,7 @@ var changeLicenceC = () => {
                     success: function (response) {
                         $.each(response.data, function(index, value) {
                             $('#etablissement_activites_' + value).parent('label').hide();
+                            $('#etablissement_activites_' + value).removeClass('required-activites');
                         });
                     }
                 })
@@ -377,6 +383,7 @@ var changeLicenceC = () => {
                     success: function (response) {
                         $.each(response.data, function(index, value) {
                             $('#etablissement_activites_' + value).parent('label').show();
+                            $('#etablissement_activites_' + value).addClass('required-activites');
                         });
                     }
                 })
