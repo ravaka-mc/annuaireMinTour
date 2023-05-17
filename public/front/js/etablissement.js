@@ -189,6 +189,7 @@ var hasError = () => {
         if(!isckecked){
             _error = true;
             $('#wrapper-activites').append('<span class="champ-erreur">Vous devez sélectionner au moins une activité pour continuer</span>');
+            return;
         }
     }
 
