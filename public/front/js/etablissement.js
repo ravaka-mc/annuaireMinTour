@@ -178,6 +178,48 @@ var hasError = () => {
         }
     }
 
+    if($('.active .required-activites').length > 0) {
+        var isckecked = false;
+        $('.active .required-activites').each(function () {
+            if($(this).is(':checked')){
+                isckecked = true;
+            }
+        })
+
+        if(!isckecked){
+            _error = true;
+            $('#wrapper-activites').append('<span class="champ-erreur">Vous devez sélectionner au moins une activité pour continuer</span>');
+        }
+    }
+
+    if($('.active .cb-activite').length > 0) {
+        var isckecked = false;
+        $('.active .cb-activite').each(function () {
+            if($(this).is(':checked')){
+                isckecked = true;
+            }
+        })
+
+        if(!isckecked){
+            _error = true;
+            $('#wrapper-activites').append('<span class="champ-erreur">Vous devez sélectionner au moins une activité pour continuer</span>');
+        }
+    }
+
+    if($('.active .rd-classement').length > 0) {
+        var isckecked = false;
+        $('.active .rd-classement').each(function () {
+            if($(this).is(':checked')){
+                isckecked = true;
+            }
+        })
+
+        if(!isckecked){
+            _error = true;
+            $('#wrapper-classements').append('<span class="champ-erreur">Vous devez sélectionner au moins un classement pour continuer</span>');
+        }
+    }
+
     if($('.active #etablissement_dateOuverture').length > 0 && $('.active #etablissement_dateOuverture').val() == ''){
         $('.active #etablissement_dateOuverture').parent().append('<span class="champ-erreur">Ce champ est obligatoire</span>');
         _error = true;

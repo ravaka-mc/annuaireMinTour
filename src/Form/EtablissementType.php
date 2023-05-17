@@ -137,6 +137,9 @@ class EtablissementType extends AbstractType
                 $form->add('activites', EntityType::class, [
                     'class' => Activite::class,
                     'choice_label' => 'nom',
+                    'choice_attr' => function ($choice, $key, $value) {
+                        return ['class' => 'cb-activite'];
+                    },
                     'expanded' => true,
                     'multiple' => true,
                     'required' => false,
@@ -298,6 +301,9 @@ class EtablissementType extends AbstractType
                 $form->add('classement', EntityType::class, [
                     'class' => Classement::class,
                     'choice_label' => 'nom',
+                    'choice_attr' => function ($choice, $key, $value) {
+                        return ['class' => 'rd-classement'];
+                    },
                     'expanded' => true,
                     'multiple' => false,
                     'empty_data' => '',
@@ -365,6 +371,9 @@ class EtablissementType extends AbstractType
                 ->add('activites', EntityType::class, [
                     'class' => Activite::class,
                     'choice_label' => 'nom',
+                    'choice_attr' => function ($choice, $key, $value) {
+                        return ['class' => 'cb-activite'];
+                    },
                     'expanded' => true,
                     'multiple' => true,
                     'required' => false,
@@ -458,6 +467,9 @@ class EtablissementType extends AbstractType
                 $form->add('classement', EntityType::class, [
                     'class' => Classement::class,
                     'choice_label' => 'nom',
+                    'choice_attr' => function ($choice, $key, $value) {
+                        return ['class' => 'rd-classement'];
+                    },
                     'expanded' => true,
                     'multiple' => false,
                     'empty_data' => '',
@@ -525,6 +537,9 @@ class EtablissementType extends AbstractType
                 ->add('activites', EntityType::class, [
                     'class' => Activite::class,
                     'choice_label' => 'nom',
+                    'choice_attr' => function ($choice, $key, $value) {
+                        return ['class' => 'cb-activite'];
+                    },
                     'expanded' => true,
                     'multiple' => true,
                     'required' => false,
@@ -613,6 +628,9 @@ class EtablissementType extends AbstractType
                 $form->add('classement', EntityType::class, [
                     'class' => Classement::class,
                     'choice_label' => 'nom',
+                    'choice_attr' => function ($choice, $key, $value) {
+                        return ['class' => 'rd-classement'];
+                    },
                     'expanded' => true,
                     'multiple' => false,
                     'empty_data' => '',
@@ -680,6 +698,9 @@ class EtablissementType extends AbstractType
                 ->add('activites', EntityType::class, [
                     'class' => Activite::class,
                     'choice_label' => 'nom',
+                    'choice_attr' => function ($choice, $key, $value) {
+                        return ['class' => 'cb-activite'];
+                    },
                     'expanded' => true,
                     'multiple' => true,
                     'required' => false,
