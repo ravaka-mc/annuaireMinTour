@@ -336,6 +336,20 @@ class Etablissement
      */
     private $groupementAutre;
 
+    /**
+     * @Vich\UploadableField(mapping="categories", fileNameProperty="pieceJustification")
+     * 
+     * @var File|null
+     */
+    private $pieceJustificationFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $pieceJustification;
+
+    
+
     public function __construct()
     {
         $this->groupements = new ArrayCollection();
@@ -616,9 +630,8 @@ class Etablissement
     /**
      * @param null|File $avatarFile
      * 
-     * @return Etablissement
      */
-    public function setAvatarFile(?File $avatarFile): Etablissement
+    public function setAvatarFile(?File $avatarFile): self
     {
          $this->avatarFile = $avatarFile ;
 
@@ -1144,6 +1157,39 @@ class Etablissement
     public function setGroupementAutre(?bool $groupementAutre): self
     {
         $this->groupementAutre = $groupementAutre;
+
+        return $this;
+    }
+
+    public function getPieceJustification(): ?string
+    {
+        return $this->pieceJustification;
+    }
+
+    public function setPieceJustification(?string $pieceJustification): self
+    {
+        $this->pieceJustification = $pieceJustification;
+
+        return $this;
+    }
+
+    /**
+     *
+     * @return  File|null
+     */ 
+    public function getPieceJustificationFile()
+    {
+        return $this->pieceJustificationFile;
+    }
+
+    /**
+     * @param  File|null  $pieceJustificationFile
+     *
+     * @return  self
+     */ 
+    public function setPieceJustificationFile(?File $pieceJustificationFile): self
+    {
+        $this->pieceJustificationFile = $pieceJustificationFile;
 
         return $this;
     }

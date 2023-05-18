@@ -189,6 +189,15 @@
 											<label for="">Stat</label>
 											{{ form_widget(form.stat) }}
 										</div>
+										{% if form.pieceJustificationFile is defined %}
+											<div class="form-control">
+												<label for="">Pièce Justification</label>
+												{{ form_widget(form.pieceJustificationFile) }}
+												<a href="{{ asset('uploads/etablissements/' ~ etablissement.pieceJustification()) }}">
+													{{ etablissement.pieceJustification() }}
+												</a>
+											</div>
+										{% endif %}
 									</div>
 								</div>
 							</div>
@@ -276,6 +285,15 @@
 												<span class="champ-erreur">La valeur est invalide</span>
 											{% endif %}
 										</div>
+										{% if form.pieceJustificationFile is defined %}
+											<div class="form-control">
+												<label for="">Pièce Justification</label>
+												{{ form_widget(form.pieceJustificationFile) }}
+												<a href="{{ asset('uploads/etablissements/' ~ etablissement.pieceJustification()) }}">
+													{{ etablissement.pieceJustification() }}
+												</a>
+											</div>
+										{% endif %}
 									</div>
 								</div>
 							</div>

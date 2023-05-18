@@ -1,3 +1,4 @@
+{% if sousActivites|length > 0 %}
 <div id="wrapper-sous-activites">
     {% for activite in sousActivites %}
         <label>
@@ -7,3 +8,4 @@
         </label>
     {% endfor %}
 </div>
+{% endif %}

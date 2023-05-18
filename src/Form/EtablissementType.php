@@ -221,6 +221,16 @@ class EtablissementType extends AbstractType
                         ])
                     ],
                 ])
+                ->add('activiteAutre', CheckboxType::class, [
+                    'label'    => 'Autre',
+                    'required' => false,
+                ])
+                ->add('autreActivite', TextType::class, [
+                    'required' => false,
+					'attr' => [
+                        'placeholder' => 'A préciser'
+                    ]
+                ])
                 ->add('licenceA', CheckboxType::class, [
                     'label'    => 'A',
                     'required' => false,
@@ -250,6 +260,20 @@ class EtablissementType extends AbstractType
                 ->add('licenceC', CheckboxType::class, [
                     'label'    => 'C',
                     'required' => false,
+                ])
+                ->add('pieceJustificationFile', FileType::class,[
+                    'required' => false,
+                    'mapped' => false,
+                    'constraints' => [
+                        new File([
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/png',
+                                'application/pdf'
+                            ],
+                            'mimeTypesMessage' => 'Veuillez uploader un fichier valide (jpeg, png, pdf)',
+                        ]),
+                    ],
                 ])
                 ->add('dateLicenceC', DateType::class, [
                     'widget' => 'single_text',
@@ -387,6 +411,20 @@ class EtablissementType extends AbstractType
                         'class' => 'datepicker',
                     ],
                     'format' => 'dd/MM/yyyy',
+                ])
+                ->add('pieceJustificationFile', FileType::class,[
+                    'required' => false,
+                    'mapped' => false,
+                    'constraints' => [
+                        new File([
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/png',
+                                'application/pdf'
+                            ],
+                            'mimeTypesMessage' => 'Veuillez uploader un fichier valide (jpeg, png, pdf)',
+                        ]),
+                    ],
                 ])
                 ->add('reference', TextType::class, [
                     'required' => true,
@@ -554,6 +592,20 @@ class EtablissementType extends AbstractType
                     ],
                     'format' => 'dd/MM/yyyy',
                 ])
+                ->add('pieceJustificationFile', FileType::class,[
+                    'required' => false,
+                    'mapped' => false,
+                    'constraints' => [
+                        new File([
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/png',
+                                'application/pdf'
+                            ],
+                            'mimeTypesMessage' => 'Veuillez uploader un fichier valide (jpeg, png, pdf)',
+                        ]),
+                    ],
+                ])
                 ->add('reference', TextType::class, [
                     'required' => true,
                 ])
@@ -714,6 +766,20 @@ class EtablissementType extends AbstractType
                         'class' => 'datepicker',
                     ],
                     'format' => 'dd/MM/yyyy',
+                ])
+                ->add('pieceJustificationFile', FileType::class,[
+                    'required' => false,
+                    'mapped' => false,
+                    'constraints' => [
+                        new File([
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/png',
+                                'application/pdf'
+                            ],
+                            'mimeTypesMessage' => 'Veuillez uploader un fichier valide (jpeg, png, pdf)',
+                        ]),
+                    ],
                 ])
                 ->add('reference', TextType::class, [
                     'required' => true,

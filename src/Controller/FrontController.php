@@ -342,6 +342,15 @@ class FrontController extends AbstractController
                     $etablissement->setAvatar($fileName);
                 }
             }
+
+            if($form->has('pieceJustificationFile')){
+                $pieceJustificationFile = $form->get('pieceJustificationFile')->getData();
+                if ($pieceJustificationFile) {
+                    $fileName = $this->upload($pieceJustificationFile);
+                    $etablissement->setPieceJustification($fileName);
+                }
+            }
+
             if($form->has('licenceA')){
                 if($form->get('licenceA')->getData()){
                     $category = $form->get('category')->getData();

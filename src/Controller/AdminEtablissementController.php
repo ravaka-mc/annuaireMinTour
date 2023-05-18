@@ -142,6 +142,14 @@ class AdminEtablissementController extends AdminController
                 }
             }
 
+            if($form->has('pieceJustificationFile')){
+                $pieceJustificationFile = $form->get('pieceJustificationFile')->getData();
+                if ($pieceJustificationFile) {
+                    $fileName = $this->upload($pieceJustificationFile);
+                    $etablissement->setPieceJustification($fileName);
+                }
+            }
+
             $this->etablissementRepository->add($etablissement, true);
 
             return $this->redirectToRoute('app_admin_etablissement');
