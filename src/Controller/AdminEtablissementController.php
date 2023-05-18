@@ -3,12 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use Twig\Environment;
 use App\Entity\Refuse;
 use App\Entity\Etablissement;
 use App\Form\EtablissementType;
+use Symfony\Component\Mime\Email;
 use App\Repository\RefuseRepository;
 use App\Repository\EtablissementRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,12 +25,16 @@ class AdminEtablissementController extends AdminController
     private $refuseRepository;
     private $slugger;
     private $security;
+    private $twig;
+    private $mailer;
 
-    public function __construct(EtablissementRepository $etablissementRepository, SluggerInterface $slugger, Security $security, RefuseRepository $refuseRepository){
+    public function __construct( MailerInterface $mailer, Environment $twig, EtablissementRepository $etablissementRepository, SluggerInterface $slugger, Security $security, RefuseRepository $refuseRepository){
         $this->etablissementRepository = $etablissementRepository;
         $this->refuseRepository = $refuseRepository;
         $this->slugger = $slugger;
         $this->security = $security;
+        $this->twig = $twig;
+        $this->mailer = $mailer;
     }
 
 
@@ -62,11 +69,21 @@ class AdminEtablissementController extends AdminController
     }
 
     /**
-     * @Route("/admin/region/{id}/delete", name="app_admin_etablissement_delete")
+     * @Route("/admin/etablissement/{id}/delete", name="app_admin_etablissement_delete")
      */
     public function delete(Etablissement $etablissement): Response
     {
         $this->etablissementRepository->remove($etablissement, true);
+
+        $html = $this->twig->render('front/email/etablissement-supprime.html.twig');
+
+        $message = (new Email())
+        ->from('annuaire@tourisme.gov.mg')
+        ->to($etablissement->getCreatedBy()->getEmail())
+        ->subject('Formulaire de signaler')
+        ->html($html);
+
+        $this->mailer->send($message);
 
         return $this->redirectToRoute('app_admin_etablissement');
     }
@@ -108,6 +125,17 @@ class AdminEtablissementController extends AdminController
         $etablissement->setStatut('valide');
         $etablissement->setDateValidation($date_validation);
         $this->etablissementRepository->add($etablissement, true);
+        
+        $html = $this->twig->render('front/email/etablissement-valide.html.twig');
+
+        $message = (new Email())
+        ->from('annuaire@tourisme.gov.mg')
+        ->to($etablissement->getCreatedBy()->getEmail())
+        ->subject('Formulaire de signaler')
+        ->html($html);
+
+        $this->mailer->send($message);
+
         return $this->redirectToRoute('app_admin_etablissement');
     }
 

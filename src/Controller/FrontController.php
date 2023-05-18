@@ -45,8 +45,9 @@ class FrontController extends AbstractController
     private $signalerRepository;
     private $deleteRepository;
     private $twig;
+    private $mailer;
 
-    public function __construct(Environment $twig, DeleteRepository $deleteRepository, SignalerRepository $signalerRepository, CategoryRepository $categoryRepository, RegionRepository $regionRepository, EtablissementRepository $etablissementRepository, UserRepository $userRepository, SluggerInterface $slugger, Security $security, ActiviteRepository $activiteRepository){
+    public function __construct( MailerInterface $mailer, Environment $twig, DeleteRepository $deleteRepository, SignalerRepository $signalerRepository, CategoryRepository $categoryRepository, RegionRepository $regionRepository, EtablissementRepository $etablissementRepository, UserRepository $userRepository, SluggerInterface $slugger, Security $security, ActiviteRepository $activiteRepository){
         $this->categoryRepository = $categoryRepository;
         $this->regionRepository = $regionRepository;
         $this->etablissementRepository = $etablissementRepository;
@@ -57,6 +58,7 @@ class FrontController extends AbstractController
         $this->signalerRepository = $signalerRepository;
         $this->deleteRepository = $deleteRepository;
         $this->twig = $twig;
+        $this->mailer = $mailer;
     }
     
     /**
@@ -321,6 +323,7 @@ class FrontController extends AbstractController
     }
 
     private function save(Request $request, Etablissement $etablissement, $titre, $label_btn, $is_edit = false){
+        /** @var User **/
         $user = $this->security->getUser();
 
         if($is_edit && $user != $etablissement->getCreatedBy())
@@ -363,10 +366,22 @@ class FrontController extends AbstractController
             $etablissement->setStatut('en attente');
             $this->etablissementRepository->add($etablissement, true);
 
-            if($is_edit)
+            if($is_edit){
                 $this->addFlash('success', 'Etablissement a été bien modifié');
-            else
+            }
+            else {
+                $html = $this->twig->render('front/email/ajout-etablissement.html.twig');
+
+                $message = (new Email())
+                ->from('annuaire@tourisme.gov.mg')
+                ->to($user->getEmail())
+                ->subject('Formulaire de signaler')
+                ->html($html);
+
+                $this->mailer->send($message);
+
                 $this->addFlash('success', 'Etablissement a été bien ajouté');
+            }
 
             return $this->redirectToRoute('app_dashboard');
         }
