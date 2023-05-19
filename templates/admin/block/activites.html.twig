@@ -1,0 +1,20 @@
+{% if activites|length > 0 %}
+    {% for activite in activites %}
+        <label>
+            {{ activite.nom }}
+            <input class="cb-activite required-activites" type="checkbox" id="etablissement_activites_{{ activite.id }}" name="etablissement[activites][]" value="{{ activite.id }}" {% if activite.id in activite_ids %}checked="checked"{% endif %}>
+            <span class="checkmark"></span>
+            {% if activite.enfants|length > 0 %}
+                <div id="wrapper-sous-activites">
+                    {% for sous_activite in activite.enfants %}
+                        <label>
+                            {{ sous_activite.nom }}
+                            <input class="cb-activite required-activites" type="checkbox" id="etablissement_activites_{{ sous_activite.id }}" name="etablissement[activites][]" value="{{ sous_activite.id }}" {% if sous_activite.id in activite_ids %}checked="checked"{% endif %}>
+                            <span class="checkmark"></span>
+                        </label>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </label>
+    {% endfor %}
+{% endif %}

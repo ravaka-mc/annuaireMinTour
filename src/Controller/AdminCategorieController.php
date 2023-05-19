@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use Twig\Environment;
 use App\Entity\Region;
 use App\Form\UserType;
 use App\Entity\Category;
@@ -28,12 +29,16 @@ class AdminCategorieController extends AdminController
 {
     private $categoryRepository;
     private $activiteRepository;
+    private $etablissementRepository;
     private $slugger;
+    private $twig;
 
-    public function __construct(CategoryRepository $categoryRepository, ActiviteRepository $activiteRepository, SluggerInterface $slugger){
+    public function __construct(EtablissementRepository $etablissementRepository, Environment $twig, CategoryRepository $categoryRepository, ActiviteRepository $activiteRepository, SluggerInterface $slugger){
         $this->categoryRepository = $categoryRepository;
         $this->activiteRepository = $activiteRepository;
+        $this->etablissementRepository = $etablissementRepository;
         $this->slugger = $slugger;
+        $this->twig = $twig;
     }
 
 
@@ -128,31 +133,44 @@ class AdminCategorieController extends AdminController
      *  @Route("/category/activite-licence-b", name="app_category_licence_b")
      */
     public function getActivitesLicenceBCategory(Request $request){
-        $category_id = $request->query->get('category_id');
-        $category =  $this->categoryRepository->findOneBy(['id' => (int) $category_id]);
-
-        $data = $category->getActivitesLicenceB()->map(function($activite) {
-            return $activite->getId();
-        })->toArray();
-
-        return new JsonResponse([
-            "data" => $data
-        ]);
+        return $this->renderActivitesLicenceCategory($request, 'B');
     }
 
     /**
      *  @Route("/category/activite-licence-c", name="app_category_licence_c")
      */
     public function getActivitesLicenceCCategory(Request $request){
-        $category_id = $request->query->get('category_id');
-        $category =  $this->categoryRepository->findOneBy(['id' => (int) $category_id]);
+        return $this->renderActivitesLicenceCategory($request, 'C');
+    }
 
-        $data = $category->getActivitesLicenceC()->map(function($activite) {
+    private function renderActivitesLicenceCategory(Request $request, $typeLicence){
+        $category_id = $request->query->get('category_id');
+        $etablissement_id = $request->query->get('etablissement_id', '');
+
+        $category =  $this->categoryRepository->findOneBy(['id' => (int) $category_id]);
+        
+        $activite_ids = [];
+        if($etablissement_id != '') {
+            $etablissement = $this->etablissementRepository->findOneBy(['id' => (int) $etablissement_id]);
+            foreach ($etablissement->getActivites() as $activite){
+                $activite_ids[] = $activite->getId();
+            }
+        }
+        
+        $activites = ($typeLicence == 'B') ? $category->getActivitesLicenceB() : $category->getActivitesLicenceC();;
+
+        $html = $this->twig->render('admin/block/activites.html.twig', [
+            'activites' => $activites,
+            'activite_ids' => $activite_ids
+        ]);
+
+        $data = $activites->map(function($activite) {
             return $activite->getId();
         })->toArray();
-        
+
         return new JsonResponse([
-            "data" => $data
+            "html" => $html,
+            'data' => $data,
         ]);
     }
 }   

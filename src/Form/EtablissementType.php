@@ -223,6 +223,9 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('activiteAutre', CheckboxType::class, [
                     'label'    => 'Autre',
+                    'attr' => [
+                        'class' => 'cb-activite required-activites'
+                    ],
                     'required' => false,
                 ])
                 ->add('autreActivite', TextType::class, [

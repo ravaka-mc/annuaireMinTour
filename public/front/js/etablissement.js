@@ -250,6 +250,7 @@ var hasError = () => {
     var regexSiteWeb = /^((?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9\-.]+\.[a-zA-Z]{2,}(?:\/[\w\-\.]*)*\/?)$/
     var regexFacebook = /(?:https?:\/\/)?(?:www\.)?(mbasic.facebook|m\.facebook|facebook|fb)\.(com|me)\/(?:(?:\w\.)*#!\/)?(?:pages\/)?(?:[\w\-\.]*\/)*([\w\-\.]*)/i
     var regexLinkedin = /^(http(s)?:\/\/)?([\w]+\.)?linkedin\.com\/(pub|in|profile|company)\/([-a-zA-Z0-9]+)\/*/i
+    var regexPieceJustification = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
     if($(".active #etablissement_telephone").length > 0){
         var phoneValid = regexPhone.test($(".active #etablissement_telephone").val());
         if(!phoneValid && $(".active #etablissement_telephone").val() != ''){
@@ -257,6 +258,15 @@ var hasError = () => {
             _error = true;
         }
     }
+
+    if($(".active #etablissement_pieceJustificationFile").length > 0 && $(".active #etablissement_pieceJustificationFile").prop('files').length > 0){
+        var file = $(".active #etablissement_pieceJustificationFile").prop('files')[0];
+        if (!regexPieceJustification.exec(file.name)) {
+            $(".active #etablissement_pieceJustificationFile").next().append('<span class="champ-erreur">Veuillez uploader un fichier valide (jpeg, png, pdf)</span>');
+            _error = true;
+        }
+    }
+
 
     if($(".active #etablissement_siteWeb").length > 0){
         var siteWebValid = regexSiteWeb.test($(".active #etablissement_siteWeb").val());
@@ -362,10 +372,10 @@ var changeLicenceB = () => {
                         category_id :  $('#etablissement_category').val()
                     },
                     dataType: 'json',
+                    dataType: 'json',
                     success: function (response) {
                         $.each(response.data, function(index, value) {
-                            $('#etablissement_activites_' + value).parent('label').hide();
-                            $('#etablissement_activites_' + value).removeClass('required-activites');
+                            $('#etablissement_activites_' + value).parent('label').remove();
                         });
                     }
                 })
@@ -376,14 +386,15 @@ var changeLicenceB = () => {
                     type: 'get',
                     url: app_category_licence_b,
                     data: {
-                        category_id :  $('#etablissement_category').val()
+                        category_id :  $('#etablissement_category').val(),
+                        etablissement_id : $('#etablissement-id').val()
                     },
                     dataType: 'json',
                     success: function (response) {
                         $.each(response.data, function(index, value) {
-                            $('#etablissement_activites_' + value).parent('label').show();
-                            $('#etablissement_activites_' + value).addClass('required-activites');
+                            $('#etablissement_activites_' + value).parent('label').remove();
                         });
+                        $('#wrapper-activites #item-activitesB').append(response.html);
                     }
                 })
             }
@@ -398,8 +409,8 @@ var changeLicenceC = () => {
         $("[id^='etablissement_activites_']").parent('label').hide();
         $('#etablissement_licenceC').change(function() {
             if(!$(this).is(':checked')){
-                $('#etablissement_dateLicenceC').removeAttr('required')
-                $('#etablissement_referenceC').removeAttr('required')
+                $('#etablissement_dateLicenceC').removeAttr('required');
+                $('#etablissement_referenceC').removeAttr('required');
                 $.ajax({
                     type: 'get',
                     url: app_category_licence_c,
@@ -409,8 +420,7 @@ var changeLicenceC = () => {
                     dataType: 'json',
                     success: function (response) {
                         $.each(response.data, function(index, value) {
-                            $('#etablissement_activites_' + value).parent('label').hide();
-                            $('#etablissement_activites_' + value).removeClass('required-activites');
+                            $('#etablissement_activites_' + value).parent('label').remove();
                         });
                     }
                 })
@@ -421,18 +431,18 @@ var changeLicenceC = () => {
                     type: 'get',
                     url: app_category_licence_c,
                     data: {
-                        category_id :  $('#etablissement_category').val()
+                        category_id :  $('#etablissement_category').val(),
+                        etablissement_id : $('#etablissement-id').val()
                     },
                     dataType: 'json',
                     success: function (response) {
                         $.each(response.data, function(index, value) {
-                            $('#etablissement_activites_' + value).parent('label').show();
-                            $('#etablissement_activites_' + value).addClass('required-activites');
+                            $('#etablissement_activites_' + value).parent('label').remove();
                         });
+                        $('#wrapper-activites #item-activitesC').append(response.html);
                     }
                 })
             }
-            
         });
         $('#etablissement_licenceC:checked').trigger('change');
     }
@@ -498,7 +508,7 @@ var initFunction = () => {
     changeLicenceA();
     changeLicenceC();
     changeLicenceB();
-    changeActivite();
+    //changeActivite();
     changeMember();
     changeLicences();
     changeCategory();
