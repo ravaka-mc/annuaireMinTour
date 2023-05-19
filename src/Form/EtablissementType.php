@@ -840,7 +840,14 @@ class EtablissementType extends AbstractType
                         'Guide spécialisé' => 'GUIDE_SPECIALISE',
                     ],
                     'choice_attr' => function ($choice, $key, $value) {
-                        return ['class' => 'select-category'];
+                        if($value != 'GUIDE_SPECIALISE')
+                            return [
+                                'class' => 'select-category'
+                            ];
+                        else
+                            return [
+                                'class' => ''
+                            ];
                     },
                     'expanded' => true,
                     'multiple' => true,

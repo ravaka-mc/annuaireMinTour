@@ -178,6 +178,20 @@ var hasError = () => {
         }
     }
 
+    if($('.active .select-category').length > 0) {
+        var isckecked = false;
+        $('.active .select-category').each(function () {
+            if($(this).is(':checked')){
+                isckecked = true;
+            }
+        })
+
+        if(!isckecked){
+            _error = true;
+            $('.active .cat-check').append('<span class="champ-erreur">Vous devez sélectionner au moins un guide pour continuer</span>');
+        }
+    }
+
     if($('.active .required-activites').length > 0) {
         var isckecked = false;
         $('.active .required-activites').each(function () {
