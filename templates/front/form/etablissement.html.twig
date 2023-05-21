@@ -208,8 +208,20 @@
 								{% if form.activites is defined %}
 									<div id="wrapper-activites" class="card-wrap form-control">
 										<label>Activités <span class="facultatif">(facultatif)</span></label>
-										<div id="item-activitesB" class="custom_checkbox half"></div>
-										<div id="item-activitesC" class="custom_checkbox half"></div>
+										{% if form.licenceA is defined %}
+											<div id="item-activitesB" class="custom_checkbox half"></div>
+											<div id="item-activitesC" class="custom_checkbox half"></div>
+										{% else %}
+											<div class="custom_checkbox half">
+												{% for child in form.activites|filter(child => not child.rendered) %}
+													<label>
+														{{ child.vars.label }}
+														{{ form_widget(child) }}
+														<span class="checkmark"></span>
+													</label>
+												{% endfor %}
+											</div>
+										{% endif %}
 										<div class="custom_checkbox half">
 											{% if form.activiteAutre is defined %}
 											<label>

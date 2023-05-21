@@ -66,8 +66,10 @@ var changeAutreActivite = () => {
     $('#etablissement_activiteAutre').on('change', function(){
         if($(this).is(":checked")){
             $('#wrapper-autreActivite').show();
+            $('#etablissement_autreActivite').attr('required', 'required');
         } else {
             $('#wrapper-autreActivite').hide();
+            $('#etablissement_autreActivite').removeAttr('required');
         }
     })
     $('#etablissement_activiteAutre:checked').trigger('change');
