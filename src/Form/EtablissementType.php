@@ -138,7 +138,7 @@ class EtablissementType extends AbstractType
                     'class' => Activite::class,
                     'choice_label' => 'nom',
                     'choice_attr' => function ($choice, $key, $value) {
-                        return ['class' => 'cb-activite'];
+                        return ['class' => 'cb-activite required-activites'];
                     },
                     'expanded' => true,
                     'multiple' => true,
@@ -399,7 +399,7 @@ class EtablissementType extends AbstractType
                     'class' => Activite::class,
                     'choice_label' => 'nom',
                     'choice_attr' => function ($choice, $key, $value) {
-                        return ['class' => 'cb-activite'];
+                        return ['class' => 'cb-activite required-activites'];
                     },
                     'expanded' => true,
                     'multiple' => true,
@@ -582,7 +582,7 @@ class EtablissementType extends AbstractType
                     'class' => Activite::class,
                     'choice_label' => 'nom',
                     'choice_attr' => function ($choice, $key, $value) {
-                        return ['class' => 'cb-activite'];
+                        return ['class' => 'cb-activite required-activites'];
                     },
                     'expanded' => true,
                     'multiple' => true,
@@ -757,7 +757,7 @@ class EtablissementType extends AbstractType
                     'class' => Activite::class,
                     'choice_label' => 'nom',
                     'choice_attr' => function ($choice, $key, $value) {
-                        return ['class' => 'cb-activite'];
+                        return ['class' => 'cb-activite required-activites'];
                     },
                     'expanded' => true,
                     'multiple' => true,
