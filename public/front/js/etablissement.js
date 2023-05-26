@@ -143,24 +143,7 @@ var changeMember = () => {
 
 var hasError = () => {
     var _error = false;
-    if(is_edit == false){
-        /*$.ajax({
-            async: false,
-            type: 'get',
-            url: app_etablissement_exist,
-            data: {
-                etablissement_nom :  $('#etablissement_nom').val()
-            },
-            dataType: 'json',
-            success: function(response) {
-                $('#etablissement_nom').removeClass('error');
-                if(response.exist){
-                    $('#etablissement_nom').parent().append('<span class="champ-erreur">Cet établissement est déjà inscrit. Si vous voulez gérer cet établissement, vous pouvez nous contacter</span>');
-                    _error = true;
-                } 
-            }
-        });*/
-    }   
+
     $('.active input').each(function(e){
         if($(this).is(':required') && $(this).val() == ''){
             if($(this).is('#etablissement_telephone')){
@@ -356,6 +339,26 @@ var hasError = () => {
             $(".active #etablissement_gerant").parent().append('<span class="champ-erreur">La valeur est invalide</span>');
             _error = true;
         }
+    }
+
+    if(is_edit == false){
+        $.ajax({
+            async: false,
+            type: 'get',
+            url: app_etablissement_exist,
+            data: {
+                etablissement_nom :  $('#etablissement_nom').val(),
+                etablissement_region : $('#etablissement_region').val(),
+            },
+            dataType: 'json',
+            success: function(response) {
+                $('#etablissement_nom').removeClass('error');
+                if(response.exist){
+                    $('#etablissement_nom').parent().append('<span class="champ-erreur">Cet établissement est déjà inscrit. Si vous voulez gérer cet établissement, vous pouvez nous contacter</span>');
+                    _error = true;
+                } 
+            }
+        });
     }
 
     return _error;

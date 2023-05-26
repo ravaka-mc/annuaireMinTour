@@ -9,6 +9,7 @@ use App\Entity\Etablissement;
 use App\Form\EtablissementType;
 use Symfony\Component\Mime\Email;
 use App\Repository\RefuseRepository;
+use App\Repository\RegionRepository;
 use App\Repository\EtablissementRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
@@ -22,14 +23,16 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class AdminEtablissementController extends AdminController
 {
     private $etablissementRepository;
+    private $regionRepository;
     private $refuseRepository;
     private $slugger;
     private $security;
     private $twig;
     private $mailer;
 
-    public function __construct( MailerInterface $mailer, Environment $twig, EtablissementRepository $etablissementRepository, SluggerInterface $slugger, Security $security, RefuseRepository $refuseRepository){
+    public function __construct(RegionRepository $regionRepository, MailerInterface $mailer, Environment $twig, EtablissementRepository $etablissementRepository, SluggerInterface $slugger, Security $security, RefuseRepository $refuseRepository){
         $this->etablissementRepository = $etablissementRepository;
+        $this->regionRepository = $regionRepository;
         $this->refuseRepository = $refuseRepository;
         $this->slugger = $slugger;
         $this->security = $security;
@@ -206,9 +209,20 @@ class AdminEtablissementController extends AdminController
      *  @Route("/etablissement/exist", name="app_etablissement_exist")
      */
     public function etablissementExist(Request $request){
-        $etablissement_nom = $request->query->get('etablissement_nom'); 
-        $etablissement = $this->etablissementRepository->findOneBy(['nom' => $etablissement_nom]);
-
+        $etablissement_nom = $request->query->get('etablissement_nom');
+        $region_id = $request->query->get('etablissement_region');
+        
+        if($region_id != ''){
+            $region = $this->regionRepository->findOneBy([
+                'id' => (int) $region_id,
+            ]);
+            
+            $etablissement = $this->etablissementRepository->findOneBy([
+                'nom' => $etablissement_nom,
+                'region' => $region
+            ]);
+        }
+            
         return new JsonResponse([
             "exist" => ($etablissement) ? true : false
         ]);
