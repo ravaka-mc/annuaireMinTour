@@ -3478,7 +3478,7 @@ label.nopad {
 	display: grid;
 	grid-template-columns: 150px 1fr;
 	gap: 35px;
-	align-items: center;
+	align-items: start;
 }
 
 .logo-entreprise {
@@ -5140,3 +5140,7 @@ div#wrapper-proprietaire { margin-bottom:15px; }
 .input-box:focus-within {
 	border-color: #777;
 }
+#wrapper-activites.card-wrap {
+ margin-bottom : 25px;
+}
+.wprappAvatar {text-align:center}

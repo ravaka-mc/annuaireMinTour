@@ -29,7 +29,7 @@
 									<div class="sub-title"><span>Coordonnées</span></div>
 									<div class="head">
 										{% if form.avatarFile is defined %}
-										<div>
+										<div class="wprappAvatar">
 											<div id="wrapper-avatar" class="logo-entreprise">
 												<input type="file" name="{{ form.avatarFile.vars.full_name }}" id="avatar" class="form-control-file" style="display: none;"/>
 												{% if etablissement is defined and etablissement.avatar is not null %}
@@ -191,7 +191,7 @@
 										</div>
 										{% if form.pieceJustificationFile is defined %}
 											<div class="form-control">
-												<label for="">Pièce Justification</label>
+												<label for="">Pièce justification <span class="facultatif">(facultatif)</span></label>
 												{{ form_widget(form.pieceJustificationFile) }}
 												<a href="{{ asset('uploads/etablissements/' ~ etablissement.pieceJustification()) }}">
 													{{ etablissement.pieceJustification() }}
@@ -207,7 +207,7 @@
 							<div id="wrapper-classements-activites" class="bloc_editense form-wrap step">
 								{% if form.activites is defined %}
 									<div id="wrapper-activites" class="card-wrap form-control">
-										<label>Activités <span class="facultatif">(facultatif)</span></label>
+										<label>Activités</label>
 										{% if form.licenceA is defined %}
 											<div id="item-activitesB" class="custom_checkbox half"></div>
 											<div id="item-activitesC" class="custom_checkbox half"></div>
@@ -242,9 +242,9 @@
 								{% endif %}
 								
 								{% if form.classement is defined %}
-									<div id="wrapper-classements" class="form-control">
-										<div class="card-wrap">
-											<label>Classement <span class="facultatif">(facultatif)</span></label>
+									<div id="wrapper-classements" class="form-control card-wrap">
+										
+											<label>Classement</label>
 											<div class="custom-radio half">
 												{% for child in form.classement|filter(child => not child.rendered) %}
 												<label>
@@ -254,7 +254,7 @@
 												</label>
 												{% endfor %}
 											</div>
-										</div>
+										
 									</div>
 								{% endif %}
 							</div>
@@ -295,7 +295,7 @@
 										</div>
 										{% if form.pieceJustificationFile is defined %}
 											<div class="form-control">
-												<label for="">Pièce Justification</label>
+												<label for="">Pièce Justification <span class="facultatif">(facultatif)</span></label>
 												{{ form_widget(form.pieceJustificationFile) }}
 												<a href="{{ asset('uploads/etablissements/' ~ etablissement.pieceJustification()) }}">
 													{{ etablissement.pieceJustification() }}
