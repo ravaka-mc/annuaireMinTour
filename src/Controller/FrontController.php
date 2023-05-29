@@ -93,7 +93,7 @@ class FrontController extends AbstractController
     {
         $user = $this->security->getUser();
 
-        if(in_array('ROLE_ADMIN', $user->getRoles()))
+        if(in_array('ROLE_ADMIN', $user->getRoles()) || in_array('ROLE_VALIDATOR', $user->getRoles()))
             return $this->redirectToRoute('app_admin');
 
         $categories = $this->categoryRepository->findAll();

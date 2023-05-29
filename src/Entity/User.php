@@ -217,4 +217,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getDisplayName(){
         return sprintf('%s', $this->email);
     }
+
+    public function getRole(): string
+    {
+        $roles = $this->roles;
+
+        return $roles[0];
+    }
+    public function getDisplayRole(): string
+    {
+        $roles = $this->roles;
+        switch ($roles[0]) {
+            case 'ROLE_ADMIN':
+                return 'Administrateur';
+                break;
+            case 'ROLE_ETABLISSEMENT':
+                return 'Etablissement';
+                break;
+            default:
+                return 'Validateur';
+                break;
+        }
+    }
 }

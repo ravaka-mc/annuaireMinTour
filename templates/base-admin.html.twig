@@ -28,6 +28,7 @@
                 <div class="logo"><a href="{{ path('app_admin') }}"><img src="{{ asset('admin/img/logo.svg') }}" alt=""></a>
                 </div>
                 <nav class="menu-wrap">
+                    {% if is_granted('ROLE_ADMIN') %}
                     <ul>
                         <li class="dash"><a href="{{ path('app_admin') }}">Dashboard</a></li>
                         <li class="has-child etablissement"><a href="{{ path('app_admin_etablissement') }}">Liste établissement</a></li>
@@ -45,6 +46,12 @@
                             </ul>
                         </li>
                     </ul>
+                    {% else %}
+                        <ul>
+                        <li class="dash"><a href="{{ path('app_admin') }}">Dashboard</a></li>
+                        <li class="has-child etablissement"><a href="{{ path('app_admin_etablissement') }}">Liste établissement</a></li>
+                    </ul>
+                    {% endif %}
                 </nav>
             </section>
             {% block body %}{% endblock %}

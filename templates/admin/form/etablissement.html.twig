@@ -18,7 +18,9 @@
 					{% endif %}
 				{% endfor %}
 			</ul>
+			{% if is_granted('ROLE_ADMIN') %}
 			<form id="frm-etablissement" name="{{ form.vars.full_name }}" method="post" enctype="multipart/form-data">
+			{% endif %}
 				<div class="categories">
 					<div class="card-wrap">
 						<label>Catégorie</label>
@@ -497,17 +499,27 @@
 					</div>
 
 					<div class="t-right mt-50">
-						{{ form_widget(form._token) }}
-						<input type="hidden" id="etablissement-id" value="{{ etablissement.id }}">
-						<button type="submit" class="btn">{{ label_btn }}</button>
-						{% if is_edit == 1 and etablissement.statut != 'valide' %}
-						<!-- Modifier en attente -->
-						<a href="{{ path('app_admin_etablissement_valide', {id:etablissement.id}) }}"class="btn green">Valider</a>
-						<button data-fancybox="" data-src="#refuser" class="btn red">Refuser</button>
+						{% if is_granted('ROLE_ADMIN') %}
+							{{ form_widget(form._token) }}
+							<input type="hidden" id="etablissement-id" value="{{ etablissement.id }}">
+							<button type="submit" class="btn">{{ label_btn }}</button>
+							{% if is_edit == 1 and etablissement.statut != 'valide' %}
+							<!-- Modifier en attente -->
+							<a href="{{ path('app_admin_etablissement_valide', {id:etablissement.id}) }}"class="btn green">Valider</a>
+							<button data-fancybox="" data-src="#refuser" class="btn red">Refuser</button>
+							{% endif %}
+						{% else %}
+							{% if is_edit == 1 and etablissement.statut != 'valide' %}
+							<!-- Modifier en attente -->
+							<a href="{{ path('app_admin_etablissement_valide', {id:etablissement.id}) }}"class="btn green">Valider</a>
+							<button data-fancybox="" data-src="#refuser" class="btn red">Refuser</button>
+							{% endif %}
 						{% endif %}
 					</div>
 				</div>
+			{% if is_granted('ROLE_ADMIN') %}
 			</form>
+			{% endif %}
            {% include "admin/block/copyright.html.twig" %}
         </section>
     </main>

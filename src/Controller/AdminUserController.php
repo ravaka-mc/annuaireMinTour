@@ -66,8 +66,6 @@ class AdminUserController extends AdminController
                 )
             );
 
-            $user->setRoles(["ROLE_ETABLISSEMENT"]);
-
             $this->userRepository->add($user, true);
 
             return new JsonResponse([
@@ -91,13 +89,11 @@ class AdminUserController extends AdminController
          * @var User $user
          */
         if($request->getMethod() === 'POST') {
-            $nom = $request->request->get('nom');
-            $prenom = $request->request->get('prenom');
             $email = $request->request->get('email');
+            $role = $request->request->get('role');
     
-            $user->setNom($nom);
-            $user->setPrenom($prenom);
             $user->setEmail($email);
+            $user->setRoles([$role]);
 
             if($pwd = $request->request->get('password'))
             $user->setPassword(
