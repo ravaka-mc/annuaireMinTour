@@ -41,11 +41,17 @@
                             <td><div class="en-attente">En attente</div></td>
                         {% endif %}
                         <td>
+                            {% if is_granted('ROLE_ADMIN') %}
                             <div class="action">
                                 <a href="{{ path('app_admin_etablissement_edit', {id:etablissement.id}) }}" class="edit"></a>
                                 <a href="{{ path('app_etablissement', {category_slug:etablissement.category.slug, etablissement_slug:etablissement.slug}) }}" class="view"></a>
                                 <a data-fancybox="" data-src="#popup-delete_{{etablissement.id}}" class="delete"></a>
                             </div>
+                             {% else %}
+                                <div class="action">
+                                    <a href="{{ path('app_admin_etablissement_edit', {id:etablissement.id}) }}" class="edit"></a>
+                                </div>
+                            {% endif %}
                         </td>
                     </tr>
                     {% endfor %}
