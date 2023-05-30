@@ -48,13 +48,8 @@ class AdminEtablissementController extends AdminController
     {
         $user = $this->security->getUser();
 
-        if(in_array('ROLE_ADMIN', $user->getRoles()))
-            $etablissements = $this->etablissementRepository->findBy([], ['created_at' => 'desc']);
-        else
-            $etablissements = $this->etablissementRepository->findBy([
-                'statut' => 'en attente'
-            ], ['created_at' => 'desc']);
-
+        $etablissements = $this->etablissementRepository->findBy([], ['created_at' => 'desc']);
+        
         return $this->render('admin/layout/etablissements.html.twig', [
             'etablissements' => $etablissements,
         ]);

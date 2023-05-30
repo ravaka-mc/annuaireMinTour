@@ -151,7 +151,7 @@ class AdminCategorieController extends AdminController
         
         $activite_ids = [];
         if($etablissement_id != '') {
-            $etablissement = $this->etablissementRepository->findOneBy(['id' => (int) $etablissement_id]);
+            $etablissement = $this->etablissementRepository->findOneBy(['id' => (int) $etablissement_id], ['id' => 'desc']);
             foreach ($etablissement->getActivites() as $activite){
                 $activite_ids[] = $activite->getId();
             }
@@ -167,6 +167,8 @@ class AdminCategorieController extends AdminController
         $data = $activites->map(function($activite) {
             return $activite->getId();
         })->toArray();
+
+        
 
         return new JsonResponse([
             "html" => $html,

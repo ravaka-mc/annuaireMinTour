@@ -310,7 +310,7 @@ var hasError = () => {
     if($(".active #etablissement_nif").length > 0){
         var nif = $(".active #etablissement_nif").val();
         var nifValid = regexNif.test(nif);
-        if((!nifValid && nif != '') || nif.length != 10){
+        if((!nifValid && nif != '') && nif.length != 10){
             $(".active #etablissement_nif").parent().append('<span class="champ-erreur">La valeur est invalide</span>');
             _error = true;
         }
@@ -319,7 +319,7 @@ var hasError = () => {
     if($(".active #etablissement_stat").length > 0){
         var stat = $("#etablissement_stat").val();
         var statValid = regexStat.test(stat);
-        if((!statValid && stat != '') || stat.length != 17){
+        if((!statValid && stat != '') && stat.length != 17){
             $(".active #etablissement_stat").parent().append('<span class="champ-erreur">La valeur est invalide</span>');
             _error = true;
         }

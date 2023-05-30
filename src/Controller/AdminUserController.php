@@ -40,7 +40,7 @@ class AdminUserController extends AdminController
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
 
-        $users = $this->userRepository->findAll();
+        $users = $this->userRepository->findBy([], ['created_at' => 'desc']);
 
         return $this->render('admin/layout/user.html.twig', [
             'form' => $form->createView(),

@@ -294,7 +294,10 @@ class Category
      */
     public function getActivitesLicenceC(): Collection
     {
-        return $this->activitesLicenceC;
+        $criteria = Criteria::create()
+        ->orderBy(['id' => 'DESC']);
+
+        return $this->activitesLicenceC->matching($criteria);
     }
 
     public function addActivitesLicenceC(Activite $activitesLicenceC): self
