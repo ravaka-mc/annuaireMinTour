@@ -83,7 +83,7 @@
 							<div class="stitre">
 								Téléphone
 							</div>
-							<span><a href="tel:+261{{ etablissement.telephone|trim }}">+261 {{ etablissement.telephone }}</a></span>
+							<span><a href="tel:+261{{ etablissement.telephone|trim }}">+261{{ etablissement.telephone }}</a></span>
 						</div>
                     {% endif %}
                     {% if etablissement.siteWeb is not null %}
@@ -277,7 +277,7 @@
 						<img src="{{ asset('front/images/salle.svg') }}" alt="">
 					</div>
 					<div class="texte">
-						<p><span class="numscroller" data-min="1" data-max="{{ etablissement.salleConference}}" data-delay="5" data-increment="10">{{ etablissement.salleConference}}</span> m2</p>
+						<p><span class="numscroller" data-min="1" data-max="{{ etablissement.salleConference}}" data-delay="5" data-increment="10">{{ etablissement.superficieSalle }}</span> m2</p>
 						<div class="n-titre">Salle de conférence</div>
 					</div>
 				</div>
@@ -288,7 +288,7 @@
 						<img src="{{ asset('front/images/nbre-salle-conference.svg') }}" alt="">
 					</div>
 					<div class="texte">
-						<p><span class="numscroller" data-min="1" data-max="{{ etablissement.superficieSalle }}" data-delay="5" data-increment="10">{{ etablissement.superficieSalle }}</span> m2</p>
+						<p><span class="numscroller" data-min="1" data-max="{{ etablissement.superficieSalle }}" data-delay="5" data-increment="10">{{ etablissement.salleConference}}</span></p>
 						<div class="n-titre">Salle de conférence</div>
 					</div>
 				</div>

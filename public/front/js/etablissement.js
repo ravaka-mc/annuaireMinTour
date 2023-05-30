@@ -536,6 +536,8 @@ var initFunction = () => {
     changeAvatar();
     $( ".datepicker" ).datepicker({
         maxDate: -1,
+		changeYear: true,
+		yearRange: "-60:+0",
         dateFormat: "dd/mm/yy",
         dayNamesMin: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
         monthNames: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],

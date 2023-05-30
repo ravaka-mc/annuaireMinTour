@@ -37,7 +37,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-	width: 8px;
+	width: 5px;
 	background-color: #1a141d;
 }
 
@@ -5144,3 +5144,4 @@ div#wrapper-proprietaire { margin-bottom:15px; }
  margin-bottom : 25px;
 }
 .wprappAvatar {text-align:center}
+.information-detail .flex-beetween {padding-bottom:0px}

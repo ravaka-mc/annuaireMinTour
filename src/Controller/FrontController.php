@@ -375,7 +375,7 @@ class FrontController extends AbstractController
                 $message = (new Email())
                 ->from('annuaire@tourisme.gov.mg')
                 ->to($user->getEmail())
-                ->subject('Formulaire de signaler')
+                ->subject('Etablissement bien ajouté')
                 ->html($html);
 
                 $this->mailer->send($message);
@@ -426,7 +426,7 @@ class FrontController extends AbstractController
             $message = (new Email())
             ->from('annuaire@tourisme.gov.mg')
             ->to('annuaire@tourisme.gov.mg')
-            ->subject('Formulaire de signaler')
+            ->subject('Etablissement signalé')
             ->html($html);
 
             $mailer->send($message);
