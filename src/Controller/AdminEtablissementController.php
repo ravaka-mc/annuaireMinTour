@@ -80,12 +80,15 @@ class AdminEtablissementController extends AdminController
     {
         $this->etablissementRepository->remove($etablissement, true);
 
-        $html = $this->twig->render('front/email/etablissement-supprime.html.twig');
+        $nom = $etablissement->getNom();
+        $html = $this->twig->render('front/email/etablissement-supprime.html.twig', [
+            'nom' => $nom
+        ]);
 
         $message = (new Email())
         ->from('annuaire@tourisme.gov.mg')
         ->to($etablissement->getCreatedBy()->getEmail())
-        ->subject('Formulaire de signaler')
+        ->subject($nom . ' a été supprimé')
         ->html($html);
 
         $this->mailer->send($message);
@@ -131,12 +134,15 @@ class AdminEtablissementController extends AdminController
         $etablissement->setDateValidation($date_validation);
         $this->etablissementRepository->add($etablissement, true);
         
-        $html = $this->twig->render('front/email/etablissement-valide.html.twig');
+        $nom = $etablissement->getNom();
+        $html = $this->twig->render('front/email/etablissement-valide.html.twig', [
+            'nom' => $nom
+        ]);
 
         $message = (new Email())
         ->from('annuaire@tourisme.gov.mg')
         ->to($etablissement->getCreatedBy()->getEmail())
-        ->subject('Formulaire de signaler')
+        ->subject('Votre établissement : ' . $nom . ' a été validé')
         ->html($html);
 
         $this->mailer->send($message);
@@ -158,6 +164,20 @@ class AdminEtablissementController extends AdminController
 
         $etablissement->setStatut('refuse');
         $this->etablissementRepository->add($etablissement, true);
+
+        $nom = $etablissement->getNom();
+        $html = $this->twig->render('front/email/etablissement-refuse.html.twig', [
+            'nom' => $nom,
+        ]);
+
+        
+        $message = (new Email())
+        ->from('annuaire@tourisme.gov.mg')
+        ->to($etablissement->getCreatedBy()->getEmail())
+        ->subject('Votre établissement : ' .  $nom . ' a été refusé')
+        ->html($html);
+
+        $this->mailer->send($message);
 
         return $this->redirectToRoute('app_admin_etablissement');
     }

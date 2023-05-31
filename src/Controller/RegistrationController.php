@@ -67,7 +67,7 @@ class RegistrationController extends AbstractController
             $message = (new Email())
             ->from('annuaire@tourisme.gov.mg')
             ->to($user->getEmail())
-            ->subject('Formulaire de contact')
+            ->subject('Bienvenue sur Annuaire touristiques à Madagascar')
             ->html($html);
 
             $mailer->send($message);

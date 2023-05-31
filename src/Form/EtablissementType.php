@@ -849,7 +849,7 @@ class EtablissementType extends AbstractType
                             ];
                         else
                             return [
-                                'class' => ''
+                                'class' => 'category-specialise'
                             ];
                     },
                     'expanded' => true,

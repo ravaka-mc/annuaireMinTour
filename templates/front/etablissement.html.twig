@@ -118,8 +118,12 @@
 								{% endif %}
 							{% endfor %}
 						</div>
-						{% if etablissement.region is not null %}
-						<div><strong>Région : </strong>{{  etablissement.region.nom }} </div>
+						
+						{% if etablissement.region is not null and 'GUIDE_REGIONAL' in etablissement.categorieGuide %}
+							<div><strong>Région : </strong>{{  etablissement.region.nom }} </div>
+						{% endif %}
+						{% if etablissement.zoneIntervention != '' and 'GUIDE_LOCAL' in etablissement.categorieGuide %}
+							<div><strong>Localisation : </strong>{{  etablissement.zoneIntervention }}</div>
 						{% endif %}
 						{% if etablissement.categorieAutorisation != '' %}
 						<div><strong>Spécialisation : </strong>{{  etablissement.categorieAutorisation }}</div>

@@ -116,6 +116,12 @@ var changeCategory = () => {
                 $('#etablissement_zoneIntervention').removeAttr('required')
             }
 
+            
+        })
+
+        $('.category-specialise').on('change', function(){
+            value = $(this).val();
+            isActive = $(this).is(':checked');
             if(value == 'GUIDE_SPECIALISE' && isActive) {
                 $('#wrapper-preciser').show();
                 $('#etablissement_categorieAutorisation').attr('required', 'required')
@@ -127,6 +133,7 @@ var changeCategory = () => {
         })
 
         $('.select-category:checked').trigger('change')
+        $('.category-specialise:checked').trigger('change')
     }
 }
 

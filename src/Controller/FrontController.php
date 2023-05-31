@@ -138,7 +138,7 @@ class FrontController extends AbstractController
             $message = (new Email())
             ->from('annuaire@tourisme.gov.mg')
             ->to('annuaire@tourisme.gov.mg')
-            ->subject('Formulaire de contact')
+            ->subject(' Formulaire de contact - Annuaire touristiques')
             ->html($html);
 
             $mailer->send($message);
@@ -370,7 +370,9 @@ class FrontController extends AbstractController
                 $this->addFlash('success', 'Etablissement a été bien modifié');
             }
             else {
-                $html = $this->twig->render('front/email/ajout-etablissement.html.twig');
+                $html = $this->twig->render('front/email/ajout-etablissement.html.twig', [
+                    'nom' => $etablissement->getNom()
+                ]);
 
                 $message = (new Email())
                 ->from('annuaire@tourisme.gov.mg')
@@ -423,10 +425,11 @@ class FrontController extends AbstractController
                 'etablissement' => $etablissement
             ]);
 
+            $nom = $etablissement->getNom();
             $message = (new Email())
             ->from('annuaire@tourisme.gov.mg')
             ->to('annuaire@tourisme.gov.mg')
-            ->subject('Etablissement signalé')
+            ->subject(' L’établissement : ' . $nom . ' a été signalé')
             ->html($html);
 
             $mailer->send($message);
