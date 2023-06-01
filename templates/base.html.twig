@@ -37,7 +37,7 @@
                                 <li {% if active == 'contact' %}class="current-menu-item"{% endif %}><a href="{{ path('app_contact') }}" title="Contact">Contact</a></li>
                             </ul>
                             <div class="header_right">
-                                {% if is_granted('ROLE_ADMIN') %}
+                                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_VALIDATOR')  %}
                                     <a href="{{ path('app_admin')}}" class="btn btn-primary membrebtn">
                                         <span>Mon compte</span>
                                     </a>
