@@ -28,7 +28,16 @@
                 <div class="texteitem">
                     <h1>{{ etablissement.nom }}</h1>
 					<ul>
-						{% if etablissement.region is not null %}
+						{% if etablissement.region is not null and 'GUIDE_REGIONAL' in etablissement.categorieGuide %}
+							<div><strong>Région : </strong>{{  etablissement.region.nom }} </div>
+						{% endif %}
+						{% if etablissement.zoneIntervention != '' and 'GUIDE_LOCAL' in etablissement.categorieGuide %}
+							<div><strong>Localisation : </strong>{{  etablissement.zoneIntervention }}</div>
+						{% endif %}
+						{% if etablissement.region is not null and 'GUIDE_REGIONAL' in etablissement.categorieGuide %}
+						<li> <span class="localisation">{{ etablissement.region }}</span></li>
+						{% endif %}
+						{% if etablissement.zoneIntervention != '' and 'GUIDE_LOCAL' in etablissement.categorieGuide %}
 						<li> <span class="localisation">{{ etablissement.region }}</span></li>
 						{% endif %}
 						{% if etablissement.category is not null %}
