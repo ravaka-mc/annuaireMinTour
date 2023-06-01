@@ -109,17 +109,18 @@
 						</div>
 						<div><strong>Catégorie : </strong>
 							Guide
-							{% for category in etablissement.categorieGuide %}
-								{% if category == 'GUIDE_NATIONAL' %}
-									nationale,
-								{% elseif category == 'GUIDE_REGIONAL'%}
-									régionale,
-								{% elseif category == 'GUIDE_LOCAL'%}
-									locale,
-								{% elseif category == 'GUIDE_SPECIALISE'%}
-									Spécialisé
-								{% endif %}
-							{% endfor %}
+							{% if 'GUIDE_NATIONAL' in etablissement.categorieGuide %}
+								nationale
+							{% endif %}
+							{% if 'GUIDE_REGIONAL' in etablissement.categorieGuide %}
+								régionale
+							{% endif %}
+							{% if 'GUIDE_LOCAL' in etablissement.categorieGuide %}
+								locale
+							{% endif %}
+							{% if 'GUIDE_SPECIALISE' in etablissement.categorieGuide %}
+								{% if etablissement.categorieGuide|length > 1%}, {% endif %}Spécialisé
+							{% endif %}
 						</div>
 						
 						{% if etablissement.region is not null and 'GUIDE_REGIONAL' in etablissement.categorieGuide %}

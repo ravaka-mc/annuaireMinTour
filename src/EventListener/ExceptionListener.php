@@ -8,7 +8,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class ExceptionListener implements EventSubscriberInterface
 {
@@ -28,6 +30,9 @@ class ExceptionListener implements EventSubscriberInterface
     {
         $exception = $event->getThrowable();
         
+        if (!$exception instanceof NotFoundHttpException && !$exception instanceof AccessDeniedHttpException) {
+            return;
+        }
 
         $categories = $this->categoryRepository->findAll();
 
