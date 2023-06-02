@@ -88,7 +88,7 @@ class AdminEtablissementController extends AdminController
         $message = (new Email())
         ->from('annuaire@tourisme.gov.mg')
         ->to($etablissement->getCreatedBy()->getEmail())
-        ->subject($nom . ' a été supprimé')
+        ->subject('Votre établissement : ' . $nom . ' a été supprimé')
         ->html($html);
 
         $this->mailer->send($message);
