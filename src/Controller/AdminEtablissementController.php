@@ -168,6 +168,7 @@ class AdminEtablissementController extends AdminController
         $nom = $etablissement->getNom();
         $html = $this->twig->render('front/email/etablissement-refuse.html.twig', [
             'nom' => $nom,
+            'raison' => $raison
         ]);
 
         
