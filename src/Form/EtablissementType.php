@@ -487,7 +487,7 @@ class EtablissementType extends AbstractType
                     ]
                 ])
                 ->add('salleConference', IntegerType::class, [
-                    'required' => true,
+                    'required' => false,
                     'attr' => [
                         'min' => 0
                     ]
@@ -646,7 +646,7 @@ class EtablissementType extends AbstractType
                     ]
                 ])
                 ->add('salleConference', IntegerType::class, [
-                    'required' => true,
+                    'required' => false,
                     'attr' => [
                         'min' => 0
                     ]
