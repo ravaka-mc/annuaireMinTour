@@ -481,7 +481,7 @@ class EtablissementType extends AbstractType
                     ]
                 ])
                 ->add('superficieSalle', IntegerType::class, [
-                    'required' => true,
+                    'required' => false,
                     'attr' => [
                         'min' => 0
                     ]
