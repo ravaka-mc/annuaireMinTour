@@ -406,6 +406,7 @@ var changeLicenceB = () => {
                     }
                 })
             } else {
+                $('.autre-checkbox').parents('.custom_checkbox').hide();
                 $('#etablissement_dateLicenceB').attr('required', 'required')
                 $('#etablissement_referenceB').attr('required', 'required')
                 $.ajax({
@@ -451,6 +452,7 @@ var changeLicenceC = () => {
                     }
                 })
             } else {
+                $('.autre-checkbox').parents('.custom_checkbox').show();
                 $('#etablissement_dateLicenceC').attr('required', 'required')
                 $('#etablissement_referenceC').attr('required', 'required')
                 $.ajax({
