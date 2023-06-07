@@ -6,6 +6,10 @@ framework:
 
     messenger:
         reset_on_message: true
+    
+    profiler: 
+        enabled: false
+        collect: false
 
     # error_controller: App\Controller\ErrorController::show
 
