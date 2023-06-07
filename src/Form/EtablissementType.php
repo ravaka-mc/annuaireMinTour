@@ -855,14 +855,18 @@ class EtablissementType extends AbstractType
                     'expanded' => true,
                     'multiple' => true,
                 ])
-                ->add('carteProfessionnelle')
+                ->add('carteProfessionnelle', TextType::class, [
+					'required' => true
+				])
                 ->add('autreGroupement', TextType::class, [
 					'required' => false,
 					'attr' => [
                         'placeholder' => 'À préciser'
                     ]
 				])
-                ->add('agrement')
+                ->add('agrement', TextType::class, [
+					'required' => true
+				])
                 ->add('categorieAutorisation', TextType::class, [
                     'required' => false,   
                     'attr' => [
