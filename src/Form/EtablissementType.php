@@ -79,9 +79,15 @@ class EtablissementType extends AbstractType
             ])
             ->add('facebook', TextType::class, [
                 'required' => false,
+				'attr' => array(
+					'placeholder' => 'https://www.facebook.com/...'
+				)
             ])
             ->add('linkedin', TextType::class, [
                 'required' => false,
+				'attr' => array(
+					'placeholder' => 'https://www.linkedin.com/...'
+				)
             ])
             
             ->add('category', EntityType::class, [
@@ -475,7 +481,7 @@ class EtablissementType extends AbstractType
                     ]
                 ])
                 ->add('nombreLit', IntegerType::class, [
-                    'required' => true,
+                    'required' => false,
                     'attr' => [
                         'min' => 0
                     ]
@@ -670,13 +676,13 @@ class EtablissementType extends AbstractType
                     ]
                 ])
                 ->add('nombreLit', IntegerType::class, [
-                    'required' => true,
+                    'required' => false,
                     'attr' => [
                         'min' => 0
                     ]
                 ])
                 ->add('nombreResto', IntegerType::class, [
-                    'required' => true,
+                    'required' => false,
                     'attr' => [
                         'min' => 0
                     ]
@@ -856,7 +862,7 @@ class EtablissementType extends AbstractType
                     'multiple' => true,
                 ])
                 ->add('carteProfessionnelle', TextType::class, [
-					'required' => true
+					'required' => false
 				])
                 ->add('autreGroupement', TextType::class, [
 					'required' => false,
@@ -865,7 +871,7 @@ class EtablissementType extends AbstractType
                     ]
 				])
                 ->add('agrement', TextType::class, [
-					'required' => true
+					'required' => false
 				])
                 ->add('categorieAutorisation', TextType::class, [
                     'required' => false,   

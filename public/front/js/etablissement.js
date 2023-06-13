@@ -180,7 +180,7 @@ var hasError = () => {
 
         if(!isckecked){
             _error = true;
-            $('.active .cat-check').append('<span class="champ-erreur">Vous devez sélectionner au moins un guide pour continuer</span>');
+            $('.active .cat-check').append('<span class="champ-erreur">Vous devez sélectionner au moins une catégorie pour continuer</span>');
         }
     }
 

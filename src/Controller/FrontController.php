@@ -382,7 +382,7 @@ class FrontController extends AbstractController
 
                 $this->mailer->send($message);
 
-                $this->addFlash('success', 'Etablissement a été bien ajouté');
+                $this->addFlash('success', 'Votre établissement a été ajouté avec succès et est actuellement en cours de validation. Nous vous enverrons une notification par e-mail dès que la validation sera terminée.');
             }
 
             return $this->redirectToRoute('app_dashboard');

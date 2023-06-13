@@ -41,7 +41,7 @@
 													<span class="replace-img"></span>
 												</label>
 											</div>
-											<span class="facultatif">Insérer votre logo</span>
+											<span class="facultatif">Insérer votre logo (facultatif)</span>
 											</div>
 										{% else %}
 											<div id="wrapper-avatar" class="logo-entreprise">
@@ -66,14 +66,6 @@
 								</div>
 								<div class="card-wrap content-ense">
 									<div id="wrapper-not-guide" class="half">
-										<div class="form-control">
-											<label for="">Ville</label>
-											{{ form_widget(form.ville) }}
-										</div>
-										<div class="form-control">
-											<label for="">Code Postal</label>
-											{{ form_widget(form.codePostal) }}
-										</div>
 										{% if form.region is defined and form.categorieGuide is not defined %}
 											<div id="wrapper-region" class="form-control">
 												<label for="">Region</label>
@@ -87,7 +79,15 @@
 											</div>
 										{% endif %}
 										<div class="form-control">
-											<label for="">Téléphone</label>
+											<label for="">Ville</label>
+											{{ form_widget(form.ville) }}
+										</div>
+										<div class="form-control">
+											<label for="">Code Postal</label>
+											{{ form_widget(form.codePostal) }}
+										</div>
+										<div class="form-control">
+											<label for="">Téléphone<span class="facultatif"> (XX XX XXX XX)</span></label>
 											<div class="input-box">
 												<span class="prefix">+261</span>
 												{{ form_widget(form.telephone) }}
@@ -182,11 +182,11 @@
 										</div>
 										{% endif %}
 										<div class="form-control">
-											<label for="">NIF</label>
+											<label for="">NIF <span class="facultatif">(10 Chiffres)</span></label>
 											{{ form_widget(form.nif) }}
 										</div>
 										<div class="form-control">
-											<label for="">Stat</label>
+											<label for="">Stat <span class="facultatif">(17 Chiffres)</span></label>
 											{{ form_widget(form.stat) }}
 										</div>
 										{% if form.pieceJustificationFile is defined %}
@@ -280,14 +280,14 @@
 										</div>
 										{% endif %}
 										<div class="form-control">
-											<label for="">NIF</label>
+											<label for="">NIF <span class="facultatif">(10 Chiffres)</span></label>
 											{{ form_widget(form.nif) }}
 											{% if form_errors(form.nif) %}
 												<span class="champ-erreur">La valeur est invalide</span>
 											{% endif %}
 										</div>
 										<div class="form-control">
-											<label for="">Stat</label>
+											<label for="">Stat <span class="facultatif">(17 Chiffres)</span></label>
 											{{ form_widget(form.stat) }}
 											{% if form_errors(form.stat) %}
 												<span class="champ-erreur">La valeur est invalide</span>
@@ -295,7 +295,7 @@
 										</div>
 										{% if form.pieceJustificationFile is defined %}
 											<div class="form-control">
-												<label for="">Pièce Justification <span class="facultatif">(facultatif)</span></label>
+												<label for="">Pièce Justificative <span class="facultatif">(facultatif)</span></label>
 												{{ form_widget(form.pieceJustificationFile) }}
 												<a href="{{ asset('uploads/etablissements/' ~ etablissement.pieceJustification()) }}">
 													{{ etablissement.pieceJustification() }}
@@ -312,9 +312,7 @@
 								form.nombreCouverts is defined or 
 								form.salleConference is defined or 
 								form.nombreSalaries is defined or 
-								form.nombreSalaireFemme is defined or 
-								form.nombreLit is defined or 
-								form.nombreResto is defined or 
+								form.nombreSalaireFemme is defined or
 								form.superficieSalle is defined 
 						%}
 							<div id="wrapper-infos_supplementaire" class="bloc_editense form-wrap step">
@@ -323,6 +321,14 @@
 										<div class="sub-title"><span>Informations supplémentaires</span></div>
 									</div>
 									<div class="half">
+										<div class="form-control">
+											<label for="">Nombre de Salariés Homme</label>
+											{{ form_widget(form.nombreSalaries) }}
+										</div>
+										<div class="form-control">
+											<label for="">Nombre de Salariés Femme</label>
+											{{ form_widget(form.nombreSalaireFemme) }}
+										</div>
 										{% if form.nombreChambres is defined %}
 										<div class="form-control">
 											<label for="">Nombre de chambres</label>
@@ -337,27 +343,6 @@
 											<div class="form-control">
 												<label for="">Nombre de couverts</label>
 												{{ form_widget(form.nombreCouverts) }}
-											</div>
-										{% endif %}
-			
-										<div class="form-control">
-											<label for="">Nombre de Salariés Homme</label>
-											{{ form_widget(form.nombreSalaries) }}
-										</div>
-										<div class="form-control">
-											<label for="">Nombre de Salariés Femme</label>
-											{{ form_widget(form.nombreSalaireFemme) }}
-										</div>
-										{% if form.nombreLit is defined %}
-											<div class="form-control">
-												<label for="">Nombre de lit</label>
-												{{ form_widget(form.nombreLit) }}
-											</div>
-										{% endif %}
-										{% if form.nombreResto is defined %}
-											<div class="form-control">
-												<label for="">Nombre de restaurant</label>
-												{{ form_widget(form.nombreResto) }}
 											</div>
 										{% endif %}
 										{% if form.salleConference is defined %}
@@ -434,20 +419,20 @@
 									<div class="half">
 										{% if form.carteProfessionnelle is defined %}
 										<div class="form-control">
-											<label for="">N° carte et badge professionnel</label>
+											<label for="">N° carte et badge professionnel <span class="facultatif">(facultatif)</span></label>
 											{{ form_widget(form.carteProfessionnelle) }}
 										</div>
 										{% endif %}
 										<div class="form-control">
-											<label for="">Agrément</label>
+											<label for="">Agrément <span class="facultatif">(facultatif)</span></label>
 											{{ form_widget(form.agrement) }}
 										</div>
 										<div class="form-control">
-											<label for="">NIF <span class="facultatif">(facultatif)</span></label>
+											<label for="">NIF <span class="facultatif">(10 Chiffres - facultatif)</span></label>
 											{{ form_widget(form.nif) }}
 										</div>
 										<div class="form-control">
-											<label for="">Stat <span class="facultatif">(facultatif)</span></label>
+											<label for="">Stat <span class="facultatif">(17 Chiffres - facultatif)</span></label>
 											{{ form_widget(form.stat) }}
 										</div>
 

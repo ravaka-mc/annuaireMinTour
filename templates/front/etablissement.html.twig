@@ -202,6 +202,17 @@
 				L'établissement en chiffres
 			</div>
 			<div class="stat-detail text-left">
+			{% if etablissement.nombreSalaries is not null %}
+				<div class="item">
+					<div class="icon">
+						<img src="{{ asset('front/images/salarie.svg') }}" alt="">
+					</div>
+					<div class="texte">
+						<p><span class="numscroller" data-min="1" data-max="{{ etablissement.nombreSalaries + etablissement.nombreSalaireFemme }}" data-delay="5" data-increment="10">{{ etablissement.nombreSalaries + etablissement.nombreSalaireFemme}}</span></p>
+					<div class="n-titre">Salariés</div>
+					</div>
+				</div>
+				{% endif %}
 				{% if etablissement.capaciteAccueil is not null %}
 				<div class="item">
 					<div class="icon">
@@ -213,17 +224,7 @@
 					</div>
 				</div>
 				{% endif %}
-				{% if etablissement.nombreSalaries is not null %}
-				<div class="item">
-					<div class="icon">
-						<img src="{{ asset('front/images/salarie.svg') }}" alt="">
-					</div>
-					<div class="texte">
-						<p><span class="numscroller" data-min="1" data-max="{{ etablissement.nombreSalaries + etablissement.nombreSalaireFemme }}" data-delay="5" data-increment="10">{{ etablissement.nombreSalaries + etablissement.nombreSalaireFemme}}</span></p>
-					<div class="n-titre">Salariés</div>
-					</div>
-				</div>
-				{% endif %}
+				
 				{% if etablissement.nombreChambres is not null %}
 				<div class="item">
 					<div class="icon">
