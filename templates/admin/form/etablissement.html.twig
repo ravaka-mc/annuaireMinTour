@@ -157,7 +157,7 @@
 											</div>
 										</div>
 										<div class="half tri">
-											<label>C <span style="color: #a2a2a2">(Prestation touristiques spécialisées)</span>
+											<label>C <span style="color: #a2a2a2">(Prestations touristiques spécialisées)</span>
 												{{ form_widget(form.licenceC) }}
 												<div class="checkmark"></div>
 											</label>
@@ -193,7 +193,7 @@
 										</div>
 										{% if form.pieceJustificationFile is defined %}
 											<div class="form-control">
-												<label for="">Pièce Justification</label>
+												<label for="">Pièce justificative</label>
 												{{ form_widget(form.pieceJustificationFile) }}
 												<a href="{{ asset('uploads/etablissements/' ~ etablissement.pieceJustification()) }}">
 													{{ etablissement.pieceJustification() }}
@@ -289,7 +289,7 @@
 										</div>
 										{% if form.pieceJustificationFile is defined %}
 											<div class="form-control">
-												<label for="">Pièce Justification</label>
+												<label for="">Pièce justificative</label>
 												{{ form_widget(form.pieceJustificationFile) }}
 												<a href="{{ asset('uploads/etablissements/' ~ etablissement.pieceJustification()) }}">
 													{{ etablissement.pieceJustification() }}
