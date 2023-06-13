@@ -66,6 +66,11 @@ class Activite
      */
     private $categoriesLicenceA;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $ordre;
+
     public function __construct()
     {
         $this->etablissements = new ArrayCollection();
@@ -299,6 +304,18 @@ class Activite
         if ($this->categoriesLicenceA->removeElement($categoriesLicenceA)) {
             $categoriesLicenceA->removeActivitesLicenceA($this);
         }
+
+        return $this;
+    }
+
+    public function getOrdre(): ?int
+    {
+        return $this->ordre;
+    }
+
+    public function setOrdre(?int $ordre): self
+    {
+        $this->ordre = $ordre;
 
         return $this;
     }

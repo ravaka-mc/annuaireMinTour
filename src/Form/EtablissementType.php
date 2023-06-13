@@ -689,19 +689,7 @@ class EtablissementType extends AbstractType
                 ]);
                 break;
             case 'TYPE_4':
-                $form->add('classement', EntityType::class, [
-                    'class' => Classement::class,
-                    'choice_label' => 'nom',
-                    'choice_attr' => function ($choice, $key, $value) {
-                        return ['class' => 'rd-classement'];
-                    },
-                    'expanded' => true,
-                    'multiple' => false,
-                    'empty_data' => '',
-                    'placeholder' => false,
-                    'required' => false,
-                ])
-                ->add('groupements', EntityType::class, [
+                $form->add('groupements', EntityType::class, [
                     'class' => Groupement::class,
                     'choice_label' => 'nom',
                     'expanded' => true,

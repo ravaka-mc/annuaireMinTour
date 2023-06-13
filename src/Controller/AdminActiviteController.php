@@ -85,12 +85,14 @@ class AdminActiviteController extends AdminController
     {
         $nom = $request->request->get('nom');
         $parent_id = $request->request->get('parent', 0);
+        $ordre = $request->request->get('ordre', 0);
 
         if($parent_id != 0){
             $activite->setParent($this->activiteRepository->findOneBy(['id' => (int) $parent_id]));
         }
         
         $activite->setNom($nom);
+        $activite->setOrdre($ordre);
         $this->activiteRepository->add($activite, true);
 
         return $this->redirectToRoute('app_admin_activite');

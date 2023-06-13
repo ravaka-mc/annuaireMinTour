@@ -51,6 +51,10 @@
                 <label for="nom">Parent</label>
                 {{ form_widget(form.parent) }}
             </div>
+            <div class="form-control">
+                <label for="nom">Ordre</label>
+                {{ form_widget(form.ordre) }}
+            </div>
             {{ form_widget(form._token) }}
             <div class="pbtn full"><button type="submit" class="btn red">Ajouter activite</button></div>
         </form>
@@ -71,6 +75,10 @@
                             <option value="{{ parent.id }}" {% if activite.parent == parent %}selected="selected"{% endif %}>{{ parent.nom }}</option>
                         {% endfor %}
                     </select>
+                </div>
+                <div class="form-control">
+                    <label for="nom">Ordre</label>
+                    <input type="number" name="ordre" value="{{ activite.ordre }}">
                 </div>
                 <div class="pbtn full"><button type="submit" class="btn red">Enregistrer</button></div>
             </form>

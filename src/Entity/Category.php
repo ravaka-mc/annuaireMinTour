@@ -295,7 +295,7 @@ class Category
     public function getActivitesLicenceC(): Collection
     {
         $criteria = Criteria::create()
-        ->orderBy(['id' => 'DESC']);
+        ->orderBy(['ordre' => 'ASC']);
 
         return $this->activitesLicenceC->matching($criteria);
     }

@@ -363,6 +363,17 @@ class FrontController extends AbstractController
                     }
                 }
             }
+
+            if($form->has('licenceB')){
+                if($form->get('licenceB')->getData()){
+                    $category = $form->get('category')->getData();
+                    $activiteslicenceB = $category->getActivitesLicenceB();
+                    foreach($activiteslicenceB as $activite){
+                        $etablissement->addActivite($activite);
+                    }
+                }
+            }
+
             $etablissement->setStatut('en attente');
             $this->etablissementRepository->add($etablissement, true);
 

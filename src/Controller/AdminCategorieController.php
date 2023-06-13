@@ -157,7 +157,7 @@ class AdminCategorieController extends AdminController
             }
         }
         
-        $activites = ($typeLicence == 'B') ? $category->getActivitesLicenceB() : $category->getActivitesLicenceC();;
+        $activites = ($typeLicence == 'B') ? $category->getActivitesLicenceB() : $category->getActivitesLicenceC();
 
         $html = $this->twig->render('admin/block/activites.html.twig', [
             'activites' => $activites,

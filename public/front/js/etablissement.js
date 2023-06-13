@@ -163,7 +163,8 @@ var hasError = () => {
     })
 
     if($('.active #etablissement_licenceC').length > 0){
-        if(!$('.active #etablissement_licenceC').is(':checked') && !$('.active #etablissement_licenceB').is(':checked')
+        if(!$('.active #etablissement_licenceC').is(':checked') 
+        && !$('.active #etablissement_licenceB').is(':checked')
         && !$('.active #etablissement_licenceA').is(':checked')){
             $('.active #etablissement_licenceC').parent().append('<span class="champ-erreur">Vous devez sélectionner au moins une licence pour continuer</span>');
             _error = true;
@@ -596,8 +597,9 @@ $(document).ready(function () {
 
         if(hasError()) return false;
         
-        if($('#etablissement_licenceA').length > 0 && (!$('#etablissement_licenceB').is(':checked') && 
-        !$('#etablissement_licenceC').is(':checked')) && $('#wrapper-coordonnees.active').length > 0) {
+        if($('#etablissement_licenceA').length > 0 
+        && !$('#etablissement_licenceC').is(':checked')
+        && $('#wrapper-coordonnees.active').length > 0) {
             $('.step.active').removeClass('active').nextAll('.step').eq(0).addClass('active');
             currentStep++;
         }
@@ -616,8 +618,8 @@ $(document).ready(function () {
     });
     
     $('.prev').click(function() {
-        if($('#etablissement_licenceA').length > 0 && (!$('#etablissement_licenceB').is(':checked') 
-        && !$('#etablissement_licenceC').is(':checked'))  && $('#wrapper-infos_supplementaire.active').length > 0){
+        if($('#etablissement_licenceA').length > 0 && !$('#etablissement_licenceC').is(':checked') 
+        && $('#wrapper-infos_supplementaire.active').length > 0){
             $('.step.active').removeClass('active').prevAll('.step').eq(0).addClass('active');
             currentStep--;
         }
