@@ -72,7 +72,7 @@ class RegistrationController extends AbstractController
 
             $mailer->send($message);
 
-            return $this->redirectToRoute('app_admin');
+            return $this->redirectToRoute('app_dashboard');
         }
 
         return $this->render('registration/register.html.twig', [
