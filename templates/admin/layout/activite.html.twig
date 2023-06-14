@@ -55,6 +55,10 @@
                 <label for="nom">Ordre</label>
                 {{ form_widget(form.ordre) }}
             </div>
+            <div class="form-control">
+                <label for="nom">Type</label>
+                {{ form_widget(form.type) }}
+            </div>
             {{ form_widget(form._token) }}
             <div class="pbtn full"><button type="submit" class="btn red">Ajouter activite</button></div>
         </form>
@@ -80,6 +84,13 @@
                     <label for="nom">Ordre</label>
                     <input type="number" name="ordre" value="{{ activite.ordre }}">
                 </div>
+                <div class="form-control">
+                    <label for="nom">Ordre</label>
+                    <select id="activite_type" name="type">
+                        <option value="TYPE_HEBERGEMENT" {% if activite.type == 'TYPE_HEBERGEMENT' %}selected="selected"{% endif %}>Type d'hébergement</option>
+                        <option value="TYPE_RESTAURATION" {% if activite.type == 'TYPE_RESTAURATION' %}selected="selected"{% endif %}>Type de restauration</option>
+                    </select>
+                 </div>
                 <div class="pbtn full"><button type="submit" class="btn red">Enregistrer</button></div>
             </form>
         </div>

@@ -212,26 +212,40 @@
 											<div id="item-activitesB" class="custom_checkbox half"></div>
 											<div id="item-activitesC" class="custom_checkbox half"></div>
 										{% else %}
-											<div class="custom_checkbox half">
+											<div class="custom_checkbox">
+												<h7>Type d'hébergement</h7>
 												{% for child in form.activites|filter(child => not child.rendered) %}
-													<label>
-														{{ child.vars.label }}
-														{{ form_widget(child) }}
-														<span class="checkmark"></span>
-													</label>
+													{% if type_activite(child.vars.value) == 'TYPE_HEBERGEMENT' %}
+														<label>
+															{{ child.vars.label }}
+															{{ form_widget(child) }}
+															<span class="checkmark"></span>
+														</label>
+													{% endif %}
+												{% endfor %}
+											</div>
+											<div class="custom_checkbox">
+												<h7>Type de restauration</h7>
+												{% for child in form.activites|filter(child => not child.rendered) %}
+													{% if type_activite(child.vars.value) == 'TYPE_RESTAURATION' %}
+														<label>
+															{{ child.vars.label }}
+															{{ form_widget(child) }}
+															<span class="checkmark"></span>
+														</label>
+													{% endif %}
 												{% endfor %}
 											</div>
 										{% endif %}
-										<div class="custom_checkbox half">
-											{% if form.activiteAutre is defined %}
-											<label>
-												Autre
-												{{ form_widget(form.activiteAutre) }}
-												<span class="checkmark"></span>
-											</label>
+										{% if form.activiteAutre is defined %}
+											<div class="custom_checkbox half">
+												<label>
+													Autre
+													{{ form_widget(form.activiteAutre) }}
+													<span class="checkmark"></span>
+												</label>
+											</div>
 										{% endif %}
-										</div>
-										
 										{% if form.autreActivite is defined %}
 											<div id="wrapper-autreActivite" class="form-control">
 												<label>Préciser</label>
@@ -243,18 +257,16 @@
 								
 								{% if form.classement is defined %}
 									<div id="wrapper-classements" class="form-control card-wrap">
-										
-											<label>Classement</label>
-											<div class="custom-radio half">
-												{% for child in form.classement|filter(child => not child.rendered) %}
-												<label>
-													{{ child.vars.label }}
-													{{ form_widget(child) }}
-													<span class="checkmark"></span>
-												</label>
-												{% endfor %}
-											</div>
-										
+										<label>Classement</label>
+										<div class="custom-radio half">
+											{% for child in form.classement|filter(child => not child.rendered) %}
+											<label>
+												{{ child.vars.label }}
+												{{ form_widget(child) }}
+												<span class="checkmark"></span>
+											</label>
+											{% endfor %}
+										</div>
 									</div>
 								{% endif %}
 							</div>

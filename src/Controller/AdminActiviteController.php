@@ -84,8 +84,9 @@ class AdminActiviteController extends AdminController
     public function edit(Request $request, Activite $activite): Response
     {
         $nom = $request->request->get('nom');
-        $parent_id = $request->request->get('parent', 0);
-        $ordre = $request->request->get('ordre', 0);
+        $parent_id = $request->request->get('parent', 0) == "" ? 0 : $request->request->get('parent', 0);
+        $ordre = $request->request->get('ordre', 0) == "" ? 0 : $request->request->get('ordre', 0);
+        $type = $request->request->get('type');
 
         if($parent_id != 0){
             $activite->setParent($this->activiteRepository->findOneBy(['id' => (int) $parent_id]));
@@ -93,6 +94,8 @@ class AdminActiviteController extends AdminController
         
         $activite->setNom($nom);
         $activite->setOrdre($ordre);
+        $activite->setType($type);
+
         $this->activiteRepository->add($activite, true);
 
         return $this->redirectToRoute('app_admin_activite');

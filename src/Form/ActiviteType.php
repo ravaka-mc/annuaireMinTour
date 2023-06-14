@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class ActiviteType extends AbstractType
@@ -23,6 +24,12 @@ class ActiviteType extends AbstractType
                 'required' => false
             ])
             ->add('ordre', IntegerType::class)
+            ->add('type', ChoiceType::class, [
+                'choices' => [
+                    'Type d\'hébergement' => 'TYPE_HEBERGEMENT',
+                    'Type de restauration ' => 'TYPE_RESTAURATION',
+                ],
+            ])
         ;
     }
 

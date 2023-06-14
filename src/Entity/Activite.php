@@ -71,6 +71,11 @@ class Activite
      */
     private $ordre;
 
+    /**
+     * @ORM\Column(type="string", length=60, nullable=true)
+     */
+    private $type;
+
     public function __construct()
     {
         $this->etablissements = new ArrayCollection();
@@ -316,6 +321,18 @@ class Activite
     public function setOrdre(?int $ordre): self
     {
         $this->ordre = $ordre;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(?string $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }
