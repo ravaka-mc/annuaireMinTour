@@ -211,7 +211,7 @@
 										{% if form.licenceA is defined %}
 											<div id="item-activitesB" class="custom_checkbox half"></div>
 											<div id="item-activitesC" class="custom_checkbox half"></div>
-										{% else %}
+										{% elseif  form.classement is defined %}
 											<div class="custom_checkbox">
 												<h7>Type d'hébergement</h7>
 												{% for child in form.activites|filter(child => not child.rendered) %}
@@ -234,6 +234,16 @@
 															<span class="checkmark"></span>
 														</label>
 													{% endif %}
+												{% endfor %}
+											</div>
+										{% else %}
+											<div class="custom_checkbox">
+												{% for child in form.activites|filter(child => not child.rendered) %}
+													<label>
+														{{ child.vars.label }}
+														{{ form_widget(child) }}
+														<span class="checkmark"></span>
+													</label>
 												{% endfor %}
 											</div>
 										{% endif %}
