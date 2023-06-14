@@ -5146,3 +5146,4 @@ div#wrapper-proprietaire { margin-bottom:15px; }
 }
 .wprappAvatar {text-align:center}
 .information-detail .flex-beetween {padding-bottom:0px}
+#item-activitesC {column-count: 2; display: inherit;}
