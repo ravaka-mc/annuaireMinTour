@@ -87,6 +87,7 @@ class AdminActiviteController extends AdminController
         $parent_id = $request->request->get('parent', 0) == "" ? 0 : $request->request->get('parent', 0);
         $ordre = $request->request->get('ordre', 0) == "" ? 0 : $request->request->get('ordre', 0);
         $type = $request->request->get('type');
+        $classement = $request->request->get('classement');
 
         if($parent_id != 0){
             $activite->setParent($this->activiteRepository->findOneBy(['id' => (int) $parent_id]));
@@ -95,6 +96,9 @@ class AdminActiviteController extends AdminController
         $activite->setNom($nom);
         $activite->setOrdre($ordre);
         $activite->setType($type);
+        
+        if($classement)
+            $activite->setClassement(true);
 
         $this->activiteRepository->add($activite, true);
 

@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class ActiviteType extends AbstractType
 {
@@ -29,6 +30,10 @@ class ActiviteType extends AbstractType
                     'Type d\'hébergement' => 'TYPE_HEBERGEMENT',
                     'Type de restauration ' => 'TYPE_RESTAURATION',
                 ],
+            ])
+            ->add('classement', CheckboxType::class, [
+                'label'    => 'Autre',
+                'required' => false,
             ])
         ;
     }

@@ -6,7 +6,7 @@ use Twig\TwigFunction;
 use Twig\Extension\AbstractExtension;
 use App\Repository\ActiviteRepository;
 
-class TypeActiviteExtension extends AbstractExtension
+class ActiviteExtension extends AbstractExtension
 {
     private $activiteRepository;
     
@@ -18,6 +18,7 @@ class TypeActiviteExtension extends AbstractExtension
     {
         return [
             new TwigFunction('type_activite', [$this, 'typeActivite']),
+            new TwigFunction('classement_activite', [$this, 'classementActivite']),
         ];
     }
 
@@ -26,5 +27,12 @@ class TypeActiviteExtension extends AbstractExtension
         $activite = $this->activiteRepository->findOneBy(['id' => (int) $id]);
         
         return $activite->getType();
+    }
+
+    public function classementActivite($id)
+    {
+        $activite = $this->activiteRepository->findOneBy(['id' => (int) $id]);
+        
+        return $activite->isClassement();
     }
 }

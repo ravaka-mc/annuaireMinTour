@@ -76,6 +76,11 @@ class Activite
      */
     private $type;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $classement;
+
     public function __construct()
     {
         $this->etablissements = new ArrayCollection();
@@ -333,6 +338,18 @@ class Activite
     public function setType(?string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function isClassement(): ?bool
+    {
+        return $this->classement;
+    }
+
+    public function setClassement(?bool $classement): self
+    {
+        $this->classement = $classement;
 
         return $this;
     }

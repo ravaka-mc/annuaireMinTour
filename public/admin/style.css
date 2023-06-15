@@ -1655,3 +1655,7 @@ input, select, textarea {
 }
 .wprappAvatar {text-align:center}
 .card-wrap .form-in-head{margin-bottom:30px}
+.form-wrap .cb_classement label{
+	margin-left: 0px;
+	text-transform: uppercase;
+}

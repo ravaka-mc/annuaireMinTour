@@ -335,7 +335,7 @@ class EtablissementType extends AbstractType
                     'class' => Classement::class,
                     'choice_label' => 'nom',
                     'choice_attr' => function ($choice, $key, $value) {
-                        return ['class' => 'rd-classement'];
+                        return ['class' => 'item-classement'];
                     },
                     'expanded' => true,
                     'multiple' => false,
@@ -518,7 +518,7 @@ class EtablissementType extends AbstractType
                     'class' => Classement::class,
                     'choice_label' => 'nom',
                     'choice_attr' => function ($choice, $key, $value) {
-                        return ['class' => 'rd-classement'];
+                        return ['class' => 'item-classement'];
                     },
                     'expanded' => true,
                     'multiple' => false,

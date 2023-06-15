@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Twig\Environment;
 use App\Entity\Classement;
 use App\Form\ClassementType;
 use App\Repository\ClassementRepository;
@@ -13,9 +14,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class AdminClassementController extends AdminController
 {
     private $classementRepository;
+    private $twig;
 
-    public function __construct(ClassementRepository $classementRepository){
+    public function __construct(ClassementRepository $classementRepository, Environment $twig){
         $this->classementRepository = $classementRepository;
+        $this->twig = $twig;
     }
 
 
@@ -81,5 +84,21 @@ class AdminClassementController extends AdminController
         $this->classementRepository->add($classement, true);
 
         return $this->redirectToRoute('app_admin_classement');
+    }
+
+    /**
+     *  @Route("/classements", name="app_classements")
+     */
+    public function getClassement(){
+        
+        $classements =  $this->classementRepository->findAll();
+        
+        $html = $this->twig->render('admin/block/classements.html.twig', [
+            'classements' => $classements,
+        ]);
+        
+        return new JsonResponse([
+            "html" => $html
+        ]);
     }
 }

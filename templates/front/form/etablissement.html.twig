@@ -218,7 +218,11 @@
 													{% if type_activite(child.vars.value) == 'TYPE_HEBERGEMENT' %}
 														<label>
 															{{ child.vars.label }}
-															{{ form_widget(child) }}
+															{% if classement_activite(child.vars.value) %}
+																{{ form_widget(child, {'attr': {'class': 'cb-activite required-activites has-classement'}}) }}
+															{% else %}
+																{{ form_widget(child) }}
+															{% endif %}
 															<span class="checkmark"></span>
 														</label>
 													{% endif %}
@@ -230,7 +234,11 @@
 													{% if type_activite(child.vars.value) == 'TYPE_RESTAURATION' %}
 														<label>
 															{{ child.vars.label }}
-															{{ form_widget(child) }}
+															{% if classement_activite(child.vars.value) %}
+																{{ form_widget(child, {'attr': {'class': 'cb-activite required-activites has-classement'}}) }}
+															{% else %}
+																{{ form_widget(child) }}
+															{% endif %}
 															<span class="checkmark"></span>
 														</label>
 													{% endif %}
@@ -266,7 +274,7 @@
 								{% endif %}
 								
 								{% if form.classement is defined %}
-									<div id="wrapper-classements" class="form-control card-wrap">
+									<div id="wrapper-classements" class="form-control card-wrap" style="display:none">
 										<label>Classement</label>
 										<div class="custom-radio half">
 											{% for child in form.classement|filter(child => not child.rendered) %}

@@ -44,20 +44,27 @@
         <form id="form-activite" class="form-wrap" method="post" name="{{ form.vars.full_name }}" action="{{ path("app_admin_activite_add") }}">
              <ul class="form-error"></ul>
             <div class="form-control">
-                <label for="nom">Nom</label>
+                <label>Nom</label>
                 {{ form_widget(form.nom) }}
             </div>
             <div class="form-control">
-                <label for="nom">Parent</label>
+                <label>Parent</label>
                 {{ form_widget(form.parent) }}
             </div>
             <div class="form-control">
-                <label for="nom">Ordre</label>
+                <label>Ordre</label>
                 {{ form_widget(form.ordre) }}
             </div>
             <div class="form-control">
-                <label for="nom">Type</label>
+                <label>Type</label>
                 {{ form_widget(form.type) }}
+            </div>
+            <div class="form-control custom_checkbox cb_classement">
+                <label>
+                    Classement
+                    {{ form_widget(form.classement) }}
+                    <span class="checkmark"></span>
+                </label>
             </div>
             {{ form_widget(form._token) }}
             <div class="pbtn full"><button type="submit" class="btn red">Ajouter activite</button></div>
@@ -91,6 +98,13 @@
                         <option value="TYPE_RESTAURATION" {% if activite.type == 'TYPE_RESTAURATION' %}selected="selected"{% endif %}>Type de restauration</option>
                     </select>
                  </div>
+                 <div class="form-control custom_checkbox cb_classement">
+                    <label>
+                        Classement
+                        <input type="checkbox" id="activite_classement" name="classement" value="1" {% if activite.classement %}checked{% endif %}>
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
                 <div class="pbtn full"><button type="submit" class="btn red">Enregistrer</button></div>
             </form>
         </div>

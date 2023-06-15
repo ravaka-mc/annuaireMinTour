@@ -502,6 +502,22 @@ var changeActivite = () => {
     }
 }
 
+var displayClassement = () => {
+    if($(".has-classement").length > 0) {
+        $(".has-classement").on('change', function() {
+            var that = $(this);
+            if(that.is(':checked')){
+                $('#wrapper-classements').show();
+                $('.item-classement').addClass('rd-classement');
+            } else {
+                $('#wrapper-classements').hide();
+                $('.item-classement').removeClass('rd-classement');
+            }
+        })
+        $(".has-classement").trigger('change')
+    }
+}
+
 var changeAvatar = () => {
     $('.replace-img').click(function(){
         $('#avatar').trigger('click')
@@ -544,6 +560,7 @@ var initFunction = () => {
     changeAutreActivite();
     changeAutreGroupement();
     changeAvatar();
+    displayClassement();
     $( ".datepicker" ).datepicker({
         maxDate: -1,
 		changeYear: true,

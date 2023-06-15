@@ -1,0 +1,12 @@
+{% if classements|length > 0 %}
+<label>Classement</label>
+<div class="custom-radio half">
+     {% for classement in classements %}
+        <label>
+            {{ classement.nom }}
+            <input type="radio" id="etablissement_classement_{{ classement.id }}" name="etablissement[classement]" class="rd-classement" value="{{ classement.id }}">
+            <span class="checkmark"></span>
+        </label>
+    {% endfor %}
+</div>
+{% endif %}
