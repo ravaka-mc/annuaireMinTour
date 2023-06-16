@@ -19,6 +19,8 @@ class ActiviteExtension extends AbstractExtension
         return [
             new TwigFunction('type_activite', [$this, 'typeActivite']),
             new TwigFunction('classement_activite', [$this, 'classementActivite']),
+            new TwigFunction('hebergement_activite', [$this, 'hebergementActivite']),
+            new TwigFunction('restaurant_activite', [$this, 'restaurantActivite']),
         ];
     }
 
@@ -34,5 +36,26 @@ class ActiviteExtension extends AbstractExtension
         $activite = $this->activiteRepository->findOneBy(['id' => (int) $id]);
         
         return $activite->isClassement();
+    }
+
+    public function hebergementActivite($activitesForm)
+    {
+        foreach ($activitesForm->getIterator() as $child){
+            if($this->typeActivite($child->vars['value']) == 'TYPE_HEBERGEMENT'){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function restaurantActivite($activitesForm)
+    {
+        foreach ($activitesForm->getIterator() as $child){
+            if($this->typeActivite($child->vars['value']) == 'TYPE_RESTAURATION'){
+                return true;
+            }
+        }
+
+        return false;
     }
 }

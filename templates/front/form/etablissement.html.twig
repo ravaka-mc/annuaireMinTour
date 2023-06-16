@@ -213,37 +213,43 @@
 											<div id="item-activitesB" class="custom_checkbox half"></div>
 											<div id="item-activitesC" class="custom_checkbox half"></div>
 										{% elseif  form.classement is defined %}
-										    <div class="stitre">Activités</div>
+										    <div class="stitre">Type</div>
 										    <div class="half av_margbot">
 				                                <div class="custom_checkbox">
-    												{% for child in form.activites|filter(child => not child.rendered) %}
-    													{% if type_activite(child.vars.value) == 'TYPE_HEBERGEMENT' %}
-    														<label>
-    															{{ child.vars.label }}
-    															{% if classement_activite(child.vars.value) %}
-    																{{ form_widget(child, {'attr': {'class': 'cb-activite required-activites has-classement'}}) }}
-    															{% else %}
-    																{{ form_widget(child) }}
-    															{% endif %}
-    															<span class="checkmark"></span>
-    														</label>
-    													{% endif %}
-    												{% endfor %}
+													{% if hebergement_activite(form.activites) %}
+														<h7>Type d'hébergement</h7>
+														{% for child in form.activites|filter(child => not child.rendered) %}
+															{% if type_activite(child.vars.value) == 'TYPE_HEBERGEMENT' %}
+																<label>
+																	{{ child.vars.label }}
+																	{% if classement_activite(child.vars.value) %}
+																		{{ form_widget(child, {'attr': {'class': 'cb-activite required-activites has-classement'}}) }}
+																	{% else %}
+																		{{ form_widget(child) }}
+																	{% endif %}
+																	<span class="checkmark"></span>
+																</label>
+															{% endif %}
+														{% endfor %}
+													{% endif %}
     											</div>
     											<div class="custom_checkbox">
-    												{% for child in form.activites|filter(child => not child.rendered) %}
-    													{% if type_activite(child.vars.value) == 'TYPE_RESTAURATION' %}
-    														<label>
-    															{{ child.vars.label }}
-    															{% if classement_activite(child.vars.value) %}
-    																{{ form_widget(child, {'attr': {'class': 'cb-activite required-activites has-classement'}}) }}
-    															{% else %}
-    																{{ form_widget(child) }}
-    															{% endif %}
-    															<span class="checkmark"></span>
-    														</label>
-    													{% endif %}
-    												{% endfor %}
+													{% if restaurant_activite(form.activites) %}
+														<h7>Type de restauration</h7>
+														{% for child in form.activites|filter(child => not child.rendered) %}
+															{% if type_activite(child.vars.value) == 'TYPE_RESTAURATION' %}
+																<label>
+																	{{ child.vars.label }}
+																	{% if classement_activite(child.vars.value) %}
+																		{{ form_widget(child, {'attr': {'class': 'cb-activite required-activites has-classement'}}) }}
+																	{% else %}
+																		{{ form_widget(child) }}
+																	{% endif %}
+																	<span class="checkmark"></span>
+																</label>
+															{% endif %}
+														{% endfor %}
+													{% endif %}
     											</div>
 										    </div>
 										{% else %}

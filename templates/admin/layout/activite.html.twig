@@ -14,7 +14,8 @@
                 <thead>
                     <tr>
                         <th></th>
-                         <th><span>Ordre</span></th>
+                        <th><span>ID</span></th>
+                        <th><span>Ordre</span></th>
                         <th><span>Nom</span></th>
                         <th><span>Action</span></th>
                         <th></th>
@@ -24,7 +25,8 @@
                     {% for activite in activites %}
                         <tr>
                             <td></td>
-                             <td>{{ activite.ordre }}</td>
+                            <td>{{ activite.id }}</td>
+                            <td>{{ activite.ordre }}</td>
                             <td>{{ activite.nom }}</td>
                             <td>
                                 <div class="action">
