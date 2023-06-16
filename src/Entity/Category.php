@@ -210,7 +210,10 @@ class Category
      */
     public function getActivites(): Collection
     {
-        return $this->activites;
+        $criteria = Criteria::create()
+        ->orderBy(['ordre' => 'ASC']);
+
+        return $this->activites->matching($criteria);
     }
 
     public function addActivite(Activite $activite): self

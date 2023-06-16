@@ -34,7 +34,7 @@ class AdminActiviteController extends AdminController
         $form = $this->createForm(ActiviteType::class, $activite);
 
         $activites = $this->activiteRepository->findBy([], [
-            'nom' => 'asc'
+            'ordre' => 'asc'
         ]);
 
         return $this->render('admin/layout/activite.html.twig', [
