@@ -212,7 +212,7 @@
 										    <div class="stitre">Activités</div>
 											<div id="item-activitesB" class="custom_checkbox half"></div>
 											<div id="item-activitesC" class="custom_checkbox half"></div>
-										{% elseif  form.classement is defined %}
+										{% elseif  hebergement_activite(form.activites) and restaurant_activite(form.activites) %}
 										    <div class="stitre">Type</div>
 										    <div class="half av_margbot">
 				                                <div class="custom_checkbox">
@@ -258,7 +258,11 @@
 												{% for child in form.activites|filter(child => not child.rendered) %}
 													<label>
 														{{ child.vars.label }}
-														{{ form_widget(child) }}
+														{% if classement_activite(child.vars.value) %}
+															{{ form_widget(child, {'attr': {'class': 'cb-activite required-activites has-classement'}}) }}
+														{% else %}
+															{{ form_widget(child) }}
+														{% endif %}
 														<span class="checkmark"></span>
 													</label>
 												{% endfor %}
