@@ -3248,7 +3248,11 @@ form .checkboxgroup {
 	max-width: 850px;
 	align-items: center;
 }
-
+.stitre {
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 20px;
+}
 /* Form */
 .form-wrap {
 	position: relative;
@@ -3265,6 +3269,15 @@ form .checkboxgroup {
 	grid-template-columns: 1fr 1fr;
 	gap:10px 20px;
 	margin-bottom: 10px;
+}
+.form-wrap .av_margbot {
+    margin-bottom: 20px;
+}
+.av_margbot .custom_checkbox {
+    margin-bottom: 0;
+}
+.av_margbot h5 {
+    font-size: 16px;
 }
 
 .custom-radio.half,

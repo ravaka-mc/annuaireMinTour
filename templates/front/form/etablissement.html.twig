@@ -207,44 +207,47 @@
 							<div id="wrapper-classements-activites" class="bloc_editense form-wrap step">
 								{% if form.activites is defined %}
 									<div id="wrapper-activites" class="card-wrap form-control">
-										<label>Activités</label>
+										
 										{% if form.licenceA is defined %}
+										    <div class="stitre">Activités</div>
 											<div id="item-activitesB" class="custom_checkbox half"></div>
 											<div id="item-activitesC" class="custom_checkbox half"></div>
 										{% elseif  form.classement is defined %}
-											<div class="custom_checkbox">
-												<h7>Type d'hébergement</h7>
-												{% for child in form.activites|filter(child => not child.rendered) %}
-													{% if type_activite(child.vars.value) == 'TYPE_HEBERGEMENT' %}
-														<label>
-															{{ child.vars.label }}
-															{% if classement_activite(child.vars.value) %}
-																{{ form_widget(child, {'attr': {'class': 'cb-activite required-activites has-classement'}}) }}
-															{% else %}
-																{{ form_widget(child) }}
-															{% endif %}
-															<span class="checkmark"></span>
-														</label>
-													{% endif %}
-												{% endfor %}
-											</div>
-											<div class="custom_checkbox">
-												<h7>Type de restauration</h7>
-												{% for child in form.activites|filter(child => not child.rendered) %}
-													{% if type_activite(child.vars.value) == 'TYPE_RESTAURATION' %}
-														<label>
-															{{ child.vars.label }}
-															{% if classement_activite(child.vars.value) %}
-																{{ form_widget(child, {'attr': {'class': 'cb-activite required-activites has-classement'}}) }}
-															{% else %}
-																{{ form_widget(child) }}
-															{% endif %}
-															<span class="checkmark"></span>
-														</label>
-													{% endif %}
-												{% endfor %}
-											</div>
+										    <div class="stitre">Activités</div>
+										    <div class="half av_margbot">
+				                                <div class="custom_checkbox">
+    												{% for child in form.activites|filter(child => not child.rendered) %}
+    													{% if type_activite(child.vars.value) == 'TYPE_HEBERGEMENT' %}
+    														<label>
+    															{{ child.vars.label }}
+    															{% if classement_activite(child.vars.value) %}
+    																{{ form_widget(child, {'attr': {'class': 'cb-activite required-activites has-classement'}}) }}
+    															{% else %}
+    																{{ form_widget(child) }}
+    															{% endif %}
+    															<span class="checkmark"></span>
+    														</label>
+    													{% endif %}
+    												{% endfor %}
+    											</div>
+    											<div class="custom_checkbox">
+    												{% for child in form.activites|filter(child => not child.rendered) %}
+    													{% if type_activite(child.vars.value) == 'TYPE_RESTAURATION' %}
+    														<label>
+    															{{ child.vars.label }}
+    															{% if classement_activite(child.vars.value) %}
+    																{{ form_widget(child, {'attr': {'class': 'cb-activite required-activites has-classement'}}) }}
+    															{% else %}
+    																{{ form_widget(child) }}
+    															{% endif %}
+    															<span class="checkmark"></span>
+    														</label>
+    													{% endif %}
+    												{% endfor %}
+    											</div>
+										    </div>
 										{% else %}
+										    <div class="stitre">Activités</div>
 											<div class="custom_checkbox">
 												{% for child in form.activites|filter(child => not child.rendered) %}
 													<label>
