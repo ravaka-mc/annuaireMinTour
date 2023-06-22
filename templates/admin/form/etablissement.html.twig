@@ -307,8 +307,6 @@
 						 		form.salleConference is defined or 
 						 		form.nombreSalaries is defined or 
 						 		form.nombreSalaireFemme is defined or 
-						 		form.nombreLit is defined or 
-						 		form.nombreResto is defined or 
 						 		form.superficieSalle is defined 
 						%}
 							<div id="wrapper-infos_supplementaire" class="bloc_editense form-wrap">
@@ -351,18 +349,6 @@
 											<label for="">Nombre de Salariés Femme</label>
 											{{ form_widget(form.nombreSalaireFemme) }}
 										</div>
-										{% endif %}
-										{% if form.nombreLit is defined %}
-											<div class="form-control">
-												<label for="">Nombre de lit</label>
-												{{ form_widget(form.nombreLit) }}
-											</div>
-										{% endif %}
-										{% if form.nombreResto is defined %}
-											<div class="form-control">
-												<label for="">Nombre de restaurant</label>
-												{{ form_widget(form.nombreResto) }}
-											</div>
 										{% endif %}
 										{% if form.superficieSalle is defined %}
 											<div class="form-control">

@@ -217,7 +217,7 @@
 										    <div class="half av_margbot">
 				                                <div class="custom_checkbox">
 													{% if hebergement_activite(form.activites) %}
-														<h7>Type d'hébergement</h7>
+														<div class="ssTitre">Type d'hébergement</div>
 														{% for child in form.activites|filter(child => not child.rendered) %}
 															{% if type_activite(child.vars.value) == 'TYPE_HEBERGEMENT' %}
 																<label>
@@ -235,7 +235,7 @@
     											</div>
     											<div class="custom_checkbox">
 													{% if restaurant_activite(form.activites) %}
-														<h7>Type de restauration</h7>
+														<div class="ssTitre">Type de restauration</div>
 														{% for child in form.activites|filter(child => not child.rendered) %}
 															{% if type_activite(child.vars.value) == 'TYPE_RESTAURATION' %}
 																<label>
