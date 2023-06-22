@@ -213,6 +213,7 @@ class Etablissement
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="etablissements")
+     * @ORM\JoinColumn(onDelete="SET NULL")
      */
     private $createdBy;
 

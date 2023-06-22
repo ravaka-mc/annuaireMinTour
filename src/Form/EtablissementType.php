@@ -480,12 +480,6 @@ class EtablissementType extends AbstractType
                         'min' => 0
                     ]
                 ])
-                ->add('nombreLit', IntegerType::class, [
-                    'required' => false,
-                    'attr' => [
-                        'min' => 0
-                    ]
-                ])
                 ->add('superficieSalle', IntegerType::class, [
                     'required' => false,
                     'attr' => [
@@ -671,12 +665,6 @@ class EtablissementType extends AbstractType
                 ])
                 ->add('nombreSalaireFemme', IntegerType::class, [
                     'required' => true,
-                    'attr' => [
-                        'min' => 0
-                    ]
-                ])
-                ->add('nombreLit', IntegerType::class, [
-                    'required' => false,
                     'attr' => [
                         'min' => 0
                     ]
