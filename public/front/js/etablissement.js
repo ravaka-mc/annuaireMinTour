@@ -506,6 +506,8 @@ var displayClassement = () => {
     if($(".has-classement").length > 0) {
         $(".has-classement").on('change', function() {
             var that = $(this);
+            var isckecked = false;
+            
             if(that.is(':checked')){
                 $('#wrapper-classements').show();
                 $('.item-classement').addClass('rd-classement');
@@ -513,6 +515,13 @@ var displayClassement = () => {
                 $('#wrapper-classements').hide();
                 $('.item-classement').removeClass('rd-classement');
             }
+
+            $(".has-classement").each(function() {
+                if($(this).is(':checked')){
+                    $('#wrapper-classements').show();
+                    $('.item-classement').addClass('rd-classement');
+                }
+            })
         })
         $(".has-classement").trigger('change')
     }
