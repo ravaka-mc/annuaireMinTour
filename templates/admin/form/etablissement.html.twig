@@ -316,6 +316,18 @@
 										<div class="sub-title"><span>Informations supplémentaires</span></div>
 									</div>
 									<div class="half">
+										{% if form.nombreSalaries is defined %}
+										<div class="form-control">
+											<label for="">Nombre de Salariés Homme</label>
+											{{ form_widget(form.nombreSalaries) }}
+										</div>
+										{% endif %}
+										{% if form.nombreSalaireFemme is defined %}
+										<div class="form-control">
+											<label for="">Nombre de Salariés Femme</label>
+											{{ form_widget(form.nombreSalaireFemme) }}
+										</div>
+										{% endif %}
 										{% if form.nombreChambres is defined %}
 										<div class="form-control">
 											<label for="">Nombre de chambres</label>
@@ -338,18 +350,6 @@
 												<label for="">Salle de conférence</label>
 												{{ form_widget(form.salleConference) }}
 											</div>
-										{% endif %}
-										{% if form.nombreSalaries is defined %}
-										<div class="form-control">
-											<label for="">Nombre de Salariés Homme</label>
-											{{ form_widget(form.nombreSalaries) }}
-										</div>
-										{% endif %}
-										{% if form.nombreSalaireFemme is defined %}
-										<div class="form-control">
-											<label for="">Nombre de Salariés Femme</label>
-											{{ form_widget(form.nombreSalaireFemme) }}
-										</div>
 										{% endif %}
 										{% if form.nombreResto is defined %}
 											<div class="form-control">
