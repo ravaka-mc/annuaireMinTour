@@ -469,6 +469,7 @@ var changeLicenceC = () => {
                             $('#etablissement_activites_' + value).parent('label').remove();
                         });
                         $('#wrapper-activites #item-activitesC').append(response.html);
+                        changeActivite();
                     }
                 })
             }
@@ -481,22 +482,17 @@ var changeActivite = () => {
     if($("[id^='etablissement_activites_']").length > 0) {
         $("[id^='etablissement_activites_']").on('change', function() {
             var that = $(this);
-            if(that.is(':checked')){
-                $.ajax({
-                    type: 'get',
-                    url: app_sous_activites,
-                    data: {
-                        activite_id :  that.val(),
-                        etablissement_id : $('#etablissement-id').val()
-                    },
-                    dataType: 'json',
-                    success: function (response) {
-                        that.next().after(response.html);
-                    }
-                })
-            } else {
-                $('#wrapper-sous-activites').remove();
+            var champs_rattache = that.parent('label').attr('data-nbr');
+            if(champs_rattache != ''){
+                 if(that.is(':checked')){
+                    $('#etablissement_' + champs_rattache).attr('required', 'required');
+                    $('#etablissement_' + champs_rattache).parents('.form-control').removeClass('nombreHidden');
+                } else {
+                    $('#etablissement_' + champs_rattache).removeAttr('required');
+                    $('#etablissement_' + champs_rattache).parents('.form-control').addClass('nombreHidden');
+                }
             }
+           
         })
         $("[id^='etablissement_activites_']").trigger('change')
     }
@@ -562,7 +558,7 @@ var initFunction = () => {
     changeLicenceA();
     changeLicenceC();
     changeLicenceB();
-    //changeActivite();
+    changeActivite();
     changeMember();
     changeLicences();
     changeCategory();

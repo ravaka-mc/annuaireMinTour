@@ -35,6 +35,16 @@ class ActiviteType extends AbstractType
                 'label'    => 'Autre',
                 'required' => false,
             ])
+            ->add('champRattache', ChoiceType::class, [
+                'required' => false,
+                'placeholder' => '.......................',
+                'choices' => [
+                    'Nombre de voitures' => 'nombreVoiture',
+                    'Nombre de bateaux' => 'nombreBateau',
+                    'Nombre de matériels de transports motorisés' => 'nombreTransportMotorise',
+                    'Nombre de matériels de transports non motorisés' => 'nombreTransportNonMotorise',
+                ],
+            ])
         ;
     }
 

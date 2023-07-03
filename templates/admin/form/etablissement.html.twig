@@ -369,6 +369,24 @@
 												{{ form_widget(form.nombreVoiture) }}
 											</div>
 										{% endif %}
+										{% if form.nombreBateau is defined %}
+											<div class="form-control">
+												<label for="">Nombre de bateaux</label>
+												{{ form_widget(form.nombreBateau) }}
+											</div>
+										{% endif %}
+										{% if form.nombreTransportMotorise is defined %}
+											<div class="form-control">
+												<label for="">Nombre de matériels de transports motorisés</label>
+												{{ form_widget(form.nombreTransportMotorise) }}
+											</div>
+										{% endif %}
+										{% if form.nombreTransportNonMotorise is defined %}
+											<div class="form-control">
+												<label for="">Nombre de matériels de transports non motorisés</label>
+												{{ form_widget(form.nombreTransportNonMotorise) }}
+											</div>
+										{% endif %}
 									</div>
 								</div>
 							</div>

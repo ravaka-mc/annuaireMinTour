@@ -35,11 +35,6 @@ class Activite
     private $categories;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="activitesB")
-     */
-    private $activitesC;
-
-    /**
      * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="activitesLicenceB")
      * @ORM\JoinTable(name="category_activite_licence_b")
      */
@@ -81,11 +76,15 @@ class Activite
      */
     private $classement;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $champRattache;
+
     public function __construct()
     {
         $this->etablissements = new ArrayCollection();
         $this->categories = new ArrayCollection();
-        $this->activitesC = new ArrayCollection();
         $this->categoriesLicenceB = new ArrayCollection();
         $this->categoriesLicenceC = new ArrayCollection();
         $this->enfants = new ArrayCollection();
@@ -166,33 +165,6 @@ class Activite
 
     public function __toString(){
         return $this->nom;
-    }
-
-    /**
-     * @return Collection<int, Category>
-     */
-    public function getActivitesC(): Collection
-    {
-        return $this->activitesC;
-    }
-
-    public function addActivitesC(Category $activitesC): self
-    {
-        if (!$this->activitesC->contains($activitesC)) {
-            $this->activitesC[] = $activitesC;
-            $activitesC->addActivitesB($this);
-        }
-
-        return $this;
-    }
-
-    public function removeActivitesC(Category $activitesC): self
-    {
-        if ($this->activitesC->removeElement($activitesC)) {
-            $activitesC->removeActivitesB($this);
-        }
-
-        return $this;
     }
 
     /**
@@ -350,6 +322,18 @@ class Activite
     public function setClassement(?bool $classement): self
     {
         $this->classement = $classement;
+
+        return $this;
+    }
+
+    public function getChampRattache(): ?string
+    {
+        return $this->champRattache;
+    }
+
+    public function setChampRattache(?string $champRattache): self
+    {
+        $this->champRattache = $champRattache;
 
         return $this;
     }

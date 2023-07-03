@@ -42,7 +42,7 @@
                         {% endif %}
                         <td>
                             <div class="action">
-                                {% if etablissement.statut == 'valide' %}
+                                {% if etablissement.statut == 'valide' or etablissement.statut == 'delete' %}
                                     <a href="{{ path('app_admin_etablissement_edit', {id:etablissement.id}) }}" class="edit"></a>
                                     <a href="{{ path('app_etablissement', {category_slug:etablissement.category.slug, etablissement_slug:etablissement.slug}) }}" class="view"></a>
                                     <a data-fancybox="" data-src="#popup-delete_{{etablissement.id}}" class="delete"></a>

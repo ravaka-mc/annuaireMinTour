@@ -349,6 +349,21 @@ class Etablissement
      */
     private $pieceJustification;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nombreBateau;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nombreTransportMotorise;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nombreTransportNonMotorise;
+
     
 
     public function __construct()
@@ -1191,6 +1206,42 @@ class Etablissement
     public function setPieceJustificationFile(?File $pieceJustificationFile): self
     {
         $this->pieceJustificationFile = $pieceJustificationFile;
+
+        return $this;
+    }
+
+    public function getNombreBateau(): ?int
+    {
+        return $this->nombreBateau;
+    }
+
+    public function setNombreBateau(?int $nombreBateau): self
+    {
+        $this->nombreBateau = $nombreBateau;
+
+        return $this;
+    }
+
+    public function getNombreTransportMotorise(): ?int
+    {
+        return $this->nombreTransportMotorise;
+    }
+
+    public function setNombreTransportMotorise(?int $nombreTransportMotorise): self
+    {
+        $this->nombreTransportMotorise = $nombreTransportMotorise;
+
+        return $this;
+    }
+
+    public function getNombreTransportNonMotorise(): ?int
+    {
+        return $this->nombreTransportNonMotorise;
+    }
+
+    public function setNombreTransportNonMotorise(?int $nombreTransportNonMotorise): self
+    {
+        $this->nombreTransportNonMotorise = $nombreTransportNonMotorise;
 
         return $this;
     }

@@ -70,6 +70,10 @@
                     <span class="checkmark"></span>
                 </label>
             </div>
+            <div class="form-control">
+                <label>Champs rattaché</label>
+                {{ form_widget(form.champRattache) }}
+            </div>
             {{ form_widget(form._token) }}
             <div class="pbtn full"><button type="submit" class="btn red">Ajouter activite</button></div>
         </form>
@@ -108,6 +112,16 @@
                         <input type="checkbox" id="activite_classement" name="classement" value="1" {% if activite.classement %}checked{% endif %}>
                         <span class="checkmark"></span>
                     </label>
+                </div>
+                <div class="form-control">
+                    <label>Champs rattaché</label>
+                    <select id="activite_champRattache" name="champRattache">
+                        <option value="" selected="selected">.......................</option>
+                        <option value="nombreVoiture" {% if activite.champRattache == 'nombreVoiture' %}selected="selected"{% endif %}>Nombre de voitures</option>
+                        <option value="nombreBateau" {% if activite.champRattache == 'nombreBateau' %}selected="selected"{% endif %}>Nombre de bateaux</option>
+                        <option value="nombreTransportMotorise" {% if activite.champRattache == 'nombreTransportMotorise' %}selected="selected"{% endif %}>Nombre de matériels de transports motorisés</option>
+                        <option value="nombreTransportNonMotorise" {% if activite.champRattache == 'nombreTransportNonMotorise' %}selected="selected"{% endif %}>Nombre de matériels de transports non motorisés</option>
+                    </select>
                 </div>
                 <div class="pbtn full"><button type="submit" class="btn red">Enregistrer</button></div>
             </form>

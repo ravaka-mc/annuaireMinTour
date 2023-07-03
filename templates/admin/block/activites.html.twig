@@ -1,6 +1,6 @@
 {% if activites|length > 0 %}
     {% for activite in activites %}
-        <label>
+        <label data-nbr="{{ champ_rattache_activite(activite.id) }}">
             {{ activite.nom }}
             <input class="cb-activite required-activites" type="checkbox" id="etablissement_activites_{{ activite.id }}" name="etablissement[activites][]" value="{{ activite.id }}" {% if activite.id in activite_ids %}checked="checked"{% endif %}>
             <span class="checkmark"></span>

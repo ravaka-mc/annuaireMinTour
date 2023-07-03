@@ -220,7 +220,7 @@
 														<div class="ssTitre">Type d'hébergement</div>
 														{% for child in form.activites|filter(child => not child.rendered) %}
 															{% if type_activite(child.vars.value) == 'TYPE_HEBERGEMENT' %}
-																<label>
+																<label data-nbr="{{ champ_rattache_activite(child.vars.value) }}">
 																	{{ child.vars.label }}
 																	{% if classement_activite(child.vars.value) %}
 																		{{ form_widget(child, {'attr': {'class': 'cb-activite required-activites has-classement'}}) }}
@@ -238,7 +238,7 @@
 														<div class="ssTitre">Type de restauration</div>
 														{% for child in form.activites|filter(child => not child.rendered) %}
 															{% if type_activite(child.vars.value) == 'TYPE_RESTAURATION' %}
-																<label>
+																<label data-nbr="{{ champ_rattache_activite(child.vars.value) }}">
 																	{{ child.vars.label }}
 																	{% if classement_activite(child.vars.value) %}
 																		{{ form_widget(child, {'attr': {'class': 'cb-activite required-activites has-classement'}}) }}
@@ -256,7 +256,7 @@
 										    <div class="stitre">Activités</div>
 											<div class="custom_checkbox">
 												{% for child in form.activites|filter(child => not child.rendered) %}
-													<label>
+													<label data-nbr="{{ champ_rattache_activite(child.vars.value) }}">
 														{{ child.vars.label }}
 														{% if classement_activite(child.vars.value) %}
 															{{ form_widget(child, {'attr': {'class': 'cb-activite required-activites has-classement'}}) }}
@@ -401,9 +401,27 @@
 											</div>
 										{% endif %}
 										{% if form.nombreVoiture is defined %}
-											<div class="form-control">
-												<label for="">Nombre de transports motorisés <span class="facultatif">(facultatif)</span></label>
+											<div class="form-control nombreHidden">
+												<label for="">Nombre de voiture </label>
 												{{ form_widget(form.nombreVoiture) }}
+											</div>
+										{% endif %}
+										{% if form.nombreBateau is defined %}
+											<div class="form-control nombreHidden">
+												<label for="">Nombre de bateaux</label>
+												{{ form_widget(form.nombreBateau) }}
+											</div>
+										{% endif %}
+										{% if form.nombreTransportMotorise is defined %}
+											<div class="form-control nombreHidden">
+												<label for="">Nombre de matériels de transports motorisés</label>
+												{{ form_widget(form.nombreTransportMotorise) }}
+											</div>
+										{% endif %}
+										{% if form.nombreTransportNonMotorise is defined %}
+											<div class="form-control nombreHidden">
+												<label for="">Nombre de matériels de transports non motorisés</label>
+												{{ form_widget(form.nombreTransportNonMotorise) }}
 											</div>
 										{% endif %}
 									</div>

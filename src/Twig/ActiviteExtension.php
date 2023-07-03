@@ -21,6 +21,7 @@ class ActiviteExtension extends AbstractExtension
             new TwigFunction('classement_activite', [$this, 'classementActivite']),
             new TwigFunction('hebergement_activite', [$this, 'hebergementActivite']),
             new TwigFunction('restaurant_activite', [$this, 'restaurantActivite']),
+            new TwigFunction('champ_rattache_activite', [$this, 'champRattacheActivite']),
         ];
     }
 
@@ -57,5 +58,12 @@ class ActiviteExtension extends AbstractExtension
         }
 
         return false;
+    }
+
+    public function champRattacheActivite($id)
+    {
+        $activite = $this->activiteRepository->findOneBy(['id' => (int) $id]);
+
+        return $activite->getChampRattache();
     }
 }

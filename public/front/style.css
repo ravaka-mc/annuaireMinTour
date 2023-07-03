@@ -5161,3 +5161,6 @@ div#wrapper-proprietaire { margin-bottom:15px; }
 .information-detail .flex-beetween {padding-bottom:0px}
 #item-activitesC {column-count: 2; display: inherit;}
 .custom_checkbox .ssTitre {margin-bottom: 10px;}
+.nombreHidden{
+	display: none;
+}

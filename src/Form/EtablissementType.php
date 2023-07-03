@@ -151,6 +151,30 @@ class EtablissementType extends AbstractType
                     'required' => false,
                     'choices' => $category->getActivites()
                 ])
+                ->add('nombreVoiture', IntegerType::class, [
+                    'required' => false,
+                    'attr' => [
+                        'min' => 0
+                    ]
+                ])
+                ->add('nombreBateau', IntegerType::class, [
+                    'required' => false,
+                    'attr' => [
+                        'min' => 0
+                    ]
+                ])
+                ->add('nombreTransportMotorise', IntegerType::class, [
+                    'required' => false,
+                    'attr' => [
+                        'min' => 0
+                    ]
+                ])
+                ->add('nombreTransportNonMotorise', IntegerType::class, [
+                    'required' => false,
+                    'attr' => [
+                        'min' => 0
+                    ]
+                ])
                 ->add('groupements', EntityType::class, [
                     'class' => Groupement::class,
                     'choice_label' => 'nom',
@@ -317,12 +341,6 @@ class EtablissementType extends AbstractType
                         'min' => 0
                     ]
                 ])
-                ->add('nombreVoiture', IntegerType::class, [
-                    'required' => false,
-                    'attr' => [
-                        'min' => 0
-                    ]
-                ])
                 ->add('referenceC', TextType::class, [   
                     'attr' => [
                         'placeholder' => 'N° de référence C'
@@ -411,6 +429,30 @@ class EtablissementType extends AbstractType
                     'multiple' => true,
                     'required' => false,
                     'choices' => $category->getActivites()
+                ])
+                ->add('nombreVoiture', IntegerType::class, [
+                    'required' => false,
+                    'attr' => [
+                        'min' => 0
+                    ]
+                ])
+                ->add('nombreBateau', IntegerType::class, [
+                    'required' => false,
+                    'attr' => [
+                        'min' => 0
+                    ]
+                ])
+                ->add('nombreTransportMotorise', IntegerType::class, [
+                    'required' => false,
+                    'attr' => [
+                        'min' => 0
+                    ]
+                ])
+                ->add('nombreTransportNonMotorise', IntegerType::class, [
+                    'required' => false,
+                    'attr' => [
+                        'min' => 0
+                    ]
                 ])
                 ->add('dateOuverture', DateType::class, [
                     'widget' => 'single_text',
@@ -589,6 +631,30 @@ class EtablissementType extends AbstractType
                     'required' => false,
                     'choices' => $category->getActivites()
                 ])
+                ->add('nombreVoiture', IntegerType::class, [
+                    'required' => false,
+                    'attr' => [
+                        'min' => 0
+                    ]
+                ])
+                ->add('nombreBateau', IntegerType::class, [
+                    'required' => false,
+                    'attr' => [
+                        'min' => 0
+                    ]
+                ])
+                ->add('nombreTransportMotorise', IntegerType::class, [
+                    'required' => false,
+                    'attr' => [
+                        'min' => 0
+                    ]
+                ])
+                ->add('nombreTransportNonMotorise', IntegerType::class, [
+                    'required' => false,
+                    'attr' => [
+                        'min' => 0
+                    ]
+                ])
                 ->add('dateOuverture', DateType::class, [
                     'widget' => 'single_text',
                     'required' => false,
@@ -745,6 +811,30 @@ class EtablissementType extends AbstractType
                     'multiple' => true,
                     'required' => false,
                     'choices' => $category->getActivites()
+                ])
+                ->add('nombreVoiture', IntegerType::class, [
+                    'required' => false,
+                    'attr' => [
+                        'min' => 0
+                    ]
+                ])
+                ->add('nombreBateau', IntegerType::class, [
+                    'required' => false,
+                    'attr' => [
+                        'min' => 0
+                    ]
+                ])
+                ->add('nombreTransportMotorise', IntegerType::class, [
+                    'required' => false,
+                    'attr' => [
+                        'min' => 0
+                    ]
+                ])
+                ->add('nombreTransportNonMotorise', IntegerType::class, [
+                    'required' => false,
+                    'attr' => [
+                        'min' => 0
+                    ]
                 ])
                 ->add('dateOuverture', DateType::class, [
                     'widget' => 'single_text',
